@@ -1,7 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "juan";
-  home.homeDirectory = "/home/juan";
-  home.stateVersion = "25.05";
+  imports = [
+    ./modules/common.nix
+  ];
+
+  home = { 
+    username = "juan";
+    homeDirectory = "/home/juan";
+    stateVersion = "25.05";
+  };
 }
