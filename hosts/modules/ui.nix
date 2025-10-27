@@ -1,3 +1,4 @@
+# hosts/modules/ui.nix
 { pkgs, ... }:
 
 {

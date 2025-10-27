@@ -1,3 +1,4 @@
+# hosts/modules/users.nix
 { pkgs, ... }:
 
 {

@@ -1,11 +1,25 @@
-{ pkgs, ... }:
-
+# home/modules/common.nix
+{
+  pkgs,
+  kukenan,
+  system,
+  ...
+}:
+let
+  kuks = kukenan.packages.${pkgs.system}.neovim.max;
+in
 {
   home.packages = with pkgs; [
     ripgrep
-    obsidian
+    gemini-cli
+    nodejs
+    tree
+    gcc
+    kuks
+    waybar
+    swww
   ];
-  
+
   programs = {
     git = {
       enable = true;
@@ -19,9 +33,9 @@
     bash = {
       enable = true;
       shellAliases = {
-        vim = "nvim";
+        vim = "nvim-max";
+        cat = "bat";
       };
     };
   };
-
 }

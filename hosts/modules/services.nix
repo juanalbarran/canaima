@@ -1,3 +1,4 @@
+# hosts/modules/services.nix
 { pkgs, ... }:
 
 {
@@ -23,6 +24,12 @@
     xserver.xkb = {
       layout = "us";
       variant = "";
+    };
+
+    logind = {
+      lidSwitch = "ignore";
+      lidSwitchExternalPower = "ignore";
+      lidSwitchDocked = "ignore";
     };
   };
 }
