@@ -1,0 +1,51 @@
+#!@bash@/bin/bash
+PATH="@coreutils@/bin:@findutils@/bin:@swww@/bin:@libnotify@/bin"
+
+LOG_FILE="/tmp/wallpaper.log"
+echo "--- Script started at $(date) ---" > $LOG_FILE
+
+# First, check if the session is ready
+if [ -z "$WAYLAND_DISPLAY" ]; then
+    echo "Error: WAYLAND_DISPLAY is not set. Exiting." >> $LOG_FILE
+    exit 1
+fi
+echo "Session ready. WAYLAND_DISPLAY is $WAYLAND_DISPLAY" >> $LOG_FILE
+
+# [NEW] Launch the daemon from inside the script
+echo "Launching swww-daemon..." >> $LOG_FILE
+swww-daemon &
+
+# Define the correct socket path
+SOCKET_PATH="$XDG_RUNTIME_DIR/swww-$WAYLAND_DISPLAY.socket"
+echo "Waiting for swww-daemon socket at: $SOCKET_PATH" >> $LOG_FILE
+
+# Wait for the socket to appear
+COUNTER=0
+while [ ! -e "$SOCKET_PATH" ] && [ $COUNTER -lt 50 ]; do
+  sleep 0.1
+  COUNTER=$((COUNTER + 1))
+done
+
+if [ ! -e "$SOCKET_PATH" ]; then
+    echo "Error: Socket not found after 5 seconds. Daemon failed." >> $LOG_FILE
+    notify-send "Wallpaper Script" "Error: swww-daemon failed."
+    exit 1
+fi
+echo "Socket found. Proceeding." >> $LOG_FILE
+
+# --- Now we set the wallpaper (this part is unchanged) ---
+notify-send "Wallpaper Script" "Setting new wallpaper..."
+echo "Notification sent." >> $LOG_FILE
+
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+WALLPAPER=$(find -L "$WALLPAPER_DIR" -type f 2>> $LOG_FILE | shuf -n 1 2>> $LOG_FILE)
+
+if [ -z "$WALLPAPER" ]; then
+  echo "Error: 'find -L' command returned no images." >> $LOG_FILE
+  exit 1
+fi
+
+echo "Setting wallpaper to: $WALLPAPER" >> $LOG_FILE
+swww img "$WALLPAPER" --transition-type any 2>> $LOG_FILE
+echo "swww img command sent. Script finished." >> $LOG_FILE
+
