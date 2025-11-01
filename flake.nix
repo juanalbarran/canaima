@@ -43,7 +43,7 @@
       homeConfigurations = {
         "juan" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ ./home/shared-config.nix ];
+          modules = [ ./home/home-config.nix ];
           extraSpecialArgs = { inherit kukenan system; };
         };
       };
