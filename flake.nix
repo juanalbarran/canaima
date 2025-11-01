@@ -1,5 +1,4 @@
 # flake.nix
-
 {
   description = "Canaima NixOS configuration with Home Manager";
   inputs = {
@@ -11,24 +10,41 @@
     ghostty.url = "github:ghostty-org/ghostty/v1.2.1";
   };
 
-  outputs = { self, nixpkgs, home-manager, kukenan, ghostty, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      kukenan,
+      ghostty,
+      ...
+    }@inputs:
     let
       system = "x86_64-linux";
-    in {
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
       nixosConfigurations = {
         canaima = nixpkgs.lib.nixosSystem {
-	  inherit system;
-	  specialArgs = { inherit kukenan system ghostty; };
-	  modules = [
-	    ./hosts/configuration.nix
-	    home-manager.nixosModules.home-manager
-	    {
+          inherit system;
+          specialArgs = { inherit kukenan system ghostty; };
+          modules = [
+            ./hosts/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
               home-manager.extraSpecialArgs = {
                 inherit kukenan system;
               };
             }
-	    ./home/home.nix
-	  ];
+            ./home/home.nix
+          ];
+        };
+      };
+      homeConfigurations = {
+        "juan" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home/shared-config.nix ];
+          extraSpecialArgs = { inherit kukenan system; };
         };
       };
     };
