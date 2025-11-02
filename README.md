@@ -13,3 +13,9 @@ sudo nixos-rebuild switch --flake .#canaima
 ```bash
 home-manager switch --flake .#juan
 ```
+
+or
+
+```bash
+nix run home-manager/release-25.05 -- switch --flake .#juan
+```

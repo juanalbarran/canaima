@@ -17,7 +17,12 @@ in
     gcc
     kuks
     waybar
+    jq
+    # wallpaper
     swww
+    # screenshots
+    grim
+    slurp
   ];
 
   programs = {
