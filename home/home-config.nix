@@ -7,6 +7,7 @@
     ./modules/hyprland
     ./modules/waybar
     ./modules/kanshi
+    ./modules/extras
   ];
 
   home = {
