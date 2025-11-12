@@ -11,13 +11,13 @@ in
 {
   home.packages = with pkgs; [
     ripgrep
-    gemini-cli
-    nodejs
     tree
     gcc
-    kuks
     waybar
     jq
+    # dev editor
+    tmux
+    kuks
     # wallpaper
     swww
     # screenshots
@@ -32,7 +32,6 @@ in
       userEmail = "juanjesusalbarran@gmial.com";
     };
 
-    starship.enable = true;
     bat.enable = true;
 
     bash = {
@@ -41,6 +40,9 @@ in
         vim = "nvim-max";
         cat = "bat";
       };
+    };
+    yazi = {
+      enable = true;
     };
   };
 }

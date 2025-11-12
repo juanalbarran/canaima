@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   xdg.configFile = {
     "waybar/config".source = ./waybar.jsonc;

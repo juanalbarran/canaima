@@ -8,6 +8,8 @@
     ./modules/waybar
     ./modules/kanshi
     ./modules/extras
+    ./modules/tmux
+    ./modules/starship
   ];
 
   home = {
