@@ -1,13 +1,15 @@
 # hosts/modules/programs.nix
-{ pkgs, ghostty, ... }:
-
+{
+  pkgs,
+  ghostty,
+  ...
+}:
 {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
     git
-    kitty
     ghostty.packages.${system}.default
     firefox
     wl-clipboard
@@ -26,9 +28,8 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs = { 
+  programs = {
     hyprland.enable = true;
     hyprlock.enable = true;
   };
-
 }
