@@ -38,7 +38,7 @@ notify-send "Wallpaper Script" "Setting new wallpaper..."
 echo "Notification sent." >> $LOG_FILE
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-WALLPAPER=$(find -L "$WALLPAPER_DIR" -type f 2>> $LOG_FILE | shuf -n 1 2>> $LOG_FILE)
+WALLPAPER=$(find -L "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) 2>> $LOG_FILE | shuf -n 1 2>> $LOG_FILE)
 
 if [ -z "$WALLPAPER" ]; then
   echo "Error: 'find -L' command returned no images." >> $LOG_FILE

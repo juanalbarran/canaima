@@ -4,11 +4,9 @@
   kukenan,
   system,
   ...
-}:
-let
-  kuks = kukenan.packages.${pkgs.system}.neovim.max;
-in
-{
+}: let
+  kuks = kukenan.packages.${pkgs.system}.neovim.base;
+in {
   home.packages = with pkgs; [
     ripgrep
     tree
@@ -37,11 +35,16 @@ in
     bash = {
       enable = true;
       shellAliases = {
-        vim = "nvim-max";
+        vim = "nvim-base";
         cat = "bat";
+        vim-web = "nvim-web";
+        vim-java = "nvim-java";
       };
     };
     yazi = {
+      enable = true;
+    };
+    lazygit = {
       enable = true;
     };
   };
