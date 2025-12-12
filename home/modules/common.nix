@@ -6,6 +6,7 @@
   ...
 }: let
   kuks = kukenan.packages.${pkgs.system}.neovim.base;
+  kuks-web = kukenan.packages.${pkgs.system}.neovim.web;
 in {
   home.packages = with pkgs; [
     ripgrep
@@ -16,11 +17,13 @@ in {
     # dev editor
     tmux
     kuks
+    kuks-web
     # wallpaper
     swww
     # screenshots
     grim
     slurp
+    fastfetch
   ];
 
   programs = {
@@ -37,9 +40,12 @@ in {
       shellAliases = {
         vim = "nvim-base";
         cat = "bat";
-        vim-web = "nvim-web";
+        web = "nvim-web";
         vim-java = "nvim-java";
       };
+      initExtra = ''
+        fastfetch
+      '';
     };
     yazi = {
       enable = true;
