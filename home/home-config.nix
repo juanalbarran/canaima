@@ -1,6 +1,5 @@
 # home/home-config.nix
-{ ... }:
-{
+{...}: {
   imports = [
     ./modules/common.nix
     ./modules/ghostty
@@ -10,6 +9,7 @@
     ./modules/extras
     ./modules/tmux
     ./modules/starship
+    ./modules/fastfetch
   ];
 
   home = {
