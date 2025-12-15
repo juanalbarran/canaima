@@ -10,42 +10,39 @@
     ghostty.url = "github:ghostty-org/ghostty/v1.2.1";
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      kukenan,
-      ghostty,
-      ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      nixosConfigurations = {
-        canaima = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit kukenan system ghostty; };
-          modules = [
-            ./hosts/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = {
-                inherit kukenan system;
-              };
-            }
-            ./home/home.nix
-          ];
-        };
-      };
-      homeConfigurations = {
-        "juan" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home/home-config.nix ];
-          extraSpecialArgs = { inherit kukenan system; };
-        };
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    kukenan,
+    ghostty,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+  in {
+    nixosConfigurations = {
+      canaima = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {inherit kukenan system ghostty;};
+        modules = [
+          ./hosts/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = {
+              inherit kukenan system;
+            };
+          }
+          ./home/home.nix
+        ];
       };
     };
+    homeConfigurations = {
+      "juan" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./home/users/juan];
+        extraSpecialArgs = {inherit kukenan system;};
+      };
+    };
+  };
 }
