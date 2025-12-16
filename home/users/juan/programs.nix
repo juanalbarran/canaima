@@ -4,7 +4,7 @@
     git = {
       enable = true;
       userName = "Juan Jesus";
-      userEmail = "juanjesusalbarran@gmial.com";
+      userEmail = "juanjesusalbarran@gmail.com";
     };
 
     bat.enable = true;
