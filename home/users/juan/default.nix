@@ -11,6 +11,7 @@
     ./../../modules/tmux
     ./../../modules/starship
     ./../../modules/fastfetch
+    ./../../modules/hyprlock
   ];
 
   home = {

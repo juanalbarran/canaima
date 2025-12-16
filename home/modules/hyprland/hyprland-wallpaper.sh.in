@@ -37,7 +37,7 @@ echo "Socket found. Proceeding." >> $LOG_FILE
 notify-send "Wallpaper Script" "Setting new wallpaper..."
 echo "Notification sent." >> $LOG_FILE
 
-WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers/2560x1080"
 WALLPAPER=$(find -L "$WALLPAPER_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) 2>> $LOG_FILE | shuf -n 1 2>> $LOG_FILE)
 
 if [ -z "$WALLPAPER" ]; then
