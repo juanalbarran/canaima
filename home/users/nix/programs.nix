@@ -1,10 +1,10 @@
-# home/users/juan/programs.nix
+# home/users/nix/programs.nix
 {
   programs = {
     git = {
       enable = true;
-      userName = "Juan Jesus";
-      userEmail = "juanjesusalbarran@gmail.com";
+      userName = "Juan Albarran";
+      userEmail = "juan.albarran@nixs.com";
     };
 
     bat.enable = true;
@@ -16,16 +16,14 @@
         cat = "bat";
         wvim = "nvim-web";
         jvim = "nvim-java";
+        nvim = "nvim-max";
       };
       initExtra = ''
         fastfetch
       '';
     };
-    yazi = {
-      enable = true;
-    };
-    lazygit = {
-      enable = true;
-    };
+
+    yazi.enable = true;
+    lazygit.enable = true;
   };
 }

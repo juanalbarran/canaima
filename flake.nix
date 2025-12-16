@@ -43,6 +43,11 @@
         modules = [./home/users/juan];
         extraSpecialArgs = {inherit kukenan system;};
       };
+      "nix" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [./home/users/nix];
+        extraSpecialArgs = {inherit kukenan system;};
+      };
     };
   };
 }

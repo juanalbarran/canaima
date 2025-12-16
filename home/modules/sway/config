@@ -1,0 +1,55 @@
+# home/modules/sway/config
+
+input "type:keyboard" {
+    xkb_layout "us"
+    xkb_options "altwin:swap_alt_win"
+}
+
+include ~/.config/sway/variables.conf
+include ~/.config/sway/autostart.conf
+include ~/.config/sway/monitors.conf
+include /etc/sway/config-vars.d/*
+
+output eDP-1 scale 1.2
+
+include ~/.config/sway/bindings.conf
+
+bar {
+    #swaybar_command waybar
+    position top
+
+    status_command while date +'%A, %-d [%H:%M]'; do sleep 60; done
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    colors {
+        statusline #ff8800
+        background #000000
+        inactive_workspace #000000 #000000 #444444 
+        active_workspace #000000 #000000 #ffffff
+        focused_workspace #000000 #000000 #ff8800
+        binding_mode #000000 #000000 #ffffff
+    }
+}
+# 
+# sounds - pulseaudio
+#
+exec pulseaudio --daemonize
+
+# Brightness control
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+# Volume control
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+default_border none
+
+# Command to start apps by default
+#exec_always ~/.config/sway/start_apps.sh
+
+include /etc/sway/config.d/*
