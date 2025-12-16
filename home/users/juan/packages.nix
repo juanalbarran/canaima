@@ -12,6 +12,7 @@ in {
     tree
     gcc
     waybar
+    hyprlock
     jq
     # dev editor
     tmux
@@ -23,5 +24,7 @@ in {
     grim
     slurp
     fastfetch
+    # browsers
+    brave
   ];
 }
