@@ -13,7 +13,6 @@ in {
     gcc
     waybar
     hyprlock
-    jq
     # dev editor
     tmux
     kuks
@@ -21,7 +20,6 @@ in {
     # screenshots
     grim
     slurp
-    fastfetch
     # browsers
     brave
   ];
