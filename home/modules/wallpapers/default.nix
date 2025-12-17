@@ -10,14 +10,19 @@
     isExecutable = true;
     bash = "${pkgs.bash}/bin/bash";
     # We add jq here to parse JSON
-    jq = "${pkgs.jq}/bin/jq";
+    jq = "${pkgs.jq}/bin";
     coreutils = "${pkgs.coreutils}/bin";
     findutils = "${pkgs.findutils}/bin";
     swww = "${pkgs.swww}/bin";
     libnotify = "${pkgs.libnotify}/bin";
+    procps = "${pkgs.procps}/bin";
   };
 in {
-  home.packages = [pkgs.swww pkgs.jq]; # Ensure jq is installed
+  home.packages = with pkgs; [
+    swww
+    jq
+    procps
+  ]; # Ensure jq is installed
 
   home.file.".local/bin/wallpaper-manager".source = wallpaperScript;
 
@@ -26,7 +31,6 @@ in {
     recursive = true;
   };
 
-  # ... (Keep your existing Systemd service and timer configs exactly the same) ...
   systemd.user.services.wallpaper-cycler = {
     Unit = {
       Description = "Cycle wallpapers using swww";
