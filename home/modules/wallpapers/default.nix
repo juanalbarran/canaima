@@ -1,55 +1,80 @@
 # home/modules/wallpapers/default.nix
 {
   pkgs,
-  config,
   lib,
+  config,
   ...
-}: let
-  wallpaperScript = pkgs.substituteAll {
-    src = ./wallpaper.sh.in;
-    isExecutable = true;
+}:
+with lib; let
+  cfg = config.programs.canaima-wallpapers;
+
+  # 1. Determine the command prefix (Wrap with nixGL on Ubuntu)
+  nixGLPrefix =
+    if cfg.withNixGL
+    then "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL "
+    else "";
+
+  # 2. Prepare the script with explicit paths for the commands
+  scriptFile = pkgs.replaceVars ./wallpaper.sh.in {
     bash = "${pkgs.bash}/bin/bash";
-    # We add jq here to parse JSON
     jq = "${pkgs.jq}/bin";
     coreutils = "${pkgs.coreutils}/bin";
     findutils = "${pkgs.findutils}/bin";
-    swww = "${pkgs.swww}/bin";
     libnotify = "${pkgs.libnotify}/bin";
     procps = "${pkgs.procps}/bin";
+
+    # We pass the full command string (e.g. "nixGL /path/to/swww")
+    swww_daemon_cmd = "${nixGLPrefix}${pkgs.swww}/bin/swww-daemon";
+    swww_client_cmd = "${nixGLPrefix}${pkgs.swww}/bin/swww";
   };
+
+  # 3. Create the executable launcher
+  wallpaperManager = pkgs.writeShellScriptBin "wallpaper-manager" ''
+    exec ${pkgs.bash}/bin/bash "${scriptFile}" "$@"
+  '';
 in {
-  home.packages = with pkgs; [
-    swww
-    jq
-    procps
-  ]; # Ensure jq is installed
-
-  home.file.".local/bin/wallpaper-manager".source = wallpaperScript;
-
-  home.file."Pictures/Wallpapers" = {
-    source = ../../assets/wallpapers;
-    recursive = true;
+  # Define options for users to configure
+  options.programs.canaima-wallpapers = {
+    enable = mkEnableOption "Enable wallpaper manager";
+    withNixGL = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Wrap swww with NixGL (Required for Ubuntu).";
+    };
   };
 
-  systemd.user.services.wallpaper-cycler = {
-    Unit = {
-      Description = "Cycle wallpapers using swww";
-      After = ["graphical-session.target"];
-      PartOf = ["graphical-session.target"];
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      swww
+      jq
+      procps
+      wallpaperManager
+    ];
+    home.file."Pictures/Wallpapers" = {
+      source = ../../assets/wallpapers;
+      recursive = true;
     };
-    Service = {
-      ExecStart = "${config.home.homeDirectory}/.local/bin/wallpaper-manager";
-      Type = "oneshot";
-    };
-    Install = {WantedBy = ["graphical-session.target"];};
-  };
 
-  systemd.user.timers.wallpaper-cycler = {
-    Unit = {Description = "Timer for wallpaper cycling";};
-    Timer = {
-      OnUnitActiveSec = "15m";
-      OnBootSec = "1m";
+    systemd.user.services.wallpaper-cycler = {
+      Unit = {
+        Description = "Cycle wallpapers using swww";
+        After = ["graphical-session.target"];
+        PartOf = ["graphical-session.target"];
+      };
+      Service = {
+        ExecStart = "${wallpaperManager}/bin/wallpaper-manager";
+        Type = "oneshot";
+      };
+      Install = {WantedBy = ["graphical-session.target"];};
     };
-    Install = {WantedBy = ["timers.target"];};
+
+    systemd.user.timers.wallpaper-cycler = {
+      Unit = {Description = "Timer for wallpaper cycling";};
+      Timer = {
+        OnUnitActiveSec = "15m";
+        OnBootSec = "1m";
+      };
+      Install = {WantedBy = ["timers.target"];};
+    };
   };
 }

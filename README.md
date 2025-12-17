@@ -11,11 +11,11 @@ sudo nixos-rebuild switch --flake .#canaima
 ### Run home-manager flake
 
 ```bash
-nix run home-manager/release-25.05 -- switch --flake .#juan
+nix run home-manager/release-25.11 -- switch --flake .#juan
 ```
 
 ```bash
-nix run home-manager/release-25.05 -- switch --flake .#nix
+nix run home-manager/release-25.11 -- switch --flake .#nix
 ```
 
 or

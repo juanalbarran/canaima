@@ -5,19 +5,19 @@
     ./programs.nix
     ./../../modules/ghostty
     ./../../modules/hyprland
-    ./../../modules/waybar
     ./../../modules/kanshi
     ./../../modules/tmux
     ./../../modules/starship
     ./../../modules/fastfetch
     ./../../modules/hyprlock
     ./../../modules/wallpapers
+    ./../../modules/quickshell
   ];
 
   home = {
     username = "juan";
     homeDirectory = "/home/juan";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
   };
   # Ensures the Home Manager-built Hyprland session is used by the Display Manager
   # and sources the HM-configured environment variables and services.
