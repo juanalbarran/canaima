@@ -2,12 +2,13 @@
 {
   description = "Canaima NixOS configuration with Home Manager";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     kukenan.url = "github:juanalbarran/neovim/kick";
     #kukenan.url = "github:juanalbarran/neovim/main";
     ghostty.url = "github:ghostty-org/ghostty/v1.2.1";
+    nixgl.url = "github:nix-community/nixGL";
   };
 
   outputs = {
@@ -16,15 +17,21 @@
     home-manager,
     kukenan,
     ghostty,
+    nixgl,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [nixgl.overlay];
+    };
   in {
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {inherit kukenan system ghostty;};
+        specialArgs = {
+          inherit kukenan system ghostty;
+        };
         modules = [
           ./hosts/configuration.nix
           home-manager.nixosModules.home-manager
@@ -41,12 +48,16 @@
       "juan" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./home/users/juan];
-        extraSpecialArgs = {inherit kukenan system;};
+        extraSpecialArgs = {
+          inherit kukenan system;
+        };
       };
       "nix" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./home/users/nix];
-        extraSpecialArgs = {inherit kukenan system;};
+        extraSpecialArgs = {
+          inherit kukenan system;
+        };
       };
     };
   };

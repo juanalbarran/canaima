@@ -11,12 +11,13 @@
     ./../../modules/hyprlock
     ./../../modules/kanshi
     ./../../modules/wallpapers
+    ./../../modules/quickshell
   ];
 
   home = {
     username = "juan-albarran";
     homeDirectory = "/home/juan-albarran/";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
   };
 
   xsession.enable = true;

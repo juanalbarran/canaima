@@ -3,8 +3,12 @@
   programs = {
     git = {
       enable = true;
-      userName = "Juan Albarran";
-      userEmail = "juan.albarran@nixs.com";
+      settings = {
+        user = {
+          name = "Juan Albarran";
+          email = "juan.albarran@nixs.com";
+        };
+      };
     };
 
     bat.enable = true;
@@ -25,5 +29,14 @@
 
     yazi.enable = true;
     lazygit.enable = true;
+    canaima-quickshell = {
+      enable = true;
+      variant = "sway";
+      withNixGL = true;
+    };
+    canaima-wallpapers = {
+      enable = true;
+      withNixGL = true;
+    };
   };
 }
