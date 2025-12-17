@@ -1,74 +1,86 @@
 # home/modules/kanshi/default.nix
-{
+{pkgs, ...}: {
   services.kanshi = {
     enable = true;
     settings = [
       {
-        # Profile 1: Dual monitor (Monitor and Lid open)
-        # Matches when both displays are connected
+        # --- Profile 1: Dual Monitor (Fully Dynamic) ---
         profile.name = "dual-monitor";
         profile.outputs = [
           {
             criteria = "eDP-1";
+            status = "enable";
             position = "0,0";
-            mode = "1366x768";
           }
           {
             criteria = "HDMI-A-1";
-            position = "1366,0";
-            mode = "2560x1080";
+            status = "enable";
           }
         ];
         profile.exec = ''
-          echo "dual-monitor" > /tmp/kanshi-profile
-          notify-send "Kanshi" "Perfil activo: 💻 + 🖥️ Dual monitor"
-          hyprctl keyword workspace 1, monitor:eDP-1
-          hyprctl keyword workspace 2, monitor:HDMI-A-1
-          hyprctl keyword workspace 3, monitor:eDP-1
-          hyprctl keyword workspace 4, monitor:HDMI-A-1
+          ${pkgs.libnotify}/bin/notify-send "Kanshi" "Dual Monitor Detected"
+
+          if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
+            # Sway specific workspace logic
+            swaymsg workspace 1 output eDP-1
+            swaymsg workspace 2 output HDMI-A-1
+            swaymsg workspace 3 output eDP-1
+            swaymsg workspace 4 output HDMI-A-1
+          elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+            # Hyprland specific workspace logic
+            hyprctl keyword workspace 1, monitor:eDP-1
+            hyprctl keyword workspace 2, monitor:HDMI-A-1
+            hyprctl keyword workspace 3, monitor:eDP-1
+            hyprctl keyword workspace 4, monitor:HDMI-A-1
+          fi
         '';
       }
       {
-        # Profile 2: Docked (Lid closed with external monitor)
-        # Matches when only the external monitor is available
+        # --- Profile 2: Docked / Clamshell ---
         profile.name = "docked-clamshell";
         profile.outputs = [
           {
+            criteria = "eDP-1";
+            status = "disable";
+          }
+          {
             criteria = "HDMI-A-1";
+            status = "enable";
             position = "0,0";
-            mode = "2560x1080";
           }
         ];
         profile.exec = ''
-          echo "docked-clamshell" > /tmp/kanshi-profile
-          notify-send "Kanshi" "Perfil activo: 🧳 Modo dock (solo monitor externo)"
-          hyprctl keyword workspace 1, monitor:HDMI-A-1
-          hyprctl keyword workspace 2, monitor:HDMI-A-1
+          ${pkgs.libnotify}/bin/notify-send "Kanshi" "Docked Mode"
+
+          if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
+             swaymsg workspace 1 output HDMI-A-1
+             swaymsg workspace 2 output HDMI-A-1
+          elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+             hyprctl keyword workspace 1, monitor:HDMI-A-1
+             hyprctl keyword workspace 2, monitor:HDMI-A-1
+          fi
         '';
       }
       {
-        # Profile 3 "Laptop only" (Fallback)
-        # Matches only when laptop display is available
+        # --- Profile 3: Laptop Only ---
         profile.name = "laptop-only";
         profile.outputs = [
           {
             criteria = "eDP-1";
+            status = "enable";
             position = "0,0";
-            mode = "1366x768";
           }
         ];
         profile.exec = ''
-          echo "laptop-only" > /tmp/kanshi-profile
-          notify-send "Kanshi" "Perfil activo: 💻 Solo laptop"
-          hyprctl keyword workspace 1, monitor:eDP-1
-          hyprctl keyword workspace 2, monitor:eDP-1
+          ${pkgs.libnotify}/bin/notify-send "Kanshi" "Laptop Mode"
+
+          if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
+             swaymsg workspace 1 output eDP-1
+          elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+             hyprctl keyword workspace 1, monitor:eDP-1
+          fi
         '';
       }
     ];
-  };
-  systemd.user.services.kanshi = {
-    Unit = {
-      After = "graphical-session.target";
-    };
   };
 }

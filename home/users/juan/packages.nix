@@ -18,8 +18,6 @@ in {
     tmux
     kuks
     kuks-web
-    # wallpaper
-    swww
     # screenshots
     grim
     slurp

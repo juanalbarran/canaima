@@ -11,12 +11,9 @@ in {
     ripgrep
     tree
     gcc
-    jq
     # dev editor
     kuks
     kuks-web
-    # extra
-    fastfetch
     # font
     nerd-fonts.jetbrains-mono
   ];

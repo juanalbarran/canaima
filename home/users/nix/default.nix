@@ -1,4 +1,4 @@
-# hoem/user/nix/default.nix
+# home/user/nix/default.nix
 {pkgs, ...}: {
   imports = [
     ./fonts.nix
@@ -9,6 +9,8 @@
     ./../../modules/fastfetch
     ./../../modules/sway
     ./../../modules/hyprlock
+    ./../../modules/kanshi
+    ./../../modules/wallpapers
   ];
 
   home = {

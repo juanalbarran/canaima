@@ -7,11 +7,11 @@
     ./../../modules/hyprland
     ./../../modules/waybar
     ./../../modules/kanshi
-    ./../../modules/extras
     ./../../modules/tmux
     ./../../modules/starship
     ./../../modules/fastfetch
     ./../../modules/hyprlock
+    ./../../modules/wallpapers
   ];
 
   home = {
