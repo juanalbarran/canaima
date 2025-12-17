@@ -15,7 +15,7 @@ nix run home-manager/release-25.11 -- switch --flake .#juan
 ```
 
 ```bash
-nix run home-manager/release-25.11 -- switch --flake .#nix
+nix run home-manager/release-25.11 -- switch --flake .#nix --impure
 ```
 
 or
