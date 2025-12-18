@@ -11,7 +11,6 @@ in {
     ripgrep
     tree
     gcc
-    waybar
     hyprlock
     # dev editor
     tmux

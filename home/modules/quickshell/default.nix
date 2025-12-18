@@ -47,5 +47,14 @@ in {
       else if cfg.variant == "sway"
       then ./shell-sway.qml
       else ./shell.qml;
+
+    # 3. AUTOMATIC HYPRLAND STARTUP
+    # This block only runs if the variant is explicitly "hyprland"
+    wayland.windowManager.hyprland.settings = mkIf (cfg.variant == "hyprland") {
+      # This effectively adds "exec = pkill quickshell; quickshell" to your hyprland.conf
+      exec = [
+        "pkill quickshell; ${quickshell-script}/bin/quickshell"
+      ];
+    };
   };
 }

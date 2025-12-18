@@ -1,19 +1,16 @@
 # hosts/modules/services.nix
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # List services that you want to enable:
-  services = { 
-
+  services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
 
     # Login
-    greetd = { 
+    greetd = {
       enable = true;
       settings.default_session = {
-       command = "${pkgs.hyprland}/bin/Hyprland";
-       user = "juan";
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        user = "juan";
       };
     };
 
@@ -25,11 +22,13 @@
       layout = "us";
       variant = "";
     };
-
     logind = {
-      lidSwitch = "ignore";
-      lidSwitchExternalPower = "ignore";
-      lidSwitchDocked = "ignore";
+      settings.Login = {
+        HandleLidSwitch = "ignore";
+        HandleLidSwitchDocked = "ignore";
+        HandleLidSwitchExternalPower = "ignore";
+        KillUserProcesses = false;
+      };
     };
   };
 }

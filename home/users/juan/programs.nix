@@ -3,8 +3,12 @@
   programs = {
     git = {
       enable = true;
-      userName = "Juan Jesus";
-      userEmail = "juanjesusalbarran@gmail.com";
+      settings = {
+        user = {
+          name = "Juan Jesus";
+          email = "juanjesusalbarran@gmail.com";
+        };
+      };
     };
 
     bat.enable = true;

@@ -3,8 +3,7 @@
   pkgs,
   ghostty,
   ...
-}:
-{
+}: {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -16,6 +15,7 @@
     wofi
     psmisc # -> the killall command
     pavucontrol
+    kitty
   ];
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
