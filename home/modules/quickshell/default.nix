@@ -50,11 +50,30 @@ in {
 
     # 3. AUTOMATIC HYPRLAND STARTUP
     # This block only runs if the variant is explicitly "hyprland"
-    wayland.windowManager.hyprland.settings = mkIf (cfg.variant == "hyprland") {
-      # This effectively adds "exec = pkill quickshell; quickshell" to your hyprland.conf
-      exec = [
-        "pkill quickshell; ${quickshell-script}/bin/quickshell"
-      ];
+    # wayland.windowManager.hyprland.settings = mkIf (cfg.variant == "hyprland") {
+    #   # This effectively adds "exec = pkill quickshell; quickshell" to your hyprland.conf
+    #   exec = [
+    #     "pkill quickshell; ${quickshell-script}/bin/quickshell"
+    #   ];
+    # };
+    # --- NEW: SYSTEMD SERVICE ---
+    systemd.user.services.quickshell = {
+      Unit = {
+        Description = "Quickshell Status Bar";
+        # Start after the graphical session is ready
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+      };
+      Service = {
+        # Command to run
+        ExecStart = "${quickshell-script}/bin/quickshell";
+        # Restart if it crashes
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
   };
 }
