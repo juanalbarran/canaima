@@ -7,7 +7,10 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     kukenan.url = "github:juanalbarran/neovim/kick";
     #kukenan.url = "github:juanalbarran/neovim/main";
-    ghostty.url = "github:ghostty-org/ghostty/v1.2.1";
+    ghostty = {
+      url = "github:ghostty-org/ghostty/v1.2.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixgl.url = "github:nix-community/nixGL";
   };
 
