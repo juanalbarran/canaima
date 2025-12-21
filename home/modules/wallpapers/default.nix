@@ -54,27 +54,5 @@ in {
       source = ../../assets/wallpapers;
       recursive = true;
     };
-
-    systemd.user.services.wallpaper-cycler = {
-      Unit = {
-        Description = "Cycle wallpapers using swww";
-        After = ["graphical-session.target"];
-        PartOf = ["graphical-session.target"];
-      };
-      Service = {
-        ExecStart = "${wallpaperManager}/bin/wallpaper-manager";
-        Type = "oneshot";
-      };
-      Install = {WantedBy = ["graphical-session.target"];};
-    };
-
-    systemd.user.timers.wallpaper-cycler = {
-      Unit = {Description = "Timer for wallpaper cycling";};
-      Timer = {
-        OnUnitActiveSec = "15m";
-        OnBootSec = "1m";
-      };
-      Install = {WantedBy = ["timers.target"];};
-    };
   };
 }
