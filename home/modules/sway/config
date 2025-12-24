@@ -8,6 +8,7 @@ input "type:keyboard" {
 include ~/.config/sway/variables.conf
 include ~/.config/sway/autostart.conf
 include ~/.config/sway/monitors.conf
+include ~/.config/sway/rules.conf
 include /etc/sway/config-vars.d/*
 
 output eDP-1 scale 1.2
