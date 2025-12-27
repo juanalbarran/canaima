@@ -12,6 +12,7 @@
     ./../../modules/kanshi
     ./../../modules/wallpapers
     ./../../modules/quickshell
+    ./../../modules/keybinds
   ];
 
   home = {

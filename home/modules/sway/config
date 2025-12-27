@@ -54,3 +54,4 @@ default_border none
 #exec_always ~/.config/sway/start_apps.sh
 
 include /etc/sway/config.d/*
+

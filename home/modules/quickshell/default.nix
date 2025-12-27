@@ -12,18 +12,49 @@ with lib; let
   qmlPath = "${pkgs.quickshell}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml";
   pluginPath = "${pkgs.qt6.qtwayland}/lib/qt-6/plugins:${pkgs.qt6.qtbase}/lib/qt-6/plugins";
 
-  # Runner Logic (NixGL vs Raw)
+  # Source Selection
+  shellSource =
+    if cfg.variant == "hyprland"
+    then ./shell-hyprland.qml
+    else if cfg.variant == "sway"
+    then ./shell-sway.qml
+    else ./shell.qml;
+
+  # Bundling Step
+  configDir = pkgs.runCommand "quickshell-config" {} ''
+    mkdir -p $out
+    cp ${shellSource} $out/shell.qml
+    mkdir -p $out/components
+    cp -r ${./components/common}/* $out/components/
+    ${
+      if cfg.variant == "sway"
+      then "cp -r ${./components/sway}/* $out/components/"
+      else ""
+    }
+    ${
+      if cfg.variant == "hyprland"
+      then "cp -r ${./components/hyprland}/* $out/components/"
+      else ""
+    }
+  '';
+
   runner =
     if cfg.withNixGL
     then "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.quickshell}/bin/quickshell"
     else "${pkgs.quickshell}/bin/quickshell";
 
-  # Wrapper Script
   quickshell-script = pkgs.writeShellScriptBin "quickshell" ''
     export QML_IMPORT_PATH="${qmlPath}"
     export QT_PLUGIN_PATH="${pluginPath}"
+
+    # Required for Ubuntu/NixGL stability
     export QT_QPA_PLATFORM=wayland
-    exec ${runner} "$@"
+    export EGL_PLATFORM=wayland
+    unset QT_QPA_PLATFORMTHEME
+    export QML_DISABLE_DISK_CACHE=1
+
+    # Run exactly once. If it dies, it dies.
+    exec ${runner} -p "${configDir}/shell.qml" "$@"
   '';
 in {
   options.programs.canaima-quickshell = {
@@ -34,18 +65,16 @@ in {
     };
     withNixGL = mkOption {
       type = types.bool;
-      default = false;
+      default = true;
     };
   };
 
   config = mkIf cfg.enable {
-    home.packages = [quickshell-script pkgs.qt6.qtwayland pkgs.qt6.qtbase];
+    home.packages = [quickshell-script pkgs.nixgl.auto.nixGLDefault pkgs.qt6.qtwayland pkgs.qt6.qtbase];
 
-    xdg.configFile."quickshell/shell.qml".source =
-      if cfg.variant == "hyprland"
-      then ./shell-hyprland.qml
-      else if cfg.variant == "sway"
-      then ./shell-sway.qml
-      else ./shell.qml;
+    xdg.configFile."quickshell/shell.qml".source = shellSource;
+    xdg.configFile."quickshell/components/Tray.qml".source = ./components/common/Tray.qml;
+    xdg.configFile."quickshell/components/Clock.qml".source = ./components/common/Clock.qml;
+    xdg.configFile."quickshell/components/Battery.qml".source = ./components/common/Battery.qml;
   };
 }
