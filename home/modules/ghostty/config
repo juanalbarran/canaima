@@ -757,7 +757,7 @@ cursor-style = block
 #   * `true`
 #   * `false`
 # 
-cursor-style-blink = 
+cursor-style-blink = false
 
 # The color of the text under the cursor. If this is not set, a default will
 # be chosen.
@@ -1227,7 +1227,7 @@ window-inherit-font-size = true
 # 
 # macOS: To hide the titlebar without removing the native window borders
 #        or rounded corners, use `macos-titlebar-style = hidden` instead.
-window-decoration = auto
+window-decoration = false
 
 # The font that will be used for the application's window and tab titles.
 # 
@@ -1553,7 +1553,7 @@ click-repeat-interval = 0
 # If "foo" contains `a = 2`, the final value of `a` will be 2, because
 # `foo` is loaded after the configuration file that configures the
 # nested `config-file` value.
-config-file = 
+#config-file = 
 
 # When this is true, the default configuration file paths will be loaded.
 # The default configuration file paths are currently only the XDG
@@ -1796,7 +1796,7 @@ vt-kam-allowed = false
 # 
 # Changing this value at runtime and reloading the configuration will only
 # affect new windows, tabs, and splits.
-custom-shader = shaders/cursor-smear.glsl
+#custom-shader = shaders/cursor-smear.glsl
 
 # If `true` (default), the focused terminal surface will run an animation
 # loop when custom shaders are used. This uses slightly more CPU (generally
@@ -1815,7 +1815,7 @@ custom-shader = shaders/cursor-smear.glsl
 # 
 # This value can be changed at runtime and will affect all currently
 # open terminals.
-custom-shader-animation = true
+custom-shader-animation = false
 
 # Control the in-app notifications that Ghostty shows.
 # 

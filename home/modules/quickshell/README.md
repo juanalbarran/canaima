@@ -8,8 +8,7 @@ It works as a service in systemctl were it will run the service quickshell
 
 ### Commands
 
-dd
-For manually start the service
+To manually start the service
 
 ```bash
 systemctl --user start quickshell

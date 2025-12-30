@@ -8,8 +8,10 @@
 with lib; let
   cfg = config.programs.canaima-quickshell;
 
+  quickshellPkg = pkgs.quickshell;
+
   # Paths
-  qmlPath = "${pkgs.quickshell}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml";
+  qmlPath = "${quickshellPkg}/lib/qt-6/qml:${pkgs.qt6.qtdeclarative}/lib/qt-6/qml";
   pluginPath = "${pkgs.qt6.qtwayland}/lib/qt-6/plugins:${pkgs.qt6.qtbase}/lib/qt-6/plugins";
 
   # Source Selection
@@ -20,12 +22,23 @@ with lib; let
     then ./shell-sway.qml
     else ./shell.qml;
 
+  wifiQml = pkgs.replaceVars ./components/common/Wifi.qml {
+    nmcli = "${pkgs.networkmanager}/bin/nmcli";
+    bash = "${pkgs.bash}/bin/bash";
+  };
+
   # Bundling Step
   configDir = pkgs.runCommand "quickshell-config" {} ''
     mkdir -p $out
     cp ${shellSource} $out/shell.qml
     mkdir -p $out/components
+
     cp -r ${./components/common}/* $out/components/
+
+    chmod -R u+w $out/components/
+
+    cp -f ${wifiQml} $out/components/Wifi.qml
+
     ${
       if cfg.variant == "sway"
       then "cp -r ${./components/sway}/* $out/components/"
@@ -40,12 +53,13 @@ with lib; let
 
   runner =
     if cfg.withNixGL
-    then "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${pkgs.quickshell}/bin/quickshell"
-    else "${pkgs.quickshell}/bin/quickshell";
+    then "${pkgs.nixgl.auto.nixGLDefault}/bin/nixGL ${quickshellPkg}/bin/quickshell"
+    else "${quickshellPkg}/bin/quickshell";
 
   quickshell-script = pkgs.writeShellScriptBin "quickshell" ''
     export QML_IMPORT_PATH="${qmlPath}"
     export QT_PLUGIN_PATH="${pluginPath}"
+    export PATH="${pkgs.networkmanager}/bin:$PATH"
 
     # Required for Ubuntu/NixGL stability
     export QT_QPA_PLATFORM=wayland
@@ -76,5 +90,6 @@ in {
     xdg.configFile."quickshell/components/Tray.qml".source = ./components/common/Tray.qml;
     xdg.configFile."quickshell/components/Clock.qml".source = ./components/common/Clock.qml;
     xdg.configFile."quickshell/components/Battery.qml".source = ./components/common/Battery.qml;
+    xdg.configFile."quickshell/components/Wifi.qml".source = ./components/common/Wifi.qml;
   };
 }
