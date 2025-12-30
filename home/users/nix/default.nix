@@ -13,6 +13,7 @@
     ./../../modules/wallpapers
     ./../../modules/quickshell
     ./../../modules/keybinds
+    ./../../modules/browsers
   ];
 
   home = {

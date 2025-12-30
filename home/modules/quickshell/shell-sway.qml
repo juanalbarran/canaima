@@ -11,7 +11,6 @@ import "components"
 PanelWindow {
   id: root
 
-  // Theme
   property color colBg: "#131314"
   property color colFg: "#a9b1d6"
   property color colMuted: "#444b6a"
@@ -34,23 +33,33 @@ PanelWindow {
     anchors.rightMargin: 35
     spacing: 10 
 
-    // Workspaces
     Workspaces {
       activeColor: root.colBlue
       fgColor: root.colFg
       mutedColor: root.colMuted
       fontName: root.fontFamily
     }
-    // Spacer (pushes everything else to the right)
+
     Item { Layout.fillWidth: true }
 
-    // SystemTray 
     Tray {
       mutedColor: root.colMuted
       fontName: root.fontFamily
     } 
+    CPU {
+      chillColor: root.colFg
+      dangerColor: root.colRed
+      fontName: root.fontName
+      fontSize: root.fontSize
+    }
 
-    // Battery Indicator
+    Wifi {
+      activeColor: root.colBlue
+      disconnectedColor: root.colRed
+      fontName: root.fontFamily
+      fontSize: root.fontSize
+    }
+
     Battery {
       chargingColor: root.colBlue
       lowColor: root.colRed

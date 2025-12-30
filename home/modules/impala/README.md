@@ -6,6 +6,8 @@ Impala is a TUI Network manager so it is easier to configure the wifi
 
 ## Debian based systems
 
+NOTE: It doesn't work in nix user, so im using nmtui
+
 For make it work on Ubuntu y needed to make some changes
 Ubuntu by default uses `wpa_supplicant` as NetworkManager, but Impala to work need to use `iwd`.
 Because the `iwd` and the `wpa_supplicant` will fight for the wifi card i shouldn't have both running at the seame time so i had to do the following

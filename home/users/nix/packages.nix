@@ -16,5 +16,6 @@ in {
     kuks-web
     # font
     nerd-fonts.jetbrains-mono
+    powertop
   ];
 }
