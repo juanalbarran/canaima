@@ -2,5 +2,6 @@
 {
   imports = [
     ./brave.nix
+    ./firefox
   ];
 }
