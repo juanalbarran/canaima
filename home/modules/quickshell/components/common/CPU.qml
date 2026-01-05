@@ -10,7 +10,6 @@ RowLayout {
 
     property color chillColor: "#a9b1d6"
     property color dangerColor: "#f7768e"
-    property color textColor: "#c0caf5"
     property string fontName: "JetBrainsMono Nerd Font"
     property int fontSize: 14
 
@@ -67,27 +66,39 @@ RowLayout {
         font.family: root.fontName
         font.pixelSize: root.fontSize
 
-        // FIX: Added the MouseArea required by the ToolTip
         MouseArea {
             id: mouseArea
             anchors.fill: parent
-            hoverEnabled: true // Required for ToolTips to show on hover
+            hoverEnabled: true
         }
 
         ToolTip {
-            // Remove 'parent: cpuIcon' (ToolTip is already inside it)
-            // or keep it, but 'visible' needs the mouseArea
+            id: toolTip
             visible: mouseArea.containsMouse
             delay: 100
             timeout: 5000
 
+            // 1. Give breathing room so text doesn't overflow
+            padding: 8
+
+            // 2. Manual Position Calculation
+            // We calculate: - (Text Height + Top Padding + Bottom Padding + Margin)
+            // 12px (approx text) + 8px (top) + 8px (bottom) + 6px (margin above icon)
+            y: -45
+
+            // Center horizontally
+            x: (parent.width - width) / 2
+
             contentItem: Text {
+                id: ttText // We ID this to reference its height for positioning
                 text: "CPU: " + root.usagePercent + "%"
-                // FIX: 'root.textColor' was undefined in your original code
-                color: root.textColor
+                color: root.chillColor
                 font.family: root.fontName
                 font.pixelSize: 12
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
             }
+
             background: Rectangle {
                 color: "#1a1b26"
                 border.color: "#414868"

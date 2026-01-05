@@ -14,25 +14,25 @@ HYPR_TEXT='
    HYPRLAND KEYBINDINGS
    ==============================================================
    KEY                     DESCRIPTION
-   --------------------------------------------------------------
-   SUPER + Q               Focus Terminal (or Launch if closed)
-   SUPER + B               Focus Browser  (or Launch if closed)
-   SUPER + A               Focus AI       (or Launch if closed)
+   
+   SUPER + Q                 Ghostty
+   SUPER + B                Firefox
+   SUPER + A                Gemini
    SUPER + E               File Manager
    SUPER + R               Application Menu
-   SUPER + C               Kill Active Window
+   SUPER + C               󰧻 Kill Active Window
    SUPER + V               Toggle Floating
    SUPER + P               Pseudo Tiling (Dwindle)
    SUPER + T               Toggle Split (Dwindle)
    SUPER + S               Toggle Special Workspace (Scratchpad)
-   SUPER + /               Show Keybindings (You are here)
-   --------------------------------------------------------------
+   SUPER + /                Show Keybindings (You are here)
+   
    SUPER + SHIFT + W       Change Wallpaper
    SUPER + SHIFT + S       Move Active to Special Workspace
    SUPER + CTRL + Q        Lock Screen
    SUPER + CTRL + K        Launch Kitty
    SUPER + M               Exit Hyprland
-   --------------------------------------------------------------
+   
    Print                   Screenshot (Whole Screen)
    CTRL + Print            Screenshot (Active Window)
    SHIFT + Print           Screenshot (Selected Area)
@@ -45,21 +45,21 @@ SWAY_TEXT='
    SWAY KEYBINDINGS
    ==============================================================
    KEY                     DESCRIPTION
-   --------------------------------------------------------------
-   SUPER + q               Start Terminal (Ghostty)
-   SUPER + b               Start Browser (Firefox)
-   SUPER + a               Start AI (Gemini)
+   
+   SUPER + q                 Ghostty
+   SUPER + b                Firefox
+   SUPER + a                Gemini
    SUPER + d               Start Launcher
-   SUPER + c               Kill Focused Window
-   SUPER + /               Show Keybindings (You are here)
-   --------------------------------------------------------------
+   SUPER + c               󰧻 Kill Active Window
+   SUPER + /                Show Keybindings (You are here)
+   
    SUPER + Shift + w       Change Wallpaper
    SUPER + Shift + i       Network Manager (Floating)
    SUPER + Shift + c       Reload Sway Config
    SUPER + Shift + e       Exit Sway Session
-   --------------------------------------------------------------
+   
    SUPER + Ctrl + q        Lock Screen
-   --------------------------------------------------------------
+   
    SUPER + Shift + Space   Toggle Floating Mode
    SUPER + Space           Swap Focus (Tiling <-> Floating)
    SUPER + Shift + Minus   Move Window to Scratchpad
