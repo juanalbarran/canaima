@@ -11,7 +11,7 @@
     ./../../modules/hyprlock
     ./../../modules/kanshi
     ./../../modules/wallpapers
-    ./../../modules/quickshell
+    ./../../modules/waybar
     ./../../modules/keybinds
     ./../../modules/browsers
   ];
