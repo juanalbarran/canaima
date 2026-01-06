@@ -1,0 +1,36 @@
+/* /home/modules/waybar/components/workspaces/workspaces.css */
+#workspaces {
+    margin-left: 35px;
+}
+
+#workspaces button {
+    padding: 0 2px; 
+    
+    font-size: 10px;
+    font-weight: normal;
+    
+    color: #a9b1d6;
+    
+    transition: all 0.3s ease;
+}
+
+#workspaces button.focused {
+    color: #7aa2f7;
+    background-color: transparent;
+}
+
+#workspaces button.empty {
+    color: #a9b1d6;
+}
+
+#workspaces button:hover {
+    background-color: transparent;
+    background: transparent;
+    color: #e0af68;
+    box-shadow: none;
+}
+
+#workspaces button.urgent {
+    color: #f7768e; /* Red for urgent */
+}
+
