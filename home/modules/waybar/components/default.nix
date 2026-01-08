@@ -3,10 +3,13 @@
   imports = [
     ./clock
     ./workspaces
-    ./memory
+    #./memory
+    #./cpu
+    #./bluetooth
+    ./battery
+    ./network
   ];
 
-  programs.waybar.settings.mainBar = {
-    modules-right = ["memory" "cpu" "battery" "network"];
-  };
+  programs.waybar.settings.mainBar.modules-right = ["network" "battery"];
+  # modules-right = ["network" "cpu" "memory" "battery"];
 }

@@ -11,12 +11,11 @@
 
 /* --- Bar Background --- */
 window#waybar {
-    min-height: 28px;
+    min-height: 30px;
     
     background-color: #131314;
     color: #a9b1d6;
         font-size: 14px;
 
 }
-
 

@@ -1,7 +1,7 @@
-# home/modules/waybar/components/workspaces/workspace-sway.nix
+# home/modules/waybar/components/workspaces/workspace-hyprland.nix
 {
-  programs.waybar.settings.mainBar."sway/workspaces" = {
-    disable-scroll = true;
+  programs.waybar.settings.mainBar."hyprland/workspaces" = {
+    active-only = false;
     all-outputs = true;
 
     persistent-workspaces = {
@@ -17,5 +17,6 @@
       default = "󰄰";
       urgent = "";
     };
+    on-click = "activate";
   };
 }

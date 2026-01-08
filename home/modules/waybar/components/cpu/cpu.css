@@ -1,0 +1,12 @@
+/* home/modules/waybar/components/cpu/cpu.css */
+#cpu {
+    color: #fab387;
+    padding: 0 5px;
+    font-size: 12px;
+}
+
+#cpu.alternating {
+    background-color: #fab387;
+    color: #11111b;
+    border-radius: 8px;
+}
