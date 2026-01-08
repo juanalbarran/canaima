@@ -7,13 +7,12 @@
     ./../../modules/ghostty
     ./../../modules/starship
     ./../../modules/fastfetch
-    ./../../modules/sway
-    ./../../modules/hyprlock
     ./../../modules/kanshi
-    ./../../modules/wallpapers
-    ./../../modules/waybar
     ./../../modules/keybinds
     ./../../modules/browsers
+    ./../../modules/ui/sway
+    ./../../modules/ui/wallpapers
+    ./../../modules/ui/waybar
   ];
 
   home = {

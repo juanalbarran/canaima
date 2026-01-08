@@ -1,0 +1,3 @@
+# home/modules/ghostty/window-rules/nmtui.toml
+title=nmtui-floating
+window-decoration=false

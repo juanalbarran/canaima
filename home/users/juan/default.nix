@@ -4,14 +4,15 @@
     ./packages.nix
     ./programs.nix
     ./../../modules/ghostty
-    ./../../modules/hyprland
     ./../../modules/kanshi
-    ./../../modules/tmux
     ./../../modules/starship
     ./../../modules/fastfetch
-    ./../../modules/hyprlock
-    ./../../modules/wallpapers
-    ./../../modules/quickshell
+    ./../../modules/browsers
+    # UI modules
+    ./../../modules/ui/hyprlock
+    ./../../modules/ui/wallpapers
+    ./../../modules/ui/waybar
+    ./../../modules/ui/hyprland
   ];
 
   home = {

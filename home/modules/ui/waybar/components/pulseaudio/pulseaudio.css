@@ -1,0 +1,16 @@
+/* home/modules/waybar/components/pulseaudio/pulseaudio.css */
+
+#pulseaudio {
+    color: #f5c2e7;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 12px;
+    padding: 0 5px;
+}
+
+#pulseaudio.muted {
+    color: #45475a;
+}
+
+#pulseaudio.bluetooth {
+    color: #89b4fa; 
+}
