@@ -10,11 +10,9 @@
     wget
     git
     ghostty.packages.${system}.default
-    firefox
     wl-clipboard
     wofi
     psmisc # -> the killall command
-    pavucontrol
     kitty
   ];
   fonts.packages = with pkgs; [
