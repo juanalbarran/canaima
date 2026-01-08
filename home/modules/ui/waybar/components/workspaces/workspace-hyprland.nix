@@ -13,8 +13,9 @@
 
     format = "{icon}";
     format-icons = {
-      focused = "";
-      default = "󰄰";
+      active = "";
+      default = "";
+      empty = "󰄰";
       urgent = "";
     };
     on-click = "activate";

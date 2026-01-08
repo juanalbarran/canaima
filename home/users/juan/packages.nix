@@ -11,15 +11,8 @@ in {
     ripgrep
     tree
     gcc
-    hyprlock
     # dev editor
-    tmux
     kuks
     kuks-web
-    # screenshots
-    grim
-    slurp
-    # browsers
-    brave
   ];
 }
