@@ -8,8 +8,9 @@
     #./bluetooth
     ./battery
     ./network
+    ./pulseaudio
   ];
 
-  programs.waybar.settings.mainBar.modules-right = ["network" "battery"];
+  programs.waybar.settings.mainBar.modules-right = ["pulseaudio" "network" "battery"];
   # modules-right = ["network" "cpu" "memory" "battery"];
 }
