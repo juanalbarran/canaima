@@ -1,5 +1,9 @@
 # home/modules/hyprland/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     extraConfig = builtins.readFile ./hyprland.conf;
@@ -13,8 +17,13 @@
     "hypr/hyprland-workspaces.conf".source = ./hyprland-workspaces.conf;
   };
 
-  home.packages = with pkgs; [
-    grim
-    slurp
-  ];
+  home = {
+    packages = with pkgs; [
+      grim
+      slurp
+    ];
+    activation.createScreenshotsDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p $HOME/Pictures/screenshots
+    '';
+  };
 }
