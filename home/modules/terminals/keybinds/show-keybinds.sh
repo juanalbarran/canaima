@@ -43,29 +43,33 @@ HYPR_TEXT='
 SWAY_TEXT='
 
    SWAY KEYBINDINGS
-   ==============================================================
+   ====================================================================
    KEY                     DESCRIPTION
-   
+   
    SUPER + q                 Ghostty
    SUPER + b                Firefox
    SUPER + a                Gemini
    SUPER + d               Start Launcher
    SUPER + c               󰧻 Kill Active Window
    SUPER + /                Show Keybindings (You are here)
-   
+   
+   PRINT                   Screenshot -> ~/Pictures/screenshots/
+   PRINT + Shift           Screenshot Area -> ~/Pictures/screenshots/
+   PRINT + CRTL            Screenshot Area -> Clipboard
+   
    SUPER + Shift + w       Change Wallpaper
    SUPER + Shift + i       Network Manager (Floating)
    SUPER + Shift + c       Reload Sway Config
    SUPER + Shift + e       Exit Sway Session
-   
+   
    SUPER + Ctrl + q        Lock Screen
-   
+   
    SUPER + Shift + Space   Toggle Floating Mode
    SUPER + Space           Swap Focus (Tiling <-> Floating)
    SUPER + Shift + Minus   Move Window to Scratchpad
    SUPER + Minus           Cycle Scratchpad Windows
    SUPER + r               Enter Resize Mode
-   ==============================================================
+   ====================================================================
    (Press any key to close)'
 
 # Detect Environment and Run
