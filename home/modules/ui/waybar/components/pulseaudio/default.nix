@@ -1,5 +1,15 @@
 # home/modules/ui/waybar/components/pulseaudio/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: let
+  isHyprland = config.wayland.windowManager.hyprland.enable;
+  termCommand =
+    if isHyprland
+    then "${pkgs.kitty}/bin/kitty --class pulsemixer -e pulsemixer"
+    else "${pkgs.foot}/bin/foot -a pulsemixer -e pulsemixer";
+in {
   programs.waybar.settings.mainBar."pulseaudio" = {
     scroll-step = 5;
     format = "{icon}";
@@ -17,7 +27,7 @@
       car = " ";
     };
 
-    on-click = "ghostty --config-file=\"$HOME/.config/ghostty/window-rules/pulsemixer.toml\" -e sh -c \"sleep 0.5 && $HOME/.nix-profile/bin/pulsemixer\"";
+    on-click = termCommand;
     on-click-right = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
     tooltip-format = "{desc}\n{volume}%";
   };

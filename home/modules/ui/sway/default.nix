@@ -4,6 +4,9 @@
   lib,
   ...
 }: {
+  imports = [
+    ./foot.nix
+  ];
   xdg.configFile = {
     "sway/config".source = ./config;
     "sway/variables.conf".source = ./variables.conf;
