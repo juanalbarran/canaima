@@ -3,11 +3,9 @@
   imports = [
     ./packages.nix
     ./programs.nix
-    ./../../modules/ghostty
     ./../../modules/kanshi
-    ./../../modules/starship
-    ./../../modules/fastfetch
     ./../../modules/browsers
+    ./../../modules/terminals
     # UI modules
     ./../../modules/ui/hyprlock
     ./../../modules/ui/wallpapers

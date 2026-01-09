@@ -4,15 +4,12 @@
     ./fonts.nix
     ./packages.nix
     ./programs.nix
-    ./../../modules/ghostty
-    ./../../modules/starship
-    ./../../modules/fastfetch
     ./../../modules/kanshi
-    ./../../modules/keybinds
     ./../../modules/browsers
     ./../../modules/ui/sway
     ./../../modules/ui/wallpapers
     ./../../modules/ui/waybar
+    ./../../modules/terminals
   ];
 
   home = {
