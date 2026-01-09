@@ -7,6 +7,15 @@
   imports = [
     ./foot.nix
   ];
+  wayland.windowManager.sway = {
+    # Set the package null instead of pkgs.sway, to use the sway installed by apt
+    # in the Ubuntu machine
+    package = null;
+    checkConfig = true;
+    config = {
+      extraConfig = builtins.readFile ./config;
+    };
+  };
   xdg.configFile = {
     "sway/config".source = ./config;
     "sway/variables.conf".source = ./variables.conf;
@@ -20,6 +29,7 @@
     packages = with pkgs; [
       grim
       slurp
+      wtype
     ];
     activation.createScreenshotsDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
       mkdir -p $HOME/Pictures/screenshots
