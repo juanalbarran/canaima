@@ -11,6 +11,7 @@
     ./../../modules/ui/wallpapers
     ./../../modules/ui/waybar
     ./../../modules/ui/hyprland
+    ./../../modules/ui/wofi
   ];
 
   home = {

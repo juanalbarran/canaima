@@ -9,13 +9,30 @@
   # 1. Define the Master Menu Script
   # This script generates the top-level menu and handles the logic for submenus
   system-menu = pkgs.writeShellScriptBin "system-menu" ''
-    # Options for the main menu
-    OPTS="  Applications\n  Keybinds\n  Bluetooth\n   Sound\n   Network\n   Power"
+    # --- Helper Function to calculate height ---
+    get_height() {
+      line_count=$(echo -e "$1" | wc -l)
 
-    # Launch Wofi in dmenu mode to select an option
+      # Formula: (lines * 32px per line) + 12px vertical padding
+      # Since you hid the search bar, we don't need a large base number.
+      echo $(( ($line_count * 32) + 28 ))
+    }
+    # -------------------------------------------
+    OPTS="  Applications\n  Keybinds"
+
+    if [ -d "/sys/class/bluetooth" ] && [ "$(${pkgs.coreutils}/bin/ls -A /sys/class/bluetooth)" ]; then
+        OPTS="$OPTS\n  Bluetooth"
+    fi
+
+    OPTS="$OPTS\n   Sound\n   Network\n   Power"
+
+    HEIGHT=$(get_height "$OPTS")
+
     SELECTED=$(echo -e "$OPTS" | ${pkgs.wofi}/bin/wofi \
     --conf ${./config-menu.conf} \
-    --style ${./style.css})
+    --style ${./style.css} \
+    --height $HEIGHT \
+    --cache-file /dev/null)
 
     case $SELECTED in
       "  Applications")
@@ -57,12 +74,23 @@
       "   Power")
         # Simple Power Submenu
         OPTS="  Shutdown\n  Reboot\n  Logout\n  Lock"
-        ACTION=$(echo -e "$OPTS" | ${pkgs.wofi}/bin/wofi --dmenu --prompt "Power Menu" --height 250 --width 300)
+
+        SUB_HEIGHT=$(get_height "$OPTS")
+
+        ACTION=$(echo -e "$OPTS" | ${pkgs.wofi}/bin/wofi \
+          --dmenu \
+          --prompt "Power Menu" \
+          --hide-search \
+          --height $SUB_HEIGHT \
+          --width 300 \
+          --cache-file /dev/null \
+          --conf ${./config-menu.conf})
+
 
         case $ACTION in
           "  Shutdown") systemctl poweroff ;;
           "  Reboot") systemctl reboot ;;
-          "  Lock") loginctl lock-session ;;
+          "  Lock") hyprlock ;;
           "  Logout") loginctl terminate-user $USER ;;
         esac
         ;;

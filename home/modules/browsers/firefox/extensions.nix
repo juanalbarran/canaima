@@ -36,6 +36,9 @@
             (extension "privacy-badger17" "jid1-MnnxcxisBPnSXQ@jetpack")
             (extension "cookie-autodelete" "CookieAutoDelete@kennydo.com")
 
+            # Navigation
+            (extension "tridactyl-vim" "tridactyl.vim@cmcaine.co.uk")
+
             # Layout / Themeing
             (extension "tree-style-tab" "treestyletab@piro.sakura.ne.jp")
             (extension "darkreader" "addon@darkreader.org")
