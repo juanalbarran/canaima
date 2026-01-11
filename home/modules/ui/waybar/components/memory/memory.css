@@ -1,13 +1,13 @@
 /* home/modules/waybar/components/memory/memory.css */
 #memory {
-      /* font-size: 14px; */
-      color: #cba6f7; 
-      background-color: transparent;
-      padding: 0 5px;
+  /* font-size: 14px; */
+  color: #cba6f7;
+  background-color: transparent;
+  padding: 0 5px;
 }
 
 #memory.alternating {
-      background-color: #313244;
-      border-radius: 8px;
-      color: #ffffff;
+  background-color: #313244;
+  border-radius: 8px;
+  color: #ffffff;
 }

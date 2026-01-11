@@ -9,6 +9,7 @@
     ./../../modules/ui/sway
     ./../../modules/ui/wallpapers
     ./../../modules/ui/waybar
+    ./../../modules/ui/wofi
     ./../../modules/terminals
   ];
 
@@ -19,6 +20,8 @@
   };
 
   xsession.enable = true;
+
+  features.bluetooth = true;
 
   xdg.portal = {
     enable = true;
