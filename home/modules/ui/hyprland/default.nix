@@ -15,6 +15,7 @@
     "hypr/hyprland-autostart.conf".source = ./hyprland-autostart.conf;
     "hypr/hyprland-keybinds.conf".source = ./hyprland-keybinds.conf;
     "hypr/hyprland-workspaces.conf".source = ./hyprland-workspaces.conf;
+    "hypr/hyprland-rules.conf".source = ./hyprland-rules.conf;
   };
 
   home = {
