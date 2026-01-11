@@ -14,8 +14,8 @@ in {
     scroll-step = 5;
     format = "{icon}";
     format-muted = " ";
-    format-bluetooth = " {icon}";
-    format-bluetooth-muted = "  ";
+    format-bluetooth = " {icon}";
+    format-bluetooth-muted = "  ";
 
     format-icons = {
       default = ["" " " " "];

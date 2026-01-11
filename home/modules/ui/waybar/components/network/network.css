@@ -1,24 +1,24 @@
 /* home/modules/waybar/components/network/network.css */
 
 #network {
-    color: #a9b1d6;
-    font-family: "JetBrainsMono Nerd Font";
-    /* font-size: 14px; */
-    padding: 0 5px;
+  color: #a9b1d6;
+  font-family: "JetBrainsMono Nerd Font";
+  /* font-size: 14px; */
+  padding: 0 5px;
 }
 
 #network.disconnected {
-    color: #a9b1d6;
-    /* color: #f38ba8; */
+  color: #a9b1d6;
+  /* color: #f38ba8; */
 }
 
 #network.ethernet {
-    color: #a9b1d6;
-    /* color: #89b4fa;  */
+  color: #a9b1d6;
+  /* color: #89b4fa;  */
 }
 
 #network.alternating {
-    background-color: #89dceb;
-    color: #11111b;
-    border-radius: 8px;
+  background-color: #89dceb;
+  color: #11111b;
+  border-radius: 8px;
 }
