@@ -3,5 +3,6 @@
   imports = [
     ./brave.nix
     ./firefox
+    ./qutebrowser
   ];
 }
