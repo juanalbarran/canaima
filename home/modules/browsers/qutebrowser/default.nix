@@ -49,8 +49,8 @@
         "<ctrl-m>" = "spawn mpv {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
-        "<Alt-[>" = "tab-prev";
-        "<Alt-]>" = "tab-next";
+        "<Meta-Shift-{>" = "tab-prev";
+        "<Meta-Shift-}>" = "tab-next";
 
         # toggle dark mode quickly with ',d'
         ",d" = "config-cycle colors.webpage.darkmode.enabled";
