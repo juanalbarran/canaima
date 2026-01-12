@@ -90,7 +90,13 @@
         case $ACTION in
           "  Shutdown") systemctl poweroff ;;
           "  Reboot") systemctl reboot ;;
-          "  Lock") hyprlock ;;
+          "  Lock")
+            if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+              hyprlock
+            else
+              /usr/local/bin/swaylock -C ~/.config/sway/lock_config
+            fi
+            ;;
           "  Logout") loginctl terminate-user $USER ;;
         esac
         ;;
