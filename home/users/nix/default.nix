@@ -21,7 +21,7 @@
 
   xsession.enable = true;
 
-  features.bluetooth = true;
+  features.bluetooth = false;
 
   xdg.portal = {
     enable = true;
