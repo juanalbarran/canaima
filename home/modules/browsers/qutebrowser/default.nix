@@ -1,17 +1,14 @@
 # home/modules/browsers/qutebrowser/default.nix
-{
-  pkgs,
-  nixgl,
-  ...
-}: {
+{pkgs, ...}: {
   programs.qutebrowser = {
     enable = true;
     quickmarks = {
-      gh = "https://github.com";
-      hm = "https://home-manager-options.extranix.com";
-      nw = "https://nixos.wiki";
-      yt = "https://youtube.com";
-      rd = "https://reddit.com";
+      github = "https://github.com";
+      home-manager-options = "https://home-manager-options.extranix.com";
+      nixwiki = "https://nixos.wiki";
+      youtube = "https://youtube.com";
+      reddit = "https://reddit.com";
+      twitch = "https://twitch.tv";
     };
     searchEngines = {
       # default (used when you just type a string)
@@ -22,9 +19,6 @@
 
       # search home manager options
       "hm" = "https://home-manager-options.extranix.com/?query={}";
-
-      # youtube specific search
-      "y" = "https://www.youtube.com/results?search_query={}";
 
       # google fallback
       "g" = "https://www.google.com/search?hl=en&q={}";
@@ -41,12 +35,11 @@
       "content.blocking.enabled" = true; # enable built-in adblock (brave's engine)
     };
 
-    # 4. keybindings
     keyBindings = {
       normal = {
         # power user feature: open video links in mpv (requires mpv installed)
-        "m" = "hint links spawn mpv {hint-url}";
-        "<ctrl-m>" = "spawn mpv {url};; tab-close";
+        "m" = "hint links spawn ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {hint-url}";
+        "<ctrl-m>" = "spawn ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
         "<Meta-Shift-{>" = "tab-prev";
@@ -54,6 +47,10 @@
 
         # toggle dark mode quickly with ',d'
         ",d" = "config-cycle colors.webpage.darkmode.enabled";
+      };
+      command = {
+        "<Ctrl-n>" = "completion-item-focus next";
+        "<Ctrl-p>" = "completion-item-focus prev";
       };
     };
   };
