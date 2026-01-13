@@ -14,6 +14,10 @@ include /etc/sway/config-vars.d/*
 output eDP-1 scale 1.2
 
 include ~/.config/sway/bindings.conf
+include ~/.config/sway/bindings/browser-binds.conf
+include ~/.config/sway/bindings/ai-binds.conf
+include ~/.config/sway/bindings/firefox-binds.conf
+include ~/.config/sway/bindings/screenshot-binds.conf
 
 # bar {
 #     #swaybar_command waybar

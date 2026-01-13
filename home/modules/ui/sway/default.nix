@@ -6,6 +6,7 @@
 }: {
   imports = [
     ./foot.nix
+    ./special-binds
   ];
   wayland.windowManager.sway = {
     # Set the package null instead of pkgs.sway, to use the sway installed by apt
