@@ -9,6 +9,9 @@
       youtube = "https://youtube.com";
       reddit = "https://reddit.com";
       twitch = "https://twitch.tv";
+      tony = "https://tonybtw.com";
+      gmail = "https://gmail.com";
+      nixsearch = "https://search.nixos.org/packages?channel=unstable&query={}";
     };
     searchEngines = {
       # default (used when you just type a string)
@@ -58,4 +61,7 @@
     mpv # the video player
     yt-dlp # the tool mpv uses to "read" youtube/twitch urls
   ];
+  xdg.configFile = {
+    "qutebrowser/gemini-config.py".source = ./gemini-config.py;
+  };
 }
