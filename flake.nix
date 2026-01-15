@@ -31,11 +31,11 @@
   in {
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
-        inherit system;
         specialArgs = {
           inherit kukenan system ghostty;
         };
         modules = [
+          {nixpkgs.hostPlatform = system;}
           ./hosts/configuration.nix
           home-manager.nixosModules.home-manager
           {
@@ -45,14 +45,12 @@
           }
         ];
       };
-    };
-    nixosConfigurations = {
       suckless = nixpkgs.lib.nixosSystem {
-        inherit system;
         specialArgs = {
           inherit kukenan system ghostty;
         };
         modules = [
+          {nixpkgs.hostPlatform = system;}
           ./hosts/configurations/suckless
           home-manager.nixosModules.home-manager
           {
