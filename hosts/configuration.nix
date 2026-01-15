@@ -17,10 +17,12 @@
     ./modules/boot.nix
     ./modules/networking.nix
     ./modules/localization.nix
-    ./modules/users.nix
+    ./users/juan.nix
     ./modules/programs.nix
     ./modules/services.nix
     ./modules/ui.nix
+    ./modules/hyprland.nix
+    ./modules/common
   ];
 
   # This value determines the NixOS release from which the default

@@ -40,10 +40,26 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
-              inherit kukenan system;
+              inherit kukenan system ghostty;
             };
           }
-          ./home/home.nix
+        ];
+      };
+    };
+    nixosConfigurations = {
+      suckless = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit kukenan system ghostty;
+        };
+        modules = [
+          ./hosts/configurations/suckless
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = {
+              inherit kukenan system ghostty;
+            };
+          }
         ];
       };
     };
@@ -52,14 +68,14 @@
         inherit pkgs;
         modules = [./home/users/juan];
         extraSpecialArgs = {
-          inherit kukenan system;
+          inherit kukenan system ghostty;
         };
       };
       "nix" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./home/users/nix];
         extraSpecialArgs = {
-          inherit kukenan system;
+          inherit kukenan system ghostty;
         };
       };
     };
