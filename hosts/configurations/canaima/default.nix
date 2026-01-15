@@ -1,8 +1,9 @@
-# hosts/configuration.nix
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-{...}: {
+# home/configurations/canaima/default.nix
+{
+  # Edit this configuration file to define what should be installed on
+  # your system.  Help is available in the configuration.nix(5) man page
+  # and in the NixOS manual (accessible by running ‘nixos-help’).
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -13,15 +14,14 @@
 
   imports = [
     # Include the results of the hardware scan.
-    ./hardware/asus/hardware-configuration.nix
-    ./modules/networking.nix
-    ./modules/localization.nix
-    ./users/juan.nix
-    ./modules/programs.nix
-    ./modules/services.nix
-    ./modules/ui.nix
-    ./modules/hyprland.nix
-    ./modules/common # fonts and boot
+    ./../../hardware/asus/hardware-configuration.nix
+    ./../../modules/networking.nix
+    ./../../users/juan.nix
+    ./../../modules/programs.nix
+    ./../../modules/services.nix
+    ./../../modules/ui.nix
+    ./../../modules/hyprland.nix
+    ./../../modules/common # fonts, boot, localization
   ];
 
   # This value determines the NixOS release from which the default

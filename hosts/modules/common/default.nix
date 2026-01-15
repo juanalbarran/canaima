@@ -2,5 +2,7 @@
 {
   imports = [
     ./font
+    ./boot.nix
+    ./localization.nix
   ];
 }

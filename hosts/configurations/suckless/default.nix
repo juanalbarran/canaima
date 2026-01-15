@@ -1,12 +1,10 @@
 # hosts/configurations/suckless/default.nix
 {pkgs, ...}: {
   imports = [
-    ./../../modules/boot.nix
     ./../../modules/networking.nix
-    ./../../modules/localization.nix
     ./../../users/suckless.nix
     ./../../hardware/asus/hardware-configuration.nix
-    ./../../modules/common
+    ./../../modules/common # fonts, boot localization
     ./../../modules/ui/dwm
   ];
 
