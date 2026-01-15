@@ -15,10 +15,6 @@
     psmisc # -> the killall command
     kitty
   ];
-  fonts.packages = with pkgs; [
-    nerd-fonts.caskaydia-cove
-    nerd-fonts.jetbrains-mono
-  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -26,8 +22,4 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  programs = {
-    hyprland.enable = true;
-    hyprlock.enable = true;
-  };
 }

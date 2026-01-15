@@ -1,4 +1,4 @@
-# hosts/modules/users.nix
+# hosts/users/juan.nix
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.juan = {
