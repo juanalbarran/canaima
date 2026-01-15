@@ -36,6 +36,7 @@
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
+#include <time.h>
 #ifdef XINERAMA
 #include <X11/extensions/Xinerama.h>
 #endif /* XINERAMA */
@@ -435,6 +436,7 @@ buttonpress(XEvent *e)
 	}
 	if (ev->window == selmon->barwin) {
 		i = x = 0;
+		x += 35;
 		do
 			x += TEXTW(tags[i]);
 		while (ev->x >= x && ++i < LENGTH(tags));
@@ -443,7 +445,7 @@ buttonpress(XEvent *e)
 			arg.ui = 1 << i;
 		} else if (ev->x < x + TEXTW(selmon->ltsymbol))
 			click = ClkLtSymbol;
-		else if (ev->x > selmon->ww - (int)TEXTW(stext))
+		else if (ev->x > selmon->ww - (int)TEXTW(stext) - 35)
 			click = ClkStatusText;
 		else
 			click = ClkWinTitle;
@@ -712,8 +714,16 @@ drawbar(Monitor *m)
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad + 2; /* 2px right padding */
-		drw_text(drw, m->ww - tw, 0, tw, bh, 0, stext, 0);
+		tw = TEXTW(stext) - lrpad + 2; /* Calculate the width of the text */
+		
+		/* Draw the text, shifted left by 35px */
+		drw_text(drw, m->ww - tw - 35, 0, tw, bh, 0, stext, 0);
+		
+		/* Draw the blank margin on the far right */
+		drw_rect(drw, m->ww - 35, 0, 35, bh, 1, 1);
+
+		/* Add 35 to tw so the window title bar stops earlier and respects the margin */
+		tw += 35; 
 	}
 
 	for (c = m->clients; c; c = c->next) {
@@ -722,14 +732,19 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 	x = 0;
+
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_rect(drw, x, 0, 35, bh, 1, 1);
+	x += 35;
+
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
-		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
+		// if (occ & 1 << i)
+		// 	drw_rect(drw, x + boxs, boxs, boxw, boxw,
+		// 		m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+		// 		urg & 1 << i);
 		x += w;
 	}
 	w = TEXTW(m->ltsymbol);
@@ -747,6 +762,21 @@ drawbar(Monitor *m)
 			drw_rect(drw, x, 0, w, bh, 1, 1);
 		}
 	}
+	// Clock
+	time_t now = time(NULL);
+    struct tm *tm = localtime(&now);
+    char clockStr[64];
+    
+    /* Format: 20:42 | Thu, 15 */
+    strftime(clockStr, sizeof(clockStr), "%H:%M | %a, %d", tm);
+
+    /* Calculate center position */
+    w = TEXTW(clockStr);
+    x = (m->ww - w) / 2;
+
+    /* Draw the clock using Normal colors (SchemeNorm) */
+    drw_setscheme(drw, scheme[SchemeNorm]);
+    drw_text(drw, x, 0, w, bh, lrpad / 2, clockStr, 0);
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
 
