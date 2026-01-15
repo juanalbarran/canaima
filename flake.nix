@@ -25,7 +25,7 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
-      inherit system;
+      localSystem = system;
       overlays = [nixgl.overlay];
     };
   in {
@@ -36,7 +36,7 @@
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
-          ./hosts/configuration.nix
+          ./hosts/configurations/canaima
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
