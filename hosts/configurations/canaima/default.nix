@@ -15,13 +15,11 @@
   imports = [
     # Include the results of the hardware scan.
     ./../../hardware/asus/hardware-configuration.nix
-    ./../../modules/networking.nix
     ./../../users/juan.nix
     ./../../modules/programs.nix
     ./../../modules/services.nix
-    ./../../modules/ui.nix
-    ./../../modules/hyprland.nix
-    ./../../modules/common # fonts, boot, localization
+    ./../../modules/ui/hyprland
+    ./../../modules/common # fonts, boot, localization, networking
   ];
 
   # This value determines the NixOS release from which the default
