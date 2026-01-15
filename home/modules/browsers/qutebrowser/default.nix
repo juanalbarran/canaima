@@ -38,8 +38,8 @@
     keyBindings = {
       normal = {
         # power user feature: open video links in mpv (requires mpv installed)
-        "m" = "hint links spawn ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {hint-url}";
-        "<ctrl-m>" = "spawn ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {url};; tab-close";
+        "m" = "hint links spawn ${pkgs.mpv}/bin/mpv --detach --force-window --vo=wlshm {hint-url}";
+        "<ctrl-m>" = "spawn ${pkgs.mpv}/bin/mpv --detach --force-window --vo=wlshm {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
         "<Meta-Shift-{>" = "tab-prev";
