@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+export PATH="$HOME/.nix-profile/bin:$PATH"
 # Function to display text cleanly without a pager
 display_hud() {
     clear
