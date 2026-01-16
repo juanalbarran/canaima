@@ -3,7 +3,6 @@
   imports = [
     ./fastfetch
     ./ghostty
-    ./keybinds
     ./starship
     ./tmux
   ];
