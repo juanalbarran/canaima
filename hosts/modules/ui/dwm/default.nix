@@ -18,4 +18,8 @@
     picom.enable = true;
   };
   environment.systemPackages = [pkgs.xclip];
+  home.packages = with pkgs; [
+    wmcrtl
+    xdotool
+  ];
 }

@@ -4,6 +4,7 @@
   keybinds = pkgs.writeShellScriptBin "keybinds" (builtins.readFile ./scripts/keybinds.sh);
   bookmarks = pkgs.writeShellScriptBin "bookmarks" (builtins.readFile ./scripts/bookmarks.sh);
   systemMenu = pkgs.writeShellScriptBin "system-menu" (builtins.readFile ./scripts/system-menu.sh);
+  projects = pkgs.writeShellScriptBin "projects" (builtins.readFile ./scripts/projects.sh);
 in {
   programs.wofi = {
     enable = true;
@@ -18,6 +19,9 @@ in {
   xdg.configFile = {
     "wofi/config-menu.conf".source = ./config-menu.conf;
     "wofi/bookmarks-menu.conf".source = ./bookmarks-menu.conf;
+    "wofi/projects-menu.conf".source = ./projects-menu.conf;
+    "bookmarks/personal.txt".source = ./../../../assets/bookmarks/personal.txt;
+    "bookmarks/work.txt".source = ./../../../assets/bookmarks/work.txt;
   };
   home.packages = with pkgs; [
     systemMenu
@@ -25,5 +29,6 @@ in {
     keybinds
     bookmarks
     bluetuith
+    projects
   ];
 }
