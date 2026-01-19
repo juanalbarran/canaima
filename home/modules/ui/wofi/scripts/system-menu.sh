@@ -86,3 +86,4 @@ case "$SELECTED" in
         power-menu
         ;;
 esac
+

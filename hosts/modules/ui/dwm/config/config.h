@@ -74,7 +74,9 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", "-c", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *projectscmd[] = { "projects", NULL };
+static const char *sysmenucmd[] = { "system-menu", NULL };
 static const char *termcmd[]  = { "com.mitchellh.ghostty", "ghostty", NULL };
 static const char *browser[]  = { "qutebrowser-std", "qutebrowser", "--qt-arg", "name", "qutebrowser-std", NULL };
 static const char *ai[] = { 
@@ -89,7 +91,8 @@ static const char *ai[] = {
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_d,      spawn,          {.v = sysmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = projectscmd } },
 	{ MODKEY,                       XK_q,      runorraise,     {.v = termcmd } },
 	{ MODKEY,                       XK_a,      runorraise,     {.v = ai } },
 	{ MODKEY,                       XK_b,      runorraise,     {.v = browser } },
@@ -99,7 +102,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      movestack,      {.i = +1 } },
 	{ MODKEY,                       XK_y,      togglebar,      {0} },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_p,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_o,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_j,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_k,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },

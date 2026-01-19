@@ -5,6 +5,7 @@
     ./../../hardware/asus/hardware-configuration.nix
     ./../../modules/common # fonts, boot, localization, networking
     ./../../modules/ui/dwm
+    ./../../modules/ui/dmenu
   ];
 
   nix.settings.experimental-features = [
