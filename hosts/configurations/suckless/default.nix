@@ -13,11 +13,11 @@
     "flakes"
   ];
 
-  console = {
-    enable = true;
-    font = "ter-v16n";
-    packages = [pkgs.terminus_font];
-  };
+  # console = {
+  #   enable = true;
+  #   font = "ter-v16n";
+  #   packages = [pkgs.terminus_font];
+  # };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

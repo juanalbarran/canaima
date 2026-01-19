@@ -1,15 +1,10 @@
 # hosts/modules/programs.nix
-{
-  pkgs,
-  ghostty,
-  ...
-}: {
+{pkgs, ...}: {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
     git
-    ghostty.packages.${system}.default
     wl-clipboard
     wofi
     psmisc # -> the killall command
