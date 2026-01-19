@@ -86,8 +86,6 @@ static const char *ai[] = {
     "https://gemini.google.com",
     NULL 
 };
-static const char *tmuxprev[] = { "xdotool", "key", "Alt+braceleft", NULL };
-static const char *tmuxnext[] = { "xdotool", "key", "Alt+braceright", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -118,8 +116,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_bracketleft,  spawn,          {.v = tmuxprev } },
-	{ MODKEY|ShiftMask,             XK_bracketright, spawn,          {.v = tmuxnext } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
