@@ -4,7 +4,6 @@
     ./packages.nix
     ./programs.nix
     ./../../modules/terminals/fastfetch
-    # ./../../modules/terminals/st
     ./../../modules/terminals/starship
     ./../../modules/terminals/ghostty
     ./../../modules/browsers/qutebrowser
