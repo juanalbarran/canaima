@@ -7,6 +7,8 @@ WOFI_CONFIG="$HOME/.config/wofi/projects-menu.conf"
 WOFI="$HOME/.nix-profile/bin/wofi"
 WAYLAND_APP_ID="com.mitchellh.ghostty"
 X11_CLASS_NAME="ghostty"
+VIM_PATH="$HOME/.nix-profile/bin/nvim-base"
+BASH_PATH="$HOME/.nix-profile/bin/bash"
 
 # --- Get the list of projects ---
 selected_name=$(find "$PROJECTS_DIR" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | \
@@ -28,16 +30,22 @@ session_name=$(echo "$selected_name" | tr . _)
 # then we create another window in the newly created session called console
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
     
-    tmux new-session -d -s "$session_name" -c "$selected_path" -n "editor"
-    tmux send-keys -t "${session_name}:editor" "vim" C-m
+    tmux new-session \
+        -d -s "$session_name" \
+        -c "$selected_path" \
+        -n "editor" \
+        "$VIM_PATH; exec $BASH_PATH"
     
     project_config="$selected_path/.tmux-init.conf"
     
     if [ -f "$project_config" ]; then
         SESSION="$session_name" . "$project_config"
     else
-        tmux new-window -t "$session_name" -n "console" -c "$selected_path"
-        tmux send-keys -t "$SESSION:console" "fastfetch" C-m
+        tmux new-window \
+            -t "$session_name" \
+            -n "console" \
+            -c "$selected_path" \
+            "exec $BASH_PATH"
 
         tmux select-window -t "${session_name}:editor"
     fi
