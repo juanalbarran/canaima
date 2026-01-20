@@ -41,7 +41,7 @@ static const Rule rules[] = {
 	// { "Slack",           NULL,			NULL,       1 << 3,       0,           -1 },
 	// { "discord",         NULL,			NULL,       1 << 4,       0,           -1 },
 	// { "kdenlive",        NULL,			NULL,       1 << 7,       0,           -1 },
-	{ "ghostty",		NULL,			NULL,       1 << 0,       0,           -1 },
+	{ NULL,			"st",			NULL,       1 << 0,       0,           -1 },
 	{ NULL,			"qutebrowser-gemini",	NULL,       0 << 0,       0,           -1 },
 	{ NULL,			"qutebrowser-std",	NULL,       1 << 1,       0,           -1 },
 	{ "firefox",		NULL,			NULL,       1 << 2,       0,           -1 },
@@ -77,7 +77,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", "-c", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *projectscmd[] = { "projects", NULL };
 static const char *sysmenucmd[] = { "system-menu", NULL };
-static const char *termcmd[]  = { "com.mitchellh.ghostty", "ghostty", NULL };
+static const char *termcmd[]  = { "st", "st", "-n", "st", NULL };
 static const char *browser[]  = { "qutebrowser-std", "qutebrowser", "--qt-arg", "name", "qutebrowser-std", NULL };
 static const char *ai[] = { 
     "qutebrowser-gemini",
