@@ -9,7 +9,7 @@ static const char *fonts[] = {
 };
 
 /* --- ADD THESE LINES --- */
-static int centered = 0;                    /* -c option; centers dmenu on screen */
+static int centered = 1;                    /* -c option; centers dmenu on screen */
 static int min_width = 500;                 /* minimum width when centered */
 static unsigned int lineheight = 0;         /* -h option; minimum height of a line, 0 = default/calculated */
 static unsigned int min_lineheight = 8;     /* minimum height if lineheight is 0 */
@@ -24,7 +24,7 @@ static const char *colors[SchemeLast][2] = {
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
 static unsigned int lines      = 10;
-
+static unsigned int border_width = 2;
 /*
  * Characters not considered part of a word while deleting words
  * for example: " /?\"&[]"

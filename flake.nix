@@ -24,6 +24,20 @@
       overlays = [nixgl.overlay];
     };
   in {
+    devShells.${system}.suckless = pkgs.mkShell {
+      # toolchain + headers/libs
+      packages = with pkgs; [
+        pkg-config
+        xorg.libX11
+        xorg.libXft
+        xorg.libXinerama
+        fontconfig
+        freetype
+        harfbuzz
+        gcc
+        gnumake
+      ];
+    };
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
         specialArgs = {

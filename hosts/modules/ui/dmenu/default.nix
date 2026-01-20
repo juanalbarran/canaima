@@ -18,6 +18,11 @@ in {
           url = "https://tools.suckless.org/dmenu/patches/line-height/dmenu-lineheight-5.2.diff";
           sha256 = "sha256-QdY2T/hvFuQb4NAK7yfBgBrz7Ii7O7QmUv0BvVOdf00=";
         })
+        # Border patch
+        (pkgs.fetchpatch {
+          url = "https://tools.suckless.org/dmenu/patches/border/dmenu-border-5.2.diff";
+          sha256 = "";
+        })
       ];
       postPatch = ''
         cp ${./config/config.h} config.h
