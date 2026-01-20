@@ -53,9 +53,4 @@ if wmctrl -x -l | grep -q "$terminal_app_id"; then
 else
     $terminal -n "$terminal_app_id" -e tmux attach-session -t "$session_name"
 fi
-# if tmux switch-client -t "$session_name" 2>/dev/null; then
-#     wmctrl -x -a "$terminal_app_id"
-# else
-#     $terminal -e tmux attach-session -t "$session_name"
-# fi
 
