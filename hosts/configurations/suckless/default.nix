@@ -6,6 +6,7 @@
     ./../../modules/common # fonts, boot, localization, networking
     ./../../modules/ui/dwm
     ./../../modules/ui/dmenu
+    ./../../modules/terminals/st
   ];
 
   nix.settings.experimental-features = [

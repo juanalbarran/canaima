@@ -7,6 +7,7 @@
     ./../../modules/terminals/starship
     ./../../modules/terminals/ghostty
     ./../../modules/browsers/qutebrowser
+    ./../../modules/terminals/tmux
   ];
 
   home = {

@@ -2,8 +2,8 @@
 set -eu
 
 # Set your terminal:
-terminal="ghostty"
-terminal_app_id="ghostty"
+terminal="st"
+terminal_app_id="st"
 
 # Paths
 projects_path="$HOME/dev"
@@ -11,7 +11,8 @@ vim_path="$HOME/.nix-profile/bin/nvim-base"
 bash_path="$HOME/.nix-profile/bin/bash"
 
 # Set your dmenu flags
-dmenu="$HOME/.nix-profile/bin/dmenu"
+# dmenu="$HOME/.nix-profile/bin/dmenu"
+dmenu="dmenu"
 
 # Pick repo
 selected_name="$(find "$projects_path" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | $dmenu -l 30 -fn "JetBrainsMono Nerd Font:size=12" -p "Projects:")"
@@ -44,9 +45,17 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
     fi
 fi
 
-if tmux switch-client -t "$session_name" 2>/dev/null; then
-    wmctrl -w -a "$terminal_app_id"
+if wmctrl -x -l | grep -q "$terminal_app_id"; then
+    wmctrl -x -a "$terminal_app_id"
+    tmux list-clients -F "#{client_tty}" | while read -r tty; do
+        tmux switch-client -c "$tty" =t "$session_name"
+    done
 else
-    $terminal -e tmux attach-session -t "$session_name"
+    $terminal -n "$terminal_app_id" -e tmux attach-session -t "$session_name"
 fi
+# if tmux switch-client -t "$session_name" 2>/dev/null; then
+#     wmctrl -x -a "$terminal_app_id"
+# else
+#     $terminal -e tmux attach-session -t "$session_name"
+# fi
 
