@@ -13,15 +13,22 @@
     "nix-command"
     "flakes"
   ];
-
-  # console = {
-  #   enable = true;
-  #   font = "ter-v16n";
-  #   packages = [pkgs.terminus_font];
-  # };
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  # Enable ZRAM to handle the ram
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
+  # Will not wait to be connected to a network to finish boot
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  # Reduce swappiness
+  boot.kernelSysctl = {
+    "vm.swappiness" = 10;
+  };
 
   system.stateVersion = "25.11";
 }
