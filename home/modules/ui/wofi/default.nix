@@ -24,6 +24,7 @@ in {
     "bookmarks/chill.txt".source = ./../../../assets/bookmarks/chill.txt;
     "bookmarks/work.txt".source = ./../../../assets/bookmarks/work.txt;
     "bookmarks/code.txt".source = ./../../../assets/bookmarks/code.txt;
+    "bookmarks/dotfiles.txt".source = ./../../../assets/bookmarks/dotfiles.txt;
   };
   home.packages = with pkgs; [
     systemMenu
