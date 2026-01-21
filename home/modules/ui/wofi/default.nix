@@ -19,9 +19,11 @@ in {
   xdg.configFile = {
     "wofi/config-menu.conf".source = ./config-menu.conf;
     "wofi/bookmarks-menu.conf".source = ./bookmarks-menu.conf;
+    "wofi/prebookmarks-menu.conf".source = ./prebookmarks-menu.conf;
     "wofi/projects-menu.conf".source = ./projects-menu.conf;
-    "bookmarks/personal.txt".source = ./../../../assets/bookmarks/personal.txt;
+    "bookmarks/chill.txt".source = ./../../../assets/bookmarks/chill.txt;
     "bookmarks/work.txt".source = ./../../../assets/bookmarks/work.txt;
+    "bookmarks/code.txt".source = ./../../../assets/bookmarks/code.txt;
   };
   home.packages = with pkgs; [
     systemMenu
