@@ -11,77 +11,48 @@ fi
 set -eu
 
 # Configuration
-PERS_FILE="${PERS_FILE:-$HOME/.config/bookmarks/personal.txt}"
-WORK_FILE="${WORK_FILE:-$HOME/.config/bookmarks/work.txt}"
-BOOKMARKS_CONF="${WOFICONF:-$HOME/.config/wofi/bookmarks-menu.conf}"
+bookmarks_directory="$HOME/.config/bookmarks"
+prebookmarks_conf="$HOME/.config/wofi/prebookmarks-menu.conf"
+bookmarks_conf="$HOME/.config/wofi/bookmarks-menu.conf"
 
-# Wofi command
-WOFI="wofi --conf='$BOOKMARKS_CONF' -p 'Bookmarks:' -i"
+qutebrowser="$(command -v qutebrowser || true)"
+qutebrowser_id="org.qutebrowser.qutebrowser"
 
-# Browsers & IDs
-QUTE_CMD="$(command -v qutebrowser || true)"
-QUTE_ID="org.qutebrowser.qutebrowser"
+brave="$(command -v brave || command -v brave-browser || true)"
+brave_id="brave-browser"
 
-BRAVE_CMD="$(command -v brave || command -v brave-browser || true)"
-# Note: On Hyprland, check 'hyprctl clients' for the class name if this fails
-BRAVE_ID="brave-browser" 
-
-FALLBACK="$(command -v xdg-open || echo qutebrowser)"
-
-# Ensure files exist
-mkdir -p "$(dirname "$PERS_FILE")"
-[ -f "$PERS_FILE" ] || cat >"$PERS_FILE" <<'EOF'
-# personal
-tonybtw :: https://tonybtw.com
-https://youtube.com
-EOF
-[ -f "$WORK_FILE" ] || cat >"$WORK_FILE" <<'EOF'
-# work
-[docs] NixOS Manual :: https://nixos.org/manual/
-EOF
-
-emit() {
-  tag="$1"; file="$2"
-  [ -f "$file" ] || return 0
-  grep -vE '^\s*(#|$)' "$file" | while IFS= read -r line; do
-    case "$line" in
-      *"::"*)
-        lhs="${line%%::*}"; rhs="${line#*::}"
-        lhs="$(printf '%s' "$lhs" | sed 's/[[:space:]]*$//')"
-        rhs="$(printf '%s' "$rhs" | sed 's/^[[:space:]]*//')"
-        printf '[%s] %s :: %s\n' "$tag" "$lhs" "$rhs"
-        ;;
-      *)
-        printf '[%s] %s :: %s\n' "$tag" "$line" "$line"
-        ;;
-    esac
-  done
+get_height() {
+    # Count lines. Note: wc -l usually counts newlines, so we ensure accurate counting
+    local line_count
+    line_count=$(echo -e "$1" | wc -l)
+    # Formula: (lines * 32px per line) + 28px padding
+    echo $(( (line_count * 32) + 28 ))
 }
 
-# Build combined list
-choice="$({
-  emit personal "$PERS_FILE"
-  emit work     "$WORK_FILE"
-} | sort | eval "$WOFI" || true)"
+# We get the menu with the name of the files
+cd "$bookmarks_directory" || exit
 
-[ -n "$choice" ] || exit 0
+categories=$(for file in *.txt; do
+    name="${file%.*}"
+    name="${name^}"
+    echo "$name"
+done)
 
-# Parse tag and raw URL
-tag="${choice%%]*}"; tag="${tag#\[}"
-raw="${choice##* :: }"
+categories_height=$(get_height "$categories")
 
-# Clean URL
-raw="$(printf '%s' "$raw" \
-  | sed -e 's/[[:space:]]\+#.*$//' -e 's/[[:space:]]\/\/.*$//' \
-        -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')"
+selected_category=$(echo "$categories" | wofi \
+    --conf="$prebookmarks_conf" \
+    --height="$categories_height" \
+    -p "Bookmarks:" -i)
 
-# Ensure scheme
-case "$raw" in
-  http://*|https://*|file://*|about:*|chrome:*) url="$raw" ;;
-  *) url="https://$raw" ;;
-esac
+# Check if a category was selected
+if [ -z "$selected_category" ]; then
+    exit 0
+fi
 
-# --- RUN OR RAISE LOGIC ---
+filename="${selected_category,,}"
+filename="${filename}.txt"
+
 open_with() {
   app_id="$1"
   cmd="$2"
@@ -121,11 +92,26 @@ open_with() {
   exit 0
 }
 
-case "$tag" in
-  personal) open_with "$QUTE_ID"  "$QUTE_CMD"  "$url" ;;
-  work)     open_with "$BRAVE_ID" "$BRAVE_CMD" "$url" ;;
-esac
 
-# Fallback
-nohup $FALLBACK "$url" >/dev/null 2>&1 &
+if [ -f "$filename" ]; then
+    bookmarks=$(grep -v "^#" "$filename")
+    bookmarks_height=$(get_height "$bookmarks")
+    selected_link=$(echo "$bookmarks" | wofi \
+        --conf="$bookmarks_conf" \
+        --height="$bookmarks_height" \
+        -p "$selected_category Links:" -i)
+
+    if [ -n "$selected_link" ]; then
+        url=$(echo "$selected_link" | awk '{print $NF}')
+        if [ "$filename" = "work.txt" ]; then
+            open_with "$brave_id" "$brave" "$url" >/dev/null 2>&1
+        else
+            open_with "$qutebrowser_id" "$qutebrowser" "$url" >/dev/null 2>&1
+        fi
+        notify-send "Opening browser" "Target: $url"
+    fi
+else
+    notify-send "Error" "Couldnot find file: $filename"
+    exit 1
+fi
 
