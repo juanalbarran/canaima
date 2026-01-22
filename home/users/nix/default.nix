@@ -11,6 +11,7 @@
     ./../../modules/ui/waybar
     ./../../modules/ui/wofi
     ./../../modules/terminals
+    ./../../modules/ai
   ];
 
   home = {
