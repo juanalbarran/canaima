@@ -12,6 +12,7 @@
     ./../../modules/ui/wofi
     ./../../modules/terminals
     ./../../modules/ai
+    ./../../modules/tui/gazelle
   ];
 
   home = {

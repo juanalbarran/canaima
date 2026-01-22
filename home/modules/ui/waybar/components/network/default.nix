@@ -7,8 +7,8 @@
   isHyprland = config.wayland.windowManager.hyprland.enable;
   termCommand =
     if isHyprland
-    then "${pkgs.kitty}/bin/kitty --class nmtui-floating -e nmtui"
-    else "${pkgs.foot}/bin/foot -a nmtui-floating -e nmtui";
+    then "${pkgs.kitty}/bin/kitty --class network -e ~/.nix-profile/bin/gazelle"
+    else "${pkgs.foot}/bin/foot -a network -e ~/.nix-profile/bin/gazelle";
 in {
   programs.waybar.settings.mainBar."network" = {
     interval = 5;
