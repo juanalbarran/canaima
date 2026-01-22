@@ -12,6 +12,7 @@
     ./../../modules/ui/waybar
     ./../../modules/ui/hyprland
     ./../../modules/ui/wofi
+    ./../../modules/ai
   ];
 
   home = {

@@ -7,6 +7,7 @@
     ./../../modules/terminals/starship
     ./../../modules/browsers/qutebrowser
     ./../../modules/terminals/tmux
+    ./../../modules/ai
   ];
   home = {
     username = "juan";
