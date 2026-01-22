@@ -77,9 +77,9 @@ case "$SELECTED" in
         ;;
     *"Network")
         if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-            kitty --class nmtui-floating -e nmtui
+            kitty --class network -e gazelle
         else
-            foot -a nmtui-floating -e nmtui
+            foot -a network -e gazelle
         fi
         ;;
     *"Power")

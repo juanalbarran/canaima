@@ -55,7 +55,7 @@ case "$SELECTED" in
         $TERM_CMD --class pulsemixer -e pulsemixer
         ;;
     *"Network")
-        $TERM_CMD --class nmtui-floating -e nmtui
+        $TERM_CMD --class network -e gazelle
         ;;
     *"Power")
         power-menu
