@@ -9,6 +9,7 @@
     #kukenan.url = "github:juanalbarran/neovim/main";
     nixgl.url = "github:nix-community/nixGL";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
+    nix-colors.url = "github:misterio77/nix-colors";
   };
 
   outputs = {
@@ -18,6 +19,7 @@
     kukenan,
     nixgl,
     gazelle,
+    nix-colors,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -77,14 +79,14 @@
         inherit pkgs;
         modules = [./home/users/juan];
         extraSpecialArgs = {
-          inherit kukenan system gazelle;
+          inherit kukenan system gazelle nix-colors;
         };
       };
       "nix" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./home/users/nix];
         extraSpecialArgs = {
-          inherit kukenan system gazelle;
+          inherit kukenan system gazelle nix-colors;
         };
       };
     };
