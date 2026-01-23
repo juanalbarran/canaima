@@ -1,21 +1,20 @@
 /* home/modules/waybar/style.css */
 /* --- Global Font & Colors --- */
+
 * {
-    border: none;
-    border-radius: 0;
-    font-family: "JetBrains Mono Nerd Font", monospace;
-    font-weight: normal;
-    font-style: normal;
-    min-height: 0;
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrains Mono Nerd Font", monospace;
+  font-weight: normal;
+  font-style: normal;
+  min-height: 0;
 }
 
 /* --- Bar Background --- */
 window#waybar {
-    min-height: 30px;
-    
-    background-color: #131314;
-    color: #a9b1d6;
-        font-size: 14px;
+  min-height: 30px;
 
+  background-color: @background;
+  color: @text;
+  font-size: 14px;
 }
-
