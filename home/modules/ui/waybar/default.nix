@@ -25,6 +25,7 @@
       };
       style = lib.concatStrings (
         [
+          "@import url(\"${config.home.homeDirectory}/.cache/style/waybar-colors.css\");\n\n"
           (builtins.readFile ./style.css)
           (builtins.readFile ./components/components.css)
           (builtins.readFile ./components/clock/clock.css)
