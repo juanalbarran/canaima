@@ -17,26 +17,7 @@
   services = {
     # Enable the OpenSSH daemon.
     openssh.enable = true;
-
-    greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = ''
-            ${pkgs.greetd.tuigreet}/bin/tuigreet \
-              --time \
-              --asterisks \
-              --user-menu \
-              --remember \
-              --remember-session \
-              --sessions ${config.services.displayManager.sessionData.desktops}/share/xsessions \
-              --cmd startx \
-              --greeting "Welcome to NixOS"
-          '';
-          user = "greeter";
-        };
-      };
-    };
+    displayManager.ly.enable = true;
     xserver = {
       enable = true;
       xkb = {
