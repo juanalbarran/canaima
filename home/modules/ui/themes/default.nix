@@ -4,10 +4,16 @@
   darkScheme = import ./dark.nix;
   lightScheme = import ./light.nix;
   mkWaybarVars = import ./templates/waybar.nix;
+  mkQuteVars = import ./templates/qutebrowser.nix;
 in {
   xdg.configFile = {
+    # waybar
     "themes/dark/waybar.css".text = mkWaybarVars darkScheme;
     "themes/light/waybar.css".text = mkWaybarVars lightScheme;
+
+    # qutebrowser
+    "themes/dark/qutebrowser.py".text = mkQuteVars darkScheme;
+    "themes/light/qutebrowser.py".text = mkQuteVars lightScheme;
   };
   home.packages = [
     toggle-theme

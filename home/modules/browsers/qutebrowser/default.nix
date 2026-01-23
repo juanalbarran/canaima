@@ -56,6 +56,12 @@
         "<Ctrl-p>" = "completion-item-focus prev";
       };
     };
+    extraConfig = ''
+      import os
+      config_path = os.path.expanduser("~/.cache/style/qutebrowser-theme.py")
+      if os.path.exists(config_path):
+          config.source(config_path)
+    '';
   };
   home.packages = with pkgs; [
     mpv # the video player
