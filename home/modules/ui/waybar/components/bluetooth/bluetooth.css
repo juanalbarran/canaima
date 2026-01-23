@@ -1,18 +1,18 @@
 /* home/modules/waybar/components/bluetooth/bluetooth.css */
 
 #bluetooth {
-  color: #a9b1d6;
+  color: @text;
   font-family: "JetBrainsMono Nerd Font";
   font-size: 12px;
   padding: 0 5px;
 }
 
 #bluetooth.on {
-  color: #a9b1d6;
+  color: @text;
 }
 
 #bluetooth.connected {
-  color: #a6e3a1;
+  color: @base0B;
 }
 
 #bluetooth.off,

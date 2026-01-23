@@ -13,6 +13,7 @@
     ./../../modules/terminals
     ./../../modules/ai
     ./../../modules/tui/gazelle
+    ./../../modules/ui/themes
   ];
 
   home = {

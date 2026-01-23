@@ -1,7 +1,7 @@
 /* home/modules/waybar/components/pulseaudio/pulseaudio.css */
 
 #pulseaudio {
-  color: #a9b1d6;
+  color: @text;
   font-family: "JetBrainsMono Nerd Font";
   font-size: 12px;
   padding: 0 5px;
@@ -12,5 +12,5 @@
 }
 
 #pulseaudio.bluetooth {
-  color: #a9b1d6;
+  color: @text;
 }
