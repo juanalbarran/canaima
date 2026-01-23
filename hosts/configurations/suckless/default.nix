@@ -25,10 +25,5 @@
   # Will not wait to be connected to a network to finish boot
   systemd.services.NetworkManager-wait-online.enable = false;
 
-  # Reduce swappiness
-  boot.kernelSysctl = {
-    "vm.swappiness" = 10;
-  };
-
   system.stateVersion = "25.11";
 }
