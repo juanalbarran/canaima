@@ -17,11 +17,17 @@ if [ "$current_mode" = "dark" ]; then
   gtk_theme="Adwaita"
   prefer_dark="false"
   color_scheme="default"
+  # Qutebrowser Manual Variables
+  qb_dark_bool="false"
+  qb_scheme_str="light"
 else
   new_mode="dark"
   gtk_theme="Adwaita-dark"
   prefer_dark="true"
   color_scheme="prefer-dark"
+  # Qutebrowser Manual Variables
+  qb_dark_bool="true"
+  qb_scheme_str="dark"
 fi
 
 echo "Switching to $new_mode"
@@ -38,7 +44,7 @@ pkill waybar
 waybar &
 
 # qutebrowser
-qutebrowser ":config-source ;; reload" >/dev/null 2>&1 || true
+qutebrowser ":config-source ;; set colors.webpage.darkmode.enabled $qb_dark_bool ;; set colors.webpage.preferred_color_scheme $qb_scheme_str ;; reload -f" >/dev/null 2>&1 || true
 
 if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
