@@ -1,7 +1,12 @@
 # home/modules/browsers/qutebrowser/gemini-config.py
-
+import os
 import subprocess
 from qutebrowser.api import interceptor
+
+config_path = os.path.expanduser("~/.cache/style/qutebrowser-theme.py")
+
+if os.path.exists(config_path):
+    config.source(config_path)
 
 # --- 1. MINIMAL UI ---
 config.load_autoconfig(False)

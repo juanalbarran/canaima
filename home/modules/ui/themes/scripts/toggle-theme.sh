@@ -17,17 +17,11 @@ if [ "$current_mode" = "dark" ]; then
   gtk_theme="Adwaita"
   prefer_dark="false"
   color_scheme="default"
-
-  qb_dark_bool="false"
-  qb_scheme_str="light"
 else
   new_mode="dark"
   gtk_theme="Adwaita-dark"
   prefer_dark="true"
   color_scheme="prefer-dark"
-
-  qb_dark_bool="true"
-  qb_scheme_str="dark"
 fi
 
 echo "Switching to $new_mode"
@@ -44,19 +38,7 @@ pkill waybar
 waybar &
 
 # qutebrowser
-if pgrep -f qutebrowser > /dev/null; then
-    # A. Reload the python config (Colors UI)
-    qutebrowser ":config-source" >/dev/null 2>&1 || true
-    
-    # B. Force the Algorithm (Dark Reader style)
-    qutebrowser ":set colors.webpage.darkmode.enabled $qb_dark_bool" >/dev/null 2>&1 || true
-    
-    # C. Force the Website Signal (Gemini/Youtube)
-    qutebrowser ":set colors.webpage.preferred_color_scheme $qb_scheme_str" >/dev/null 2>&1 || true
-    
-    # D. Reload the page to apply changes
-    qutebrowser ":reload -f" >/dev/null 2>&1 || true
-fi
+qutebrowser ":config-source ;; reload" >/dev/null 2>&1 || true
 
 if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
