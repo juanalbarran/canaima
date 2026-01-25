@@ -35,6 +35,7 @@ echo "Switching to $new_mode"
 # Updating symlinks of style files
 ln -sf "$theme_dir/$new_mode/waybar.css" "$cache_dir/waybar-colors.css"
 ln -sf "$theme_dir/$new_mode/qutebrowser.py" "$cache_dir/qutebrowser-theme.py"
+cp -f "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
 
 # we save the new state
 echo "$new_mode" > "$cache_dir/mode"
