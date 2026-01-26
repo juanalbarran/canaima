@@ -36,6 +36,7 @@ echo "Switching to $new_mode"
 ln -sf "$theme_dir/$new_mode/waybar.css" "$cache_dir/waybar-colors.css"
 ln -sf "$theme_dir/$new_mode/qutebrowser.py" "$cache_dir/qutebrowser-theme.py"
 cp -f "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
+cp -f "$theme_dir/$new_mode/wofi.css" "$cache_dir/wofi.css"
 
 # we save the new state
 echo "$new_mode" > "$cache_dir/mode"

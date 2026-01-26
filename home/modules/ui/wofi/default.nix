@@ -1,5 +1,9 @@
 # home/modules/ui/wofi/default.nix
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
   powerMenu = pkgs.writeShellScriptBin "power-menu" (builtins.readFile ./scripts/power-menu.sh);
   keybinds = pkgs.writeShellScriptBin "keybinds" (builtins.readFile ./scripts/keybinds.sh);
   bookmarks = pkgs.writeShellScriptBin "bookmarks" (builtins.readFile ./scripts/bookmarks.sh);
@@ -14,13 +18,13 @@ in {
       run-always_parse_args = true;
       run-cache_file = "/dev/null";
     };
-    style = builtins.readFile ./style.css;
   };
   xdg.configFile = {
     "wofi/config-menu.conf".source = ./config-menu.conf;
     "wofi/bookmarks-menu.conf".source = ./bookmarks-menu.conf;
     "wofi/prebookmarks-menu.conf".source = ./prebookmarks-menu.conf;
     "wofi/projects-menu.conf".source = ./projects-menu.conf;
+    "wofi/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.xdg.cacheHome}/style/wofi.css";
     "bookmarks/chill.txt".source = ./../../../assets/bookmarks/chill.txt;
     "bookmarks/work.txt".source = ./../../../assets/bookmarks/work.txt;
     "bookmarks/code.txt".source = ./../../../assets/bookmarks/code.txt;
