@@ -35,7 +35,6 @@
       "sway/autostart.conf".source = ./autostart.conf;
       "sway/bindings.conf".source = ./bindings.conf;
       "sway/monitors.conf".source = ./monitors.conf;
-      "sway/lock_config".source = ./swaylock.conf;
       "sway/rules.conf".source = ./rules.conf;
     };
     home = {
