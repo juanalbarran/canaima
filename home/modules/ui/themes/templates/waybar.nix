@@ -19,7 +19,7 @@ scheme: ''
   @define-color base0F ${scheme.palette.base0F};
 
   @define-color background ${scheme.palette.base00};
-  @define-color text       ${scheme.palette.base02};
+  @define-color text       ${scheme.palette.base05};
   @define-color accent     ${scheme.palette.base0D};
   @define-color urgent     ${scheme.palette.base08};
   @define-color hover      ${scheme.palette.base0A};
