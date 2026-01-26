@@ -272,11 +272,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1769353502,
-        "narHash": "sha256-X9XtLlT+d3x2S3DymFwE5ch7iTv/0kQDByvRA6CaYSk=",
+        "lastModified": 1769426252,
+        "narHash": "sha256-YMz4YYBqt3yFRJQKh5kSoQ89S01AKNByw+UeUptYqzU=",
         "owner": "juanalbarran",
         "repo": "neovim",
-        "rev": "abb7a35dfdb4355881dd198484e364794693161c",
+        "rev": "fd8ba9aa85e357a66d2f4f997172a3d9ca32dbf8",
         "type": "github"
       },
       "original": {
