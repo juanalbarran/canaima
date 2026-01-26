@@ -19,26 +19,6 @@ include ~/.config/sway/bindings/ai-binds.conf
 include ~/.config/sway/bindings/firefox-binds.conf
 include ~/.config/sway/bindings/screenshot-binds.conf
 
-# bar {
-#     #swaybar_command waybar
-#     position top
-#
-#     status_command while date +'%A, %-d [%H:%M]'; do sleep 60; done
-#
-#     # When the status_command prints a new line to stdout, swaybar updates.
-#     # The default just shows the current date and time.
-#     #status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-#
-#     colors {
-#         statusline #ff8800
-#         background #000000
-#         inactive_workspace #000000 #000000 #444444 
-#         active_workspace #000000 #000000 #ffffff
-#         focused_workspace #000000 #000000 #ff8800
-#         binding_mode #000000 #000000 #ffffff
-#     }
-# }
-# 
 # sounds - pulseaudio
 #
 exec pulseaudio --daemonize

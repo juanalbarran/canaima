@@ -18,9 +18,14 @@
     ./../../users/juan.nix
     ./../../modules/programs.nix
     ./../../modules/services.nix
-    ./../../modules/ui/hyprland
+    # ./../../modules/ui/hyprland
+    ./../../modules/ui/sway
     ./../../modules/common # fonts, boot, localization, networking
   ];
+
+  # Don't wait for network startup
+  systemd.services.NetworkManager-wait-online.enable = false;
+  services.journald.extraConfig = "Storage=volatile";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

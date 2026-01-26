@@ -20,12 +20,16 @@
     username = "juan-albarran";
     homeDirectory = "/home/juan-albarran/";
     stateVersion = "25.11";
+    sessionPath = [
+      "$HOME/.nix-profile/bin"
+    ];
   };
 
   xsession.enable = true;
 
   features.bluetooth = false;
   host.isNixOS = true;
+  targets.genericLinux.enable = true;
 
   xdg.portal = {
     enable = true;
