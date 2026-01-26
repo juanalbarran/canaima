@@ -10,6 +10,7 @@
   mkWaybarVars = import ./templates/waybar.nix;
   mkQuteVars = import ./templates/qutebrowser.nix;
   mkGhosttyVars = import ./templates/ghostty.nix;
+  mkWofiVars = import ./templates/wofi.nix;
 in {
   xdg.configFile = {
     # waybar
@@ -23,6 +24,10 @@ in {
     # ghostty
     "themes/dark/ghostty".text = mkGhosttyVars darkScheme;
     "themes/light/ghostty".text = mkGhosttyVars lightScheme;
+
+    # wofi
+    "themes/dark/wofi.css".text = mkWofiVars darkScheme;
+    "themes/light/wofi.css".text = mkWofiVars lightScheme;
   };
   home.packages = [
     toggle-theme
