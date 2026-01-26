@@ -2,16 +2,27 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   imports = [
     ./foot.nix
     ./special-binds
   ];
+  options = {
+    host.isNixOS = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Set to true if running on NixOS, false for Ubuntu/other";
+    };
+  };
   wayland.windowManager.sway = {
     # Set the package null instead of pkgs.sway, to use the sway installed by apt
     # in the Ubuntu machine
-    package = null;
+    package =
+      if config.host.isNixOS
+      then pkgs.sway
+      else null;
     checkConfig = true;
     config = {
       extraConfig = builtins.readFile ./config;
