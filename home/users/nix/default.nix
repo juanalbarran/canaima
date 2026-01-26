@@ -25,6 +25,7 @@
   xsession.enable = true;
 
   features.bluetooth = false;
+  host.isNixOS = true;
 
   xdg.portal = {
     enable = true;

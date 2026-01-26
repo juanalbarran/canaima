@@ -16,6 +16,8 @@
     ./../../modules/ai
   ];
 
+  host.isNixOS = true;
+
   home = {
     username = "juan";
     homeDirectory = "/home/juan";
