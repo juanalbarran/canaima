@@ -30,15 +30,5 @@
 
     yazi.enable = true;
     lazygit.enable = true;
-    # For when using quickshell
-    # canaima-quickshell = {
-    #   enable = true;
-    #   variant = "sway";
-    #   withNixGL = true;
-    # };
-    canaima-wallpapers = {
-      enable = true;
-      withNixGL = true;
-    };
   };
 }
