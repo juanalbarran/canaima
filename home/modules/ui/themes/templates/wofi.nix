@@ -15,13 +15,13 @@ scheme: ''
   #inner-box {
     margin: 5px;
     border: none;
-    background-color: #${scheme.palette.base00};
+    background-color: ${scheme.palette.base00};
   }
 
   #outer-box {
     margin: 5px;
     border: none;
-    background-color: #${scheme.palette.base00};
+    background-color: ${scheme.palette.base00};
   }
 
   #scroll {
