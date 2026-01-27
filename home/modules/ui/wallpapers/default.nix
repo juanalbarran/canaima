@@ -34,7 +34,7 @@ in {
         Description = "Timer to update wallpapaer every 5 minutes";
       };
       Timer = {
-        OnBootSec = "1m";
+        OnBootSec = "10s";
         OnUnitActiveSec = "5m";
       };
       Install = {

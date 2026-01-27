@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export PATH="$HOME/.nix-profile/bin:$PATH"
 
 # configuration
 cache_dir="$HOME/.cache/style"
