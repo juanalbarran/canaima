@@ -17,5 +17,7 @@ in {
     # font
     nerd-fonts.jetbrains-mono
     powertop
+    # developer environment
+    devenv
   ];
 }
