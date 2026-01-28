@@ -40,5 +40,5 @@ home-manager switch --flake .#juan
 ```
 
 ```bash
-home-manager switch --flake .#nix --impure
+home-manager switch --flake .#nix
 ```
