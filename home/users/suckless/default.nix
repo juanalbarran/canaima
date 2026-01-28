@@ -17,4 +17,10 @@
   # Ensures the Home Manager-built Hyprland session is used by the Display Manager
   # and sources the HM-configured environment variables and services.
   xsession.enable = true;
+
+  manual = {
+    manpages.enable = false;
+    html.enable = false;
+    json.enable = false;
+  };
 }
