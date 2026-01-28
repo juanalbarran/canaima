@@ -25,4 +25,10 @@
     homeDirectory = "/home/juan";
     stateVersion = "25.11";
   };
+
+  manual = {
+    manpages.enable = false;
+    html.enable = false;
+    json.enable = false;
+  };
 }

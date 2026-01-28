@@ -13,7 +13,6 @@
     "nix-command"
     "flakes"
   ];
-  nixpkgs.config.allowUnfree = true;
 
   # Enable ZRAM to handle the ram
   zramSwap = {

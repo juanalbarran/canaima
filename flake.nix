@@ -3,13 +3,18 @@
   description = "Canaima NixOS configuration with Home Manager";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    kukenan.url = "github:juanalbarran/neovim/kick";
-    #kukenan.url = "github:juanalbarran/neovim/main";
-    nixgl.url = "github:nix-community/nixGL";
-    gazelle.url = "github:Zeus-Deus/gazelle-tui";
-    nix-colors.url = "github:misterio77/nix-colors";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    kukenan = {
+      url = "github:juanalbarran/neovim/kick";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    gazelle = {
+      url = "github:Zeus-Deus/gazelle-tui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -17,15 +22,15 @@
     nixpkgs,
     home-manager,
     kukenan,
-    nixgl,
     gazelle,
-    nix-colors,
     ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
-      localSystem = system;
-      overlays = [nixgl.overlay];
+      inherit system;
+      config = {
+        allowUnfree = true;
+      };
     };
   in {
     devShells.${system}.suckless = pkgs.mkShell {
@@ -79,14 +84,14 @@
         inherit pkgs;
         modules = [./home/users/juan];
         extraSpecialArgs = {
-          inherit kukenan system gazelle nix-colors;
+          inherit kukenan system gazelle;
         };
       };
       "nix" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./home/users/nix];
         extraSpecialArgs = {
-          inherit kukenan system gazelle nix-colors;
+          inherit kukenan system gazelle;
         };
       };
     };
