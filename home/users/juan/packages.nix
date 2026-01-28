@@ -14,5 +14,7 @@ in {
     # dev editor
     kuks
     kuks-web
+    # dev environment
+    devenv
   ];
 }
