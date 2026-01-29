@@ -32,14 +32,5 @@
     lazygit = {
       enable = true;
     };
-    # canaima-quickshell = {
-    #   enable = true;
-    #   variant = "hyprland";
-    #   withNixGL = false;
-    # };
-    canaima-wallpapers = {
-      enable = true;
-      withNixGL = false;
-    };
   };
 }
