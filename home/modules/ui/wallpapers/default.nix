@@ -11,6 +11,7 @@ in {
   home.packages = with pkgs; [
     wallpaper
     screen-resolution
+    jq
   ];
   home.file."Pictures/Wallpapers" = {
     source = ../../../assets/wallpapers;
