@@ -1,38 +1,38 @@
 #!/usr/bin/env bash
 export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/usr/local/bin:$PATH"
-# Configuration
+# configuration
 cache_dir="$HOME/.cache/style"
 theme_dir="$HOME/.config/themes"
 
-# Create cache directory if it doesnt exists
+# create cache directory if it doesnt exists
 mkdir -p "$cache_dir"
 
-# --- Logic ---
+# --- logic ---
 
-# Detect current mode (default to dark)
+# detect current mode (default to dark)
 current_mode=$(cat "$cache_dir/mode" 2>/dev/null || echo "dark")
 
 if [ "$current_mode" = "dark" ]; then
   new_mode="light"
-  gtk_theme="Adwaita"
+  gtk_theme="adwaita"
   prefer_dark="false"
   color_scheme="default"
-  # Qutebrowser Manual Variables
+  # qutebrowser manual variables
   qb_dark_bool="false"
   qb_scheme_str="light"
 else
   new_mode="dark"
-  gtk_theme="Adwaita-dark"
+  gtk_theme="adwaita-dark"
   prefer_dark="true"
   color_scheme="prefer-dark"
-  # Qutebrowser Manual Variables
+  # qutebrowser manual variables
   qb_dark_bool="true"
-  qb_scheme_str="dark"
+  qb_scheme_str="light"
 fi
 
-echo "Switching to $new_mode"
+echo "switching to $new_mode"
 
-# Updating symlinks of style files
+# updating symlinks of style files
 ln -sf "$theme_dir/$new_mode/waybar.css" "$cache_dir/waybar-colors.css"
 ln -sf "$theme_dir/$new_mode/qutebrowser.py" "$cache_dir/qutebrowser-theme.py"
 cp -f "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
@@ -54,5 +54,5 @@ if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-application-prefer-dark-theme "$prefer_dark"
 fi
 
-notify-send "Theme Switched" "Mode: $new_mode"
+notify-send "theme switched" "mode: $new_mode"
 

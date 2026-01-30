@@ -1,9 +1,24 @@
 # home/modules/browsers/qutebrowser/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs.qutebrowser = {
     enable = true;
+    package = pkgs.qutebrowser.overrideAttrs (old: {
+      nativeBuildInputs = (old.nativeBuildInputs or []) ++ [pkgs.makeWrapper];
+      postFixup =
+        (old.postFixup or "")
+        + ''
+          wrapProgram $out/bin/qutebrowser \
+            --prefix GTK_PATH : "${pkgs.gnome-themes-extra}/lib/gtk-2.0" \
+            --prefix XDG_DATA_DIRS : "${config.gtk.theme.package}/share" \
+            --unset GTK_MODULES
+        '';
+    });
     quickmarks = {
-      github = "https://github.com";
+      github = "https://github.com/juanalbarran";
       home-manager-options = "https://home-manager-options.extranix.com";
       nixwiki = "https://nixos.wiki";
       youtube = "https://youtube.com";
@@ -28,7 +43,8 @@
     };
     settings = {
       # visuals
-      "colors.webpage.darkmode.enabled" = true; # force dark mode on all sites
+      "colors.webpage.darkmode.algorithm" = "lightness-cielab";
+      "colors.webpage.darkmode.contrast" = 0.0;
       "tabs.position" = "top"; # vertical tabs (better for widescreen)
       "tabs.show" = "multiple"; # hide tab bar if only 1 tab is open
       "scrolling.smooth" = true;
@@ -41,8 +57,8 @@
     keyBindings = {
       normal = {
         # power user feature: open video links in mpv (requires mpv installed)
-        "m" = "hint links spawn --detach ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {hint-url}";
-        "<ctrl-m>" = "spawn --detach ${pkgs.mpv}/bin/mpv --force-window --vo=wlshm {url};; tab-close";
+        "m" = "hint links spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {hint-url}";
+        "<ctrl-m>" = "spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
         "<Meta-Shift-{>" = "tab-prev";
