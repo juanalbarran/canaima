@@ -35,11 +35,14 @@ echo "switching to $new_mode"
 # updating symlinks of style files
 ln -sf "$theme_dir/$new_mode/waybar.css" "$cache_dir/waybar-colors.css"
 ln -sf "$theme_dir/$new_mode/qutebrowser.py" "$cache_dir/qutebrowser-theme.py"
-cp -f "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
-cp -f "$theme_dir/$new_mode/wofi.css" "$cache_dir/wofi.css"
+ln -sf "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
+ln -sf "$theme_dir/$new_mode/wofi.css" "$cache_dir/wofi.css"
 
 # we save the new state
 echo "$new_mode" > "$cache_dir/mode"
+
+#ghostty
+pkill --signal USR2 ghostty
 
 # waybar
 pkill waybar
@@ -51,7 +54,7 @@ qutebrowser ":config-source ;; set colors.webpage.darkmode.enabled $qb_dark_bool
 if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
   gsettings set org.gnome.desktop.interface color-scheme "$color_scheme"
-  gsettings set org.gnome.desktop.interface gtk-application-prefer-dark-theme "$prefer_dark"
+  # gsettings set org.gnome.desktop.interface gtk-application-prefer-dark-theme "$prefer_dark"
 fi
 
 notify-send "theme switched" "mode: $new_mode"
