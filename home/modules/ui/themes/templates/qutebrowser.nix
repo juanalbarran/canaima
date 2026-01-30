@@ -5,10 +5,11 @@ scheme: let
     if (builtins.match ".*dark.*" scheme.slug) != null
     then "True"
     else "False";
-  isDarkStr =
-    if (builtins.match ".*dark.*" scheme.slug) != null
-    then "dark"
-    else "light";
+  # isDarkStr =
+  #   if (builtins.match ".*dark.*" scheme.slug) != null
+  #   then "dark"
+  #   else "light";
+  isDarkStr = "light";
 in ''
   # Base16 Qutebrowser Template
   # Scheme: ${scheme.name}
@@ -78,6 +79,7 @@ in ''
   c.colors.hints.match.fg = base05
 
   # --- Dark Mode Toggle ---
+  c.colors.webpage.bg = base00
   c.colors.webpage.darkmode.enabled = ${isDark}
   c.colors.webpage.preferred_color_scheme = "${isDarkStr}"
 ''
