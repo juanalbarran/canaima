@@ -1,5 +1,13 @@
 # hosts/modules/ui/sway/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: let
+  tuigreet = "${pkgs.greetd.tuigreet}/bin/tuigreet";
+  session = "${pkgs.sway}/bin/sway";
+  username = "juan";
+in {
   programs = {
     sway = {
       enable = true;
@@ -18,8 +26,17 @@
   services.greetd = {
     enable = true;
     settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+      command = "${tuigreet} --time --cmd ${session}";
       user = "greeter";
     };
+  };
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    StandardOutput = "tty";
+    StandardError = "journal"; # Fails quietly instead of spamming screen
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
   };
 }
