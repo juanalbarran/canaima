@@ -2,7 +2,7 @@
 {
   imports = [
     ./font
-    ./boot.nix
+    #./boot.nix
     ./localization.nix
     ./networking.nix
     ./ui.nix
