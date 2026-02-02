@@ -54,7 +54,7 @@
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
-          ./hosts/configurations/canaima
+          ./hosts/canaima
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
@@ -63,13 +63,13 @@
           }
         ];
       };
-      suckless = nixpkgs.lib.nixosSystem {
+      sarisarinama = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit kukenan system;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
-          ./hosts/configurations/suckless
+          ./hosts/sarisarinama
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
