@@ -1,4 +1,4 @@
-# nixos/modules/common/font/default.nix
+# nixos/modules/common/default.nix
 {pkgs, ...}: {
   fonts.packages = with pkgs; [
     nerd-fonts.caskaydia-cove
