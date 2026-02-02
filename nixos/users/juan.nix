@@ -9,5 +9,4 @@
       "wheel"
     ];
   };
-  home-manager.users.juan = import ./../../home/users/juan;
 }

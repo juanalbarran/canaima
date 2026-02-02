@@ -1,10 +1,14 @@
 # nixos/modules/common/default.nix
 {
   imports = [
-    ./font
-    #./boot.nix
+    ./font.nix
     ./localization.nix
     ./networking.nix
     ./ui.nix
+  ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
   ];
 }

@@ -5,7 +5,7 @@
   ...
 }: let
   kuks = kukenan.packages.${pkgs.system}.neovim.base;
-  #kuks-web = kukenan.packages.${pkgs.system}.neovim.web;
+  kuks-web = kukenan.packages.${pkgs.system}.neovim.web;
 in {
   home.packages = with pkgs; [
     ripgrep
@@ -13,6 +13,6 @@ in {
     gcc
     # dev editor
     kuks
-    #kuks-web
+    kuks-web
   ];
 }
