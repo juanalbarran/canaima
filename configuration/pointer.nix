@@ -5,13 +5,13 @@
   # and in the NixOS manual (accessible by running ‘nixos-help’).
 
   imports = [
-    # Include the results of the hardware scan.
-    ./../../users/juan.nix
-    ./../../modules/programs.nix
-    ./../../modules/services.nix
-    # ./../../modules/ui/hyprland
-    ./../../modules/ui/sway
-    ./../../modules/common # fonts, boot, localization, networking
+    # display manager
+    ./../nixos/modules/ui/sway
+    # fonts, boot, localization, networking, experimental-features
+    ./../nixos/modules/common
+    # home-manager configuration
+    # user
+    ./../nixos/users/juan.nix
   ];
 
   # This value determines the NixOS release from which the default
