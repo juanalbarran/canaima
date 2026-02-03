@@ -2,7 +2,7 @@
 {pkgs, ...}: {
   imports = [
     ./services.nix
-    ./../../nixos/configurations/canaima
+    ./../../configuration/pointer.nix
     ./hardware/hardware-configuration.nix
   ];
 
