@@ -3,10 +3,10 @@
   imports = [
     ./packages.nix
     ./programs.nix
-    ./../../modules/terminals/fastfetch
-    ./../../modules/terminals/starship
     ./../../modules/browsers/qutebrowser
     ./../../modules/terminals/tmux
+    ./../../modules/terminals/fastfetch
+    ./../../modules/terminals/starship
   ];
   home = {
     username = "juan";
