@@ -9,7 +9,10 @@ scheme: ''
   }
 
   #input {
-    display: none;
+    margin: 5px;
+    border: none;
+    background-color: ${scheme.palette.base00};
+    color: ${scheme.palette.base05};
   }
 
   #inner-box {
