@@ -1,4 +1,4 @@
-# configurations/pointer.nix
+# configurations/budapest.nix
 {
   # Edit this configuration file to define what should be installed on
   # your system.  Help is available in the configuration.nix(5) man page
@@ -10,6 +10,7 @@
     # fonts, boot, localization, networking, experimental-features
     ./../nixos/modules/common
     # home-manager configuration
+    ./home-configuration/playa-el-agua
     # user
     ./../nixos/users/juan.nix
   ];

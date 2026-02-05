@@ -87,9 +87,9 @@
           inherit kukenan system gazelle;
         };
       };
-      "nix" = home-manager.lib.homeManagerConfiguration {
+      "playa-el-yaque" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./home/users/nix];
+        modules = [./configuration/home-configuration/playa-el-yaque];
         extraSpecialArgs = {
           inherit kukenan system gazelle;
         };

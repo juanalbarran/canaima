@@ -11,6 +11,7 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "video"
     ];
   };
   home-manager.users.juan = import ./../../home/users/suckless;

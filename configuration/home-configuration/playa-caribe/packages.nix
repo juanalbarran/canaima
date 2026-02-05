@@ -1,4 +1,4 @@
-# home/users/suckless/packages.nix
+# configuration/home-configuration/playa-caribe/packages.nix
 {
   pkgs,
   kukenan,

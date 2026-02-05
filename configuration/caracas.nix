@@ -10,8 +10,9 @@
     # terminal
     ./../../modules/terminals/st
     # home-manager configuration
+    ./home-configuration/playa-caribe
     # users
-    ./../../users/suckless.nix
+    ./../nixos/users/suckless.nix
   ];
 
   system.stateVersion = "25.11";
