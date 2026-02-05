@@ -1,6 +1,5 @@
-# home/users/suckless/programs.nix
-{pkgs, ...}:
-{
+# configuration/home-configuration/playa-caribe/programs.nix
+{pkgs, ...}: {
   programs = {
     home-manager.enable = true;
     git = {
@@ -35,11 +34,11 @@
     };
   };
 
-gtk = {
+  gtk = {
     enable = true;
     theme = {
-	name = "Adwaita";
-	package = pkgs.gnome-themes-extra;
+      name = "Adwaita";
+      package = pkgs.gnome-themes-extra;
     };
   };
 }
