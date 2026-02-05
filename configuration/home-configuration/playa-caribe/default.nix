@@ -11,6 +11,6 @@
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
     # user
-    ./../../../home/users/suckless
+    ./../../../home/users/juan
   ];
 }

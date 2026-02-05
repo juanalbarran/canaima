@@ -14,9 +14,12 @@
     ./../../../home/modules/ui/waybar
     ./../../../home/modules/ui/wofi
     ./../../../home/modules/ui/themes
+    ./../../../home/modules/kanshi # -> do i really use this?
     # the good opencode
     ./../../../home/modules/ai
     # user
     ./../../../home/users/juan
   ];
+
+  host.isNixOS = true;
 }

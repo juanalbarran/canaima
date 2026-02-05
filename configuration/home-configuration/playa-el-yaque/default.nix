@@ -7,7 +7,6 @@
     ./../../../home/modules/ui/wallpapers
     ./../../../home/modules/ui/themes
     ./../../../home/modules/ui/wofi
-    ./../../../home/modules/kanshi # -> i'm i actually using this?
     # browsers
     ./../../../home/modules/browsers
     # terminals
