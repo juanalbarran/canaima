@@ -1,4 +1,4 @@
-# home/users/suckless/packages.nix
+# configuration/home-configuration/playa-el-agua/packages.nix
 {
   pkgs,
   kukenan,
@@ -14,5 +14,7 @@ in {
     # dev editor
     kuks
     kuks-web
+    # dev environment
+    devenv
   ];
 }
