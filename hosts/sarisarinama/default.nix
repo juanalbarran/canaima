@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware/hardware-configuration.nix
-    ./../../configuration/labrador.nix
+    ./../../configuration/caracas.nix
   ];
 
   # Bootloader.
