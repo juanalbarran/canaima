@@ -1,4 +1,4 @@
-# home/users/juan/programs.nix
+# configuration/home-configuration/playa-el-agua/programs.nix
 {
   programs = {
     home-manager.enable = true;

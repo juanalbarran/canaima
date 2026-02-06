@@ -1,8 +1,8 @@
 # hosts/canaima/default.nix
-{pkgs, ...}: {
+{
   imports = [
     ./services.nix
-    ./../../nixos/configurations/canaima
+    ./../../configuration/budapest.nix
     ./hardware/hardware-configuration.nix
   ];
 
@@ -14,7 +14,7 @@
     };
   };
 
-  home-manager.users.juan = import ./../../home/users/juan;
+  home-manager.users.juan = import ./../../configuration/home-configuration/playa-el-agua;
 
   system.stateVersion = "25.11";
 }

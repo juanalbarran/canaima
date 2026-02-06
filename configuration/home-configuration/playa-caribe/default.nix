@@ -1,0 +1,16 @@
+# configuration/home-configuration/playa-caribe/default.nix
+{
+  imports = [
+    ./packages.nix
+    ./programs.nix
+    # browsers
+    ./../../../home/modules/browsers/qutebrowser
+    ./../../../home/modules/browsers/brave.nix
+    # terminal tools
+    ./../../../home/modules/terminals/tmux
+    ./../../../home/modules/terminals/fastfetch
+    ./../../../home/modules/terminals/starship
+    # user
+    ./../../../home/users/juan
+  ];
+}

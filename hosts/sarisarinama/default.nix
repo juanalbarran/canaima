@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware/hardware-configuration.nix
-    ./../../nixos/configurations/suckless
+    ./../../configuration/caracas.nix
   ];
 
   # Bootloader.

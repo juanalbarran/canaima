@@ -1,4 +1,4 @@
-# home/users/juan/packages.nix
+# configuration/home-configuration/playa-caribe/packages.nix
 {
   pkgs,
   kukenan,
@@ -14,7 +14,5 @@ in {
     # dev editor
     kuks
     kuks-web
-    # dev environment
-    devenv
   ];
 }
