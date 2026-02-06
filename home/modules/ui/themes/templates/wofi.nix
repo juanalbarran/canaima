@@ -11,8 +11,20 @@ scheme: ''
   #input {
     margin: 5px;
     border: none;
+    border-radius: 0px;
     background-color: ${scheme.palette.base00};
+    background-image: none;
     color: ${scheme.palette.base05};
+    outline: none;
+    box-shadow: none;
+  }
+
+  #input:focus {
+    border: none;
+    outline: none;
+    border-radius: 0px;
+    background-image: none;
+    box-shadow: none;
   }
 
   #inner-box {
