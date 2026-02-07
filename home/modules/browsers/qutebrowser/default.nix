@@ -1,6 +1,7 @@
 # home/modules/browsers/qutebrowser/default.nix
 {
   pkgs,
+  pkgs-unstable,
   config,
   ...
 }: {
@@ -57,8 +58,8 @@
     keyBindings = {
       normal = {
         # power user feature: open video links in mpv (requires mpv installed)
-        "m" = "hint links spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {hint-url}";
-        "<ctrl-m>" = "spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {url};; tab-close";
+        "m" = "hint links spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs-unstable.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {hint-url}";
+        "<ctrl-m>" = "spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs-unstable.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
         "<Meta-Shift-{>" = "tab-prev";
@@ -81,7 +82,7 @@
   };
   home.packages = with pkgs; [
     mpv # the video player
-    yt-dlp # the tool mpv uses to "read" youtube/twitch urls
+    pkgs-unstable.yt-dlp # the tool mpv uses to "read" youtube/twitch urls
   ];
   xdg.configFile = {
     "qutebrowser/gemini-config.py".source = ./gemini-config.py;
