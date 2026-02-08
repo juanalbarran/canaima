@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
-    kukenan.url = "github:juanalbarran/neovim/kick";
+    kukenan.url = "github:juanalbarran/neovim/main";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
   };
 
