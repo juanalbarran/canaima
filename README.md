@@ -36,9 +36,9 @@ Handles User-lever applications, dotfiles and theming.
 ### ❄️ Run home-manager flake
 
 ```bash
-home-manager switch --flake .#juan
+home-manager switch --flake .#playa-el-agua
 ```
 
 ```bash
-home-manager switch --flake .#nix
+home-manager switch --flake .#playa-el-yaque
 ```
