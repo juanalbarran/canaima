@@ -1,14 +1,14 @@
 {
-  inputs, config, ...
-}:
-let
+  inputs,
+  config,
+  ...
+}: let
   secretspath = builtins.toString inputs.secrets;
-in
-{
+in {
   imports = [
-    inputs.sops-nix.nixosModules.sops;
+    inputs.sops-nix.nixosModules.sops
   ];
   sops = {
     defaultSopsFile = "${secretspath}/secrets.yaml";
-  }
+  };
 }
