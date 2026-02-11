@@ -19,6 +19,10 @@
     ./packages.nix
     # programs
     ./programs.nix
+    # ssh keys
+    ./ssh
+    # sops configuration
+    ./sops.nix
     # home-manager user
     ./../../../home/users/nix
   ];
