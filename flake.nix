@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     secrets = {
-      url = "github:juanalbarran/fortin-de-la-galera/main";
+      url = "github:juanalbarran/fortin-de-la-galera";
       flake = false;
     };
   };
@@ -100,7 +100,7 @@
         inherit pkgs;
         modules = [./configuration/home-configuration/playa-el-yaque];
         extraSpecialArgs = {
-          inherit kukenan system gazelle pkgs-unstable sops-nix secrets;
+          inherit inputs kukenan system gazelle pkgs-unstable sops-nix secrets;
         };
       };
     };
