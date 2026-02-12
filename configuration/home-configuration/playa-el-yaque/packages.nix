@@ -19,5 +19,8 @@ in {
     powertop
     # developer environment
     devenv
+    # encription & secrets
+    age
+    sops
   ];
 }

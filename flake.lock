@@ -292,7 +292,45 @@
         "home-manager": "home-manager",
         "kukenan": "kukenan",
         "nixpkgs": "nixpkgs_4",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "nixpkgs-unstable": "nixpkgs-unstable",
+        "secrets": "secrets",
+        "sops-nix": "sops-nix"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770827916,
+        "narHash": "sha256-w+GzeSqHgDpb+2C4EiUP9BykjKbNk01ZDZT6HKxZ0oA=",
+        "owner": "juanalbarran",
+        "repo": "fortin-de-la-galera",
+        "rev": "d8c224eb20f143b7c7f5a05af06d687d9c97f29e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "juanalbarran",
+        "repo": "fortin-de-la-galera",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770683991,
+        "narHash": "sha256-xVfPvXDf9QN3Eh9dV+Lw6IkWG42KSuQ1u2260HKvpnc=",
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "rev": "8b89f44c2cc4581e402111d928869fe7ba9f7033",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {

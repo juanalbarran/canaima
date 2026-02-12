@@ -7,6 +7,14 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     kukenan.url = "github:juanalbarran/neovim/main";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
+    sops-nix = {
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    secrets = {
+      url = "github:juanalbarran/fortin-de-la-galera";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -16,6 +24,8 @@
     home-manager,
     kukenan,
     gazelle,
+    sops-nix,
+    secrets,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -49,7 +59,7 @@
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit kukenan system pkgs-unstable;
+          inherit kukenan system pkgs-unstable sops-nix secrets;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
@@ -90,7 +100,7 @@
         inherit pkgs;
         modules = [./configuration/home-configuration/playa-el-yaque];
         extraSpecialArgs = {
-          inherit kukenan system gazelle pkgs-unstable;
+          inherit inputs kukenan system gazelle pkgs-unstable sops-nix secrets;
         };
       };
     };
