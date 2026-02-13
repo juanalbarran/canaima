@@ -19,6 +19,8 @@
     ./../../../home/modules/ai
     # user
     ./../../../home/users/juan
+    # ssh public keys
+    ./ssh
   ];
 
   host.isNixOS = true;
