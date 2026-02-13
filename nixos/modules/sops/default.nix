@@ -15,7 +15,7 @@ in {
       "private_keys/playa-el-agua" = {
         path = "/home/juan/.ssh/playa-el-agua-ed25519";
         owner = "juan";
-        group = "usesr";
+        group = "users";
       };
     };
   };
