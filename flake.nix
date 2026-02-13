@@ -59,12 +59,13 @@
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit kukenan system pkgs-unstable sops-nix secrets;
+          inherit inputs kukenan system pkgs-unstable secrets;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
           ./hosts/canaima
           home-manager.nixosModules.home-manager
+          sops-nix.nixosModules.sops
           {
             home-manager.extraSpecialArgs = {
               inherit kukenan system pkgs-unstable;

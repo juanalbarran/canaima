@@ -32,5 +32,14 @@
     lazygit = {
       enable = true;
     };
+    ssh = {
+      enable = true;
+      addKeysToAgent = "yes";
+      matchBlocks = {
+        "github.com" = {
+          identityFile = "~/.ssh/playa-el-agua-ed25519";
+        };
+      };
+    };
   };
 }
