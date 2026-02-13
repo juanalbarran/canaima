@@ -58,7 +58,7 @@ We need to create the `age` key we do it like this:
 First we create the directory `~/.config/sops/age`
 
 ```bash
-mkdir -p .config/sops/age
+mkdir -p ~/.config/sops/age
 ```
 
 Next we create the `age` key. In this file both public and private keys are gonna be there
