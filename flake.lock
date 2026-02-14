@@ -300,11 +300,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1770827916,
-        "narHash": "sha256-w+GzeSqHgDpb+2C4EiUP9BykjKbNk01ZDZT6HKxZ0oA=",
+        "lastModified": 1771069784,
+        "narHash": "sha256-9LWPUy0KG25UfAi6V5tLHh71uo1HNttjwJeG2xbsd1Y=",
         "owner": "juanalbarran",
         "repo": "fortin-de-la-galera",
-        "rev": "d8c224eb20f143b7c7f5a05af06d687d9c97f29e",
+        "rev": "6cf47c3477e37ebf2b7801dcdfd8f1b2570e6b5c",
         "type": "github"
       },
       "original": {
