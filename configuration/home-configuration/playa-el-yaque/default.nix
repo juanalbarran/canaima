@@ -15,6 +15,7 @@
     ./../../../home/modules/tui/gazelle
     # ai: opencode
     ./../../../home/modules/ai
+    ./../../../home/modules/gc
     # packages
     ./packages.nix
     # programs
