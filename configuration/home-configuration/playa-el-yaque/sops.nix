@@ -12,7 +12,7 @@ in {
 
     secrets = {
       "private_keys/playa-el-yaque" = {
-        path = "/home/juan-albarran/.ssh/playa-el-yaque-ed25519";
+        path = "/home/juan-albarran/.ssh/playa-el-yaque";
       };
     };
   };
