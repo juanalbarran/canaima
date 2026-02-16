@@ -17,6 +17,9 @@ in {
         owner = "juan";
         group = "users";
       };
+      "access_tokens/github_token" = {
+        owner = "root";
+      };
     };
   };
   environment.systemPackages = with pkgs; [

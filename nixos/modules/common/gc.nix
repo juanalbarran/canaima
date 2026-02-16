@@ -1,10 +1,13 @@
+# nixos/modules/common/default.nix
 {
   nix = {
     gc = {
       automatic = true;
-      frequency = "weekly";
+      dates = "weekly";
       options = "--delete-older-than 30d";
     };
-    settings.auto-optimise-store = true;
+    settings = {
+      auto-optimise-store = true;
+    };
   };
 }

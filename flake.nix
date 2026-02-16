@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     secrets = {
-      url = "github:juanalbarran/fortin-de-la-galera";
+      url = "git+ssh://git@github.com/juanalbarran/fortin-de-la-galera.git";
       flake = false;
     };
   };

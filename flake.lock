@@ -300,17 +300,17 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1770827916,
-        "narHash": "sha256-w+GzeSqHgDpb+2C4EiUP9BykjKbNk01ZDZT6HKxZ0oA=",
-        "owner": "juanalbarran",
-        "repo": "fortin-de-la-galera",
-        "rev": "d8c224eb20f143b7c7f5a05af06d687d9c97f29e",
-        "type": "github"
+        "lastModified": 1771233632,
+        "narHash": "sha256-ZBg216DMML8dLP6PdKU1Qw/OvO4c+40ScZrFXLCyMxE=",
+        "ref": "refs/heads/main",
+        "rev": "f2551d6848ea81deb438e69bdbba128e2fd6a43c",
+        "revCount": 12,
+        "type": "git",
+        "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
       },
       "original": {
-        "owner": "juanalbarran",
-        "repo": "fortin-de-la-galera",
-        "type": "github"
+        "type": "git",
+        "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
       }
     },
     "sops-nix": {
