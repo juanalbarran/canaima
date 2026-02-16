@@ -3,6 +3,7 @@
   home.file.".ssh/playa-el-yaque.pub".source = ./playa-el-yaque.pub;
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
     matchBlocks = {
       "github.com" = {
