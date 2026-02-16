@@ -4,16 +4,16 @@
   inputs,
   ...
 }: let
-  sopsSecretPath = toString inputs.sops-nix.nixosModules.sops;
+  secretsPath = toString inputs.secrets;
 in {
   sops = {
-    age.sshKeyPaths = ["/etc/ssh/ssh_hosts_ed25519_key"];
-    defaultSopsFile = "${sopsSecretPath}/secrets.yaml";
+    age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+    defaultSopsFile = "${secretsPath}/secrets.yaml";
     validateSopsFiles = false;
 
     secrets = {
       "private_keys/playa-el-agua" = {
-        path = "/home/juan/.ssh/playa-el-agua-ed25519";
+        path = "/home/juan/.ssh/playa-el-agua";
         owner = "juan";
         group = "users";
       };
