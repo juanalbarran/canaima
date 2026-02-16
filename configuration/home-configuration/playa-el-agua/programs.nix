@@ -34,10 +34,11 @@
     };
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
       addKeysToAgent = "yes";
       matchBlocks = {
         "github.com" = {
-          identityFile = "~/.ssh/playa-el-agua-ed25519";
+          identityFile = "~/.ssh/playa-el-agua";
         };
       };
     };

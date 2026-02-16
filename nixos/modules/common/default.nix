@@ -5,6 +5,7 @@
     ./localization.nix
     ./networking.nix
     ./ui.nix
+    ./gc.nix
   ];
 
   nix.settings.experimental-features = [
