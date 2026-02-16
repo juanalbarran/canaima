@@ -13,7 +13,13 @@
     "flakes"
   ];
 
-  environment.systemPackages = with pkgs; [
-    wl-clipboard
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      wl-clipboard
+    ];
+    variables = {
+      EDITOR = "nvim-base";
+      VISUAL = "nvim-base";
+    };
+  };
 }

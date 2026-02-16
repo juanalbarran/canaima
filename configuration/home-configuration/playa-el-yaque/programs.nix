@@ -31,4 +31,8 @@
     yazi.enable = true;
     lazygit.enable = true;
   };
+  home.sessionVariables = {
+    EDITOR = "nvim-base";
+    VISUAL = "nvim-base";
+  };
 }
