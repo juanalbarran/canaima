@@ -5,10 +5,6 @@
     ./../../modules/common
     # window manager
     ./../../modules/ui/dwm
-    # menu
-    ./../../modules/ui/dmenu
-    # terminal
-    ./../../modules/terminals/st
     # laptops
     ./../nixos/modules/common/laptop.nix
     # home-manager configuration
