@@ -10,6 +10,9 @@
     ./../../../home/modules/terminals/tmux
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
+    ./../../../home/modules/terminals/st
+    # menu
+    ./../../../home/modules/ui/dmenu
     # user
     ./../../../home/users/juan
   ];
