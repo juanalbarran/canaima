@@ -5,5 +5,6 @@
     ./ghostty
     ./starship
     ./tmux
+    ./direnv
   ];
 }
