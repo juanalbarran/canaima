@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    ./foot.nix
     ./special-binds
   ];
   options = {
