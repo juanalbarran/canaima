@@ -6,5 +6,6 @@
     ./starship
     ./tmux
     ./direnv
+    ./foot
   ];
 }
