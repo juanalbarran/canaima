@@ -4,6 +4,9 @@ export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/
 terminal="ghostty"
 terminal_app_id="com.mitchellh.ghostty"
 
+aux_terminal="foot"
+aux_terminal_id="foot"
+
 projects_path="$HOME/dev"
 vim_path="$HOME/.nix-profile/bin/nvim-base"
 bash_path="$HOME/.nix-profile/bin/bash"
@@ -54,6 +57,19 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
 fi
 
 # --- Launching the terminal ---
+# First, we open a foot terminal in the 5th workspace, if it is already one open,
+# then we dont open anything
+if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+    # Check if foot is open anywhere
+    if ! hyprctl clients -j | jq -e ".[] | select(.class == \"$aux_terminal\")" > /dev/null; then
+        hyprctl dispatch exec "[workspace 5] $aux_terminal"
+    fi
+elif [ -n "$SWAYSOCK" ]; then
+    # Check if foot is open anywhere
+    if ! swaymsg -t get_tree | jq -e ".. | select(.app_id? == \"$aux_terminal_id\")" > /dev/null; then
+        swaymsg "workspace 5; exec $aux_terminal -D \"$selected_path\"; workspace back_and_forth"
+    fi
+fi
 # We check if there is another instance of the terminal open, if there is
 # another instance open then we focus that instance, if not, then we open a\
 # instance.
