@@ -37,6 +37,7 @@ ln -sf "$theme_dir/$new_mode/waybar.css" "$cache_dir/waybar-colors.css"
 ln -sf "$theme_dir/$new_mode/qutebrowser.py" "$cache_dir/qutebrowser-theme.py"
 ln -sf "$theme_dir/$new_mode/ghostty" "$cache_dir/ghostty-theme"
 ln -sf "$theme_dir/$new_mode/wofi.css" "$cache_dir/wofi.css"
+ln -sf "$theme_dir/$new_mode/foot" "$cache_dir/foot-theme"
 
 # we save the new state
 echo "$new_mode" > "$cache_dir/mode"
@@ -50,6 +51,9 @@ waybar &
 
 # qutebrowser
 qutebrowser ":config-source ;; set colors.webpage.darkmode.enabled $qb_dark_bool ;; set colors.webpage.preferred_color_scheme $qb_scheme_str ;; reload -f" >/dev/null 2>&1 || true
+
+# foot
+pkill -HUP foot
 
 if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
