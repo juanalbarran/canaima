@@ -6,15 +6,9 @@
     settings = {
       main = {
         term = "xterm-256color";
-        font = "JetBrainsMono Nerd Font:size=10";
+        font = "JetBrainsMono Nerd Font:size=12";
         dpi-aware = "yes";
         pad = "10x10 center";
-      };
-
-      colors = {
-        alpha = "1.0";
-        background = "131314";
-        foreground = "ffffff";
       };
     };
   };
