@@ -7,6 +7,7 @@ terminal_app_id="com.mitchellh.ghostty"
 projects_path="$HOME/dev"
 vim_path="$HOME/.nix-profile/bin/nvim-base"
 bash_path="$HOME/.nix-profile/bin/bash"
+devenv_path="$HOME/.nix-profile/bin/devenv"
 
 wofi="$HOME/.nix-profile/bin/wofi"
 wofi_config="$HOME/.config/wofi/projects-menu.conf"
