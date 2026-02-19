@@ -5,7 +5,7 @@ terminal="ghostty"
 terminal_app_id="com.mitchellh.ghostty"
 
 projects_path="$HOME/dev"
-vim_path="$HOME/.nix-profile/bin/nvim-base"
+vim_path="$HOME/.nix-profile/bin/nvim-web"
 bash_path="$HOME/.nix-profile/bin/bash"
 devenv_path="$HOME/.nix-profile/bin/devenv"
 
