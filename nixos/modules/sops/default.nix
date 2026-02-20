@@ -2,9 +2,11 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: let
   secretsPath = toString inputs.secrets;
+  sskKeyName = config.hostSpec.sskKeyName;
 in {
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
@@ -13,7 +15,7 @@ in {
 
     secrets = {
       "private_keys/playa-el-agua" = {
-        path = "/home/juan/.ssh/playa-el-agua";
+        path = "/home/juan/.ssh/${sshKeyName}";
         owner = "juan";
         group = "users";
       };
