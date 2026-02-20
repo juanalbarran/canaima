@@ -24,9 +24,16 @@
     ./ssh
     # sops configuration
     ./sops.nix
+    ./../../../home/modules/hostSpec
     # home-manager user
     ./../../../home/users/nix
   ];
+
+  hostSpec = {
+    username = "playa-el-yaque";
+    hostname = "playa-el-yaque";
+    sshKeyName = "playa-el-yaque";
+  };
 
   targets.genericLinux.enable = true;
 
