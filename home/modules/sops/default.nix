@@ -1,30 +1,30 @@
-# nixos/modules/sops/default.nix
+# home/modules/sops/default.nix
 {
   pkgs,
   inputs,
   config,
+  sops-nix,
   ...
 }: let
   secretsPath = toString inputs.secrets;
   sshKeyName = config.hostSpec.sshKeyName;
 in {
+  imports = [
+    sops-nix.homeManagerModules.sops
+  ];
   sops = {
     age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     defaultSopsFile = "${secretsPath}/secrets.yaml";
     validateSopsFiles = false;
 
     secrets = {
-      "private_keys/playa-el-agua" = {
+      "private_keys/${sshKeyName}" = {
         path = "/home/juan/.ssh/${sshKeyName}";
-        owner = "juan";
-        group = "users";
       };
-      "access_tokens/github_token" = {
-        owner = "root";
-      };
+      "access_tokens/github_token" = {};
     };
   };
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     sops
     age
     ssh-to-age

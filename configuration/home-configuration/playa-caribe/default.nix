@@ -16,4 +16,9 @@
     # user
     ./../../../home/users/juan
   ];
+  hostSpec = {
+    username = "playa-caribe";
+    hostname = "playa-caribe";
+    sshKeyName = "playa-caribe";
+  };
 }
