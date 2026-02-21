@@ -84,7 +84,7 @@
           sops-nix.nixosModules.sops
           {
             home-manager.extraSpecialArgs = {
-              inherit kukenan system gazelle pkgs-unstable;
+              inherit inputs secrets kukenan system gazelle pkgs-unstable sops-nix;
             };
           }
         ];
