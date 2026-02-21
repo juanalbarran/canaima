@@ -26,7 +26,7 @@ sudo nixos-rebuild switch --flake .#canaima
 ```
 
 ```bash
-sudo nixos-rebuild switch --flake .#suckless
+sudo nixos-rebuild switch --flake .#sarisarinama
 ```
 
 ## 🏠 Home configurations
