@@ -75,7 +75,7 @@
       };
       sarisarinama = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit kukenan system pkgs-unstable;
+          inherit inputs kukenan system pkgs-unstable secrets;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
@@ -83,7 +83,7 @@
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
-              inherit kukenan system gazelle pkgs-unstable;
+              inherit inputs secrets kukenan system gazelle pkgs-unstable sops-nix;
             };
           }
         ];
