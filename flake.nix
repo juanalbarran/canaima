@@ -68,7 +68,7 @@
           sops-nix.nixosModules.sops
           {
             home-manager.extraSpecialArgs = {
-              inherit kukenan system pkgs-unstable;
+              inherit inputs secrets kukenan system pkgs-unstable sops-nix;
             };
           }
         ];
@@ -91,11 +91,11 @@
       };
     };
     homeConfigurations = {
-      "juan" = home-manager.lib.homeManagerConfiguration {
+      "playa-el-agua" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [./home/users/juan];
+        modules = [./configuration/home-configuration/playa-el-agua];
         extraSpecialArgs = {
-          inherit kukenan system gazelle pkgs-unstable;
+          inherit kukenan system gazelle pkgs-unstable sops-nix secrets;
         };
       };
       "playa-el-yaque" = home-manager.lib.homeManagerConfiguration {
