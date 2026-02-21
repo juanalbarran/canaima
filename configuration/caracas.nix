@@ -9,10 +9,11 @@
     ./../nixos/modules/common/laptop.nix
     # home-manager configuration
     ./home-configuration/playa-caribe
+    # sops
+    ./../nixos/modules/sops
     # users
     ./../nixos/users/juan.nix
   ];
-  home-manager.users.juan = import ./../../home/users/suckless;
   services = {
     displayManager.ly.enable = true;
     xserver = {
