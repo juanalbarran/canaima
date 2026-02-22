@@ -7,10 +7,6 @@
     ./../nixos/modules/ui/dwm
     # laptops
     ./../nixos/modules/common/laptop.nix
-    # home-manager configuration
-    ./home-configuration/playa-caribe
-    # sops
-    ./../nixos/modules/sops
     # users
     ./../nixos/users/juan.nix
   ];

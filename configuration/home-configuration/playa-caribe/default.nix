@@ -14,6 +14,10 @@
     ./../../../home/modules/terminals/st
     # menu
     ./../../../home/modules/ui/dmenu
+    # config
+    ./../../../home/modules/hostSpec
+    ./../../../home/modules/sops
+    ./../../../home/modules/ssh
     # user
     ./../../../home/users/juan
   ];
