@@ -2,9 +2,9 @@
 {
   imports = [
     # fonts, localization, networking, experimental-features
-    ./../../modules/common
+    ./../nixos/modules/common
     # window manager
-    ./../../modules/ui/dwm
+    ./../nixos/modules/ui/dwm
     # laptops
     ./../nixos/modules/common/laptop.nix
     # home-manager configuration
