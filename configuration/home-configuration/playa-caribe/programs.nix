@@ -34,11 +34,11 @@
     };
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Adwaita";
-      package = pkgs.gnome-themes-extra;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "Adwaita";
+  #     package = pkgs.gnome-themes-extra;
+  #   };
+  # };
 }
