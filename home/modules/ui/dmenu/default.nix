@@ -4,7 +4,7 @@
   powerMenu = pkgs.writeShellScriptBin "power-menu" (builtins.readFile ./scripts/power-menu.sh);
   projects = pkgs.writeShellScriptBin "projects" (builtins.readFile ./scripts/projects.sh);
 in {
-  environment.systemPackages = with pkgs; [
+  home.packages = with pkgs; [
     (dmenu.overrideAttrs (_: {
       src = ./config;
       patches = [
