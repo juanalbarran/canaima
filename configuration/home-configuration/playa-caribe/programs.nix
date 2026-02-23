@@ -1,5 +1,5 @@
 # configuration/home-configuration/playa-caribe/programs.nix
-{pkgs, ...}: {
+{
   programs = {
     home-manager.enable = true;
     git = {
@@ -33,12 +33,4 @@
       enable = true;
     };
   };
-
-  # gtk = {
-  #   enable = true;
-  #   theme = {
-  #     name = "Adwaita";
-  #     package = pkgs.gnome-themes-extra;
-  #   };
-  # };
 }
