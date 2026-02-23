@@ -1,4 +1,5 @@
 # work
 Confulence :: https://jira.nixs.com/browse/NJS-6390
-Xtime :: https://xtime.nixs.com
-
+Xtime :: https://xtime.nixs.co
+Salesforce - Flosum :: https://appexchange.salesforce.com/appxListingDetail?listingId=a0N30000000psM0EAI
+Salesforce - Trailhead :: https://trailhead.salesforce.com/content/learn/trails/force_com_dev_beginner
