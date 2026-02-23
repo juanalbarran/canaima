@@ -3,7 +3,6 @@
   imports = [
     ./packages.nix
     ./programs.nix
-    ./sxkhd.nix
     # browsers
     ./../../../home/modules/browsers/qutebrowser
     ./../../../home/modules/browsers/brave.nix
@@ -18,6 +17,7 @@
     ./../../../home/modules/hostSpec
     ./../../../home/modules/sops
     ./../../../home/modules/ssh
+    ./../../../home/modules/sxkhd
     # user
     ./../../../home/users/juan
   ];
