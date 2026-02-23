@@ -300,11 +300,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1771526046,
-        "narHash": "sha256-H0//ROpZi4Q/jrEtQZbxU+zCncO9E7NaENvnGToSTdM=",
+        "lastModified": 1771857285,
+        "narHash": "sha256-6QUJiW6DW6VH3puSXM/Xrbwban0H/E4Z3NpZG6nJ+F4=",
         "ref": "refs/heads/main",
-        "rev": "252b2fb18ab80a067243ec7923cd52266a7b10f6",
-        "revCount": 15,
+        "rev": "615ab9ec230dd40274a96fcb941c5eb494535a4d",
+        "revCount": 18,
         "type": "git",
         "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
       },

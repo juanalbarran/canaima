@@ -1,10 +1,12 @@
 # hosts/canaima/default.nix
 {
   imports = [
+    ./hardware/hardware-configuration.nix
     ./services.nix
     ./../../configuration/budapest.nix
-    ./hardware/hardware-configuration.nix
   ];
+
+  home-manager.users.juan = import ./../../configuration/home-configuration/playa-el-agua;
 
   # Bootloader.
   boot = {
@@ -13,8 +15,6 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
-  home-manager.users.juan = import ./../../configuration/home-configuration/playa-el-agua;
 
   system.stateVersion = "25.11";
 }
