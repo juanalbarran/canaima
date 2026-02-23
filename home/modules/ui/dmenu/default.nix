@@ -9,7 +9,7 @@ in {
       src = ./config;
       patches = [
         # Center patch (-c)
-        (pkgs.fetchpatch {
+        (fetchpatch {
           url = "https://tools.suckless.org/dmenu/patches/center/dmenu-center-5.2.diff";
           sha256 = "sha256-g7ow7GVUsisR2kQ4dANRx/pJGU8fiG4fR08ZkbUFD5o=";
         })
@@ -19,7 +19,7 @@ in {
         #   sha256 = "sha256-pf9UM3cEVfYr99HuQeeakYbFNSAJmCPS+uqSI6Anf/I=";
         # })
         # Line Height patch (-h)
-        (pkgs.fetchpatch {
+        (fetchpatch {
           url = "https://tools.suckless.org/dmenu/patches/line-height/dmenu-lineheight-5.2.diff";
           sha256 = "sha256-QdY2T/hvFuQb4NAK7yfBgBrz7Ii7O7QmUv0BvVOdf00=";
         })
