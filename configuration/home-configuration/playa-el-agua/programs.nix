@@ -13,6 +13,8 @@
     };
 
     bat.enable = true;
+    yazi.enable = true;
+    lazygit.enable = true;
 
     bash = {
       enable = true;
@@ -25,22 +27,6 @@
       initExtra = ''
         fastfetch
       '';
-    };
-    yazi = {
-      enable = true;
-    };
-    lazygit = {
-      enable = true;
-    };
-    ssh = {
-      enable = true;
-      enableDefaultConfig = false;
-      addKeysToAgent = "yes";
-      matchBlocks = {
-        "github.com" = {
-          identityFile = "~/.ssh/playa-el-agua";
-        };
-      };
     };
   };
 }

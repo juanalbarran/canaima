@@ -6,7 +6,7 @@ in {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-
+    addKeysToAgent = "yes";
     matchBlocks = {
       "github.com" = {
         hostname = "github.com";
