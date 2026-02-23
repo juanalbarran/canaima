@@ -1,6 +1,8 @@
 # configuration/home-configuration/playa-el-yaque/default.nix
 {pkgs, ...}: {
   imports = [
+    ./packages.nix
+    ./programs.nix
     # ui: sway, waybar, wallpapers, themes, and wofi
     ./../../../home/modules/ui/sway
     ./../../../home/modules/ui/waybar
@@ -15,16 +17,11 @@
     ./../../../home/modules/tui/gazelle
     # ai: opencode
     ./../../../home/modules/ai
-    ./../../../home/modules/gc
-    # packages
-    ./packages.nix
-    # programs
-    ./programs.nix
-    # ssh keys
-    ./ssh
-    # sops configuration
-    ./sops.nix
+    # config
+    ./../../../home/modules/ssh
+    ./../../../home/modules/sops
     ./../../../home/modules/hostSpec
+    ./../../../home/modules/gc
     # home-manager user
     ./../../../home/users/nix
   ];
