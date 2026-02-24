@@ -1,0 +1,11 @@
+/* home/modules/ui/waybar/components/vpn/vpn.css */
+#custom-vpn {
+  color: @text;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+#custom-vpn.active {
+  color: @text;
+}
