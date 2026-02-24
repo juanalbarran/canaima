@@ -9,6 +9,7 @@ in {
     matchBlocks = {
       "*" = {
         addKeysToAgent = "yes";
+        identityFile = "~/.ssh/${sshKeyName}";
       };
       "github.com" = {
         hostname = "github.com";

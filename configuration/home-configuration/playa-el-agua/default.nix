@@ -17,6 +17,7 @@
     ./../../../home/modules/kanshi # -> do i really use this?
     ./../../../home/modules/hostSpec
     ./../../../home/modules/sops
+    ./../../../home/modules/ssh
     # the good opencode
     ./../../../home/modules/ai
     # user
@@ -27,8 +28,8 @@
 
   host.isNixOS = true;
   hostSpec = {
-    username = "playa-el-agua";
-    hostname = "playa-el-agua";
+    username = "juan";
+    hostname = "canaima";
     sshKeyName = "playa-el-agua";
   };
 }
