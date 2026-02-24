@@ -13,6 +13,8 @@
     };
 
     bat.enable = true;
+    yazi.enable = true;
+    lazygit.enable = true;
 
     bash = {
       enable = true;
@@ -27,8 +29,5 @@
         fastfetch
       '';
     };
-
-    yazi.enable = true;
-    lazygit.enable = true;
   };
 }
