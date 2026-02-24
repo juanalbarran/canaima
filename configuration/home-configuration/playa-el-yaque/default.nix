@@ -22,9 +22,12 @@
     ./../../../home/modules/sops
     ./../../../home/modules/hostSpec
     ./../../../home/modules/gc
+    ./../../../home/modules/openvpn
     # home-manager user
     ./../../../home/users/nix
   ];
+  features.vpn = true;
+  # features.bluetooth = true;
 
   hostSpec = {
     username = "playa-el-yaque";

@@ -13,6 +13,11 @@
       default = false;
       description = "Enable Bluetooth Waybar module";
     };
+    features.vpn = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable VPN Waybar module";
+    };
   };
   config = {
     programs.waybar = {
@@ -38,6 +43,9 @@
         ]
         ++ (lib.optionals config.features.bluetooth [
           (builtins.readFile ./components/bluetooth/bluetooth.css)
+        ])
+        ++ (lib.optionals config.features.vpn [
+          (builtins.readFile ./components/vpn/vpn.css)
         ])
       );
     };

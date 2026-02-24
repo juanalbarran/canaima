@@ -20,10 +20,9 @@ in {
     validateSopsFiles = false;
 
     secrets = {
-      "private_keys/${sshKeyName}" = {
-        path = "${homePath}/.ssh/${sshKeyName}";
-      };
+      "private_keys/${sshKeyName}".path = "${homePath}/.ssh/${sshKeyName}";
       "access_tokens/github_token" = {};
+      "vpn/nix".path = "${homePath}/.config/openvpn/nix.conf";
     };
     templates = {
       "github-token" = {
