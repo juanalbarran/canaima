@@ -30,7 +30,7 @@
   # features.bluetooth = true;
 
   hostSpec = {
-    username = "playa-el-yaque";
+    username = "juan-albarran";
     hostname = "playa-el-yaque";
     sshKeyName = "playa-el-yaque";
   };
