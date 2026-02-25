@@ -1,5 +1,9 @@
 # home/modules/core/gc/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   nix = {
     gc = {
       automatic = true;
@@ -9,6 +13,6 @@
     settings = {
       auto-optimise-store = true;
     };
-    package = pkgs.nix;
+    package = lib.mkDefault pkgs.nix;
   };
 }
