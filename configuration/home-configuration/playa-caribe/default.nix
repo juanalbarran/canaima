@@ -3,6 +3,7 @@
   imports = [
     ./packages.nix
     ./programs.nix
+    ./../../../home/modules/core
     # browsers
     ./../../../home/modules/browsers/qutebrowser
     ./../../../home/modules/browsers/brave.nix
@@ -10,19 +11,16 @@
     ./../../../home/modules/terminals/tmux
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
-    ./../../../home/modules/terminals/st
+    ./../../../home/modules/terminals/foot
+    # ui
+    ./../../../home/modules/ui/themes
     # menu
-    ./../../../home/modules/ui/dmenu
-    # config
-    ./../../../home/modules/hostSpec
-    ./../../../home/modules/sops
-    ./../../../home/modules/ssh
-    ./../../../home/modules/sxkhd
+    ./../../../home/modules/ui/wmenu
     # user
     ./../../../home/users/juan
   ];
   hostSpec = {
-    username = "playa-caribe";
+    username = "juan";
     hostname = "playa-caribe";
     sshKeyName = "playa-caribe";
   };
