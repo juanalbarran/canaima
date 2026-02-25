@@ -1,4 +1,4 @@
-# home/modules/hostSpec/default.nix
+# home/modules/core/hostSpec/default.nix
 {lib, ...}: {
   options.hostSpec = {
     username = lib.mkOption {

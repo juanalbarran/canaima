@@ -3,6 +3,8 @@
   imports = [
     ./packages.nix
     ./programs.nix
+    # core: gc, ssh, sops, hostSpec
+    ./../../../home/modules/core
     # ui: sway, waybar, wallpapers, themes, and wofi
     ./../../../home/modules/ui/sway
     ./../../../home/modules/ui/waybar
@@ -17,11 +19,7 @@
     ./../../../home/modules/tui/gazelle
     # ai: opencode
     ./../../../home/modules/ai
-    # config
-    ./../../../home/modules/ssh
-    ./../../../home/modules/sops
-    ./../../../home/modules/hostSpec
-    ./../../../home/modules/gc
+    # network: openvpn
     ./../../../home/modules/openvpn
     # home-manager user
     ./../../../home/users/nix
