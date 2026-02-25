@@ -1,4 +1,4 @@
-# home/modules/sops/default.nix
+# home/modules/core/sops/default.nix
 {
   pkgs,
   inputs,

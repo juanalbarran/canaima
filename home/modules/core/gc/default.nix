@@ -1,4 +1,4 @@
-# home/modules/gc/default.nix
+# home/modules/core/gc/default.nix
 {pkgs, ...}: {
   nix = {
     gc = {
