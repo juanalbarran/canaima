@@ -14,7 +14,5 @@ in {
     # dev editor
     kuks
     kuks-web
-    # run or raise in x
-    xdotool
   ];
 }
