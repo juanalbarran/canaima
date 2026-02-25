@@ -17,9 +17,6 @@
     ./../../../home/modules/ui/wofi
     ./../../../home/modules/ui/themes
     ./../../../home/modules/kanshi # -> do i really use this?
-    ./../../../home/modules/hostSpec
-    ./../../../home/modules/sops
-    ./../../../home/modules/ssh
     # the good opencode
     ./../../../home/modules/ai
     # user

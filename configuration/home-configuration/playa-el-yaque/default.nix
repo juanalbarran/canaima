@@ -15,12 +15,11 @@
     ./../../../home/modules/browsers
     # terminals
     ./../../../home/modules/terminals
-    # tui
-    ./../../../home/modules/tui/gazelle
     # ai: opencode
     ./../../../home/modules/ai
-    # network: openvpn
+    # network: openvpn, gazelle
     ./../../../home/modules/openvpn
+    ./../../../home/modules/tui/gazelle
     # home-manager user
     ./../../../home/users/nix
   ];
