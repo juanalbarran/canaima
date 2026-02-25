@@ -3,6 +3,8 @@
   imports = [
     ./packages.nix
     ./programs.nix
+    # core modules: gc, ssh, sops, hostSpec
+    ./../../../home/modules/core
     # all the browsers, let's go!
     ./../../../home/modules/browsers
     # all the terminals, let's go!
