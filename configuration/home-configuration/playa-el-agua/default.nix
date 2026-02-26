@@ -1,8 +1,6 @@
 # configuration/home-configuration/playa-el-agua/default.nix
 {
   imports = [
-    ./packages.nix
-    ./programs.nix
     # core modules: gc, ssh, sops, hostSpec
     ./../../../home/modules/core
     # all the browsers, let's go!
@@ -21,13 +19,13 @@
     ./../../../home/modules/ai
     # user
     ./../../../home/users/juan
-    # ssh public keys
-    ./ssh
   ];
 
   host.isNixOS = true;
   hostSpec = {
     username = "juan";
+    fullname = "Juan Jesus Albarran Rodriguez";
+    email = "personal/email";
     hostname = "canaima";
     sshKeyName = "playa-el-agua";
   };

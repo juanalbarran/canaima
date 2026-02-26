@@ -1,25 +1,28 @@
-# configuration/home-configuration/playa-el-yaque/programs.nix
-{
+# home/modules/core/programs.nix
+{config, ...}: let
+  fullname = config.hostSpec.fullname;
+in {
   programs = {
     home-manager.enable = true;
+    bat.enable = true;
+    yazi.enable = true;
+    lazygit.enable = true;
     git = {
       enable = true;
+      includes = [
+        {path = config.sops.templates."git-email".path;}
+      ];
       settings = {
         user = {
-          name = "Juan Albarran";
-          email = "juan.albarran@nixs.com";
+          name = "${fullname}";
         };
       };
     };
-
-    bat.enable = true;
-
     bash = {
       enable = true;
       shellAliases = {
-        vim = "nvim-base";
+        vim = "nvim-web";
         cat = "bat";
-        wvim = "nvim-web";
         jvim = "nvim-java";
         nvim = "nvim-max";
       };
@@ -27,9 +30,6 @@
         fastfetch
       '';
     };
-
-    yazi.enable = true;
-    lazygit.enable = true;
   };
   home.sessionVariables = {
     EDITOR = "nvim-base";
