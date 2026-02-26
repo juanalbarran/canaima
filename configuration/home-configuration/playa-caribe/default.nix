@@ -1,8 +1,8 @@
 # configuration/home-configuration/playa-caribe/default.nix
 {
   imports = [
-    ./packages.nix
-    ./programs.nix
+    # config
+    ./../../../home/modules/core
     # browsers
     ./../../../home/modules/browsers/qutebrowser
     ./../../../home/modules/browsers/brave.nix
@@ -10,20 +10,18 @@
     ./../../../home/modules/terminals/tmux
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
-    ./../../../home/modules/terminals/st
+    ./../../../home/modules/terminals/foot
     # menu
-    ./../../../home/modules/ui/dmenu
-    # config
-    ./../../../home/modules/hostSpec
-    ./../../../home/modules/sops
-    ./../../../home/modules/ssh
-    ./../../../home/modules/sxkhd
+    ./../../../home/modules/ui/wmenu
+    ./../../../home/modules/ui/wofi
     # user
     ./../../../home/users/juan
   ];
   hostSpec = {
-    username = "playa-caribe";
-    hostname = "playa-caribe";
+    username = "juan";
+    fullname = "Juan Jesus Albarran Rodriguez";
+    email = "personal/email";
+    hostname = "sarisarinama";
     sshKeyName = "playa-caribe";
   };
 }
