@@ -1,6 +1,5 @@
 # nixos/modules/ui/dwl/default.nix
 {pkgs, ...}: {
-  services.displayManager.ly.enable = true;
   environment.systemPackages = with pkgs; [
     (dwl.overrideAttrs (oldAttrs: {
       src = ./config;
@@ -23,5 +22,19 @@
     wl-clipboard
     wlr-randr
   ];
+  services = { 
+    displayManager = { 
+      ly.enable = true;
+      sessionPackages = [
+        (pkgs.writeTextDir "share/wayland-sessions/dwl.desktop" ''
+          [Desktop Entry]
+          Name=dwl
+          Comment=Dynamic window manager for Wayland
+          Exec=dwl
+          Type=Application
+        '')
+      ];
+    };
+  };
   programs.xwayland.enable = true;
 }
