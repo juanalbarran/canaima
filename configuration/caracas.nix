@@ -10,16 +10,5 @@
     # users
     ./../nixos/users/juan.nix
   ];
-  # services = {
-  #   displayManager.ly.enable = true;
-  #   # xserver = {
-  #   #   enable = true;
-  #   #   xkb = {
-  #   #     layout = "us";
-  #   #     variant = "";
-  #   #   };
-  #   # };
-  # };
-
   system.stateVersion = "25.11";
 }
