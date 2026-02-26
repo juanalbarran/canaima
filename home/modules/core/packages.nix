@@ -1,4 +1,4 @@
-# configuration/home-configuration/playa-el-yaque/packages.nix
+# home/modules/core/packages.nix
 {
   pkgs,
   kukenan,
@@ -11,16 +11,10 @@ in {
     ripgrep
     tree
     gcc
-    # dev editor
+    # editor
     kuks
     kuks-web
-    # font
-    nerd-fonts.jetbrains-mono
-    powertop
-    # developer environment
+    # development
     devenv
-    # encription & secrets
-    age
-    sops
   ];
 }

@@ -1,6 +1,8 @@
 # home/modules/core/default.nix
 {
   imports = [
+    ./packages.nix
+    ./programs.nix
     ./gc
     ./ssh
     ./sops
