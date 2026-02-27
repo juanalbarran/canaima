@@ -143,10 +143,10 @@ runorraise(const Arg *arg)
         focusclient(c, 1);
     } else {
         /* Spawn it if it doesn't exist */
-        const Arg spawnarg = { .v = cmd_path };
+        const char *cmd[] = { "/bin/sh", "-c", cmd_path, NULL };
+        const Arg spawnarg = { .v = cmd };
         spawn(&spawnarg);
-    }
-}
+    }}
 
 /* commands: run or raise, first is the target app_i, second is the command */
 static const char *airor[] = {"brave-gemini.google.com__-Default", "brave --app=https://gemini.google.com/", NULL};
