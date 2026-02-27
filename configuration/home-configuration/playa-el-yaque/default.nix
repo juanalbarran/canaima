@@ -1,9 +1,5 @@
 # configuration/home-configuration/playa-el-yaque/default.nix
-{
-  pkgs,
-  config,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     # core: gc, ssh, sops, hostSpec, package, programs
     ./../../../home/modules/core
