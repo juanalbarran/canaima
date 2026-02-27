@@ -8,6 +8,7 @@
 }: let
   secretsPath = toString inputs.secrets;
   sshKeyName = config.hostSpec.sshKeyName;
+  email = config.hostSpec.email;
   homePath = config.home.homeDirectory;
 in {
   imports = [
@@ -25,6 +26,8 @@ in {
         mode = "0400";
       };
       "access_tokens/github_token" = {};
+      "work/email" = {};
+      "personal/email" = {};
       "vpn/nix".path = "${homePath}/.config/openvpn/nix.conf";
     };
     templates = {
@@ -32,6 +35,13 @@ in {
         path = "${homePath}/.config/access_tokens/github_token";
         content = ''
           access-tokens = github.com=${config.sops.placeholder."access_tokens/github_token"}
+        '';
+      };
+      "git-email" = {
+        path = "${homePath}/.config/git/sops-data.conf";
+        content = ''
+          [user]
+            email = ${config.sops.placeholder.${email}}
         '';
       };
     };

@@ -1,8 +1,7 @@
 # configuration/home-configuration/playa-caribe/default.nix
 {
   imports = [
-    ./packages.nix
-    ./programs.nix
+    # config
     ./../../../home/modules/core
     # browsers
     ./../../../home/modules/browsers/qutebrowser

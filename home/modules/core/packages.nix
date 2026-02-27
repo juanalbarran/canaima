@@ -1,4 +1,4 @@
-# configuration/home-configuration/playa-caribe/packages.nix
+# home/modules/core/packages.nix
 {
   pkgs,
   kukenan,
@@ -11,8 +11,10 @@ in {
     ripgrep
     tree
     gcc
-    # dev editor
+    # editor
     kuks
     kuks-web
+    # development
+    devenv
   ];
 }
