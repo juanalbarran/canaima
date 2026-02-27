@@ -8,13 +8,13 @@
         ++ [
           (pkgs.fetchpatch {
             name = "dwl-movestack";
-            url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/movestack/movestack-0.7.patch";
-            hash = pkgs.lib.fakeHash;
+            url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/movestack/movestack.patch";
+            hash = "sha256-/Ac7oQyZNVPqGiNDn0y94arN0cz98Ie1nKkQIX27bZo=";
           })
           (pkgs.fetchpatch {
             name = "dwl-warpcursor";
-            url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/warpcursor/warpcursor-0.7.patch";
-            hash = pkgs.lib.fakeHash;
+            url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/warpcursor/warpcursor.patch";
+            hash = "sha256-0AGMq507WmW2QJW02u6eJDuQmGBAiVPbEw79npwqEDU=";
           })
         ];
       postPatch = ''
@@ -41,4 +41,7 @@
     };
   };
   programs.xwayland.enable = true;
+  programs.dconf.enable = true;
+  security.polkit.enable = true;
+  hardware.graphics.enable = true;
 }
