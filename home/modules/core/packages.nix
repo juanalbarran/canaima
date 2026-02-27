@@ -16,5 +16,7 @@ in {
     kuks-web
     # development
     devenv
+    # fonts
+    nerd-fonts.jetbrains-mono
   ];
 }
