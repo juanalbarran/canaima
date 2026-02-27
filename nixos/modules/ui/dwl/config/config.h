@@ -117,6 +117,7 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* Run or raise function */
+const char *client_get_appid(Client*c);
 static void
 runorraise(const Arg *arg)
 {
@@ -129,7 +130,8 @@ runorraise(const Arg *arg)
     wl_list_for_each(c, &clients, link) {
         /* Note: Accessing the app_id might differ slightly based on your dwl version/fork.
            Usually it's c->appid for Wayland clients or c->class for XWayland. */
-        if (c->appid && strcasestr(c->appid, target_id)) {
+	const char *id = client_get_appid(c);
+        if (id && strstr(id, target_id)) {
             found = 1;
             break;
         }
@@ -147,16 +149,16 @@ runorraise(const Arg *arg)
 
 /* commands: run or raise, first is the target app_i, second is the command */
 static const char *airor[] = {"brave-gemini.google.com__-Default", "brave --app=https://gemini.google.com/", NULL};
-static const char *browserror[] = {"org.qutebrowser.qutebrowser", "env QT_QUICK_BACKEND=software qutebrowser --target window", NULL }
+static const char *browserror[] = {"org.qutebrowser.qutebrowser", "env QT_QUICK_BACKEND=software qutebrowser --target window", NULL };
 static const char *termror[] = { "foot", "foot", NULL };
 
 /* menu */
 static const char *menucmd[] = { "wmenu-run", NULL };
 
 /* screenshots */
-static const char *screenshotcmd[] = { "/bin/sh", "-c", "grim ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
-static const char *screenshotSelection[] = { "/bin/sh", "-c", "grim -g \"$(slurp)\" ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
-static const char *screenshotClipboard[] = { "/bin/sh", "-c", "grim -g \"$(slurp)\" - | wl-copy", NULL };
+// static const char *screenshotcmd[] = { "/bin/sh", "-c", "grim ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
+// static const char *screenshotSelection[] = { "/bin/sh", "-c", "grim -g \"$(slurp)\" ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
+// static const char *screenshotClipboard[] = { "/bin/sh", "-c", "grim -g \"$(slurp)\" - | wl-copy", NULL };
 
 static const Key keys[] = {
 	/* Note that Shift changes certain key codes: 2 -> at, etc. */
@@ -164,8 +166,11 @@ static const Key keys[] = {
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,		     XKB_KEY_q,           runorraise,       {.v = termror} },
 	{ MODKEY,		     XKB_KEY_a,           runorraise,       {.v = airor} },
+	{ MODKEY,		     XKB_KEY_b,           runorraise,       {.v = browserror} },
 	{ MODKEY,                    XKB_KEY_h,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_l,           focusstack,       {.i = -1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_h,           movestack,        {.i = +1} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_l,           movestack,        {.i = -1} },
 	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_i,           incnmaster,       {.i = +1} },
 	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_d,           incnmaster,       {.i = -1} },
 	{ MODKEY|WLR_MODIFIER_CTRL,  XKB_KEY_j,           setmfact,         {.f = -0.05f} },
@@ -201,7 +206,8 @@ static const Key keys[] = {
 	/* Ctrl-Alt-Fx is used to switch to another VT, if you don't know what a VT is
 	 * do not remove them.
 	 */
-#define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_XF86Switch_VT_##n, chvt, {.ui = (n)} }
+// #define CHVT(n) { WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_XF86Switch_VT_##n, chvt, {.ui = (n)} }
+#define CHVT(n) { .mod = WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT, .keysym = XKB_KEY_XF86Switch_VT_##n, .func = chvt, .arg = {.ui = (n)}}
 	CHVT(1), CHVT(2), CHVT(3), CHVT(4), CHVT(5), CHVT(6),
 	CHVT(7), CHVT(8), CHVT(9), CHVT(10), CHVT(11), CHVT(12),
 };
