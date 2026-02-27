@@ -1,5 +1,5 @@
 # home/modules/foot/default.nix
-{
+{lib, ...}: {
   programs.foot = {
     enable = true;
     # Foot doesn't have a direct 'config-file' array like Ghostty.
@@ -37,4 +37,10 @@
       };
     };
   };
+  home.activation.setupFootTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p ~/.cache/style
+    if [ ! -e ~/.cache/style/foot-theme ]; then
+      touch ~/.cache/style/foot-theme
+    fi
+  '';
 }
