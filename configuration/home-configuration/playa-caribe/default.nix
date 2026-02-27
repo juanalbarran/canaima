@@ -20,7 +20,9 @@
   ];
   hostSpec = {
     username = "juan";
-    hostname = "playa-caribe";
+    fullname = "Juan Jesus Albarran Rodriguez";
+    email = "personal/email";
+    hostname = "sarisarinama";
     sshKeyName = "playa-caribe";
   };
 }
