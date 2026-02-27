@@ -1,9 +1,11 @@
 # configuration/home-configuration/playa-el-yaque/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
-    ./packages.nix
-    ./programs.nix
-    # core: gc, ssh, sops, hostSpec
+    # core: gc, ssh, sops, hostSpec, package, programs
     ./../../../home/modules/core
     # ui: sway, waybar, wallpapers, themes, and wofi
     ./../../../home/modules/ui/sway
@@ -15,12 +17,11 @@
     ./../../../home/modules/browsers
     # terminals
     ./../../../home/modules/terminals
-    # tui
-    ./../../../home/modules/tui/gazelle
     # ai: opencode
     ./../../../home/modules/ai
-    # network: openvpn
+    # network: openvpn, gazelle
     ./../../../home/modules/openvpn
+    ./../../../home/modules/tui/gazelle
     # home-manager user
     ./../../../home/users/nix
   ];
@@ -29,6 +30,8 @@
 
   hostSpec = {
     username = "juan-albarran";
+    fullname = "Juan Albarran";
+    email = "work/email";
     hostname = "playa-el-yaque";
     sshKeyName = "playa-el-yaque";
   };
