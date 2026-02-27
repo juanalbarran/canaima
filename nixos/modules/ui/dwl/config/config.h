@@ -116,8 +116,9 @@ static const enum libinput_config_tap_button_map button_map = LIBINPUT_CONFIG_TA
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+static inline const char *client_get_appid(Client *c);
+
 /* Run or raise function */
-const char *client_get_appid(Client*c);
 static void
 runorraise(const Arg *arg)
 {
@@ -154,6 +155,7 @@ static const char *termror[] = { "foot", "foot", NULL };
 
 /* menu */
 static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *termcmd[] = { "foot", NULL};
 
 /* screenshots */
 // static const char *screenshotcmd[] = { "/bin/sh", "-c", "grim ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
@@ -165,6 +167,7 @@ static const Key keys[] = {
 	/* modifier                  key                  function          argument */
 	{ MODKEY,                    XKB_KEY_d,           spawn,            {.v = menucmd} },
 	{ MODKEY,		     XKB_KEY_q,           runorraise,       {.v = termror} },
+	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_q,           spawn,	    {.v = termcmd} },
 	{ MODKEY,		     XKB_KEY_a,           runorraise,       {.v = airor} },
 	{ MODKEY,		     XKB_KEY_b,           runorraise,       {.v = browserror} },
 	{ MODKEY,                    XKB_KEY_h,           focusstack,       {.i = +1} },
@@ -199,7 +202,7 @@ static const Key keys[] = {
 	TAGKEYS(          XKB_KEY_7, XKB_KEY_ampersand,                     6),
 	TAGKEYS(          XKB_KEY_8, XKB_KEY_asterisk,                      7),
 	TAGKEYS(          XKB_KEY_9, XKB_KEY_parenleft,                     8),
-	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_q,           quit,             {0} },
+	{ MODKEY|WLR_MODIFIER_CTRL, XKB_KEY_q,           quit,             {0} },
 
 	/* Ctrl-Alt-Backspace and Ctrl-Alt-Fx used to be handled by X server */
 	{ WLR_MODIFIER_CTRL|WLR_MODIFIER_ALT,XKB_KEY_Terminate_Server, quit, {0} },
