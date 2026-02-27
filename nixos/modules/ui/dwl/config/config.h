@@ -131,7 +131,7 @@ runorraise(const Arg *arg)
     wl_list_for_each(c, &clients, link) {
         /* Note: Accessing the app_id might differ slightly based on your dwl version/fork.
            Usually it's c->appid for Wayland clients or c->class for XWayland. */
-	const char *id = client_get_appid(c);
+        const char *id = client_get_appid(c);
         if (id && strstr(id, target_id)) {
             found = 1;
             break;
@@ -139,6 +139,10 @@ runorraise(const Arg *arg)
     }
 
     if (found) {
+        /* Switch the monitor view to the tag(s) this client belongs to */
+        const Arg a = { .ui = c->tags };
+        view(&a);
+        
         /* Focus the existing client */
         focusclient(c, 1);
     } else {
@@ -146,7 +150,8 @@ runorraise(const Arg *arg)
         const char *cmd[] = { "/bin/sh", "-c", cmd_path, NULL };
         const Arg spawnarg = { .v = cmd };
         spawn(&spawnarg);
-    }}
+    }
+}
 
 /* commands: run or raise, first is the target app_i, second is the command */
 static const char *airor[] = {"brave-gemini.google.com__-Default", "brave --app=https://gemini.google.com/", NULL};
