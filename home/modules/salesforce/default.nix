@@ -1,5 +1,9 @@
 # home/modules/salesforce/default.nix
-{pkgs, ...}: {
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
@@ -7,4 +11,9 @@
       vscjava.vscode-java-pack # Required for Apex support
     ];
   };
+  home.packages = with pkgs; [
+    pkgs-unstable.salesforce-cli
+    jq
+    nodejs_20
+  ];
 }
