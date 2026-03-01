@@ -35,6 +35,10 @@
         spawn-terminal = "Control+Shift+n";
         fullscreen = "Control+Return";
       };
+      text-bindings = {
+        "\\x1b{" = "Super+Shift+bracketleft";
+        "\\x1b}" = "Super+Shift+bracketright";
+      };
     };
   };
   home.activation.setupFootTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
