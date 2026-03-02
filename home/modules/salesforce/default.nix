@@ -1,19 +1,28 @@
 # home/modules/salesforce/default.nix
 {
   pkgs,
-  pkgs-unstable,
+  inputs,
   ...
-}: {
+}: let
+  # Define the missing Salesforce extension manually
+  salesforce-extension = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+    name = "salesforcedx-vscode";
+    publisher = "salesforce";
+    version = "60.4.1";
+    sha256 = "sha256-g+GdVForEFQl8NMeBTky5BUykBXbau7UyuhZAGhpdP8=";
+  };
+in {
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      salesforce.salesforcedx-vscode # The main SF extension
-      vscjava.vscode-java-pack # Required for Apex support
+      salesforce-extension
+      vscjava.vscode-java-pack
     ];
   };
   home.packages = with pkgs; [
-    pkgs-unstable.salesforce-cli
+    inputs.sfdx-nix.packages.${pkgs.system}.default
     jq
     nodejs_20
+    jdk17
   ];
 }
