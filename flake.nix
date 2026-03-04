@@ -7,6 +7,7 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     kukenan.url = "github:juanalbarran/neovim/main";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
+    sfdx-nix.url = "github:rfaulhaber/sfdx-nix";
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
     gazelle,
     sops-nix,
     secrets,
+    sfdx-nix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -102,7 +104,7 @@
         inherit pkgs;
         modules = [./configuration/home-configuration/playa-el-yaque];
         extraSpecialArgs = {
-          inherit inputs kukenan system gazelle pkgs-unstable sops-nix secrets;
+          inherit inputs sfdx-nix kukenan system gazelle pkgs-unstable sops-nix secrets;
         };
       };
     };

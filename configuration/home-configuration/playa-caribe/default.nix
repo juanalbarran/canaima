@@ -17,6 +17,7 @@
     ./../../../home/modules/ui/themes
     # menu
     ./../../../home/modules/ui/wmenu
+    ./../../../home/modules/ui/wofi
     # user
     ./../../../home/users/juan
   ];
