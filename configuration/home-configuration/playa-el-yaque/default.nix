@@ -20,6 +20,8 @@
     ./../../../home/modules/tui/gazelle
     # home-manager user
     ./../../../home/users/nix
+    # work
+    ./../../../home/modules/salesforce
   ];
   features.vpn = true;
   # features.bluetooth = true;

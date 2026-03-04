@@ -4,8 +4,8 @@
   kukenan,
   ...
 }: let
-  kuks = kukenan.packages.${pkgs.system}.neovim.base;
-  kuks-web = kukenan.packages.${pkgs.system}.neovim.web;
+  kuks = kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.base;
+  kuks-web = kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.web;
 in {
   home.packages = with pkgs; [
     ripgrep
