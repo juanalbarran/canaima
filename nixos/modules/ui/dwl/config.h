@@ -1,4 +1,5 @@
 /* Taken from https://github.com/djpohly/dwl/issues/466 */
+#include <cstddef>
 #define COLOR(hex)    { ((hex >> 24) & 0xFF) / 255.0f, \
                         ((hex >> 16) & 0xFF) / 255.0f, \
                         ((hex >> 8) & 0xFF) / 255.0f, \
@@ -159,8 +160,11 @@ static const char *browserror[] = {"org.qutebrowser.qutebrowser", "env QT_QUICK_
 static const char *termror[] = { "foot", "foot", NULL };
 
 /* menu */
-static const char *menucmd[] = { "wmenu-run", NULL };
+// static const char *menucmd[] = { "wmenu-run", NULL };
+static const char *menucmd[] = { "system-menu", NULL };
 static const char *termcmd[] = { "foot", NULL};
+static const char *projectscmd[] = { "projects", NULL };
+static const char *bookmarkscmd[] = { "bookmarks", NULL };
 
 /* screenshots */
 // static const char *screenshotcmd[] = { "/bin/sh", "-c", "grim ~/Pictures/screenshots/screenshot-$(date +'%Y-%m-%d-%H%M%S').png", NULL };
@@ -175,6 +179,8 @@ static const Key keys[] = {
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_Q,           spawn,	    {.v = termcmd} },
 	{ MODKEY,		     XKB_KEY_a,           runorraise,       {.v = airor} },
 	{ MODKEY,		     XKB_KEY_b,           runorraise,       {.v = browserror} },
+	{ MODKEY,		     XKB_KEY_p,		  spawn,	    {.v = projectscmd} },
+	{ MODKEY,		     XKB_KEY_m,		  spawn,	    {.v = bookmarkscmd} },
 	{ MODKEY,                    XKB_KEY_h,           focusstack,       {.i = +1} },
 	{ MODKEY,                    XKB_KEY_l,           focusstack,       {.i = -1} },
 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_H,           movestack,        {.i = +1} },
