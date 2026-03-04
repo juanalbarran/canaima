@@ -5,6 +5,6 @@
   ...
 }: {
   home.packages = [
-    gazelle.packages.${pkgs.system}.default
+    gazelle.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
