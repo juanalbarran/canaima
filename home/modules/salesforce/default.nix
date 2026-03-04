@@ -20,7 +20,7 @@ in {
     ];
   };
   home.packages = with pkgs; [
-    inputs.sfdx-nix.packages.${pkgs.system}.default
+    inputs.sfdx-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
     jq
     nodejs_20
     jdk17
