@@ -11,6 +11,8 @@
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
     ./../../../home/modules/terminals/foot
+    # scripts
+    ./../../../home/modules/scripts
     # ui
     ./../../../home/modules/ui/themes
     # menu
