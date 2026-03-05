@@ -23,11 +23,6 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
-    kukenan,
-    gazelle,
-    sops-nix,
-    secrets,
-    sfdx-nix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -44,49 +39,33 @@
       };
     };
   in {
-    devShells.${system}.suckless = pkgs.mkShell {
-      # toolchain + headers/libs
-      packages = with pkgs; [
-        pkg-config
-        xorg.libX11
-        xorg.libXft
-        xorg.libXinerama
-        fontconfig
-        freetype
-        harfbuzz
-        gcc
-        gnumake
-      ];
-    };
     nixosConfigurations = {
       canaima = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs kukenan system pkgs-unstable secrets;
+          inherit inputs system pkgs-unstable;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
           ./hosts/canaima
           home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
           {
             home-manager.extraSpecialArgs = {
-              inherit inputs secrets kukenan system pkgs-unstable sops-nix;
+              inherit inputs system pkgs-unstable;
             };
           }
         ];
       };
       sarisarinama = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs kukenan system pkgs-unstable secrets;
+          inherit inputs system pkgs-unstable;
         };
         modules = [
           {nixpkgs.hostPlatform = system;}
           ./hosts/sarisarinama
           home-manager.nixosModules.home-manager
-          sops-nix.nixosModules.sops
           {
             home-manager.extraSpecialArgs = {
-              inherit inputs secrets kukenan system gazelle pkgs-unstable sops-nix;
+              inherit inputs system pkgs-unstable;
             };
           }
         ];
@@ -97,14 +76,14 @@
         inherit pkgs;
         modules = [./configuration/home-configuration/playa-el-agua];
         extraSpecialArgs = {
-          inherit kukenan system gazelle pkgs-unstable sops-nix secrets;
+          inherit inputs system pkgs-unstable;
         };
       };
       "playa-el-yaque" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [./configuration/home-configuration/playa-el-yaque];
         extraSpecialArgs = {
-          inherit inputs sfdx-nix kukenan system gazelle pkgs-unstable sops-nix secrets;
+          inherit inputs system pkgs-unstable;
         };
       };
     };
