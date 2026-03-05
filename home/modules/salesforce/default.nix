@@ -14,7 +14,7 @@
 in {
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       salesforce-extension
       vscjava.vscode-java-pack
     ];

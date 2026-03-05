@@ -1,10 +1,10 @@
 # home/modules/tui/gazelle/default.nix
 {
   pkgs,
-  gazelle,
+  inputs,
   ...
 }: {
   home.packages = [
-    gazelle.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.gazelle.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

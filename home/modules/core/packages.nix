@@ -1,11 +1,12 @@
 # home/modules/core/packages.nix
 {
   pkgs,
-  kukenan,
+  inputs,
   ...
 }: let
-  kuks = kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.base;
-  kuks-web = kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.web;
+  kuks = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.base;
+  kuks-web = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.web;
+  kuks-salesforce = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.salesforce;
 in {
   home.packages = with pkgs; [
     ripgrep
@@ -14,6 +15,7 @@ in {
     # editor
     kuks
     kuks-web
+    kuks-salesforce
     # development
     devenv
     # fonts

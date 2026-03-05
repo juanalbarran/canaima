@@ -3,7 +3,6 @@
   pkgs,
   inputs,
   config,
-  sops-nix,
   ...
 }: let
   secretsPath = toString inputs.secrets;
@@ -12,7 +11,7 @@
   homePath = config.home.homeDirectory;
 in {
   imports = [
-    sops-nix.homeManagerModules.sops
+    inputs.sops-nix.homeManagerModules.sops
   ];
   sops = {
     age.keyFile = "${homePath}/.config/sops/age/keys.txt";
