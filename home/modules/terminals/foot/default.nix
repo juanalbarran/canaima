@@ -13,6 +13,9 @@
         pad = "10x10center";
         selection-target = "clipboard";
       };
+      colors = {
+        background = "131313";
+      };
 
       cursor = {
         style = "block";

@@ -11,11 +11,13 @@
     ./../../../home/modules/terminals/fastfetch
     ./../../../home/modules/terminals/starship
     ./../../../home/modules/terminals/foot
+    # scripts
+    # ./../../../home/modules/scripts
     # ui
     ./../../../home/modules/ui/themes
     # menu
     ./../../../home/modules/ui/wmenu
-    ./../../../home/modules/ui/wofi
+    #./../../../home/modules/ui/wofi
     # user
     ./../../../home/users/juan
   ];
