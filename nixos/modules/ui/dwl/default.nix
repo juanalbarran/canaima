@@ -17,11 +17,11 @@
             url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/warpcursor/warpcursor.patch";
             hash = "sha256-0AGMq507WmW2QJW02u6eJDuQmGBAiVPbEw79npwqEDU=";
           })
-          (pkgs.fetchpatch {
-            name = "dwl-foreign-toplevel";
-            url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/foreign-toplevel-management/foreign-toplevel-management.patch";
-            hash = "sha256-uOXLJkTTTtb80BnT53yHEOkjJc8QXjJOBKv7eq2RcUw=";
-          })
+          # (pkgs.fetchpatch {
+          #   name = "dwl-foreign-toplevel";
+          #   url = "https://codeberg.org/dwl/dwl-patches/raw/branch/main/patches/foreign-toplevel-management/foreign-toplevel-management.patch";
+          #   hash = "sha256-uOXLJkTTTtb80BnT53yHEOkjJc8QXjJOBKv7eq2RcUw=";
+          # })
         ];
     });
 in {
