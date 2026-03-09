@@ -12,9 +12,10 @@
     ./../../../home/modules/ui/swaylock
     ./../../../home/modules/ui/wallpapers
     ./../../../home/modules/ui/waybar
-    ./../../../home/modules/ui/wofi
     ./../../../home/modules/ui/themes
     ./../../../home/modules/kanshi # -> do i really use this?
+    # menu
+    ./../../../home/modules/menus/wofi
     # the good opencode
     ./../../../home/modules/ai
     # user
@@ -28,5 +29,8 @@
     email = "personal/email";
     hostname = "canaima";
     sshKeyName = "playa-el-agua";
+    terminal = "foot";
+    terminalAppId = "foot";
+    menu = "wofi";
   };
 }

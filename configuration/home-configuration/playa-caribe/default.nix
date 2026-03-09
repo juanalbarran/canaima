@@ -16,8 +16,8 @@
     # ui
     ./../../../home/modules/ui/themes
     # menu
-    ./../../../home/modules/ui/wmenu
-    #./../../../home/modules/ui/wofi
+    ./../../../home/modules/menus/wmenu
+    #./../../../home/modules/menus/wofi
     # user
     ./../../../home/users/juan
   ];
@@ -27,5 +27,8 @@
     email = "personal/email";
     hostname = "sarisarinama";
     sshKeyName = "playa-caribe";
+    terminal = "foot";
+    terminalAppId = "foot";
+    menu = "bemenu";
   };
 }
