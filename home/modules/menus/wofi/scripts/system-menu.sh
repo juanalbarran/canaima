@@ -83,7 +83,7 @@ case "$SELECTED" in
         fi
         ;;
     *"Power")
-        power-menu
+        power-menu-wofi
         ;;
 esac
 

@@ -21,5 +21,22 @@
       type = lib.types.str;
       description = "The name of the ssh keys of the user";
     };
+    terminal = lib.mkOption {
+      type = lib.types.str;
+      description = "The name of the default terminal";
+    };
+    terminalAppId = lib.mkOption {
+      type = lib.types.str;
+      description = "The name of the terminal app";
+    };
+    menu = lib.mkOption {
+      type = lib.types.str;
+      description = "The default menu to be used (icluyes the command)";
+    };
+    isNixOS = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Set to true if running on NixOS, false for Other";
+    };
   };
 }

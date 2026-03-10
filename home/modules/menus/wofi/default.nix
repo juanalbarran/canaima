@@ -4,11 +4,11 @@
   config,
   ...
 }: let
-  powerMenu = pkgs.writeShellScriptBin "power-menu" (builtins.readFile ./scripts/power-menu.sh);
-  keybinds = pkgs.writeShellScriptBin "keybinds" (builtins.readFile ./scripts/keybinds.sh);
-  bookmarks = pkgs.writeShellScriptBin "bookmarks" (builtins.readFile ./scripts/bookmarks.sh);
-  systemMenu = pkgs.writeShellScriptBin "system-menu" (builtins.readFile ./scripts/system-menu.sh);
-  projects = pkgs.writeShellScriptBin "projects" (builtins.readFile ./scripts/projects.sh);
+  powerMenu = pkgs.writeShellScriptBin "power-menu-wofi" (builtins.readFile ./scripts/power-menu.sh);
+  keybinds = pkgs.writeShellScriptBin "keybinds-wofi" (builtins.readFile ./scripts/keybinds.sh);
+  bookmarks = pkgs.writeShellScriptBin "bookmarks-wofi" (builtins.readFile ./scripts/bookmarks.sh);
+  systemMenu = pkgs.writeShellScriptBin "system-menu-wofi" (builtins.readFile ./scripts/system-menu.sh);
+  projects = pkgs.writeShellScriptBin "projects-wofi" (builtins.readFile ./scripts/projects.sh);
 in {
   programs.wofi = {
     enable = true;
