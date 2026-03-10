@@ -3,16 +3,20 @@
   imports = [
     # core: gc, ssh, sops, hostSpec, package, programs
     ./../../../home/modules/core
-    # ui: sway, waybar, wallpapers, themes, and wofi
+    # ui: sway, waybar, wallpapers and themes
     ./../../../home/modules/ui/sway
     ./../../../home/modules/ui/waybar
     ./../../../home/modules/ui/wallpapers
     ./../../../home/modules/ui/themes
-    ./../../../home/modules/ui/wofi
     # browsers
     ./../../../home/modules/browsers
     # terminals
     ./../../../home/modules/terminals
+    # scripts
+    ./../../../home/modules/scripts
+    # menus, wofi and bemenu
+    ./../../../home/modules/menus/wofi
+    ./../../../home/modules/menus/bemenu
     # ai: opencode
     ./../../../home/modules/ai
     # network: openvpn, gazelle
@@ -32,6 +36,13 @@
     email = "work/email";
     hostname = "playa-el-yaque";
     sshKeyName = "playa-el-yaque";
+    terminal = "foot";
+    terminalAppId = "foot";
+    menu = "bemenu";
+    isNixOS = false;
+    # terminal = "ghostty";
+    # terminalAppId = "com.mitchellh.ghostty";
+    # menu = "wofi --conf $HOME/.config/wofi/projects-menu.conf --prompt 'Projects:'";
   };
 
   targets.genericLinux.enable = true;

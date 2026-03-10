@@ -1,5 +1,6 @@
 #!/bin/sh
 export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/usr/local/bin:$PATH"
+export BEMENU_BACKEND=wayland
 # --- Configuration ---
 # terminal="ghostty"
 # terminal_app_id="com.mitchellh.ghostty"
