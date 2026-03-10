@@ -2,5 +2,6 @@
 {
   imports = [
     ./projects
+    ./bookmarks
   ];
 }
