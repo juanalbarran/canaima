@@ -12,11 +12,11 @@
     ./../../../home/modules/terminals/starship
     ./../../../home/modules/terminals/foot
     # scripts
-    # ./../../../home/modules/scripts
+    ./../../../home/modules/scripts
     # ui
     ./../../../home/modules/ui/themes
     # menu
-    ./../../../home/modules/menus/wmenu
+    ./../../../home/modules/menus/bemenu
     #./../../../home/modules/menus/wofi
     # user
     ./../../../home/users/juan
