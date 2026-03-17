@@ -1,9 +1,5 @@
 # home/modules/menus/bemenu/default.nix
 {
-  config,
-  pkgs,
-  ...
-}: {
   programs.bemenu = {
     enable = true;
 
