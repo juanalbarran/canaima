@@ -4,5 +4,6 @@
     ./brave.nix
     ./firefox
     ./qutebrowser
+    ./google-chrome.nix
   ];
 }
