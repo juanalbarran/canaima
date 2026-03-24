@@ -15,14 +15,15 @@
     ./../../../home/modules/ui/themes
     ./../../../home/modules/kanshi # -> do i really use this?
     # menu
-    ./../../../home/modules/menus/wofi
+    ./../../../home/modules/menus/bemenu
+    # scripts
+    ./../../../home/modules/scripts
     # the good opencode
     ./../../../home/modules/ai
     # user
     ./../../../home/users/juan
   ];
 
-  host.isNixOS = true;
   hostSpec = {
     username = "juan";
     fullname = "Juan Jesus Albarran Rodriguez";
@@ -31,6 +32,7 @@
     sshKeyName = "playa-el-agua";
     terminal = "foot";
     terminalAppId = "foot";
-    menu = "wofi";
+    menu = "bemenu";
+    isNixOS = true;
   };
 }
