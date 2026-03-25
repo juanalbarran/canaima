@@ -36,7 +36,7 @@
     sshKeyName = "playa-el-yaque";
     terminal = "foot";
     terminalAppId = "foot";
-    menu = "bemenu";
+    menu = "wofi";
     isNixOS = false;
     # terminal = "ghostty";
     # terminalAppId = "com.mitchellh.ghostty";
