@@ -36,11 +36,11 @@
     sshKeyName = "playa-el-yaque";
     terminal = "foot";
     terminalAppId = "foot";
-    menu = "wofi";
+    # menu = "wofi";
     isNixOS = false;
     # terminal = "ghostty";
     # terminalAppId = "com.mitchellh.ghostty";
-    # menu = "wofi --conf $HOME/.config/wofi/projects-menu.conf --prompt 'Projects:'";
+    menu = "wofi --conf $HOME/.config/wofi/projects-menu.conf --prompt 'Projects:'";
   };
 
   targets.genericLinux.enable = true;
