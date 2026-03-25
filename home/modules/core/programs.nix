@@ -5,7 +5,6 @@ in {
   programs = {
     home-manager.enable = true;
     bat.enable = true;
-    yazi.enable = true;
     lazygit.enable = true;
     git = {
       enable = true;
@@ -29,6 +28,14 @@ in {
       initExtra = ''
         fastfetch
       '';
+    };
+    yazi = {
+      enable = true;
+      settings = {
+        manager = {
+          show_hidden = true;
+        };
+      };
     };
   };
   home.sessionVariables = {
