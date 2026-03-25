@@ -6,7 +6,7 @@
 }: let
   kuks = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.base;
   kuks-web = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.web;
-  kuks-salesforce = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.salesforce;
+  kuks-rust = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim.rust;
 in {
   home.packages = with pkgs; [
     ripgrep
@@ -15,7 +15,7 @@ in {
     # editor
     kuks
     kuks-web
-    kuks-salesforce
+    kuks-rust
     # development
     devenv
     # fonts
