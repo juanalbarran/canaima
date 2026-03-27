@@ -20,17 +20,28 @@ vim_path="$HOME/.nix-profile/bin/nvim-web"
 bash_path="$HOME/.nix-profile/bin/bash"
 devenv_path="$HOME/.nix-profile/bin/devenv"
 
-# --- Get the list of projects ---
-# "$@" will expand to the menu command
-selected_name=$(find "$projects_path" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | "$@")
+current_path="$projects_path"
 
-# --- Safety Check ---
-if [ -z "$selected_name" ]; then
-    exit 0
-fi
+while true; do
+    selected_name=$(find "$current_path" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | "$@")
 
-selected_path="$projects_path/$selected_name"
-session_name=$(echo "$selected_name" | tr . _)
+    # Safety check: exit if user press escape
+    if [ -z "$selected_name" ]; then
+        exit 0
+    fi
+
+    selected_path="$current_path/$selected_name"
+
+    # check for .git directory or devenv.nix to identify a project directory
+    if [ -d "$selected_path/.git" ] || [ -f "$selected_path/devenv.nix" ]; then
+        break
+    else
+        current_path="$selected_path"
+    fi
+done
+
+relative_path="${selected_path#$projects_path/}"
+session_name=$(echo "$relative_path" | tr '/' '_' | tr '.' '_')
 
 # --- Check tmux session exists ---
 # We check that exists a tmux session with the name of the project we choose, 
