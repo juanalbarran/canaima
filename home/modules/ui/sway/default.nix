@@ -5,7 +5,7 @@
   config,
   ...
 }: let
-  isNixOS = config.hostSpec.isNixOS;
+  isNixOS = config.hostSpec.isNixOs;
 in {
   imports = [
     ./special-binds
@@ -13,7 +13,7 @@ in {
   ];
   wayland.windowManager.sway = {
     package =
-      if config.host.isNixOS
+      if isNixOS
       then pkgs.sway
       else null;
     checkConfig = true;
