@@ -28,15 +28,11 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
     pkgs-unstable = import nixpkgs-unstable {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
   in {
     nixosConfigurations = {
@@ -45,13 +41,18 @@
           inherit inputs system pkgs-unstable;
         };
         modules = [
-          {nixpkgs.hostPlatform = system;}
+          {
+            nixpkgs.hostPlatform = system;
+            nixpkgs.config.allowUnfree = true;
+          }
           ./hosts/canaima
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
               inherit inputs system pkgs-unstable;
             };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
           }
         ];
       };
@@ -60,13 +61,18 @@
           inherit inputs system pkgs-unstable;
         };
         modules = [
-          {nixpkgs.hostPlatform = system;}
+          {
+            nixpkgs.hostPlatform = system;
+            nixpkgs.config.allowUnfree = true;
+          }
           ./hosts/sarisarinama
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = {
               inherit inputs system pkgs-unstable;
             };
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
           }
         ];
       };
