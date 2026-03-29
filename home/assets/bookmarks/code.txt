@@ -1,5 +1,6 @@
 # code
 Github :: https://github.com/juanalbarran
 Tony, btw :: https://tonybtw.com
-Linux Journey :: http:/linuxjourney.com
+Linux Journey :: http://linuxjourney.com
+Rust :: https://rust-lang.org
 
