@@ -2,6 +2,8 @@
 {config, ...}: let
   terminal = config.hostSpec.terminal;
   terminalAppId = config.hostSpec.terminalAppId;
+  isNixOS = config.hostSpec.isNixOS;
+  path = if isNixOS then "" else "$HOME/.nix-profile/bin/";
 in {
   xdg.configFile = {
     "sway/config".source = ./config;
@@ -19,15 +21,22 @@ in {
       set $aux_term ghostty
       set $aux_term_id com.mitchellh.ghostty
 
-      set $term $HOME/.nix-profile/bin/${terminal}
+      set $term ${path}${terminal}
       set $term_id ${terminalAppId}
 
-      set $menu $HOME/.nix-profile/bin/system-menu
-      set $bookmarks $HOME/.nix-profile/bin/bookmarks
-      set $keybinds $HOME/.nix-profile/bin/keybinds
-      set $projects $HOME/.nix-profile/bin/projects
-      set $toggleTheme $HOME/.nix-profile/bin/toggle-theme
-      set $wallpaper $HOME/.nix-profile/bin/wallpaper > /tmp/wallpaper-debug.log 2>&1
+      set $menu ${path}system-menu
+      set $bookmarks ${path}bookmarks
+      set $keybinds ${path}keybinds
+      set $projects ${path}projects
+      set $toggleTheme ${path}toggle-theme
+      set $wallpaper ${path}wallpaper > /tmp/wallpaper-debug.log 2>&1
+
+      set $ai ${path}brave --app=https://gemini.google.com/
+      set $ai_id brave-gemini.google.com__-Default
+
+      set $browser env QT_QUICK_BACKEND=software ${path}qutebrowser --target window
+      set $browser_id org.qutebrowser.qutebrowser
+
 
       set $lock swaylock
     '';
