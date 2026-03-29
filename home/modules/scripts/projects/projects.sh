@@ -16,9 +16,9 @@ shift 2
 
 # --- Configuration ---
 projects_path="$HOME/dev"
-vim_path="$HOME/.nix-profile/bin/nvim-web"
-bash_path="$HOME/.nix-profile/bin/bash"
-devenv_path="$HOME/.nix-profile/bin/devenv"
+vim_path="nvim-web"
+bash_path="bash"
+devenv_path="devenv"
 
 current_path="$projects_path"
 
