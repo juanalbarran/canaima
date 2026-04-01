@@ -4,6 +4,7 @@
     enable = true;
     package = pkgs.swaylock-effects;
     settings = {
+      scalling = "fill";
       # Appearance
       color = "1e1e2e";
       font = "JetBrainsMono Nerd Font";
@@ -15,10 +16,10 @@
       indicator-thickness = 7;
 
       # Effects (Specific to swaylock-effects)
-      screenshots = true;
-      clock = true;
-      effect-blur = "7x5";
-      effect-vignette = "0.5:0.5";
+      # screenshots = true;
+      # clock = true;
+      # effect-blur = "7x5";
+      # effect-vignette = "0.5:0.5";
 
       # Colors
       ring-color = "3b4252";
