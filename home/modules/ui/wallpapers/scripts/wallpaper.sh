@@ -28,3 +28,4 @@ fi
 # set the wallpaper
 swaymsg "output * bg '$selected_wallpaper' fill"
 
+echo "$selected_wallpaper" > "$cache_dir/current_wallpaper"
