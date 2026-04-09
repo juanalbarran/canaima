@@ -58,7 +58,7 @@ if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-window \
         -t "$session_name" \
         -n "opencode" \
-        -c "$selected_path" "$opencode_path; exec $bash_path"
+        -c "$selected_path" "opencode; exec $bash_path"
     tmux new-window \
         -t "$session_name" \
         -n "console" \
