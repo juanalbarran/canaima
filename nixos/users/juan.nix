@@ -10,4 +10,5 @@
       "video"
     ];
   };
+  nix.settings.trusted-users = ["root" "juan"];
 }
