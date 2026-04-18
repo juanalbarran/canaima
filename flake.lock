@@ -125,11 +125,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1776197360,
-        "narHash": "sha256-PnAC/XGJM+5Ue0EHeiKHPmtbvP7Q/2T2FibbtGat3t0=",
+        "lastModified": 1776349625,
+        "narHash": "sha256-+nCboZCcqAXG7DoOj8wz5SxUv6wU/BjKIYvBuZa5fDs=",
         "owner": "juanalbarran",
         "repo": "neovim",
-        "rev": "081fd371c7e20ae739f443d959012edca5dfefff",
+        "rev": "7b9e0fb6ef45abd269f64ff0a84efb8beb83c218",
         "type": "github"
       },
       "original": {

@@ -3,4 +3,5 @@ Github :: https://github.com/juanalbarran
 Tony, btw :: https://tonybtw.com
 Linux Journey :: http://linuxjourney.com
 Rust :: https://rust-lang.org
+Javabook :: https://javabook.mccue.dev/prelude/java
 
