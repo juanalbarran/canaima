@@ -7,8 +7,8 @@
   menu = config.hostSpec.menu;
   isNixOS = config.hostSpec.isNixOS;
   username = config.hostSpec.username;
-  envPath = 
-    if isNixOS 
+  envPath =
+    if isNixOS
     then "/etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh"
     else "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh";
 
@@ -21,7 +21,7 @@
     if [ -f "${envPath}" ]; then
       source "${envPath}"
     fi
-    
+
     export BEMENU_BACKEND=wayland
 
     # Pass the menu string from hostSpec as arguments to the base script
@@ -37,5 +37,6 @@ in {
     "bookmarks/code.txt".source = ./../../../assets/bookmarks/code.txt;
     "bookmarks/dotfiles.txt".source = ./../../../assets/bookmarks/dotfiles.txt;
     "bookmarks/blogs.txt".source = ./../../../assets/bookmarks/blogs.txt;
+    "bookmarks/java.txt".source = ./../../../assets/bookmarks/java.txt;
   };
 }
