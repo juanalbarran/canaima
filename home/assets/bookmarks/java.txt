@@ -1,2 +1,2 @@
-Official Java Documentation :: https//dev.java
+Official Java Documentation :: https://dev.java
 Javabook :: https://javabook.mccue.dev/prelude/java
