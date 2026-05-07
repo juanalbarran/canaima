@@ -24,6 +24,7 @@
     ./../../../home/modules/tui/gazelle
     # home-manager user
     ./../../../home/users/nix
+    # C TWO Security
   ];
   features.vpn = true;
   # features.bluetooth = true;
@@ -53,4 +54,8 @@
     };
   };
   fonts.fontconfig.enable = true;
+
+  home.packages = with pkgs; [
+    (callPackage ./drata-agent.nix {})
+  ];
 }
