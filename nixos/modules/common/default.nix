@@ -4,6 +4,7 @@
     ./font.nix
     ./localization.nix
     ./networking.nix
+    ./programs.nix
     ./ui.nix
   ];
 
