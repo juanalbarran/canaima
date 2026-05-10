@@ -80,6 +80,6 @@ in ''
 
   # --- Dark Mode Toggle ---
   c.colors.webpage.bg = base00
-  c.colors.webpage.darkmode.enabled = ${isDark}
-  #c.colors.webpage.preferred_color_scheme = "${isDarkStr}"
+  #c.colors.webpage.darkmode.enabled = ${isDark}
+  c.colors.webpage.preferred_color_scheme = "${isDarkStr}"
 ''
