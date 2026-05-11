@@ -24,7 +24,8 @@
     ./../../../home/modules/tui/gazelle
     # home-manager user
     ./../../../home/users/nix
-    # C TWO Security
+    # work
+    ./../../../home/modules/work
   ];
   features.vpn = true;
   # features.bluetooth = true;
