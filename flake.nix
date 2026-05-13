@@ -8,6 +8,7 @@
     kukenan.url = "github:juanalbarran/neovim/main";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
     sfdx-nix.url = "github:rfaulhaber/sfdx-nix";
+    xremap-flake.url = "github:xremap/nix-flake";
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
     sops-nix = {
       url = "github:mic92/sops-nix";
