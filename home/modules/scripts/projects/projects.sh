@@ -2,20 +2,20 @@
 export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/usr/local/bin:$PATH"
 # --- Parameter Parser ---
 if [ "$#" -lt 3 ]; then
-    echo "Usage: $0 <terminal_binary> <terminal_app_id> <menu_command> [menu_args...]"
-    echo "Example: $0 ghostty com.mitchellh.ghostty wofi --dmenu --prompt 'Projects:'"
+    echo "Usage: $0 <projects_path> <terminal_binary> <terminal_app_id> <menu_command> [menu_args...]"
+    echo "Example: $0 \$HOME/dev ghostty com.mitchellh.ghostty wofi --dmenu --prompt 'Projects:'"
     exit 1
 fi
 
-terminal="$1"
-terminal_app_id="$2"
+projects_path="$1"
+terminal="$2"
+terminal_app_id="$3"
 
 # shift 2 discard the first two arguments ($1 and $2).
 # Now, "$@" contains only the meny command and its flags.
-shift 2
+shift 3
 
 # --- Configuration ---
-projects_path="$HOME/dev"
 vim_path="nvim-web"
 bash_path="bash"
 devenv_path="devenv"

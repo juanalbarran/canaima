@@ -3,7 +3,10 @@
   terminal = config.hostSpec.terminal;
   terminalAppId = config.hostSpec.terminalAppId;
   isNixOS = config.hostSpec.isNixOS;
-  path = if isNixOS then "" else "$HOME/.nix-profile/bin/";
+  path =
+    if isNixOS
+    then ""
+    else "$HOME/.nix-profile/bin/";
 in {
   xdg.configFile = {
     "sway/config".source = ./config;
@@ -28,6 +31,7 @@ in {
       set $bookmarks ${path}bookmarks
       set $keybinds ${path}keybinds
       set $projects ${path}projects
+      set $projects_ctwo ${path}projects-ctwo
       set $toggleTheme ${path}toggle-theme
       set $wallpaper ${path}wallpaper > /tmp/wallpaper-debug.log 2>&1
 
