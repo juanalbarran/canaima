@@ -16,6 +16,12 @@ in {
         user = "git";
         identityFile = "~/.ssh/${sshKeyName}";
       };
+      "github-nix" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/nix";
+        identitiesOnly = true;
+      };
     };
   };
 }
