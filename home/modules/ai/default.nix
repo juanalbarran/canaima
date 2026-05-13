@@ -1,7 +1,12 @@
 # home/modules/ai/default.nix
-{pkgs, inputs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     opencode
     inputs.nix-claude-code.packages.${system}.default
+    ollama
   ];
 }
