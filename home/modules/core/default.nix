@@ -7,6 +7,7 @@
     ./ssh
     ./sops
     ./hostSpec
+    ./xremap
   ];
 }
 # This is the common modules in home manager the idea is that every single
