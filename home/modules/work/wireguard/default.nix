@@ -1,8 +1,5 @@
 {pkgs, ...}: {
-  imports = [
-    ./wireguard
-  ];
   home.packages = with pkgs; [
-    slack
+    wireguard-tools
   ];
 }
