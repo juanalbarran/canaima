@@ -21,7 +21,7 @@
     '';
 
   projects = mkProjects "projects" "$HOME/dev";
-  projects-ctwo = mkProjects "projects-ctwo" "$HOME/nix/ctwo/repositories";
+  projects-ctwo = mkProjects "projects-ctwo" "$HOME/nix/ctwo/repository";
 in {
   home.packages = [
     projects
