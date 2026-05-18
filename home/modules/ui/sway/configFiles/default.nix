@@ -41,6 +41,11 @@ in {
       set $browser env QT_QUICK_BACKEND=software ${path}qutebrowser --target window
       set $browser_id org.qutebrowser.qutebrowser
 
+      set $slack ${path}slack
+      set $slack_id Slack
+
+      set $chrome ${path}google-chrome-stable
+      set $chrome_id google-chrome
 
       set $lock swaylock
     '';
