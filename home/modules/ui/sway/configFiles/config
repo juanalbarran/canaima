@@ -20,6 +20,7 @@ include ~/.config/sway/bindings/screenshot-binds.conf
 include ~/.config/sway/bindings/factorio-binds.conf
 include ~/.config/sway/bindings/firefox-binds.conf
 include ~/.config/sway/bindings/slack-binds.conf
+include ~/.config/sway/bindings/chrome-binds.conf
 
 # sounds - pulseaudio
 #
