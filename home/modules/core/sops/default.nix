@@ -30,6 +30,8 @@ in {
       "work/email" = {};
       "personal/email" = {};
       "vpn/nix".path = "${homePath}/.config/openvpn/nix.conf";
+      "access_tokens/wireguard/private_key" = {};
+      "access_tokens/wireguard/preshared_key" = {};
     };
     templates = {
       "github-token" = {
@@ -43,6 +45,23 @@ in {
         content = ''
           [user]
             email = ${config.sops.placeholder.${email}}
+        '';
+      };
+      "wg0.conf" = {
+        path = "${homePath}/.config/wireguard/wg0.conf";
+        content = ''
+          [Interface]
+          PrivateKey = ${config.sops.placeholder."access_tokens/wireguard/private_key"}
+          Address = 100.86.156.135/32,fd00::3f:2c7a/128
+          MTU = 1280
+          DNS = 1.1.1.1,1.0.0.1
+
+          [Peer]
+          PresharedKey = ${config.sops.placeholder."access_tokens/wireguard/preshared_key"}
+          PublicKey = BjvkHcoku8s7pf1DuqJpVccDqaj8UaOCphRBrtULWVQ=
+          AllowedIPs = 0.0.0.0/0,::/0
+          Endpoint = fzn.ctwo.cloud:51820
+          PersistentKeepalive = 25
         '';
       };
     };
