@@ -387,11 +387,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1772114350,
-        "narHash": "sha256-YQvQyIaNdkoRNRlXkd6wa9jcYkFSL05Dy5FJpRBUDJY=",
+        "lastModified": 1779115861,
+        "narHash": "sha256-T7mM2oSzM0vdAIkMibZouTv7Jj2l+MsUejT8cKi3B0A=",
         "ref": "refs/heads/main",
-        "rev": "162530b3f1d73ed1539e2de68f42dedca1b7eb58",
-        "revCount": 20,
+        "rev": "de50e52653667bdfad87b980a9202f5302ec5283",
+        "revCount": 22,
         "type": "git",
         "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
       },
@@ -406,11 +406,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1777921238,
-        "narHash": "sha256-0VskNKgvdcjJSNtz9j260GD40+BLELnY9PU5ONpUO50=",
+        "lastModified": 1779057900,
+        "narHash": "sha256-HvBnxVQOKc3MM6YGp59JlW8m3RIkrT3IbrLQoZlXDbI=",
         "owner": "rfaulhaber",
         "repo": "sfdx-nix",
-        "rev": "d518a2f081be2b9ec4022f9b529bbe479303e957",
+        "rev": "d378e97490d0c7e83ec1d9394fac9415bbd1f770",
         "type": "github"
       },
       "original": {
