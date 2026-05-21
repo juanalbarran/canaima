@@ -51,10 +51,14 @@ session_name=$(echo "$relative_path" | tr '/' '_' | tr '.' '_')
 # then we create another window in the newly created session called console
 if ! tmux has-session -t "$session_name" 2>/dev/null; then
     
+    # tmux new-session \
+    #     -d -s "$session_name" \
+    #     -n "opencode" \
+    #     -c "$selected_path" "opencode; exec $bash_path"
     tmux new-session \
         -d -s "$session_name" \
-        -n "opencode" \
-        -c "$selected_path" "opencode; exec $bash_path"
+        -n "claudio" \
+        -c "$selected_path" "claude; exec $bash_path" 
     tmux new-window \
         -t "$session_name" \
         -n "editor" \
