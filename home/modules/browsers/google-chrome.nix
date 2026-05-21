@@ -6,11 +6,10 @@
     # You can reuse the same Wayland/GPU flags you used for Brave
     commandLineArgs = [
       "--ozone-platform-hint=auto"
-      "--enable-features=UseOzonePlatform"
       "--ignore-gpu-blocklist"
       "--enable-gpu-rasterization"
       "--enable-zero-copy"
-      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+      "--enable-features=UseOzonePlatform,VaapiVideoDecoder,VaapiVideoEncoder"
       "--disable-features=UseChromeOSDirectVideoDecoder"
       "--use-gl=egl"
     ];

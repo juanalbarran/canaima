@@ -5,11 +5,11 @@ scheme: let
     if (builtins.match ".*dark.*" scheme.slug) != null
     then "True"
     else "False";
-  # isDarkStr =
-  #   if (builtins.match ".*dark.*" scheme.slug) != null
-  #   then "dark"
-  #   else "light";
-  isDarkStr = "light";
+  isDarkStr =
+    if (builtins.match ".*dark.*" scheme.slug) != null
+    then "dark"
+    else "light";
+  # isDarkStr = "dark";
 in ''
   # Base16 Qutebrowser Template
   # Scheme: ${scheme.name}

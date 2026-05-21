@@ -6,7 +6,6 @@
 
     commandLineArgs = [
       "--ozone-platform-hint=auto"
-      "--enable-features=UseOzonePlatform"
 
       # Default profile
       "--profile-directory=Default"
@@ -17,7 +16,7 @@
       "--enable-zero-copy"
 
       # Video Decoding Flags
-      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder"
+      "--enable-features=UseOzonePlatform,VaapiVideoDecoder,VaapiVideoEncoder"
       "--disable-features=UseChromeOSDirectVideoDecoder"
 
       # Intel Specific Fix (Try to fix the EGL error)

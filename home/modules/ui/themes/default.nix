@@ -12,6 +12,7 @@
   mkGhosttyVars = import ./templates/ghostty.nix;
   mkWofiVars = import ./templates/wofi.nix;
   mkFootVars = import ./templates/foot.nix;
+  mkTmuxVars = import ./templates/tmux.nix;
 in {
   xdg.configFile = {
     # waybar
@@ -33,6 +34,10 @@ in {
     # foot
     "themes/dark/foot".text = mkFootVars darkScheme;
     "themes/light/foot".text = mkFootVars lightScheme;
+
+    # tmux
+    "themes/dark/tmux.conf".text = mkTmuxVars darkScheme;
+    "themes/light/tmux.conf".text = mkTmuxVars lightScheme;
   };
   home.packages = [
     toggle-theme
