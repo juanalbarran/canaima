@@ -16,7 +16,7 @@ if [ "$current_mode" = "dark" ]; then
   new_mode="light"
   gtk_theme="adwaita"
   prefer_dark="false"
-  color_scheme="default"
+  color_scheme="prefer-light"
   # qutebrowser manual variables
   qb_dark_bool="false"
   qb_scheme_str="light"
@@ -27,7 +27,7 @@ else
   color_scheme="prefer-dark"
   # qutebrowser manual variables
   qb_dark_bool="true"
-  qb_scheme_str="light"
+  qb_scheme_str="dark"
 fi
 
 echo "switching to $new_mode"
@@ -50,10 +50,16 @@ pkill waybar
 waybar &
 
 # qutebrowser
-qutebrowser ":config-source ;; set colors.webpage.darkmode.enabled $qb_dark_bool ;; set colors.webpage.preferred_color_scheme $qb_scheme_str ;; reload -f" >/dev/null 2>&1 || true
+if pgrep -x qutebrowser > /dev/null; then
+    qutebrowser ":config-source ;; set colors.webpage.darkmode.enabled $qb_dark_bool ;; set colors.webpage.preferred_color_scheme $qb_scheme_str ;; reload -f" >/dev/null 2>&1 || true
+fi
 
 # foot
-pkill -HUP foot
+  pkill -HUP foot
+
+# tmux: reload theme and repaint
+tmux source-file "$theme_dir/$new_mode/tmux.conf" 2>/dev/null || true
+tmux refresh-client 2>/dev/null || true
 
 if command -v gsettings &> /dev/null; then
   gsettings set org.gnome.desktop.interface gtk-theme "$gtk_theme"
