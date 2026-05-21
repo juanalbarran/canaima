@@ -51,6 +51,7 @@
             (extension "s3download-statusbar" "{6913849f-c79f-4f3e-83e4-890d91ad6154}")
             (extension "auto-tab-discard" "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}")
             (extension "reddit-enhancement-suite" "jid1-xUfzOsOFlzSOXg@jetpack")
+            (extension "pwas-for-firefox" "{d422b427-bfec-4fc5-8c6e-e63feee3a5fe}")
           ]
       )
       // {

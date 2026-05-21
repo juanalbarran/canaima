@@ -35,8 +35,11 @@ in {
       set $toggleTheme ${path}toggle-theme
       set $wallpaper ${path}wallpaper > /tmp/wallpaper-debug.log 2>&1
 
-      set $ai ${path}brave --app=https://gemini.google.com/
-      set $ai_id brave-gemini.google.com__-Default
+      #set $ai ${path}brave --app=https://gemini.google.com/
+      #set $ai_id brave-gemini.google.com__-Default
+
+      set $ai ${path}firefoxpwa site launch 01KS5C2YJE85WR6YP8K4Q584CZ
+      set $ai_id FFPWA-01KS5C2YJE85WR6YP8K4Q584CZ
 
       set $browser env QT_QUICK_BACKEND=software ${path}qutebrowser --target window
       set $browser_id org.qutebrowser.qutebrowser
