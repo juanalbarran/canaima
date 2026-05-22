@@ -2,6 +2,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: {
   wayland.windowManager.hyprland = {
@@ -17,7 +18,15 @@
     "hypr/hyprland-workspaces.conf".source = ./hyprland-workspaces.conf;
     "hypr/hyprland-rules.conf".source = ./hyprland-rules.conf;
   };
-
+  xdg.dataFile."wayland-sessions/hyprland.desktop" = lib.mkIf (!config.hostSpec.isNixOS) {
+    text = ''
+      [Desktop Entry]
+      Name=Hyprland
+      Comment=An intelligent dynamic tiling Wayland compositor
+      Exec=${config.home.homeDirectory}/.nix-profile/bin/hyprland
+      Type=Application
+    '';
+  };
   home = {
     packages = with pkgs; [
       grim
