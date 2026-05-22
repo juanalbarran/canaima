@@ -5,6 +5,7 @@
     ./../../../home/modules/core
     # ui: sway, waybar, wallpapers and themes
     ./../../../home/modules/ui/sway
+    ./../../../home/modules/ui/hyprland
     ./../../../home/modules/ui/waybar
     ./../../../home/modules/ui/wallpapers
     ./../../../home/modules/ui/themes
@@ -49,9 +50,14 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-hyprland
+    ];
     config = {
       sway = {default = ["gtk"];};
+      hyprland = {default = ["hyprland" "gtk"];};
     };
   };
   fonts.fontconfig.enable = true;
