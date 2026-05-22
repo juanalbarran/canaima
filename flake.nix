@@ -4,7 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     kukenan.url = "github:juanalbarran/neovim/main";
     gazelle.url = "github:Zeus-Deus/gazelle-tui";
     sfdx-nix.url = "github:rfaulhaber/sfdx-nix";
@@ -36,64 +39,38 @@
       inherit system;
       config.allowUnfree = true;
     };
+    mkNixosHost = host:
+      nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs system pkgs-unstable;};
+        modules = [
+          {
+            nixpkgs.hostPlatform = system;
+            nixpkgs.config.allowUnfree = true;
+          }
+          host
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.extraSpecialArgs = {inherit inputs system pkgs-unstable;};
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+      };
+
+    mkHomeConfig = profile:
+      home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [profile];
+        extraSpecialArgs = {inherit inputs system pkgs-unstable;};
+      };
   in {
     nixosConfigurations = {
-      canaima = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
-        modules = [
-          {
-            nixpkgs.hostPlatform = system;
-            nixpkgs.config.allowUnfree = true;
-          }
-          ./hosts/canaima
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = {
-              inherit inputs system pkgs-unstable;
-            };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
-      };
-      sarisarinama = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
-        modules = [
-          {
-            nixpkgs.hostPlatform = system;
-            nixpkgs.config.allowUnfree = true;
-          }
-          ./hosts/sarisarinama
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = {
-              inherit inputs system pkgs-unstable;
-            };
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
-      };
+      canaima = mkNixosHost ./hosts/canaima;
+      sarisarinama = mkNixosHost ./hosts/sarisarinama;
     };
     homeConfigurations = {
-      "playa-el-agua" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./configuration/home-configuration/playa-el-agua];
-        extraSpecialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
-      };
-      "playa-el-yaque" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [./configuration/home-configuration/playa-el-yaque];
-        extraSpecialArgs = {
-          inherit inputs system pkgs-unstable;
-        };
-      };
+      "playa-el-agua" = mkHomeConfig ./configuration/home-configuration/playa-el-agua;
+      "playa-el-yaque" = mkHomeConfig ./configuration/home-configuration/playa-el-yaque;
     };
   };
 }
