@@ -37,8 +37,5 @@ bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 
 default_border none
 
-# Command to start apps by default
-#exec_always ~/.config/sway/start_apps.sh
-
 include /etc/sway/config.d/*
 
