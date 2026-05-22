@@ -50,6 +50,9 @@ in {
       set $chrome ${path}google-chrome-stable
       set $chrome_id google-chrome
 
+      set $grim ${path}grim
+      set $slurp ${path}slurp
+
       set $lock swaylock
     '';
     "sway/autostart.conf".source = ./autostart.conf;

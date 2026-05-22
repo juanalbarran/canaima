@@ -16,10 +16,7 @@ in {
       if isNixOS
       then pkgs.sway
       else null;
-    checkConfig = true;
-    config = {
-      extraConfig = builtins.readFile ./config;
-    };
+    config = null;
   };
   home = {
     packages = with pkgs; [
