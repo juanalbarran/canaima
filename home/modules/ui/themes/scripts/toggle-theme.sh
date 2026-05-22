@@ -55,7 +55,7 @@ if pgrep -x qutebrowser > /dev/null; then
 fi
 
 # foot
-  pkill -HUP foot
+pkill -HUP foot
 
 # tmux: reload theme and repaint
 tmux source-file "$theme_dir/$new_mode/tmux.conf" 2>/dev/null || true
