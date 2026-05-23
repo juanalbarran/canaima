@@ -5,5 +5,6 @@
     ./bookmarks
     ./power-menu
     ./system-menu
+    ./keybinds
   ];
 }
