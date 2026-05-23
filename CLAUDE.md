@@ -49,9 +49,21 @@ hosts/<hostname>/          # Hardware config + host-specific services
 
 `isNixOS` is the key flag that lets `playa-el-yaque` (Ubuntu) skip NixOS-specific options like systemd services and declarative symlinks that only work on NixOS.
 
-### Theme system
+### Theme System
 
 Check it here [themes](./home/modules/ui/themes/THEMES.md)
+
+### Wallpaper System
+
+Check it here [wallpapers](./home/modules/ui/wallpapers/WALLPAPERS.md)
+
+### Scripts
+
+Check it here [scripts](./home/modules/scripts/SCRIPTS.md)
+
+### Menu System
+
+Check it here [menus](./home/modules/menus/MENUS.md)
 
 ### Key inputs
 
