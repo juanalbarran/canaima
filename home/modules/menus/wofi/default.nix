@@ -1,15 +1,5 @@
 # home/modules/ui/wofi/default.nix
-{
-  pkgs,
-  config,
-  ...
-}: let
-  powerMenu = pkgs.writeShellScriptBin "power-menu-wofi" (builtins.readFile ./scripts/power-menu.sh);
-  keybinds = pkgs.writeShellScriptBin "keybinds-wofi" (builtins.readFile ./scripts/keybinds.sh);
-  bookmarks = pkgs.writeShellScriptBin "bookmarks-wofi" (builtins.readFile ./scripts/bookmarks.sh);
-  systemMenu = pkgs.writeShellScriptBin "system-menu-wofi" (builtins.readFile ./scripts/system-menu.sh);
-  projects = pkgs.writeShellScriptBin "projects-wofi" (builtins.readFile ./scripts/projects.sh);
-in {
+{config, ...}: {
   programs.wofi = {
     enable = true;
     settings = {
@@ -25,13 +15,5 @@ in {
     "wofi/prebookmarks-menu.conf".source = ./prebookmarks-menu.conf;
     "wofi/projects-menu.conf".source = ./projects-menu.conf;
     "wofi/style.css".source = config.lib.file.mkOutOfStoreSymlink "${config.xdg.cacheHome}/style/wofi.css";
- };
-  home.packages = with pkgs; [
-    systemMenu
-    powerMenu
-    keybinds
-    bookmarks
-    bluetuith
-    projects
-  ];
+  };
 }
