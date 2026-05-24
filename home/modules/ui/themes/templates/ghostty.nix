@@ -1,5 +1,7 @@
 # home/modules/ui/themes/templates/ghostty.nix
-scheme: ''
+scheme: let
+  isLight = (builtins.match ".*light.*" scheme.slug) != null;
+in ''
   # Base16 Ghostty Template
   # Scheme: ${scheme.name}
 
@@ -11,14 +13,14 @@ scheme: ''
   cursor-text = ${scheme.palette.base00}
 
   # Normal Colors
-  palette = 0=${scheme.palette.base00}
+  palette = 0=${if isLight then scheme.palette.base07 else scheme.palette.base00}
   palette = 1=${scheme.palette.base08}
   palette = 2=${scheme.palette.base0B}
   palette = 3=${scheme.palette.base0A}
   palette = 4=${scheme.palette.base0D}
   palette = 5=${scheme.palette.base0E}
   palette = 6=${scheme.palette.base0C}
-  palette = 7=${scheme.palette.base05}
+  palette = 7=${if isLight then scheme.palette.base03 else scheme.palette.base05}
 
   # Bright Colors
   palette = 8=${scheme.palette.base03}
@@ -28,5 +30,5 @@ scheme: ''
   palette = 12=${scheme.palette.base0D}
   palette = 13=${scheme.palette.base0E}
   palette = 14=${scheme.palette.base0C}
-  palette = 15=${scheme.palette.base07}
+  palette = 15=${if isLight then scheme.palette.base04 else scheme.palette.base07}
 ''
