@@ -28,6 +28,7 @@
     # work
     ./../../../home/modules/work
   ];
+  features.windowManager = "sway";
   features.vpn = true;
   # features.bluetooth = true;
 
