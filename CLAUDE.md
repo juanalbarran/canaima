@@ -96,6 +96,12 @@ Check the changes here [changes](./changes.md)
 | `Scripts` | [scripts](./home/modules/scripts/scripts.md)     | Nix-wrapped launcher scripts (menu-agnostic) |
 | `Menus`   | [menus](./home/modules/menus/menus.md)           | wofi / bemenu backends; active set via `hostSpec.menu` |
 
+#### Terminals
+
+| Module  | Doc                                                          | Description                        |
+| ------- | ------------------------------------------------------------ | ---------------------------------- |
+| `Tmux`  | [tmux](./home/modules/terminals/tmux/tmux.md)                | Tmux config, status bar, keybinds  |
+
 #### Security
 
 | Module | Doc                                        | Description                     |
