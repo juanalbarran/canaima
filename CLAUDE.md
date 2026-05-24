@@ -43,9 +43,11 @@ hosts/<hostname>/                          # Hardware config + host-specific ser
 
 ### hostSpec — global variables module
 
-`home/modules/core/hostSpec/default.nix` is a **Home Manager-only** module (not used in `nixos/`) that defines `options.hostSpec.*` — machine-wide variables consumed across all home modules: `username`, `hostname`, `email`, `terminal`, `terminalAppId`, `menu`, `sshKeyName`, `isNixOS`. Each home profile sets these once; modules read them via `config.hostSpec.*`.
+`home/modules/core/hostSpec/default.nix` is a **Home Manager-only** module (not used in `nixos/`) that defines `options.hostSpec.*` — machine-wide variables consumed across all home modules: `username`, `hostname`, `email`, `terminal`, `terminalAppId`, `menu`, `sshKeyName`, `isNixOS`, `windowManager`, `bluetooth`, `vpn`. Each home profile sets these once; modules read them via `config.hostSpec.*`.
 
 `isNixOS` is the key flag that lets `playa-el-yaque` (Ubuntu) skip NixOS-specific options like systemd services and declarative symlinks that only work on NixOS.
+
+**Rule: all machine-level configuration belongs in `hostSpec`.** Any flag that describes what a machine is or has — active WM, hardware capabilities, enabled features — must be declared as an `options.hostSpec.*` option and set in the profile's `hostSpec { }` block. Never create a separate module-scoped options namespace (e.g. `features.*`) for things that are really machine identity. Modules read `config.hostSpec.*` directly.
 
 ### Latest changes
 

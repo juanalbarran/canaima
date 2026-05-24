@@ -17,8 +17,8 @@
   ];
 
   programs.waybar.settings.mainBar.modules-right =
-    (lib.optionals config.features.bluetooth ["bluetooth"])
-    ++ (lib.optionals config.features.vpn ["custom/vpn"])
+    (lib.optionals config.hostSpec.bluetooth ["bluetooth"])
+    ++ (lib.optionals config.hostSpec.vpn ["custom/vpn"])
     ++ ["pulseaudio" "network" "battery"];
   # modules-right = ["network" "cpu" "memory" "battery"];
 }

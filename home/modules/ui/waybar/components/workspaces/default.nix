@@ -1,6 +1,6 @@
 # home/modules/waybar/components/workspaces/default.nix
 {config, ...}: let
-  hyprlandEnabled = config.features.windowManager == "hyprland";
+  hyprlandEnabled = config.hostSpec.windowManager == "hyprland";
 in {
   imports = [
     ./workspace-hyprland.nix

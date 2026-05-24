@@ -7,23 +7,6 @@
   imports = [
     ./components
   ];
-  options = {
-    features.windowManager = lib.mkOption {
-      type = lib.types.enum [ "sway" "hyprland" ];
-      default = "sway";
-      description = "Active window manager; controls workspace modules and terminal selection";
-    };
-    features.bluetooth = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable Bluetooth Waybar module";
-    };
-    features.vpn = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable VPN Waybar module";
-    };
-  };
   config = {
     programs.waybar = {
       enable = true;
@@ -46,10 +29,10 @@
           #(builtins.readFile ./components/memory/memory.css)
           #(builtins.readFile ./components/cpu/cpu.css)
         ]
-        ++ (lib.optionals config.features.bluetooth [
+        ++ (lib.optionals config.hostSpec.bluetooth [
           (builtins.readFile ./components/bluetooth/bluetooth.css)
         ])
-        ++ (lib.optionals config.features.vpn [
+        ++ (lib.optionals config.hostSpec.vpn [
           (builtins.readFile ./components/vpn/vpn.css)
         ])
       );

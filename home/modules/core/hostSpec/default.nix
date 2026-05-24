@@ -38,5 +38,20 @@
       default = true;
       description = "Set to true if running on NixOS, false for Other";
     };
+    windowManager = lib.mkOption {
+      type = lib.types.enum ["sway" "hyprland"];
+      default = "sway";
+      description = "Active window manager; controls workspace modules and terminal selection";
+    };
+    bluetooth = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable Bluetooth Waybar module";
+    };
+    vpn = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable VPN Waybar module";
+    };
   };
 }

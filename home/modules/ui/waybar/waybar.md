@@ -35,26 +35,27 @@ The first line is a runtime `@import` from `~/.cache/style/waybar-colors.css`, w
 theme system generates. All color variables (`@background`, `@text`, `@accent`, `@urgent`,
 `@hover`, `@base00`–`@base0F`) come from there. See [themes.md](../themes/themes.md).
 
-### Feature flags
+### hostSpec flags
 
-Two module-level options gate optional components. Set them in your home profile:
+All machine-level flags live in `hostSpec` (see `home/modules/core/hostSpec/default.nix`).
+Set them in your profile's `hostSpec { }` block:
 
 ```nix
-features.bluetooth = true;   # adds bluetooth module to modules-right and its CSS
-features.vpn = true;         # adds custom/vpn module to modules-right and its CSS
+hostSpec = {
+  windowManager = "sway";   # or "hyprland" — controls workspace IPC and terminal flags
+  bluetooth = true;         # adds bluetooth module to modules-right and its CSS
+  vpn = true;               # adds custom/vpn module to modules-right and its CSS
+};
 ```
+
+`windowManager` defaults to `"sway"`, `bluetooth` and `vpn` default to `false`.
 
 ### WM detection
 
-`components/workspaces/default.nix` reads `config.features.windowManager` to choose
+`components/workspaces/default.nix` reads `config.hostSpec.windowManager` to choose
 between `hyprland/workspaces` (+ `hyprland/submap`) and `sway/workspaces` (+ `sway/mode`)
 for `modules-left`. The same flag is used in `network/default.nix` and `pulseaudio/default.nix`
 to select which terminal to use for modal launchers.
-
-Set it explicitly in your home profile:
-```nix
-features.windowManager = "sway";    # or "hyprland"
-```
 
 This decouples waybar from `wayland.windowManager.*.enable` state. A profile can import
 both WM modules (e.g. `playa-el-yaque` imports both sway and hyprland) without waybar
