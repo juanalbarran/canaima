@@ -121,6 +121,3 @@ Check the changes here [changes](./changes.md)
 
 `pkgs-unstable` is threaded through `specialArgs` / `extraSpecialArgs` — use it in modules via the function argument, not by importing nixpkgs again.
 
-### Secrets
-
-`home/modules/core/sops/` and anything under `home/modules/work/` depend on the private `fortin-de-la-galera` repo (the `secrets` flake input, fetched over SSH). Evaluating these modules requires SSH access to that repo. If working offline or without the key, avoid rebuilding configs that include those modules (`playa-el-agua`, `playa-el-yaque`).
