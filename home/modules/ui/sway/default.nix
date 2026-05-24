@@ -8,7 +8,6 @@
   isNixOS = config.hostSpec.isNixOS;
 in {
   imports = [
-    ./special-binds
     ./configFiles
   ];
   wayland.windowManager.sway = {
