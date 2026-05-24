@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  isHyprland = config.wayland.windowManager.hyprland.enable;
+  isHyprland = config.features.windowManager == "hyprland";
   termCommand =
     if isHyprland
     then "${pkgs.kitty}/bin/kitty --class pulsemixer -e pulsemixer"
