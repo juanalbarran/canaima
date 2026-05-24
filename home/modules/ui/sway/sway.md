@@ -10,23 +10,14 @@ configuration layer.
 ```
 home/modules/ui/sway/
 ├── default.nix                     # HM sway module entry; installs packages
-├── configFiles/
-│   ├── default.nix                 # Deploys all config files via xdg.configFile
-│   ├── config                      # Main sway entry point; includes all fragments
-│   ├── variables.conf              # Nix-injected: terminal, menu, paths, app variables
-│   ├── autostart.conf              # Portal setup, wallpaper, waybar launch
-│   ├── bindings.conf               # Core keybindings
-│   ├── monitors.conf               # Lid-switch output enable/disable
-│   └── rules.conf                  # Floating window rules for modal TUIs
-└── special-binds/
-    ├── default.nix                 # Deploys binds to ~/.config/sway/bindings/
-    ├── browser-binds.conf          # $mod+b  → qutebrowser
-    ├── firefox-binds.conf          # $mod+f  → firefox PWA
-    ├── ai-binds.conf               # $mod+a  → Gemini PWA
-    ├── screenshot-binds.conf       # Print / Shift+Print / Ctrl+Print
-    ├── slack-binds.conf            # $mod+s  → Slack
-    ├── chrome-binds.conf           # $mod+g  → Google Chrome
-    └── factorio-binds.conf         # Factorio-specific bindings
+└── configFiles/
+    ├── default.nix                 # Deploys all config files via xdg.configFile
+    ├── config                      # Main sway entry point; includes all fragments
+    ├── variables.conf              # Nix-generated: variables + all run-or-raise bindsyms
+    ├── autostart.conf              # Portal setup, wallpaper, waybar launch
+    ├── bindings.conf               # Core keybindings (navigation, layout, workspaces)
+    ├── monitors.conf               # Lid-switch output enable/disable
+    └── rules.conf                  # Floating window rules for modal TUIs
 ```
 
 ## How Config Management Works
@@ -35,44 +26,53 @@ HM's sway module is used with `config = null`. This means HM does **not** genera
 sway config from Nix options. Instead, all config files are deployed as plain files via
 `xdg.configFile` entries in `configFiles/default.nix`.
 
-The only file that gets actual Nix interpolation is `variables.conf`, which is written
-with `.text` instead of `.source`. It reads from `hostSpec` to inject the correct terminal,
-terminal app-id, and menu binary path at build time. All other files are static `.conf`
-sources symlinked to the nix store.
+`variables.conf` is the only file generated with `.text` (Nix interpolation). It contains
+both the `set $variable` definitions and all run-or-raise `bindsym` commands. All other
+files are static `.conf` sources symlinked to the nix store.
 
 The main `config` file uses `include` directives to compose the fragments:
 ```
-~/.config/sway/variables.conf
+~/.config/sway/variables.conf    ← Nix-generated: variables + run-or-raise bindsyms
 ~/.config/sway/autostart.conf
 ~/.config/sway/monitors.conf
 ~/.config/sway/rules.conf
-~/.config/sway/bindings.conf
-~/.config/sway/bindings/browser-binds.conf
-~/.config/sway/bindings/ai-binds.conf
-~/.config/sway/bindings/screenshot-binds.conf
-~/.config/sway/bindings/factorio-binds.conf
-~/.config/sway/bindings/firefox-binds.conf
-~/.config/sway/bindings/slack-binds.conf
-~/.config/sway/bindings/chrome-binds.conf
-/etc/sway/config.d/*              ← NixOS system-level additions
+~/.config/sway/bindings.conf     ← static: navigation, layout, workspaces, menus
+/etc/sway/config.d/*             ← NixOS system-level additions
 ```
 
-## variables.conf — Injected Variables
+## variables.conf — Injected Variables and Run-or-Raise Bindings
 
-These are set at build time from `hostSpec` and referenced as `$variable` throughout all
-other config files.
+Generated at build time from `configFiles/default.nix`. Contains two things:
+1. `set $variable` definitions read by all other config files
+2. Run-or-raise `bindsym` commands for every app (inlined after each app's variables)
+
+### Variable ordering rule
+
+All `$X_id` variables are defined **before** their `$X` counterpart. Sway's variable
+substitution is a simple linear scan — if `$term` were defined first, it would match
+the `$` in `$term_id` and corrupt the criteria. Defining `$term_id` first prevents this.
+
+### Variables
 
 | Variable          | Source                   | Example                        |
 | ----------------- | ------------------------ | ------------------------------ |
 | `$mod`            | hardcoded                | `Mod4` (Super key)             |
-| `$term`           | `hostSpec.terminal`      | `foot`                         |
+| `$swaymsg`        | path-prefixed            | `swaymsg`                      |
 | `$term_id`        | `hostSpec.terminalAppId` | `foot`                         |
+| `$term`           | `hostSpec.terminal`      | `foot`                         |
+| `$aux_term_id`    | hardcoded                | `com.mitchellh.ghostty`        |
 | `$aux_term`       | hardcoded                | `ghostty`                      |
-| `$menu`           | `hostSpec.menu` path     | `system-menu`                  |
+| `$browser_id`     | hardcoded                | `org.qutebrowser.qutebrowser`  |
 | `$browser`        | hardcoded                | `qutebrowser --target window`  |
+| `$ai_id`          | hardcoded                | `FFPWA-01KS5C2YJE85WR6YP8K4Q584CZ` |
 | `$ai`             | hardcoded                | `firefoxpwa site launch <id>`  |
+| `$slack_id`       | hardcoded                | `Slack`                        |
 | `$slack`          | hardcoded                | `slack`                        |
+| `$chrome_id`      | hardcoded                | `google-chrome`                |
 | `$chrome`         | hardcoded                | `google-chrome-stable`         |
+| `$firefox_id`     | hardcoded                | `firefox`                      |
+| `$firefox`        | hardcoded                | `firefox`                      |
+| `$menu`           | path-prefixed            | `system-menu`                  |
 | `$grim`           | path-prefixed            | `grim`                         |
 | `$slurp`          | path-prefixed            | `slurp`                        |
 | `$wallpaper`      | path-prefixed            | `wallpaper` script             |
@@ -80,7 +80,8 @@ other config files.
 | `$projects`       | path-prefixed            | `projects` script              |
 | `$bookmarks`      | path-prefixed            | `bookmarks` script             |
 
-Path prefix is empty on NixOS (binaries are in PATH) and `$HOME/.nix-profile/bin/` on
+`$swaymsg` has a path prefix because sway's `exec` environment inherits only the system
+PATH (no nix profile). Path prefix is empty on NixOS and `$HOME/.nix-profile/bin/` on
 standalone HM (Ubuntu).
 
 ## Core Keybindings
@@ -125,10 +126,15 @@ standalone HM (Ubuntu).
 
 ### App-focus pattern
 
-Most app bindings follow this pattern (focus if open, launch if not):
+All app bindings live in `variables.conf`, right after the app's `set` lines:
 ```
-bindsym $mod+X exec swaymsg '[app_id="$app_id"] focus' || exec $app
+set $browser_id org.qutebrowser.qutebrowser
+set $browser env QT_QUICK_BACKEND=software qutebrowser --target window
+bindsym $mod+b exec $swaymsg '[app_id="$browser_id"] focus' || exec $browser
 ```
+
+`$swaymsg` must be used instead of bare `swaymsg` — sway's exec environment has only
+the system PATH and cannot find binaries in the nix profile.
 
 ## Window Rules (`rules.conf`)
 
@@ -198,9 +204,10 @@ need updating unless the username changes.
 
 ### Most app variables are hardcoded in `variables.conf`
 
-Only `$term`, `$term_id`, and `$menu` are injected from `hostSpec`. The browser, AI, Slack,
-and Chrome variables are hardcoded strings, so they are the same regardless of profile. If
-a profile needs a different browser or AI app, the file must be edited directly.
+Only `$term`, `$term_id`, `$swaymsg`, and `$menu` are path-injected from `hostSpec` or the
+`isNixOS` flag. Browser, AI, Slack, Chrome, and Firefox variables are hardcoded strings,
+so they are the same regardless of profile. If a profile needs a different app, edit
+`configFiles/default.nix` directly.
 
 ---
 
@@ -216,9 +223,8 @@ a profile needs a different browser or AI app, the file must be edited directly.
 ### Medium priority
 
 - **Split `bindings.conf` by category:** The file mixes navigation, layout, scratchpad,
-  and resize mode bindings. Following the pattern of `special-binds/`, splitting into
-  `bindings/navigation.conf`, `bindings/layout.conf`, `bindings/apps.conf`, etc. would
-  make it easier to audit or disable categories per profile.
+  and resize mode bindings. Splitting into separate fragments would make it easier to
+  audit or disable categories per profile.
 
 - **Screen scale via `hostSpec`:** `config` hard-codes `output eDP-1 scale 1.2`. A
   `hostSpec.displayScale` option would let each profile set the correct DPI scaling without
