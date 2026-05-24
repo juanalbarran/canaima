@@ -24,6 +24,8 @@
     ./../../../home/users/juan
   ];
 
+  features.windowManager = "sway";
+
   hostSpec = {
     username = "juan";
     fullname = "Juan Jesus Albarran Rodriguez";
