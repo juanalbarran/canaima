@@ -13,19 +13,32 @@ of significant work sessions so future Claude Code sessions can pick up context 
 | -------------- | ---------------- | ----- | -------------------- | ----------------------------- |
 | `canaima`      | `playa-el-agua`  | Sway  | 2026-05-22 ~21:30    | **Needs rebuild** (see below) |
 | `sarisarinama` | `playa-caribe`   | Sway  | unknown              | unknown                       |
-| `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-23 | standalone HM, Sway in GDM ✓ |
+| `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-24 | **Waybar workspace blank** (see below) |
+
+### Waybar workspace bug — root cause identified (playa-el-yaque)
+
+After rebuilding (`home-manager switch`) and restarting Sway, waybar still shows no
+workspace indicator. Root cause: `playa-el-yaque` imports **both** `home/modules/ui/sway`
+and `home/modules/ui/hyprland`. The Hyprland module unconditionally sets
+`wayland.windowManager.hyprland.enable = true`. Every waybar component that reads
+`config.wayland.windowManager.hyprland.enable` to detect the active WM sees `true`, so
+waybar is configured to use `hyprland/workspaces` IPC — which has no socket when Sway
+is running. Also affects `network` and `pulseaudio` terminal selection (baked to `kitty`
+instead of `foot`).
+
+**Fix implemented (not yet applied via home-manager):** Added `features.windowManager`
+option to the waybar module. All implicit `wayland.windowManager.hyprland.enable` reads
+replaced with `config.features.windowManager == "hyprland"` in workspaces, network, and
+pulseaudio components. Both `playa-el-yaque` and `playa-el-agua` profiles set
+`features.windowManager = "sway"` explicitly. Apply with:
+```bash
+home-manager switch --flake .#playa-el-yaque
+```
 
 ### What's deployed vs what's in git
 
 `canaima` was last rebuilt at ~21:30 on 2026-05-22. Several commits were made after that
-point and have NOT been applied yet. The deployed nix store generation differs from the
-current git HEAD in these ways:
-
-- **Waybar workspace bug (active):** The deployed waybar config uses `hyprland/workspaces`
-  even though Sway is running. The workspace indicator is blank. Caused by the generation
-  being built while `wayland.windowManager.hyprland.enable` was somehow `true` for
-  `playa-el-agua`. The current git state is correct (no hyprland in that profile) — a
-  rebuild will fix it.
+point and have NOT been applied yet:
 
 - **Sway config = null (deployed):** The `1a2a431 Sway` commit changed
   `wayland.windowManager.sway.config` from `{ extraConfig = ...; }` to `null`. The sway
@@ -41,7 +54,10 @@ current git HEAD in these ways:
 ### Immediate action needed
 
 ```bash
-# On canaima — fixes waybar workspace indicator and applies all pending changes
+# 1. Apply features.windowManager fix (see above), then:
+home-manager switch --flake .#playa-el-yaque   # fixes workspace indicator on Ubuntu
+
+# 2. Once canaima is rebuilt:
 sudo nixos-rebuild switch --flake .#canaima
 ```
 
@@ -113,26 +129,26 @@ sudo nixos-rebuild switch --flake .#canaima
 
 ### Bugs
 
-1. **Waybar workspace indicator blank** — `canaima` only. Fix: `sudo nixos-rebuild switch
-   --flake .#canaima`. Root cause documented in `WAYBAR.md`.
+1. **Waybar workspace indicator blank** — fix implemented in git, needs `home-manager switch`
+   on `playa-el-yaque` and `nixos-rebuild` on `canaima` to deploy.
 
 2. ~~**`wayland.windowManager.sway.enable` not set**~~ — **Fixed.** `enable = true` and
-   `package = pkgs.sway` added to `home/modules/ui/sway/default.nix`. Needs rebuild to
-   deploy.
+   `package = pkgs.sway` added to `home/modules/ui/sway/default.nix`. Applied on
+   `playa-el-yaque`.
 
-3. **Waybar terminal mismatch** — When bug #1 was present, `network` and `pulseaudio`
-   waybar modules used `kitty` for their modal launchers instead of `foot`. Will be
-   corrected automatically after rebuild.
+3. **Waybar terminal mismatch** — `network` and `pulseaudio` waybar modules use `kitty`
+   instead of `foot` because `isHyprland` is `true`. Will be fixed by the
+   `features.windowManager` fix above.
 
 ### Technical debt
 
 - Most app variables in `sway/configFiles/variables.conf` (`$browser`, `$ai`, `$slack`,
-  `$chrome`) are hardcoded strings, not derived from `hostSpec`. See `SWAY.md` → Future
+  `$chrome`) are hardcoded strings, not derived from `hostSpec`. See `sway.md` → Future
   Improvements.
 - `wayland.windowManager.sway.enable` asymmetry with Hyprland (which does set it). See
-  `SWAY.md` → Known Issues.
+  `sway.md` → Known Issues.
 - Waybar WM detection relies on reading `wayland.windowManager.hyprland.enable` rather
-  than an explicit `features.windowManager` option. See `WAYBAR.md` → Future Improvements.
+  than an explicit `features.windowManager` option. See `waybar.md` → Future Improvements.
 
 ---
 
@@ -149,12 +165,12 @@ flake.nix
 ```
 
 Key subsystems with their own documentation:
-- Themes: `home/modules/ui/themes/THEMES.md`
-- Wallpapers: `home/modules/ui/wallpapers/WALLPAPERS.md`
-- Scripts: `home/modules/scripts/SCRIPTS.md`
-- Menus: `home/modules/menus/MENUS.md`
-- Waybar: `home/modules/ui/waybar/WAYBAR.md`
-- Sway: `home/modules/ui/sway/SWAY.md`
+- Themes: `home/modules/ui/themes/themes.md`
+- Wallpapers: `home/modules/ui/wallpapers/wallpapers.md`
+- Scripts: `home/modules/scripts/scripts.md`
+- Menus: `home/modules/menus/menus.md`
+- Waybar: `home/modules/ui/waybar/waybar.md`
+- Sway: `home/modules/ui/sway/sway.md`
 
 ---
 

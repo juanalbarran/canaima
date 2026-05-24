@@ -89,14 +89,14 @@ Top-level meta-menu that delegates to sub-actions.
 
 ### `wallpaper`
 
-Picks a random wallpaper from `~/Pictures/Wallpapers/<resolution>/<mode>/` and applies it via `swaymsg output * bg … fill`. Writes the selected path to `~/.cache/style/current_wallpaper`. See [WALLPAPERS.md](../ui/wallpapers/WALLPAPERS.md) for the full picture.
+Picks a random wallpaper from `~/Pictures/Wallpapers/<resolution>/<mode>/` and applies it via `swaymsg output * bg … fill`. Writes the selected path to `~/.cache/style/current_wallpaper`. See [wallpapers.md](../ui/wallpapers/wallpapers.md) for the full picture.
 
 **Sway keybind:** `Super + Shift + w`  
 Also runs automatically on startup and via a systemd timer every 5 minutes.
 
 ### `toggle-theme`
 
-Toggles dark/light mode. Reads `~/.cache/style/mode`, swaps symlinks under `~/.cache/style/`, and live-reloads all themed apps. See [THEMES.md](../ui/themes/THEMES.md).
+Toggles dark/light mode. Reads `~/.cache/style/mode`, swaps symlinks under `~/.cache/style/`, and live-reloads all themed apps. See [themes.md](../ui/themes/themes.md).
 
 **Sway keybind:** `Super + Shift + Ctrl + t`
 
