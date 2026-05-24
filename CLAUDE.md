@@ -58,49 +58,51 @@ Check the changes here [changes](./changes.md)
 
 ### Hosts
 
-| Host | Doc | OS preset | Home profile |
-| ---- | --- | --------- | ------------ |
-| `canaima` | [canaima](./hosts/canaima/canaima.md) | budapest | playa-el-agua |
-| `sarisarinama` | [sarisarinama](./hosts/sarisarinama/sarisarinama.md) | caracas | playa-caribe |
+| Host           | Doc                                                  | OS preset | Home profile  |
+| -------------- | ---------------------------------------------------- | --------- | ------------- |
+| `canaima`      | [canaima](./hosts/canaima/canaima.md)                | budapest  | playa-el-agua |
+| `sarisarinama` | [sarisarinama](./hosts/sarisarinama/sarisarinama.md) | caracas   | playa-caribe  |
 
 ### OS Presets
 
-| Preset | Doc | WM | Used by |
-| ------ | --- | -- | ------- |
-| `budapest` | [budapest](./configuration/budapest.md) | Sway | canaima |
-| `caracas` | [caracas](./configuration/caracas.md) | dwl | sarisarinama |
+| Preset     | Doc                                     | WM   | Used by      |
+| ---------- | --------------------------------------- | ---- | ------------ |
+| `budapest` | [budapest](./configuration/budapest.md) | Sway | canaima      |
+| `caracas`  | [caracas](./configuration/caracas.md)   | dwl  | sarisarinama |
 
 ### Home Profiles
 
-| Profile | Doc | Host | Type |
-| ------- | --- | ---- | ---- |
-| `playa-el-agua` | [playa-el-agua](./configuration/home-configuration/playa-el-agua/playa-el-agua.md) | canaima | NixOS |
+| Profile          | Doc                                                                                   | Host          | Type          |
+| ---------------- | ------------------------------------------------------------------------------------- | ------------- | ------------- |
+| `playa-el-agua`  | [playa-el-agua](./configuration/home-configuration/playa-el-agua/playa-el-agua.md)    | canaima       | NixOS         |
 | `playa-el-yaque` | [playa-el-yaque](./configuration/home-configuration/playa-el-yaque/playa-el-yaque.md) | Ubuntu laptop | standalone HM |
-| `playa-caribe` | [playa-caribe](./configuration/home-configuration/playa-caribe/playa-caribe.md) | sarisarinama | NixOS |
+| `playa-caribe`   | [playa-caribe](./configuration/home-configuration/playa-caribe/playa-caribe.md)       | sarisarinama  | NixOS         |
 
-### Theme System
+### Modules
 
-Check it here [themes](./home/modules/ui/themes/themes.md)
+#### UI
 
-### Wallpaper System
+| Module       | Doc                                                      | Description                        |
+| ------------ | -------------------------------------------------------- | ---------------------------------- |
+| `Themes`     | [themes](./home/modules/ui/themes/themes.md)             | Base16 theme switcher (dark/light) |
+| `Wallpapers` | [wallpapers](./home/modules/ui/wallpapers/wallpapers.md) | Wallpaper switcher                 |
+| `Waybar`     | [waybar](./home/modules/ui/waybar/waybar.md)             | Status bar for Sway and Hyprland   |
+| `Sway`       | [sway](./home/modules/ui/sway/sway.md)                   | Sway WM user config                |
 
-Check it here [wallpapers](./home/modules/ui/wallpapers/wallpapers.md)
+#### Scripts & Menus
 
-### Scripts
+| Module    | Doc                                              | Description                                  |
+| --------- | ------------------------------------------------ | -------------------------------------------- |
+| `Scripts` | [scripts](./home/modules/scripts/scripts.md)     | Nix-wrapped launcher scripts (menu-agnostic) |
+| `Menus`   | [menus](./home/modules/menus/menus.md)           | wofi / bemenu backends; active set via `hostSpec.menu` |
 
-Check it here [scripts](./home/modules/scripts/scripts.md)
+#### Other
 
-### Menu System
-
-Check it here [menus](./home/modules/menus/menus.md)
-
-### Waybar
-
-Check it here [waybar](./home/modules/ui/waybar/waybar.md)
-
-### Sway
-
-Check it here [sway](./home/modules/ui/sway/sway.md)
+| Module       | Doc                                                     | Description                         |
+| ------------ | ------------------------------------------------------- | ----------------------------------- |
+| `Browsers`   | [browsers](./home/modules/browsers/README.md)           | Browser configurations              |
+| `Quickshell` | [quickshell](./home/modules/quickshell/README.md)       | Quickshell status bar (Sway/Hyprland) |
+| `Sops`       | [sops](./home/modules/core/sops/README.md)              | Secrets management via sops-nix     |
 
 ### Key inputs
 
