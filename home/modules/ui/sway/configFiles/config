@@ -22,10 +22,6 @@ include ~/.config/sway/bindings/firefox-binds.conf
 include ~/.config/sway/bindings/slack-binds.conf
 include ~/.config/sway/bindings/chrome-binds.conf
 
-# sounds - pulseaudio
-#
-exec pulseaudio --daemonize
-
 # Brightness control
 bindsym XF86MonBrightnessUp exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
