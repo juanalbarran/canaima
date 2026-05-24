@@ -64,7 +64,9 @@ tmux source-file "$theme_dir/$new_mode/tmux.conf"
 tmux refresh-client
 ```
 
-This updates status-bar and pane-border colours without restarting tmux.
+This updates status-bar, pane-border, and pane-content background colours without
+restarting tmux. `window-style` and `window-active-style` are set to the theme's `base00`
+so the pane background switches correctly between dark and light modes.
 
 ---
 
@@ -81,8 +83,8 @@ This updates status-bar and pane-border colours without restarting tmux.
   persistence) could be declared in `default.nix` via `programs.tmux.plugins` instead of
   using TPM, keeping them in the Nix store.
 
-- **Mouse support:** `set -g mouse on` would allow click-to-focus panes and scroll with
-  the trackpad — useful when pairing or doing ad-hoc navigation.
+- ~~**Mouse support:** `set -g mouse on` would allow click-to-focus panes and scroll with
+  the trackpad — useful when pairing or doing ad-hoc navigation.~~ **Done.**
 
 - **Per-profile shell:** The shell is hardcoded to `bash`. Reading it from `hostSpec` (or
   deriving it from `programs.zsh.enable`) would make it consistent with the user's login
