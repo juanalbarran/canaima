@@ -8,6 +8,11 @@
     ./components
   ];
   options = {
+    features.windowManager = lib.mkOption {
+      type = lib.types.enum [ "sway" "hyprland" ];
+      default = "sway";
+      description = "Active window manager; controls workspace modules and terminal selection";
+    };
     features.bluetooth = lib.mkOption {
       type = lib.types.bool;
       default = false;
