@@ -33,7 +33,7 @@ home/modules/ui/waybar/
 `default.nix` concatenates all CSS files in order and feeds them to `programs.waybar.style`.
 The first line is a runtime `@import` from `~/.cache/style/waybar-colors.css`, which the
 theme system generates. All color variables (`@background`, `@text`, `@accent`, `@urgent`,
-`@hover`, `@base00`–`@base0F`) come from there. See `home/modules/ui/themes/THEMES.md`.
+`@hover`, `@base00`–`@base0F`) come from there. See [themes.md](../themes/themes.md).
 
 ### Feature flags
 
@@ -46,20 +46,19 @@ features.vpn = true;         # adds custom/vpn module to modules-right and its C
 
 ### WM detection
 
-`components/workspaces/default.nix` reads `config.wayland.windowManager.hyprland.enable`
-to choose between `hyprland/workspaces` (+ `hyprland/submap`) and `sway/workspaces`
-(+ `sway/mode`) for `modules-left`. The same flag is used in `network/default.nix` and
-`pulseaudio/default.nix` to select which terminal to use for modal launchers.
+`components/workspaces/default.nix` reads `config.features.windowManager` to choose
+between `hyprland/workspaces` (+ `hyprland/submap`) and `sway/workspaces` (+ `sway/mode`)
+for `modules-left`. The same flag is used in `network/default.nix` and `pulseaudio/default.nix`
+to select which terminal to use for modal launchers.
 
-**Critical:** this flag must match the WM actually running. If `wayland.windowManager.hyprland.enable`
-is `true` but Sway is running (or vice versa), the workspace indicator will be blank — the
-IPC socket for the other WM won't exist.
+Set it explicitly in your home profile:
+```nix
+features.windowManager = "sway";    # or "hyprland"
+```
 
-The Hyprland home module (`home/modules/ui/hyprland/default.nix`) sets `enable = true`.
-The Sway home module (`home/modules/ui/sway/default.nix`) currently does NOT set
-`wayland.windowManager.sway.enable = true` explicitly, so the detection relies on Hyprland
-being the opt-in. If the Sway module ever starts setting `enable = true`, the workspaces
-logic should be audited.
+This decouples waybar from `wayland.windowManager.*.enable` state. A profile can import
+both WM modules (e.g. `playa-el-yaque` imports both sway and hyprland) without waybar
+picking the wrong one.
 
 ### Module layout
 
@@ -95,21 +94,16 @@ to `@base0A` (yellow). See `workspaces/workspaces.css`.
 
 ## Known Issues
 
-### Workspace indicator goes blank after a rebuild that gets WM detection wrong
+### ~~Workspace indicator goes blank~~ (fixed)
 
-**Root cause:** If the last `nixos-rebuild switch` ran with `wayland.windowManager.hyprland.enable = true`
-in the profile (even temporarily), the generated waybar config will use `hyprland/workspaces`.
-Running Sway after that leaves the workspace area empty because there is no Hyprland IPC socket.
+Previously, waybar read `wayland.windowManager.hyprland.enable` to decide between
+`hyprland/workspaces` and `sway/workspaces`. On profiles that import both WM modules
+(like `playa-el-yaque`), Hyprland's `enable = true` always won, leaving the workspace
+area blank when Sway was running.
 
-**Symptom:** Workspace area is invisible; no workspace buttons appear in waybar.
-
-**Fix:** Make sure the correct WM module is imported in the home profile, then rebuild:
-```bash
-sudo nixos-rebuild switch --flake .#canaima
-```
-
-**Prevention:** The Sway home module should have `wayland.windowManager.sway.enable = true`
-explicitly set so the detection is symmetric and explicit on both sides.
+**Fixed:** waybar now reads `features.windowManager` (an explicit profile-level option)
+instead of the HM WM module state. Set `features.windowManager = "sway"` or
+`features.windowManager = "hyprland"` in your profile.
 
 ### Terminal mismatch in network and pulseaudio
 
@@ -123,25 +117,13 @@ wrong terminal is baked into the on-click command. Not visible until you click t
 
 ### High priority
 
-- **Explicit sway enable:** Add `wayland.windowManager.sway.enable = true;` to
-  `home/modules/ui/sway/default.nix`. Right now the sway module never sets this, which
-  makes the WM detection implicit and fragile. Hyprland sets `enable = true`; Sway should
-  too. The workspaces logic already handles the `if hyprlandEnabled then … else …` pattern
-  correctly once both sides are explicit.
-
 - **Use `hostSpec.terminal` in waybar components:** `network/default.nix` and
-  `pulseaudio/default.nix` re-implement terminal selection with `if isHyprland`. They
-  should just read `config.hostSpec.terminal` (and `config.hostSpec.terminalAppId` for the
-  `--app-id`/`--class` flag), since the profile already declares the correct terminal. This
-  removes a second source of truth and fixes the mismatch automatically.
+  `pulseaudio/default.nix` still use `if isHyprland` to pick the terminal binary and flag.
+  They should read `config.hostSpec.terminal` and `config.hostSpec.terminalAppId` directly,
+  since the profile already declares the correct terminal. This removes the last
+  WM-conditional in those files.
 
 ### Medium priority
-
-- **`features.windowManager` option:** Add a `features.windowManager` option (values:
-  `"sway"` or `"hyprland"`) to `waybar/default.nix`, similar to `features.bluetooth` and
-  `features.vpn`. Use it instead of `config.wayland.windowManager.hyprland.enable` for all
-  waybar decisions. This decouples waybar from the HM WM module state and makes intent
-  explicit at the profile level.
 
 - **Re-enable CPU and memory modules:** `components/default.nix` has both commented out.
   They already have CSS and nix definitions. A `features.sysinfo = false` flag (default off)

@@ -50,33 +50,55 @@ hosts/<hostname>/                          # Hardware config + host-specific ser
 ### Latest changes
 
 Always check the latest changes.
-Always ask if you propose a change if the change was made by me, if the answer is affirmative, update the CHANGES.md and also the .md file of the section that was modified.
+Always ask if you propose a change if the change was made by me, if the answer is affirmative, update the changes.md and also the .md file of the section that was modified.
 
-Check the changes here [changes](./CHANGES.md)
+Check the changes here [changes](./changes.md)
+
+### Hosts
+
+| Host | Doc | OS preset | Home profile |
+| ---- | --- | --------- | ------------ |
+| `canaima` | [canaima](./hosts/canaima/canaima.md) | budapest | playa-el-agua |
+| `sarisarinama` | [sarisarinama](./hosts/sarisarinama/sarisarinama.md) | caracas | playa-caribe |
+
+### OS Presets
+
+| Preset | Doc | WM | Used by |
+| ------ | --- | -- | ------- |
+| `budapest` | [budapest](./configuration/budapest.md) | Sway | canaima |
+| `caracas` | [caracas](./configuration/caracas.md) | dwl | sarisarinama |
+
+### Home Profiles
+
+| Profile | Doc | Host | Type |
+| ------- | --- | ---- | ---- |
+| `playa-el-agua` | [playa-el-agua](./configuration/home-configuration/playa-el-agua/playa-el-agua.md) | canaima | NixOS |
+| `playa-el-yaque` | [playa-el-yaque](./configuration/home-configuration/playa-el-yaque/playa-el-yaque.md) | Ubuntu laptop | standalone HM |
+| `playa-caribe` | [playa-caribe](./configuration/home-configuration/playa-caribe/playa-caribe.md) | sarisarinama | NixOS |
 
 ### Theme System
 
-Check it here [themes](./home/modules/ui/themes/THEMES.md)
+Check it here [themes](./home/modules/ui/themes/themes.md)
 
 ### Wallpaper System
 
-Check it here [wallpapers](./home/modules/ui/wallpapers/WALLPAPERS.md)
+Check it here [wallpapers](./home/modules/ui/wallpapers/wallpapers.md)
 
 ### Scripts
 
-Check it here [scripts](./home/modules/scripts/SCRIPTS.md)
+Check it here [scripts](./home/modules/scripts/scripts.md)
 
 ### Menu System
 
-Check it here [menus](./home/modules/menus/MENUS.md)
+Check it here [menus](./home/modules/menus/menus.md)
 
 ### Waybar
 
-Check it here [waybar](./home/modules/ui/waybar/WAYBAR.md)
+Check it here [waybar](./home/modules/ui/waybar/waybar.md)
 
 ### Sway
 
-Check it here [sway](./home/modules/ui/sway/SWAY.md)
+Check it here [sway](./home/modules/ui/sway/sway.md)
 
 ### Key inputs
 
