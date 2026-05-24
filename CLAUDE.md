@@ -100,7 +100,7 @@ Check the changes here [changes](./changes.md)
 
 | Module | Doc                                        | Description                     |
 | ------ | ------------------------------------------ | ------------------------------- |
-| `Sops` | [sops](./home/modules/core/sops/README.md) | Secrets management via sops-nix |
+| `Sops` | [sops](./home/modules/core/sops/sops.md) | Secrets management via sops-nix |
 
 #### Other
 
