@@ -15,6 +15,23 @@ of significant work sessions so future Claude Code sessions can pick up context 
 | `sarisarinama` | `playa-caribe`   | Sway  | unknown              | unknown                       |
 | `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-24 | **Waybar workspace blank** (see below) |
 
+### Sway run-or-raise fix — 2026-05-24
+
+Two bugs caused every run-or-raise binding to always launch a new instance:
+
+1. **`swaymsg` not in PATH:** Sway's `exec` environment inherits only the system PATH
+   (no nix profile). `swaymsg` lives in `~/.nix-profile/bin/` and was never found, so
+   the focus step always failed with exit 127, triggering `||` and launching a new window.
+
+2. **Variable prefix collision:** Sway substitutes variables in definition order. `$term`
+   was defined before `$term_id`, so when sway saw `$term_id` in a config line it matched
+   `$term` first, producing `foot_id` as the app_id criteria — never matching any window.
+
+**Fix:** Added `set $swaymsg ${path}swaymsg` (full nix-profile path baked in at build
+time). Reordered all `*_id` variables to appear before their base counterparts. Moved all
+run-or-raise `bindsym` commands into `variables.conf` (right after each app's `set` lines),
+replacing the separate `special-binds/` directory. Applied on `playa-el-yaque`. ✓
+
 ### hostSpec consolidation — features.* moved to hostSpec
 
 `features.windowManager`, `features.bluetooth`, and `features.vpn` were declared as
