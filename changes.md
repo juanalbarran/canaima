@@ -5,7 +5,7 @@ of significant work sessions so future Claude Code sessions can pick up context 
 
 ---
 
-## Current state — 2026-05-25
+## Current state — 2026-05-24
 
 ### Machines
 
@@ -13,7 +13,45 @@ of significant work sessions so future Claude Code sessions can pick up context 
 | -------------- | ---------------- | ----- | -------------------- | ----------------------------- |
 | `canaima`      | `playa-el-agua`  | Sway  | 2026-05-22 ~21:30    | **Needs rebuild** (see below) |
 | `sarisarinama` | `playa-caribe`   | Sway  | unknown              | unknown                       |
-| `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-24 | **Waybar workspace blank** (see below) |
+| `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-24 | OK |
+
+### Tmux: mouse support + theme background fix — 2026-05-24
+
+- **Mouse support:** Added `set -g mouse on` to `tmux.conf`. Click-to-focus panes and
+  trackpad scroll now work.
+
+- **Theme background:** `tmux.nix` template now sets `window-style bg=default` and
+  `window-active-style bg=default`. Using explicit hex colors (`base00`) was causing
+  tmux to explicitly paint empty cells dark, overriding foot's new background on toggle.
+  With `bg=default`, foot's background change propagates through to tmux empty cells.
+  Existing pane content still requires a `clear` to fully repaint after a theme switch —
+  this is an inherent terminal limitation.
+
+### Light theme terminal color fix — 2026-05-24
+
+Fixed invisible text in light mode. Root cause: in the base16 scheme, ANSI color 0 (black)
+maps to `base00` (background). In light mode `base00 = #FFFFFF`, so any text rendered in
+ANSI black was invisible on a white background.
+
+**Fix in `foot.nix` and `ghostty.nix`:** For light mode, ANSI color 0 now maps to `base07`
+(`#202124`, near-black) instead of `base00`. ANSI color 7 (white) maps to `base03`
+(`#bcc0cc`, light gray). Bright white maps to `base04`. Dark mode colors are unchanged.
+
+### Gazelle: docs + theme fix — 2026-05-24
+
+- **`gazelle.md`** created documenting the module, launch points (`Mod+Shift+i` and
+  waybar network click), window rule (`app_id="network"`, 1000×800), and flake input.
+
+- **Gazelle theme:** `~/.config/gazelle/theme.toml` now deployed via HM with dark base16
+  colors. Previously all values were commented out, causing Gazelle to fall back to
+  "textual-dark" which rendered the footer keybind labels invisible (poor ANSI color
+  approximation). With explicit hex values matching our ANSI palette, Textual maps colors
+  accurately. `config.json` updated to `"theme": "user-theme"`.
+  The `^p` command palette now shows all 11 built-in Textual themes (nord, gruvbox,
+  dracula, tokyo-night, catppuccin-mocha, etc.) for selection.
+
+- **CLAUDE.md / AGENTS.md:** `AGENTS.md` created as the canonical guidance file.
+  `CLAUDE.md` now just points to it.
 
 ### Sway run-or-raise fix — 2026-05-24
 
