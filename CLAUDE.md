@@ -10,13 +10,11 @@ sudo nixos-rebuild switch --flake .#canaima
 sudo nixos-rebuild switch --flake .#sarisarinama
 
 # Standalone Home Manager (non-NixOS)
-home-manager switch --flake .#playa-el-agua
 home-manager switch --flake .#playa-el-yaque
 
 # Dry-run / check without applying
 sudo nixos-rebuild dry-activate --flake .#canaima
 sudo nixos-rebuild dry-activate --flake .#sarisarinama
-home-manager build --flake .#playa-el-agua
 home-manager build --flake .#playa-el-yaque
 ```
 
@@ -33,12 +31,12 @@ This is a Nix flake managing two NixOS machines and two standalone Home Manager 
 ### Composition layers
 
 ```
-hosts/<hostname>/          # Hardware config + host-specific services
-  └── configuration/<preset>.nix      # OS preset (e.g. budapest.nix)
-        └── nixos/modules/            # Reusable OS-level modules
+hosts/<hostname>/                          # Hardware config + host-specific services
+  └── imports configuration/<preset>.nix  # OS preset (e.g. budapest.nix) at repo root
+        └── nixos/modules/                # Reusable OS-level modules
         └── home-manager integration
               └── configuration/home-configuration/<profile>/
-                    └── home/modules/ # Reusable user-level modules
+                    └── home/modules/     # Reusable user-level modules
 ```
 
 `flake.nix` lists hosts; each host imports its OS preset; OS presets integrate Home Manager and point to a home profile.
@@ -48,6 +46,13 @@ hosts/<hostname>/          # Hardware config + host-specific services
 `home/modules/core/hostSpec/default.nix` is a **Home Manager-only** module (not used in `nixos/`) that defines `options.hostSpec.*` — machine-wide variables consumed across all home modules: `username`, `hostname`, `email`, `terminal`, `terminalAppId`, `menu`, `sshKeyName`, `isNixOS`. Each home profile sets these once; modules read them via `config.hostSpec.*`.
 
 `isNixOS` is the key flag that lets `playa-el-yaque` (Ubuntu) skip NixOS-specific options like systemd services and declarative symlinks that only work on NixOS.
+
+### Latest changes
+
+Always check the latest changes.
+Always ask if you propose a change if the change was made by me, if the answer is affirmative, update the CHANGES.md and also the .md file of the section that was modified.
+
+Check the changes here [changes](./CHANGES.md)
 
 ### Theme System
 
@@ -64,6 +69,14 @@ Check it here [scripts](./home/modules/scripts/SCRIPTS.md)
 ### Menu System
 
 Check it here [menus](./home/modules/menus/MENUS.md)
+
+### Waybar
+
+Check it here [waybar](./home/modules/ui/waybar/WAYBAR.md)
+
+### Sway
+
+Check it here [sway](./home/modules/ui/sway/SWAY.md)
 
 ### Key inputs
 
