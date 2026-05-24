@@ -1,5 +1,5 @@
 # home/modules/ui/sway/config/default.nix
-{config, ...}: let
+{config, lib, ...}: let
   terminal = config.hostSpec.terminal;
   terminalAppId = config.hostSpec.terminalAppId;
   isNixOS = config.hostSpec.isNixOS;
@@ -9,7 +9,7 @@
     else "$HOME/.nix-profile/bin/";
 in {
   xdg.configFile = {
-    "sway/config".source = ./config;
+    "sway/config" = lib.mkForce { source = ./config; };
     "sway/variables.conf".text = ''
       # Mod key. Use Mod1 for Alt. Use Mod4 for Logo
       set $mod Mod4

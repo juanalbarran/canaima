@@ -5,18 +5,25 @@
   config,
   ...
 }: let
-  isNixOS = config.hostSpec.isNixOs;
+  isNixOS = config.hostSpec.isNixOS;
 in {
   imports = [
     ./special-binds
     ./configFiles
   ];
   wayland.windowManager.sway = {
-    package =
-      if isNixOS
-      then pkgs.sway
-      else null;
+    enable = true;
+    package = pkgs.sway;
     config = null;
+  };
+  xdg.dataFile."wayland-sessions/sway.desktop" = lib.mkIf (!isNixOS) {
+    text = ''
+      [Desktop Entry]
+      Name=Sway
+      Comment=An i3-compatible Wayland compositor
+      Exec=${config.home.homeDirectory}/.nix-profile/bin/sway
+      Type=Application
+    '';
   };
   home = {
     packages = with pkgs; [
