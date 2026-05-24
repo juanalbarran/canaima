@@ -96,13 +96,18 @@ Check the changes here [changes](./changes.md)
 | `Scripts` | [scripts](./home/modules/scripts/scripts.md)     | Nix-wrapped launcher scripts (menu-agnostic) |
 | `Menus`   | [menus](./home/modules/menus/menus.md)           | wofi / bemenu backends; active set via `hostSpec.menu` |
 
+#### Security
+
+| Module | Doc                                        | Description                     |
+| ------ | ------------------------------------------ | ------------------------------- |
+| `Sops` | [sops](./home/modules/core/sops/README.md) | Secrets management via sops-nix |
+
 #### Other
 
-| Module       | Doc                                                     | Description                         |
-| ------------ | ------------------------------------------------------- | ----------------------------------- |
-| `Browsers`   | [browsers](./home/modules/browsers/README.md)           | Browser configurations              |
-| `Quickshell` | [quickshell](./home/modules/quickshell/README.md)       | Quickshell status bar (Sway/Hyprland) |
-| `Sops`       | [sops](./home/modules/core/sops/README.md)              | Secrets management via sops-nix     |
+| Module       | Doc                                               | Description                           |
+| ------------ | ------------------------------------------------- | ------------------------------------- |
+| `Browsers`   | [browsers](./home/modules/browsers/README.md)     | Browser configurations                |
+| `Quickshell` | [quickshell](./home/modules/quickshell/README.md) | Quickshell status bar (Sway/Hyprland) |
 
 ### Key inputs
 
