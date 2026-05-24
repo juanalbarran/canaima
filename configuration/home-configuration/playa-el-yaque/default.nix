@@ -28,10 +28,6 @@
     # work
     ./../../../home/modules/work
   ];
-  features.windowManager = "sway";
-  features.vpn = true;
-  # features.bluetooth = true;
-
   hostSpec = {
     username = "juan-albarran";
     fullname = "Juan Albarran";
@@ -45,6 +41,9 @@
     # terminal = "ghostty";
     # terminalAppId = "com.mitchellh.ghostty";
     menu = "wofi --conf $HOME/.config/wofi/projects-menu.conf --prompt 'Projects:'";
+    windowManager = "sway";
+    vpn = true;
+    # bluetooth = true;
   };
 
   targets.genericLinux.enable = true;

@@ -7,7 +7,7 @@
 }: let
   bluetoothCommand = "${pkgs.foot}/bin/foot -a bluetooth-tui -e ${pkgs.bluetuith}/bin/bluetuith";
 in {
-  config = lib.mkIf config.features.bluetooth {
+  config = lib.mkIf config.hostSpec.bluetooth {
     programs.waybar.settings.mainBar."bluetooth" = {
       interval = 30;
       format = "{icon}";

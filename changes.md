@@ -5,7 +5,7 @@ of significant work sessions so future Claude Code sessions can pick up context 
 
 ---
 
-## Current state — 2026-05-24
+## Current state — 2026-05-25
 
 ### Machines
 
@@ -14,6 +14,27 @@ of significant work sessions so future Claude Code sessions can pick up context 
 | `canaima`      | `playa-el-agua`  | Sway  | 2026-05-22 ~21:30    | **Needs rebuild** (see below) |
 | `sarisarinama` | `playa-caribe`   | Sway  | unknown              | unknown                       |
 | `playa-el-yaque` (Ubuntu) | `playa-el-yaque` | Sway + Hyprland | 2026-05-24 | **Waybar workspace blank** (see below) |
+
+### hostSpec consolidation — features.* moved to hostSpec
+
+`features.windowManager`, `features.bluetooth`, and `features.vpn` were declared as
+module-scoped options in `waybar/default.nix`. These are machine-level facts, not
+waybar-internal config, so they were moved to `hostSpec`:
+
+- Added `windowManager`, `bluetooth`, `vpn` options to `home/modules/core/hostSpec/default.nix`
+- Removed `features.*` options from `waybar/default.nix`
+- All waybar components now read `config.hostSpec.*` instead of `config.features.*`
+- Both `playa-el-agua` and `playa-el-yaque` profiles updated — flags moved inside `hostSpec { }`
+- Rule added to `CLAUDE.md`: all machine-level config belongs in `hostSpec`
+
+This also contains the previous `features.windowManager` fix (workspace IPC detection decoupled
+from `wayland.windowManager.hyprland.enable`).
+
+**Needs apply:**
+```bash
+home-manager switch --flake .#playa-el-yaque
+sudo nixos-rebuild switch --flake .#canaima
+```
 
 ### Waybar workspace bug — root cause identified (playa-el-yaque)
 

@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  isHyprland = config.features.windowManager == "hyprland";
+  isHyprland = config.hostSpec.windowManager == "hyprland";
   termCommand =
     if isHyprland
     then "${pkgs.kitty}/bin/kitty --class pulsemixer -e pulsemixer"
