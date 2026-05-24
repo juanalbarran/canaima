@@ -102,6 +102,12 @@ Check the changes here [changes](./changes.md)
 | ------- | ------------------------------------------------------------ | ---------------------------------- |
 | `Tmux`  | [tmux](./home/modules/terminals/tmux/tmux.md)                | Tmux config, status bar, keybinds  |
 
+#### TUI Tools
+
+| Module    | Doc                                                     | Description                        |
+| --------- | ------------------------------------------------------- | ---------------------------------- |
+| `Gazelle` | [gazelle](./home/modules/tui/gazelle/gazelle.md)        | Network manager TUI                |
+
 #### Security
 
 | Module | Doc                                        | Description                     |
@@ -122,6 +128,7 @@ Check the changes here [changes](./changes.md)
 | `kukenan`              | Personal Neovim config flake                     |
 | `xremap-flake`         | Key remapping (used in home modules)             |
 | `sops-nix` + `secrets` | Secrets management via SSH-accessed private repo |
+| `gazelle`              | Gazelle network TUI (`github:Zeus-Deus/gazelle-tui`) |
 | `nix-claude-code`      | Claude Code Nix package                          |
 | `nixpkgs-unstable`     | Passed as `pkgs-unstable` for select packages    |
 
