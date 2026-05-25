@@ -5,6 +5,42 @@ of significant work sessions so future Claude Code sessions can pick up context 
 
 ---
 
+## Current state — 2026-05-25
+
+### Keybinds module — 2026-05-25
+
+Created `home/modules/ui/keybinds/` as a single source of truth for shared keybinds across
+Sway and Hyprland. Previously both WMs had duplicated run-or-raise binds and action binds
+in separate config files.
+
+**Structure:**
+- `default.nix` — all keybind data (`runOrRaiseApps` attrset, `actions` attrset, modifier vars)
+- `sway.nix` — generates `~/.config/sway/shared-keybinds.conf`
+- `hyprland.nix` — generates `~/.config/hypr/shared-keybinds.conf`
+
+**Patterns used:**
+- `vars` passed as a curried argument: `(import ./sway.nix vars)` — no module system threading
+- `vars` is `rec` so `actions` can reference `path` (e.g. wallpaper sway override)
+- `mkBind` / `mkHyprBind` builder functions + `lib.attrValues` + `map` to generate all
+  run-or-raise lines — adding a new app only requires touching `default.nix`
+- Same pattern for `actions`: `mkActionBind` in each WM file maps over `lib.attrValues actions`
+- `cmd` field for actions that are identical across WMs; `sway`/`hypr` fields for overrides
+- Optional fields on run-or-raise apps: `matchBy = "title"` (factorio), `extraCriteria` (ai)
+
+**hostSpec additions:** `auxTerminal`, `auxTerminalAppId`, `ai`, `aiAppId`, `browser`, `browserAppId`
+added as options with defaults. `playa-el-yaque` and `playa-el-agua` set these explicitly.
+
+**Modifier key:** Super (`Mod4`/`SUPER`). Briefly changed to Alt then reverted — keybinds stopped working as expected.
+
+**Sway:** `shared-keybinds.conf` included in `sway/config`. Duplicated binds removed from
+`bindings.conf` and `variables.conf`. `../keybinds` added to sway module imports.
+
+**Hyprland:** `shared-keybinds.conf` sourced in `hyprland.conf`. `$mainMod` renamed to `$mod`
+for consistency. Duplicated binds removed from `hyprland-keybinds.conf`. `../keybinds` added
+to hyprland module imports.
+
+---
+
 ## Current state — 2026-05-24
 
 ### Machines

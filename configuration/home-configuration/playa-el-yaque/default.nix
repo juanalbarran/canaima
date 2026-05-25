@@ -36,6 +36,12 @@
     sshKeyName = "playa-el-yaque";
     terminal = "foot";
     terminalAppId = "foot";
+    auxTerminal = "ghostty";
+    auxTerminalAppId = "com.mitchellh.ghostty";
+    ai = "firefoxpwa site launch 01KS5C2YJE85WR6YP8K4Q584CZ";
+    aiAppId = "FFPWA-01KS5C2YJE85WR6YP8K4Q584CZ";
+    browser = "qutebrowser --target window";
+    browserAppId = "org.qutebrowser.qutebrowser";
     # menu = "wofi";
     isNixOS = false;
     # terminal = "ghostty";

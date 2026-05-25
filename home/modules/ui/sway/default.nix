@@ -9,6 +9,7 @@
 in {
   imports = [
     ./configFiles
+    ../keybinds
   ];
   wayland.windowManager.sway = {
     enable = true;
