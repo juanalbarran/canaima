@@ -29,6 +29,8 @@
     sshKeyName = "playa-caribe";
     terminal = "foot";
     terminalAppId = "foot";
+    browser = "qutebrowser --target window";
+    browserAppId = "org.qutebrowser.qutebrowser";
     menu = "bemenu";
   };
 }

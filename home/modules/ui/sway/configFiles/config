@@ -6,6 +6,7 @@ input "type:keyboard" {
 }
 
 include ~/.config/sway/variables.conf
+include ~/.config/sway/shared-keybinds.conf
 include ~/.config/sway/autostart.conf
 include ~/.config/sway/monitors.conf
 include ~/.config/sway/rules.conf

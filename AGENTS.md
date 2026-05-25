@@ -88,6 +88,7 @@ Check the changes here [changes](./changes.md)
 | `Wallpapers` | [wallpapers](./home/modules/ui/wallpapers/wallpapers.md) | Wallpaper switcher                 |
 | `Waybar`     | [waybar](./home/modules/ui/waybar/waybar.md)             | Status bar for Sway and Hyprland   |
 | `Sway`       | [sway](./home/modules/ui/sway/sway.md)                   | Sway WM user config                |
+| `Keybinds`   | [keybinds](./home/modules/ui/keybinds/keybinds.md)       | Shared keybinds for Sway & Hyprland |
 
 #### Scripts & Menus
 
@@ -120,6 +121,34 @@ Check the changes here [changes](./changes.md)
 | ------------ | ------------------------------------------------- | ------------------------------------- |
 | `Browsers`   | [browsers](./home/modules/browsers/README.md)     | Browser configurations                |
 | `Quickshell` | [quickshell](./home/modules/quickshell/README.md) | Quickshell status bar (Sway/Hyprland) |
+
+### Coding patterns
+
+**KISS — keep modules small and focused.** Each file does one thing. Shared data lives in one place; consumers read from it.
+
+**No repeated code.** If the same structure appears more than twice, extract it:
+- Define a builder function that takes an attrset and returns a string/value.
+- Put the data in a list.
+- Use `map` + `lib.concatStringsSep` to generate the output.
+
+```nix
+mkEntry = { name, value, ... }: "${name} = ${value}";
+entries = [ a b c d ];
+${lib.concatStringsSep "\n" (map mkEntry entries)}
+```
+
+**Pass data as function arguments, not through the module system.** When a `default.nix` needs to share a `vars` attrset with sub-modules, pass it as a curried argument at import time rather than using `_module.args` or option types:
+
+```nix
+imports = [ (import ./sub.nix vars) ];   # sub.nix: vars: { lib, ... }: { ... }
+```
+
+**Optional fields for special cases.** When most items in a list follow the same pattern but a few need variations, add optional fields with defaults rather than branching at the call site:
+
+```nix
+mkEntry = { key, value, extra ? "", ... }: "...";
+specialItem = { key = "x"; value = "y"; extra = "z"; };
+```
 
 ### Key inputs
 
