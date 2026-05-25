@@ -9,6 +9,8 @@ home/modules/scripts/
 ├── bookmarks/
 │   ├── default.nix       # Wraps bookmarks.sh; sources hm-session-vars; injects hostSpec.menu
 │   └── bookmarks.sh      # Two-level menu: category → bookmark → open in browser
+├── keybinds/
+│   └── default.nix       # Generates content at eval time from config.keybinds.*; no shell script
 ├── projects/
 │   ├── default.nix       # Creates "projects" (~/dev) and "projects-ctwo" (~/nix/ctwo/repository)
 │   └── projects.sh       # Recursive dir browser → tmux session with standard windows
@@ -18,7 +20,7 @@ home/modules/scripts/
 ├── system-menu/
 │   ├── default.nix       # Wraps system-menu.sh; injects hostSpec.menu
 │   └── system-menu.sh    # Top-level meta-menu that delegates to sub-actions
-└── default.nix           # Imports all four sub-modules
+└── default.nix           # Imports all five sub-modules
 
 # Related scripts elsewhere:
 home/modules/ui/wallpapers/scripts/
@@ -102,13 +104,31 @@ Toggles dark/light mode. Reads `~/.cache/style/mode`, swaps symlinks under `~/.c
 
 ### `keybinds`
 
-Renders a static keybindings cheat-sheet inside a floating terminal (`foot -a keybinds`). WM-aware: shows a Sway or Hyprland layout depending on `$XDG_CURRENT_DESKTOP` / `$SWAYSOCK`. Waits for a keypress, then exits.
+Two-level interactive cheat-sheet displayed in a floating `foot -a keybinds` terminal. All content is generated at Nix eval time — no runtime parsing. Waits for a keypress, then exits.
 
-Binary: `keybinds-wofi` (defined in `home/modules/menus/wofi/default.nix`).
+**Menu structure:**
 
-**Sway keybinds:**
-- `Super + Shift + /` → direct keybind
-- `Super + d` → system-menu → Keybinds
+```
+Keybinds
+├── System
+│   ├── Applications   (run-or-raise apps from config.keybinds.runOrRaiseApps)
+│   ├── Screenshots    (screenshot + wallpaper binds)
+│   └── Actions        (WM actions: kill, launcher, lock, theme, …)
+└── Neovim
+    ├── General        (oil, neo-tree, splits, folds, fzf, buffers)
+    ├── Surround       (nvim-surround operators + examples)
+    ├── LSP
+    │   ├── Common     (gd, gr, K, rename, code actions, …)
+    │   ├── Java       (jdtls: scaffolding, refactor, codegen, test, maven)
+    │   ├── Rust       (cargo build/run/test/clean)
+    │   ├── C#         (no custom binds — refers to Common)
+    │   └── Web        (vtsls: organize/sort/remove/add imports)
+    └── Debugger       (nvim-dap: continue, step, breakpoints, UI, REPL)
+```
+
+System keybinds are read from `config.keybinds.*` (declared in `home/modules/ui/keybinds/default.nix`). Neovim keybinds are hardcoded in `home/modules/scripts/keybinds/default.nix`. Window dimensions are computed at eval time from the line count of each section.
+
+**Keybind:** `Super + Shift + Y`
 
 ### Screenshot bindings (inline, no script)
 
@@ -136,10 +156,9 @@ This means the scripts never hard-code `wofi` — the menu program is determined
 
 ## Future Improvements
 
-- **`keybinds` — live generation**: instead of a static string in the script, parse the actual sway config files to auto-generate the HUD. This would keep the cheat-sheet in sync automatically when bindings change.
 - **`projects` — session restore**: detect an existing tmux session whose working directory matches the project and reattach, rather than always creating a new one when the name drifts (e.g. after a rename).
 - **`projects` — devenv auto-start**: when a project has `devenv.nix`, optionally run `devenv up` in a dedicated `services` window when the session is first created.
 - **`bookmarks` — edit bookmark files**: add a "New bookmark" option that opens the chosen `.txt` file in `$EDITOR` directly from within the menu flow.
 - **`system-menu` — notifications toggle**: add a quick Do-Not-Disturb toggle (mako `makoctl set-mode dnd`) to the system menu alongside Sound.
 - **`power-menu` — suspend**: add a `Suspend` option (`systemctl suspend`) for laptop lid-close-less suspend.
-- **Unified `scripts/` module**: `keybinds` still lives in `home/modules/menus/wofi/`; migrating it to `home/modules/scripts/` would make the module boundary consistent (one place for all interactive launcher scripts).
+- **`keybinds` — Neovim sync**: Neovim keybinds are currently hardcoded; they could be read from `config.neovim.keybinds.*` options if those are ever declared in the neovim module.
