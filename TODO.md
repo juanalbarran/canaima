@@ -6,6 +6,24 @@
 
 ## Solved Bugs
 
+#### Swaylock PAM authentication failure — Fixed 2026-05-26
+
+Screen locked but correct password was always rejected. Full investigation and fix in `changes.md`.
+
+**Root cause:** Swaylock links to Nix's `libpam`, which does not support Ubuntu's `@include`
+directive. `/etc/pam.d/swaylock` included `login`, which uses `@include common-auth` — Nix's
+libpam hit `@include`, logged `illegal module type`, fell through to `pam_deny`, and rejected
+every password.
+
+**Fixes:**
+- `/etc/pam.d/swaylock` rewritten to `auth include common-auth` (skips `login` entirely).
+- Activation script in `swaylock/default.nix` extended to write that file on every `home-manager switch`.
+- Typo `scalling` → `scaling` in swaylock settings.
+
+---
+
+- **Wallpaper not set on login via display manager** — Fixed 2026-05-26. `autostart.conf` had `exec_always $wallpaper` but `$wallpaper` was never defined as a sway variable, so the line executed nothing. The wallpaper was only set by the systemd timer (which fires 10 s after boot, before `SWAYSOCK` is available). Fix: added `set $wallpaper ${path}wallpaper` to `variables.conf` in `configFiles/default.nix`, following the same pattern as `$swaymsg`. Now `exec_always $wallpaper` fires immediately when Sway starts (including DM-launched sessions), with `SWAYSOCK` available in the sway exec environment.
+
 - **Sway dual-monitor / lid-close on Ubuntu (`playa-el-yaque`)** — Fixed 2026-05-26. Two symptoms:
   1. **Wrong active output:** `eDP-1` stayed active after lid close; new windows opened on the invisible laptop screen.
   2. **Workspace numbering gaps:** Workspaces interleaved across both outputs (1, 3, 5 on one; 2, 4, 6 on the other). After lid close only the external monitor's half remained reachable.

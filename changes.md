@@ -244,6 +244,59 @@ sudo nixos-rebuild switch --flake .#canaima
 1. **Waybar workspace indicator blank** — fix implemented in git, needs `home-manager switch`
    on `playa-el-yaque` and `nixos-rebuild` on `canaima` to deploy.
 
+#### Swaylock PAM authentication failure — Fixed (2026-05-26)
+
+**Symptom:** Screen locked successfully but the correct password was always rejected.
+
+**Investigation steps:**
+
+1. Read `home/modules/ui/swaylock/default.nix` — confirmed the PAM wrapper activation
+   script was present and the `unix_chkpwd` symlink fix was already deployed.
+
+2. Verified `/run/wrappers/bin/unix_chkpwd → /sbin/unix_chkpwd` existed and
+   `/sbin/unix_chkpwd` was setgid shadow (`-rwxr-sr-x root shadow`) — correct.
+
+3. Checked which `libpam` swaylock links to:
+   ```
+   ldd ~/.nix-profile/bin/swaylock | grep pam
+   → libpam.so.0 => /nix/store/.../linux-pam-1.7.1/lib/libpam.so.0
+   ```
+   Swaylock uses **Nix's libpam**, not the system one.
+
+4. Confirmed Nix's libpam loads PAM modules from its own store path
+   (`/nix/store/.../linux-pam-1.7.1/lib/security/`) and that its `pam_unix.so`
+   hardcodes `/run/wrappers/bin/unix_chkpwd` — consistent with the existing fix.
+
+5. Checked `/etc/pam.d/swaylock` — contained `auth include login`.
+
+6. Checked `/etc/pam.d/login` — it uses `@include common-auth` (a Debian/Ubuntu PAM
+   preprocessor extension).
+
+7. Found the smoking gun in journald:
+   ```
+   swaylock[13570]: PAM (swaylock) illegal module type: @include
+   swaylock[13570]: PAM pam_parse: expecting return value; [...common-auth]
+   ```
+   Nix's libpam does **not** support `@include`. The chain
+   `swaylock → login → @include common-auth` failed silently at the `@include`
+   directive, PAM fell through to `pam_deny`, and every password attempt was rejected.
+
+8. Also found: `swaylock: unrecognized option '--scalling=fill'` — a typo in the
+   swaylock settings (`scalling` instead of `scaling`) that caused failures when
+   options were passed as CLI flags.
+
+**Fixes applied:**
+
+- **Immediate:** Wrote `/etc/pam.d/swaylock` with `auth include common-auth` directly,
+  bypassing `login` and its `@include` directives. Nix's libpam can parse `include` as
+  a module type but not `@include`.
+
+- **Persistent (in `swaylock/default.nix`):** Extended the `swaylockPamWrappers`
+  activation script to also write `/etc/pam.d/swaylock` with the correct content on
+  every `home-manager switch`, so it survives future rebuilds.
+
+- **Typo fix:** `scalling = "fill"` → `scaling = "fill"` in swaylock settings.
+
 2. ~~**`wayland.windowManager.sway.enable` not set**~~ — **Fixed.** `enable = true` and
    `package = pkgs.sway` added to `home/modules/ui/sway/default.nix`. Applied on
    `playa-el-yaque`.

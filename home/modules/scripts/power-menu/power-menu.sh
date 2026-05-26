@@ -47,7 +47,7 @@ case $ACTION in
         if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
             hyprlock
         else
-            swaylock -C ~/.config/sway/lock_config
+            swaylock
         fi
         ;;
     *"Logout") loginctl terminate-user "$USER" ;;
