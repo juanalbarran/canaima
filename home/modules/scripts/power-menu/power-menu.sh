@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/usr/bin:/usr/local/bin:$PATH"
 
 # --- Parameter Parser ---
 if [ "$#" -lt 1 ]; then
