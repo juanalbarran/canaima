@@ -119,7 +119,7 @@
       lock = {
         keybind = "$mod+Ctrl+q";
         name = "Lock screen";
-        sway = "exec swaylock --image $(cat ~/.cache/style/current_wallpaper)";
+        sway = "exec ${path}swaylock --image $(cat ~/.cache/style/current_wallpaper)";
         hypr = "exec, $lock";
       };
       theme = {
@@ -147,7 +147,7 @@
       exit = {
         keybind = "$mod+Shift+e";
         name = "Exit session";
-        sway = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
+        sway = "exec ${path}swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' '${path}swaymsg exit'";
         hypr = "exit,";
       };
     };
