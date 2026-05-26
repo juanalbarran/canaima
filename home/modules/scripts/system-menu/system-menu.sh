@@ -2,13 +2,15 @@
 export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
 # --- Parameter Parser ---
-if [ "$#" -lt 1 ]; then
-  echo "Usage: $0 <menu_command> [menu_args...]"
+if [ "$#" -lt 3 ]; then
+  echo "Usage: $0 <terminal> <terminal_app_id> <menu_command> [menu_args...]"
   exit 1
 fi
 
-MENU_CMD=("$@")
-MENU_PROG="$1"
+TERMINAL="$1"
+TERMINAL_APP_ID="$2"
+MENU_CMD=("${@:3}")
+MENU_PROG="${MENU_CMD[0]}"
 
 # Configuration
 CONFIG="$HOME/.config/wofi/config-menu.conf"
@@ -31,6 +33,15 @@ run_menu() {
     else
         echo -e "$input_data" | "${MENU_CMD[@]}"
     fi
+}
+
+term_exec() {
+    local app_id="$1"; shift
+    case "$TERMINAL" in
+       foot)   "$TERMINAL" -a "$app_id" "$@" ;;
+       kitty)  "$TERMINAL" --class "$app_id" -e "$@" ;;
+       *)      "$TERMINAL" "$@" ;;
+    esac
 }
 
 # -------------------------------------------
@@ -72,33 +83,11 @@ case "$SELECTED" in
         fi
         ;;
     *"Keybinds")
-        if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-            kitty --class keybinds -e keybinds
-        else
-            foot -a keybinds keybinds
-        fi
+        keybinds
         ;;
-    *"Bluetooth")
-        if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-            kitty --class bluetooth-tui -e bluetuith
-        else
-            foot -a bluetooth-tui -e bluetuith
-        fi
-        ;;
-    *"Sound")
-        if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-            kitty --class pulsemixer -e pulsemixer
-        else
-            foot -a pulsemixer -e pulsemixer
-        fi
-        ;;
-    *"Network")
-        if [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
-            kitty --class network -e gazelle
-        else
-            foot -a network -e gazelle
-        fi
-        ;;
+    *"Bluetooth") term_exec bluetooth-tui bluetuith ;;
+    *"Sound") term_exec pulsemixer pulsemixer ;;
+    *"Network") term_exec network gazelle ;;
     *"Power")
         # Call the standalone power menu script we are about to make, passing the same menu args!
         power-menu "${MENU_CMD[@]}"
