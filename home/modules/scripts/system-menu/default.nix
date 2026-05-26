@@ -5,6 +5,8 @@
   ...
 }: let
   menu = config.hostSpec.menu;
+  terminal = config.hostSpec.terminal;
+  terminalAppId = config.hostSpec.terminalAppId;
   system-menu-base = pkgs.writeShellScriptBin "system-menu-base" (builtins.readFile ./system-menu.sh);
 
   # System menu wrapper
@@ -16,7 +18,7 @@
     fi
 
     export BEMENU_BACKEND=wayland
-    exec ${system-menu-base}/bin/system-menu-base ${menu}
+    exec ${system-menu-base}/bin/system-menu-base ${terminal} ${terminalAppId} ${menu}
   '';
 in {
   home.packages = [
