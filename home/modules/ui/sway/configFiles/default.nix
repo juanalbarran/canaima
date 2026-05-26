@@ -19,8 +19,9 @@ in {
       set $up k
       set $right l
 
-      # swaymsg needs full path — sway's exec environment only has the system PATH
+      # these binaries need full path — sway's exec environment only has the system PATH
       set $swaymsg ${path}swaymsg
+      set $wallpaper ${path}wallpaper
     '';
     "sway/autostart.conf".source = ./autostart.conf;
     "sway/bindings.conf".source = ./bindings.conf;

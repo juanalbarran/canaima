@@ -10,6 +10,7 @@ in {
   };
   security.polkit.enable = true;
   security.rtkit.enable = true;
+  security.pam.services.swaylock = {};
   xdg.portal = {
     enable = true;
     wlr.enable = true; # Wayland reference portal (needed for screensharing)

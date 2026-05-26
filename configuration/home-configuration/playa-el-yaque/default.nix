@@ -9,6 +9,7 @@
     ./../../../home/modules/ui/waybar
     ./../../../home/modules/ui/wallpapers
     ./../../../home/modules/ui/themes
+    ./../../../home/modules/ui/swaylock
     # browsers
     ./../../../home/modules/browsers
     # terminals
