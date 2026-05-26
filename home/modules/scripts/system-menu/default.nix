@@ -23,5 +23,6 @@
 in {
   home.packages = [
     system-menu
+    pkgs.bluetuith
   ];
 }

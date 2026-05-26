@@ -108,10 +108,14 @@
     CONFIG="$HOME/.config/wofi/config-menu.conf"
     STYLE="$HOME/.config/wofi/style.css"
 
+    # Wofi layout constants — must match themes/templates/wofi.nix
+    FONT_SIZE=18 TEXT_MARGIN=5 WINDOW_PADDING=20 OUTER_PADDING=10 BORDER_WIDTH=2
     get_height() {
         local line_count
         line_count=$(echo -e "$1" | wc -l)
-        echo $(( (line_count * 32) + 28 ))
+        local row_h=$(( FONT_SIZE + TEXT_MARGIN * 2 ))
+        local overhead=$(( (OUTER_PADDING + BORDER_WIDTH) * 2 ))
+        echo $(( (line_count * row_h) + overhead ))
     }
 
     run_menu() {
