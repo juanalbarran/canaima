@@ -9,7 +9,6 @@ in {
     matchBlocks = {
       "*" = {
         addKeysToAgent = "yes";
-        identityFile = "~/.ssh/${sshKeyName}";
       };
       "github.com" = {
         hostname = "github.com";
@@ -20,6 +19,12 @@ in {
         hostname = "github.com";
         user = "git";
         identityFile = "~/.ssh/nix";
+        identitiesOnly = true;
+      };
+      "github-ctwo" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/ctwo";
         identitiesOnly = true;
       };
     };
