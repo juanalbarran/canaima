@@ -1,7 +1,7 @@
 scheme: ''
   * {
     font-family: "JetBrains Mono Nerd Font", monospace;
-    font-size: 18px;
+    font-size: 16px;
   }
 
   window {
