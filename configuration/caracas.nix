@@ -7,6 +7,8 @@
     ./../nixos/modules/ui/dwl
     # laptops
     ./../nixos/modules/common/laptop.nix
+    # games
+    ./../nixos/modules/game
     # users
     ./../nixos/users/juan.nix
   ];
