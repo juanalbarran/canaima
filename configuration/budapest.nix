@@ -5,6 +5,8 @@
     ./../nixos/modules/ui/sway
     # fonts, boot, localization, networking, experimental-features
     ./../nixos/modules/common
+    # game
+    ./../nixos/modules/game/steam
     # user
     ./../nixos/users/juan.nix
   ];
