@@ -15,7 +15,7 @@
     ./../../../home/modules/ui/themes
     ./../../../home/modules/kanshi # -> do i really use this?
     # menu
-    ./../../../home/modules/menus/bemenu
+    ./../../../home/modules/menus/wofi
     # scripts
     ./../../../home/modules/scripts
     # the good opencode
@@ -38,7 +38,7 @@
     aiAppId = "FFPWA-01KS5C2YJE85WR6YP8K4Q584CZ";
     browser = "qutebrowser --target window";
     browserAppId = "org.qutebrowser.qutebrowser";
-    menu = "bemenu";
+    menu = "wofi";
     isNixOS = true;
     windowManager = "sway";
   };
