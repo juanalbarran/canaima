@@ -32,7 +32,7 @@ brave="$(command -v brave || command -v brave-browser || true)"
 brave_id="brave-browser"
 
 # Wofi layout constants — must match themes/templates/wofi.nix
-FONT_SIZE=18         # * { font-size }
+FONT_SIZE=16         # * { font-size }
 TEXT_MARGIN=5        # #text { margin }
 WINDOW_PADDING=20    # window { padding }
 OUTER_PADDING=10     # #outer-box { padding }
@@ -43,7 +43,7 @@ get_height() {
     line_count=$(echo -e "$1" | wc -l)
     local row_h=$(( FONT_SIZE + TEXT_MARGIN * 2 ))
     local overhead=$(( (OUTER_PADDING + BORDER_WIDTH) * 2 ))
-    echo $(( (line_count * row_h) + overhead ))
+    echo $(( (( line_count + 2) * row_h) + overhead ))
 }
 
 # --- MENU WRAPPER FUNCTION ---
