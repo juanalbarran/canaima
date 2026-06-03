@@ -26,6 +26,13 @@ in {
     "sway/autostart.conf".source = ./autostart.conf;
     "sway/bindings.conf".source = ./bindings.conf;
     "sway/monitors.conf".source = ./monitors.conf;
-    "sway/rules.conf".source = ./rules.conf;
+    "sway/rules.conf".text = (builtins.readFile ./rules.conf) + ''
+
+      # Workspace assignments
+      assign [app_id="${config.hostSpec.terminalAppId}"] workspace 1
+      assign [app_id="${config.hostSpec.browserAppId}"] workspace 2
+      assign [app_id="${config.keybinds.runOrRaiseApps.chrome.appId}"] workspace 4
+      assign [app_id="${config.keybinds.runOrRaiseApps.slack.appId}"] workspace 5
+    '';
   };
 }
