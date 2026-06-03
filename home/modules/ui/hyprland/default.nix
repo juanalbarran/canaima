@@ -17,7 +17,14 @@
     "hypr/hyprland-autostart.conf".source = ./hyprland-autostart.conf;
     "hypr/hyprland-keybinds.conf".source = ./hyprland-keybinds.conf;
     "hypr/hyprland-workspaces.conf".source = ./hyprland-workspaces.conf;
-    "hypr/hyprland-rules.conf".source = ./hyprland-rules.conf;
+    "hypr/hyprland-rules.conf".text = (builtins.readFile ./hyprland-rules.conf) + ''
+
+      # Workspace assignments
+      windowrulev2 = workspace 1 silent, class:^(${config.hostSpec.terminalAppId})$
+      windowrulev2 = workspace 2 silent, class:^(${config.hostSpec.browserAppId})$
+      windowrulev2 = workspace 4 silent, class:^(${config.keybinds.runOrRaiseApps.chrome.appId})$
+      windowrulev2 = workspace 5 silent, class:^(${config.keybinds.runOrRaiseApps.slack.appId})$
+    '';
   };
   xdg.dataFile."wayland-sessions/hyprland.desktop" = lib.mkIf (!config.hostSpec.isNixOS) {
     text = ''
