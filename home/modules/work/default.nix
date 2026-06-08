@@ -8,6 +8,6 @@
   ];
   home.sessionPath = [
     "$HOME/.ctwo/bin"
-    "$HOMR/.local/bin"
+    "$HOME/.local/bin"
   ];
 }
