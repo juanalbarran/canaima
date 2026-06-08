@@ -23,11 +23,25 @@ devenv_path="devenv"
 current_path="$projects_path"
 
 while true; do
-    selected_name=$(find "$current_path" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | "$@")
+    subdirs=$(find "$current_path" -mindepth 1 -maxdepth 1 -type d ! -name '.*' -printf "%f\n")
+
+    if [ -f "$current_path/devenv.nix" ] || [ -d "$current_path/.git" ]; then
+        current_name=$(basename "$current_path")
+        selected_name=$(printf "%s\n%s" "$current_name" "$subdirs" | "$@")
+    else
+        current_name=""
+        selected_name=$(echo "$subdirs" | "$@")
+    fi
 
     # Safety check: exit if user press escape
     if [ -z "$selected_name" ]; then
         exit 0
+    fi
+
+    # User selected the current directory itself as the project
+    if [ -n "$current_name" ] && [ "$selected_name" = "$current_name" ]; then
+        selected_path="$current_path"
+        break
     fi
 
     selected_path="$current_path/$selected_name"
@@ -40,7 +54,15 @@ while true; do
     fi
 done
 
-relative_path="${selected_path#$projects_path/}"
+selected_path=$(realpath "$selected_path")
+real_projects_path=$(realpath "$projects_path")
+
+if [ "$selected_path" = "$real_projects_path" ]; then
+    relative_path=$(basename "$selected_path")
+else
+    relative_path="${selected_path#$real_projects_path/}"
+fi
+
 session_name=$(echo "$relative_path" | tr '/' '_' | tr '.' '_')
 
 # --- Check tmux session exists ---
