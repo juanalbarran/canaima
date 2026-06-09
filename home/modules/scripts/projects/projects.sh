@@ -25,7 +25,7 @@ current_path="$projects_path"
 while true; do
     subdirs=$(find "$current_path" -mindepth 1 -maxdepth 1 -type d ! -name '.*' -printf "%f\n")
 
-    if [ -f "$current_path/devenv.nix" ] || [ -d "$current_path/.git" ]; then
+    if [ -f "$current_path/devenv.nix" ] || [ -f "$current_path/.tmux-init.conf" ]; then
         current_name=$(basename "$current_path")
         selected_name=$(printf "%s\n%s" "$current_name" "$subdirs" | "$@")
     else
@@ -47,7 +47,7 @@ while true; do
     selected_path="$current_path/$selected_name"
 
     # check for .git directory or devenv.nix to identify a project directory
-    if [ -d "$selected_path/.git" ] || [ -f "$selected_path/devenv.nix" ]; then
+    if [ -d "$selected_path/.git" ] || [ -f "$selected_path/.tmux-init.conf" ] || [ -f "$selected_path/devenv.nix" ]; then
         break
     else
         current_path="$selected_path"
