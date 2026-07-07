@@ -38,5 +38,6 @@ in {
     "bookmarks/dotfiles.txt".source = ./../../../assets/bookmarks/dotfiles.txt;
     "bookmarks/blogs.txt".source = ./../../../assets/bookmarks/blogs.txt;
     "bookmarks/java.txt".source = ./../../../assets/bookmarks/java.txt;
+    "bookmarks/repositories.txt".source = ./../../../assets/bookmarks/repositories.txt;
   };
 }
