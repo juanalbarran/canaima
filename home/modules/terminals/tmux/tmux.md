@@ -47,11 +47,17 @@ Colours are overridden at runtime by the theme system (see below).
 | ------------ | ----------------------- |
 | `M-{`        | Previous window         |
 | `M-}`        | Next window             |
+| `C-b x`      | Kill pane (confirms)    |
+| `C-b X`      | Kill session (confirms) |
 | `v` (copy)   | Begin selection (vi)    |
 | `y` (copy)   | Copy selection and exit |
 
 `M-{` / `M-}` are bound without a prefix so they work the same as Ghostty's native
 window-switch shortcuts — Ghostty forwards them to tmux transparently.
+
+`C-b x` keeps tmux's default `kill-pane` behaviour; `C-b X` adds `kill-session` alongside
+it. Both are wrapped in `confirm-before` — `kill-session` destroys every window and pane
+in the session, and exits tmux if it is the last one.
 
 ## Theme Integration
 
