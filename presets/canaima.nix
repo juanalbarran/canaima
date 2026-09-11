@@ -6,11 +6,13 @@ in {
   flake.modules.nixos.canaima = {
     imports = [
       nixos.core
+      nixos.juan
     ];
   };
   flake.modules.homeManager.canaima = {
     imports = [
       home.core
+      home.juan
     ];
   };
 }

@@ -16,6 +16,10 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 │   ├── canaima.nix
 │   └── sarisarinama.nix
 ├── hosts/                  machines, and only what is true of one machine
+├── users/                  users, the main one, my personal, and those related with work
+│   ├── juan.nix
+│   └── work/
+│       └── nix.nix
 ├── flake.nix
 └── flake.lock
 ```

@@ -17,6 +17,6 @@
   };
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} (
-      inputs.import-tree [./modules ./presets ./hosts]
+      inputs.import-tree [./modules ./presets ./hosts ./users]
     );
 }
