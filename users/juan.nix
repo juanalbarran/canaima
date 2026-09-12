@@ -1,20 +1,18 @@
 # ./users/juan.nix
-{config, ...}: let
-  specs = config.specs;
-in {
+{
   flake.modules.nixos.juan = {
     users.users.juan = {
       isNormalUser = true;
-      description = specs.fullname;
+      description = "Juan Jesus Albarran Rodriguez";
       extraGroups = ["networkmanager" "wheel" "video"];
     };
-    nix.settings.trusted-users = ["root" specs.user];
+    nix.settings.trusted-users = ["root" "juan"];
   };
-  flake.modules.homeManager.juan = {
+  flake.modules.homeManager.juan = {config, ...}: {
     home = {
-      username = specs.user;
+      username = "juan";
       homeDirectory = "/home/juan";
-      stateVersion = specs.stateVersion;
+      stateVersion = config.hostspec.stateVersion;
     };
   };
 }

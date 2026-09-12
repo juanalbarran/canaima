@@ -1,6 +1,6 @@
 # ./modules/core/state-version.nix
-{config, ...}: {
-  flake.modules.nixos.core = {
-    system.stateVersion = config.specs.stateVersion;
+{
+  flake.modules.nixos.core = {config, ...}: {
+    system.stateVersion = config.hostspec.stateVersion;
   };
 }

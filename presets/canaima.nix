@@ -7,12 +7,15 @@ in {
     imports = [
       nixos.core
       nixos.juan
+      nixos.hostspec
     ];
+    home-manager.users.juan.imports = [home.canaima];
   };
   flake.modules.homeManager.canaima = {
     imports = [
       home.core
       home.juan
+      home.hostspec
     ];
   };
 }
