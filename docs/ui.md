@@ -27,7 +27,7 @@ The window manager for the applications will follow the `run or raise` philosoph
 ## UI Suite
 
 The ui suite will contain several applications made with `quickshell` to ensure consistency between the whole `ui`
-The inspiration is the `omarchy` menu and ui applications.
+The inspiration is the [omarchy](https://github.com/omacom/omarchy) menu and ui applications.
 This will contain
 
 - Menu

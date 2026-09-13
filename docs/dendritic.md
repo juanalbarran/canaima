@@ -11,6 +11,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 ├── modules/                features — the bulk of the config
 │   ├── core/
 │   ├── ui/
+│   ├── meta/
 │   └── workspace/
 ├── presets/                named bundles of features
 │   ├── canaima.nix
@@ -20,7 +21,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 ├── users/                  users, the main one, my personal, and those related with work
 │   ├── juan.nix
 │   └── work/
-│       └── nix.nix
+│       └── juan-albarran.nix
 ├── flake.nix
 └── flake.lock
 ```
@@ -31,6 +32,16 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 | ------------ | ------------- | -------------------------------------- |
 | Canaima      | juan          | It's the preset for my personal laptop |
 | Sarisarinama | juan-albarran | It's the preset for my work laptop     |
+
+#### Canaima
+
+Canaima will contain the configuration for my personal laptop.
+The more important thing about this is that my personal laptop will run `NixOS`
+
+#### Sarirsarinama
+
+This preset will be used for all the laptops that i'll use that uses linux and dont use the `NixOS` distribution.
+It contains it's own [document](./sarisarinama.md)
 
 ### Modules
 
