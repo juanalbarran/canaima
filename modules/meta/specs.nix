@@ -16,6 +16,11 @@
         default = "26.05";
         description = "State version for both nixos and home-manager";
       };
+      isNixOS = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Indicates if the OS is NixOS or any other distribution";
+      };
     };
   };
 in {

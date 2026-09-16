@@ -8,6 +8,8 @@ in {
       nixos.core
       nixos.juan
       nixos.hostspec
+      nixos.sway
+      nixos.ui
     ];
     home-manager.users.juan.imports = [home.canaima];
   };
@@ -16,6 +18,8 @@ in {
       home.core
       home.juan
       home.hostspec
+      home.sway
+      home.ui
     ];
   };
 }
