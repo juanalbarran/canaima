@@ -15,7 +15,7 @@
     nix-claude-code.url = "github:ryoppippi/nix-claude-code";
     sops-nix = {
       url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     secrets = {
       url = "git+ssh://git@github.com/juanalbarran/fortin-de-la-galera.git";

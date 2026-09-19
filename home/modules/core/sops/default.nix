@@ -15,6 +15,7 @@ in {
     inputs.sops-nix.homeManagerModules.sops
   ];
   sops = {
+    package = inputs.sops-nix.packages.${pkgs.system}.sops-install-secrets;
     age.keyFile = "${homePath}/.config/sops/age/keys.txt";
     #age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
     defaultSopsFile = "${secretsPath}/secrets.yaml";
