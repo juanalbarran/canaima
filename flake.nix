@@ -21,6 +21,7 @@
       url = "git+ssh://git@github.com/juanalbarran/fortin-de-la-galera.git";
       flake = false;
     };
+    herdr.url = "github:herdrdev/herdr/v0.9.1";
   };
 
   outputs = {

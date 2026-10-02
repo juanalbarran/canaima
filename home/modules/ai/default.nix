@@ -18,6 +18,7 @@ in {
   home.packages = with pkgs; [
     opencode-wrapped # Use the wrapped version here!
     inputs.nix-claude-code.packages.${system}.default
+    inputs.herdr.packages.${system}.default
     ollama
   ];
 }
