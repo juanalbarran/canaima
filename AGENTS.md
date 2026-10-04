@@ -82,37 +82,43 @@ Check the changes here [changes](./changes.md)
 
 #### UI
 
-| Module       | Doc                                                      | Description                        |
-| ------------ | -------------------------------------------------------- | ---------------------------------- |
-| `Themes`     | [themes](./home/modules/ui/themes/themes.md)             | Base16 theme switcher (dark/light) |
-| `Wallpapers` | [wallpapers](./home/modules/ui/wallpapers/wallpapers.md) | Wallpaper switcher                 |
-| `Waybar`     | [waybar](./home/modules/ui/waybar/waybar.md)             | Status bar for Sway and Hyprland   |
-| `Sway`       | [sway](./home/modules/ui/sway/sway.md)                   | Sway WM user config                |
+| Module       | Doc                                                      | Description                         |
+| ------------ | -------------------------------------------------------- | ----------------------------------- |
+| `Themes`     | [themes](./home/modules/ui/themes/themes.md)             | Base16 theme switcher (dark/light)  |
+| `Wallpapers` | [wallpapers](./home/modules/ui/wallpapers/wallpapers.md) | Wallpaper switcher                  |
+| `Waybar`     | [waybar](./home/modules/ui/waybar/waybar.md)             | Status bar for Sway and Hyprland    |
+| `Sway`       | [sway](./home/modules/ui/sway/sway.md)                   | Sway WM user config                 |
 | `Keybinds`   | [keybinds](./home/modules/ui/keybinds/keybinds.md)       | Shared keybinds for Sway & Hyprland |
 
 #### Scripts & Menus
 
-| Module    | Doc                                              | Description                                  |
-| --------- | ------------------------------------------------ | -------------------------------------------- |
-| `Scripts` | [scripts](./home/modules/scripts/scripts.md)     | Nix-wrapped launcher scripts (menu-agnostic) |
-| `Menus`   | [menus](./home/modules/menus/menus.md)           | wofi / bemenu backends; active set via `hostSpec.menu` |
+| Module    | Doc                                          | Description                                            |
+| --------- | -------------------------------------------- | ------------------------------------------------------ |
+| `Scripts` | [scripts](./home/modules/scripts/scripts.md) | Nix-wrapped launcher scripts (menu-agnostic)           |
+| `Menus`   | [menus](./home/modules/menus/menus.md)       | wofi / bemenu backends; active set via `hostSpec.menu` |
 
 #### Terminals
 
-| Module  | Doc                                                          | Description                        |
-| ------- | ------------------------------------------------------------ | ---------------------------------- |
-| `Tmux`  | [tmux](./home/modules/terminals/tmux/tmux.md)                | Tmux config, status bar, keybinds  |
+| Module | Doc                                           | Description                       |
+| ------ | --------------------------------------------- | --------------------------------- |
+| `Tmux` | [tmux](./home/modules/terminals/tmux/tmux.md) | Tmux config, status bar, keybinds |
 
 #### TUI Tools
 
-| Module    | Doc                                                     | Description                        |
-| --------- | ------------------------------------------------------- | ---------------------------------- |
-| `Gazelle` | [gazelle](./home/modules/tui/gazelle/gazelle.md)        | Network manager TUI                |
+| Module    | Doc                                              | Description         |
+| --------- | ------------------------------------------------ | ------------------- |
+| `Gazelle` | [gazelle](./home/modules/tui/gazelle/gazelle.md) | Network manager TUI |
+
+#### Games
+
+| Module  | Doc                                    | Description                                               |
+| ------- | -------------------------------------- | --------------------------------------------------------- |
+| `Games` | [games](./home/modules/games/games.md) | Lutris (Battle.net/WoW) + 32-bit GPU drivers on non-NixOS |
 
 #### Security
 
-| Module | Doc                                        | Description                     |
-| ------ | ------------------------------------------ | ------------------------------- |
+| Module | Doc                                      | Description                     |
+| ------ | ---------------------------------------- | ------------------------------- |
 | `Sops` | [sops](./home/modules/core/sops/sops.md) | Secrets management via sops-nix |
 
 #### Other
@@ -127,6 +133,7 @@ Check the changes here [changes](./changes.md)
 **KISS — keep modules small and focused.** Each file does one thing. Shared data lives in one place; consumers read from it.
 
 **No repeated code.** If the same structure appears more than twice, extract it:
+
 - Define a builder function that takes an attrset and returns a string/value.
 - Put the data in a list.
 - Use `map` + `lib.concatStringsSep` to generate the output.
@@ -152,13 +159,17 @@ specialItem = { key = "x"; value = "y"; extra = "z"; };
 
 ### Key inputs
 
-| Input                  | Purpose                                          |
-| ---------------------- | ------------------------------------------------ |
-| `kukenan`              | Personal Neovim config flake                     |
-| `xremap-flake`         | Key remapping (used in home modules)             |
-| `sops-nix` + `secrets` | Secrets management via SSH-accessed private repo |
+| Input                  | Purpose                                              |
+| ---------------------- | ---------------------------------------------------- |
+| `kukenan`              | Personal Neovim config flake                         |
+| `xremap-flake`         | Key remapping (used in home modules)                 |
+| `sops-nix` + `secrets` | Secrets management via SSH-accessed private repo     |
 | `gazelle`              | Gazelle network TUI (`github:Zeus-Deus/gazelle-tui`) |
-| `nix-claude-code`      | Claude Code Nix package                          |
-| `nixpkgs-unstable`     | Passed as `pkgs-unstable` for select packages    |
+| `nix-claude-code`      | Claude Code Nix package                              |
+| `nixpkgs-unstable`     | Passed as `pkgs-unstable` for select packages        |
 
 `pkgs-unstable` is threaded through `specialArgs` / `extraSpecialArgs` — use it in modules via the function argument, not by importing nixpkgs again.
+
+## Behavior
+
+Your goal is to teach. You are expert in Nix, NixOS, bash, and linux.

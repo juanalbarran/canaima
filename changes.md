@@ -5,6 +5,50 @@ of significant work sessions so future Claude Code sessions can pick up context 
 
 ---
 
+## Current state — 2026-10-04
+
+### Games module: Lutris + 32-bit GPU drivers (playa-el-yaque) — 2026-10-04
+
+Goal: play World of Warcraft (via Battle.net) on `playa-el-yaque`. See
+`home/modules/games/games.md`.
+
+**New module `home/modules/games/`**, imported only in `playa-el-yaque`:
+- `default.nix` — installs `pkgs-unstable.lutris`. Stable (nixos-25.11) ships 0.5.19, and the
+  Lutris servers flagged it as "no longer supported" (they expect 0.5.22).
+- `gpu-32.nix` — 32-bit version of HM's `targets.genericLinux.gpu`, wrapped in
+  `lib.mkIf (!config.hostSpec.isNixOS)`.
+
+**Bug found:** the Battle.net installer failed with
+`DxvkInstance::createInstance: Failed to create Vulkan instance`. Root cause:
+`Battle.net-Setup.exe` is a 32-bit (PE32) program, and on Ubuntu HM only links 64-bit Mesa to
+`/run/opengl-driver`. Nothing provided `/run/opengl-driver-32`. Reproduced with a 32-bit
+`vulkaninfo` inside the Lutris sandbox (`Found no drivers!`), and confirmed it found the
+Iris Xe when pointed at `pkgsi686Linux.mesa`.
+
+**Fix:** `gpu-32.nix` builds a systemd unit (`non-nixos-gpu-32.service`) that links
+`pkgsi686Linux.mesa` to `/run/opengl-driver-32` at boot, plus a setup script (installs the
+unit and a gcroot) and an activation warning when the link is missing or outdated. Applied:
+
+```bash
+home-manager switch --flake .#playa-el-yaque
+sudo ~/.nix-profile/bin/non-nixos-gpu-32-setup   # one-time; needs a real terminal
+```
+
+Verified: `/run/opengl-driver-32` → `mesa-25.2.6`, service active and in
+`multi-user.target.wants`, 32-bit Vulkan sees the Iris Xe inside the Lutris sandbox.
+Battle.net installer then ran successfully.
+
+**Found along the way (not fixed yet):**
+- `sarisarinama` does not evaluate on `main`: `configuration/caracas.nix` imports
+  `nixos/modules/game`, which has no `default.nix`. With that fixed, a second existing error
+  appears: `config.keybinds` has no `runOrRaiseApps` on `playa-caribe`.
+- Steam (NixOS) lives at `nixos/modules/game/steam`. Proposed renaming to
+  `nixos/modules/games` with a `default.nix` (tested: `canaima` builds identically).
+- Steam on `playa-el-yaque` comes from apt (`steam-installer`), not Nix. A Nix Steam would
+  need the same 32-bit drivers.
+
+---
+
 ## Current state — 2026-05-25
 
 ### Keybinds module — 2026-05-25

@@ -28,6 +28,8 @@
     ./../../../home/users/nix
     # work
     ./../../../home/modules/work
+    # games
+    ./../../../home/modules/games
   ];
   hostSpec = {
     username = "juan-albarran";
