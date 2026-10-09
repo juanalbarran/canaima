@@ -15,16 +15,16 @@ The window manager for the applications will follow the `run or raise` philosoph
 `browser`: `qutebrowser`
 `menu`: `quickshell made menu`
 `ai`: `brave or any headless browser with gemini`
-
-| Application  | Keybind               |
+| Application | Keybind |
 | ------------ | --------------------- |
-| terminal     | `mod` + `q`           |
+| terminal | `mod` + `q` |
 | aux terminal | `shift` + `mod` + `q` |
-| browser      | `mod` + `b`           |
-| ai           | `mod` + `a`           |
-| menu         | `mod` + `d`           |
-
-Keybinds come from two semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`) and `ui.binds` (commands, e.g. the menu). Each WM translates them.
+| browser | `mod` + `b` |
+| ai | `mod` + `a` |
+| menu | `mod` + `d` |
+| projects | `mod` + `p` |
+| close window | `mod` + `c` |
+Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`). Each WM translates them.
 
 ## Login
 

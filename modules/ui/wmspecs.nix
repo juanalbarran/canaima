@@ -67,6 +67,11 @@
         default = {};
         description = "Keybinds that run a command, without run-or-raise";
       };
+      actions.close = lib.mkOption {
+        type = lib.types.submodule {options = bind;};
+        default.key = "c";
+        description = "Keybind that closes the focused window";
+      };
       startup = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];

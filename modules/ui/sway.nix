@@ -25,17 +25,20 @@
       }.${
         config.ui.mod
       };
+    swayMods = {
+      mod = modKey;
+      shift = "Shift";
+      ctrl = "Control";
+    };
     toSway = bind:
       lib.concatStringsSep "+"
-      (map (m:
-          if m == "mod"
-          then modKey
-          else m)
-        bind.mods
-        ++ [bind.key]);
+      (map (m: swayMods.${m}) bind.mods ++ [bind.key]);
     execBinds =
       lib.mapAttrs' (_: b: lib.nameValuePair (toSway b.bind) "exec ${b.command}")
       (config.ui.apps // config.ui.binds);
+    actionBinds = {
+      ${toSway config.ui.actions.close} = "kill";
+    };
   in {
     wayland.windowManager.sway = {
       enable = true;
@@ -47,7 +50,7 @@
         modifier = modKey;
         terminal = config.ui.apps.terminal.command;
         bars = [];
-        keybindings = lib.mkOptionDefault execBinds;
+        keybindings = lib.mkOptionDefault (execBinds // actionBinds);
         startup = map (command: {inherit command;}) config.ui.startup;
       };
     };
