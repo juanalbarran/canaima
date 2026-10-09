@@ -26,6 +26,10 @@ The window manager for the applications will follow the `run or raise` philosoph
 
 Keybinds come from two semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`) and `ui.binds` (commands, e.g. the menu). Each WM translates them.
 
+## Login
+
+`modules/ui/login.nix` (NixOS only) runs greetd. If `hostspec.autologin` is set, the host boots straight into `ui.session.command` as that user, once. After logout, tuigreet asks for a password. `asus` sets `autologin = "juan"`.
+
 ## Shell
 
 The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` only for now). The WM starts it through `ui.startup`, and `mod` + `d` toggles its menu over IPC.

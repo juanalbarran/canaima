@@ -10,6 +10,7 @@ in {
       nixos.hostspec
       nixos.sway
       nixos.ui
+      nixos.login
     ];
     home-manager.users.juan.imports = [home.canaima];
   };

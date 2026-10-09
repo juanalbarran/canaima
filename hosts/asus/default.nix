@@ -13,6 +13,7 @@
         hostspec = {
           hostname = "canaima";
           isDocked = true;
+          autologin = "juan";
         };
       }
     ];

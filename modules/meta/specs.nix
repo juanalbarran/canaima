@@ -21,6 +21,11 @@
         default = true;
         description = "Indicates if the OS is NixOS or any other distribution";
       };
+      autologin = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "User logged in automatically once at boot; null disables it";
+      };
     };
   };
 in {
