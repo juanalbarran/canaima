@@ -33,9 +33,9 @@
           else m)
         bind.mods
         ++ [bind.key]);
-    appBinds =
-      lib.mapAttrs' (_: app: lib.nameValuePair (toSway app.bind) "exec ${app.command}")
-      config.ui.apps;
+    execBinds =
+      lib.mapAttrs' (_: b: lib.nameValuePair (toSway b.bind) "exec ${b.command}")
+      (config.ui.apps // config.ui.binds);
   in {
     wayland.windowManager.sway = {
       enable = true;
@@ -47,7 +47,8 @@
         modifier = modKey;
         terminal = config.ui.apps.terminal.command;
         bars = [];
-        keybindings = lib.mkOptionDefault appBinds;
+        keybindings = lib.mkOptionDefault execBinds;
+        startup = map (command: {inherit command;}) config.ui.startup;
       };
     };
   };

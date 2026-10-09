@@ -58,3 +58,5 @@ Contains all the modules for `ui`. More info here [UI](./ui.md)
 #### Workspace
 
 All the modules for work: editor, multiplexer
+
+- `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.

@@ -24,6 +24,12 @@ The window manager for the applications will follow the `run or raise` philosoph
 | ai           | `mod` + `a`           |
 | menu         | `mod` + `d`           |
 
+Keybinds come from two semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`) and `ui.binds` (commands, e.g. the menu). Each WM translates them.
+
+## Shell
+
+The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` only for now). The WM starts it through `ui.startup`, and `mod` + `d` toggles its menu over IPC.
+
 ## UI Suite
 
 The ui suite will contain several applications made with `quickshell` to ensure consistency between the whole `ui`

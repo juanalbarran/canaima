@@ -20,6 +20,8 @@ in {
       home.hostspec
       home.sway
       home.ui
+      home.editor
+      home.shell
     ];
   };
 }

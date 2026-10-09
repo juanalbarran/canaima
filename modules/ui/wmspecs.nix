@@ -1,5 +1,16 @@
 # ./modules/ui/wmspecs.nix
 {lib, ...}: let
+  bind = {
+    mods = lib.mkOption {
+      type = lib.types.listOf (lib.types.enum ["mod" "shift" "ctrl"]);
+      default = ["mod"];
+      description = "Modifiers of the keybind; 'mod' resolves to ui.mod";
+    };
+    key = lib.mkOption {
+      type = lib.types.str;
+      description = "Key for the keybind";
+    };
+  };
   wmspecs = {
     options.ui = {
       mod = lib.mkOption {
@@ -18,17 +29,7 @@
               type = lib.types.str;
               description = "Wayland app_id, used to match windows for run-or-raise";
             };
-            bind = {
-              mods = lib.mkOption {
-                type = lib.types.listOf (lib.types.enum ["mod" "shift" "ctrl"]);
-                default = ["mod"];
-                description = "Modifiers of the keybind; 'mod' resolves to ui.mod";
-              };
-              key = lib.mkOption {
-                type = lib.types.str;
-                description = "Key for the keybind";
-              };
-            };
+            inherit bind;
           };
         });
         default = {
@@ -52,6 +53,24 @@
           };
         };
         description = "Applications that can be opened by the WM in a run-or-raise action";
+      };
+      binds = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.submodule {
+          options = {
+            command = lib.mkOption {
+              type = lib.types.str;
+              description = "Command the keybind runs";
+            };
+            inherit bind;
+          };
+        });
+        default = {};
+        description = "Keybinds that run a command, without run-or-raise";
+      };
+      startup = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "Commands the WM runs once when the session starts";
       };
       session.command = lib.mkOption {
         type = lib.types.str;

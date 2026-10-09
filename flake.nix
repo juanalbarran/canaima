@@ -14,6 +14,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kukenan.url = "github:juanalbarran/neovim";
+    sarisarinama = {
+      url = "github:juanalbarran/sarisarinama";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+        import-tree.follows = "import-tree";
+      };
+    };
   };
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} (
