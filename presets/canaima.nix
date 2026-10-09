@@ -22,6 +22,7 @@ in {
       home.sway
       home.ui
       home.editor
+      home.multiplexer
       home.shell
     ];
   };
