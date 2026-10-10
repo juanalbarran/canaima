@@ -34,6 +34,12 @@
         type = lib.types.str;
         description = "Sops secret holding the git email, e.g. personal/email";
       };
+      defaultBrowser = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "org.qutebrowser.qutebrowser.desktop";
+        description = "Desktop file xdg-open uses for links and HTML; null leaves mimeapps.list alone";
+      };
     };
   };
 in {

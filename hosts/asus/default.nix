@@ -16,6 +16,7 @@
           autologin = "juan";
           sshKeyName = "playa-el-agua";
           emailSecret = "personal/email";
+          defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
         };
       }
     ];
