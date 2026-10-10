@@ -80,6 +80,7 @@ All the modules for work: editor, multiplexer, terminal
 
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.
 - `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `sarisarinama`.
+- `gh`: GitHub CLI as `juanalbarran`, with no `gh auth login`. `config.yml` comes from Home Manager (`git_protocol: ssh`); `hosts.yml` is a sops template holding `access_tokens/github_token`, so every `gh` on `PATH` (including the one Claude Code brings) uses it. `gh auth switch`/`login` are refused, since the account is config. Imported by `canaima` only; `mucuchies` keeps its own manual login.
 - `terminal`: foot, the main terminal (`ui.apps.terminal`), with JetBrainsMono Nerd Font 12 and 10k lines of scrollback. Colors are foot's defaults until sarisarinama themes it. Imported by `canaima` and `mucuchies`.
   | Action | Keybind |
   | ------------------------------- | ---------------------------- |

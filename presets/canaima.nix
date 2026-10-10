@@ -27,6 +27,7 @@ in {
       shell
       ai
       terminal
+      gh
     ];
   };
 }
