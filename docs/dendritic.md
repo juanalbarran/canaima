@@ -81,6 +81,7 @@ All the AI apps, one directory per app under `modules/ai/`, merged into the `ai`
 One file per browser under `modules/browsers/`, merged into the `browsers` module. Imported by `canaima` and `mucuchies`. Themes come from sarisarinama (not yet).
 
 - `qutebrowser`: the main browser (`ui.apps.browser`). Tabs on top, shown only with more than one. Adblock on, no autoplay. Quickmarks (`b` / `B` + name) and search engines (`o` + keyword): `nix`, `nixo` (NixOS options), `hm`, `g`; anything else goes to DuckDuckGo.
+- `default-browser`: if the host sets `hostspec.defaultBrowser` (a desktop file name), `xdg-open` uses it for links and HTML files (`~/.config/mimeapps.list`). `asus` sets qutebrowser; `mucuchies` leaves it unset, so its own `mimeapps.list` stays.
 
   | Action                | Keybind                              |
   | --------------------- | ------------------------------------ |
