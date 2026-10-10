@@ -13,9 +13,8 @@ in {
       hostspec
       sway
       ui
-      git
       ai
-      terminal
+      workspace
       browsers
       media
     ];

@@ -1,6 +1,6 @@
 # ./modules/workspace/editor.nix
 {inputs, ...}: {
-  flake.modules.homeManager.editor = {pkgs, ...}: let
+  flake.modules.homeManager.workspace = {pkgs, ...}: let
     kukenan = inputs.kukenan.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
   in {
     home.packages = [

@@ -1,6 +1,6 @@
 # ./modules/workspace/git.nix
 {
-  flake.modules.homeManager.git = {config, ...}: {
+  flake.modules.homeManager.workspace = {config, ...}: {
     programs.git = {
       enable = true;
       includes = [{path = config.sops.templates."git-email".path;}];

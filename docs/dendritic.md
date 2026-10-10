@@ -120,7 +120,7 @@ All the modules for work: editor, multiplexer, terminal
 
   An unfocused foot window turns urgent on the bell.
 
-- `multiplexer`: tmux, needed by the sarisarinama project menu. Imported by `canaima`.
+- `multiplexer`: tmux, needed by the sarisarinama project menu. Status bar on top: `[session]` on the left, the window list centred (current bold, others dim), and a blank line under it as a gap. No colours: the theme will come from sarisarinama. Windows and panes start at 1, mouse on, vi copy mode, `y` copies to the system clipboard.
 
   | Action                           | Keybind                        |
   | -------------------------------- | ------------------------------ |
@@ -128,5 +128,5 @@ All the modules for work: editor, multiplexer, terminal
   | next window                      | `alt` + `shift` + `]`          |
   | move window to the previous slot | `ctrl` + `alt` + `shift` + `[` |
   | move window to the next slot     | `ctrl` + `alt` + `shift` + `]` |
-
-  Each is bound under every name a terminal may send for it (`M-{`, `M-S-{`, `M-S-[`), with extended keys enabled for foot and ghostty.
+  | kill pane / session (confirms)   | `ctrl` + `b` then `x` / `X`    |
+  | copy mode: select / copy         | `v` / `y`                      |

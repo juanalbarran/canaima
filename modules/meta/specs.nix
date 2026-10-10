@@ -40,6 +40,11 @@
         example = "org.qutebrowser.qutebrowser.desktop";
         description = "Desktop file xdg-open uses for links and HTML; null leaves mimeapps.list alone";
       };
+      githubUser = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "GitHub account gh logs in as, with the sops token; null leaves gh unmanaged";
+      };
     };
   };
 in {

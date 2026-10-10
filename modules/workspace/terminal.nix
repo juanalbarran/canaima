@@ -1,6 +1,6 @@
 # ./modules/workspace/terminal.nix
 {
-  flake.modules.homeManager.terminal = {pkgs, ...}: {
+  flake.modules.homeManager.workspace = {pkgs, ...}: {
     home.packages = [pkgs.nerd-fonts.jetbrains-mono];
     fonts.fontconfig.enable = true;
     programs.foot = {

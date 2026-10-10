@@ -21,13 +21,9 @@ in {
       hostspec
       sway
       ui
-      editor
-      multiplexer
-      git
       shell
       ai
-      terminal
-      gh
+      workspace
       browsers
       media
     ];
