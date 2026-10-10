@@ -9,6 +9,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 ├── docs/                   reference for humans and AI agents
 │   └── dendritic.md
 ├── modules/                features — the bulk of the config
+│   ├── ai/
 │   ├── core/
 │   ├── ui/
 │   ├── meta/
@@ -62,6 +63,16 @@ This is the `core` module, contains the modules that are core in nixos and nix c
 #### UI
 
 Contains all the modules for `ui`. More info here [UI](./ui.md)
+
+#### AI
+
+All the AI apps, one directory per app under `modules/ai/`, merged into the `ai` module. Imported by `canaima` and `mucuchies`.
+
+- `claude-code`: [Claude Code](https://claude.com/claude-code) through Home Manager's `programs.claude-code`, with the binary from the [nix-claude-code](https://github.com/ryoppippi/nix-claude-code) flake input (official prebuilt, newer than nixpkgs). Update it with `nix flake update nix-claude-code`.
+
+| Command  | Source                                 | Description                              |
+| -------- | -------------------------------------- | ---------------------------------------- |
+| `/issue` | `modules/ai/claude/_commands/issue.md` | Show a GitHub issue and start solving it |
 
 #### Workspace
 

@@ -14,6 +14,7 @@ in {
       home.sway
       home.ui
       home.git
+      home.ai
     ];
   };
   flake.homeConfigurations.mucuchies = inputs.home-manager.lib.homeManagerConfiguration {

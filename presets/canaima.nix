@@ -25,6 +25,7 @@ in {
       home.multiplexer
       home.git
       home.shell
+      home.ai
     ];
   };
 }

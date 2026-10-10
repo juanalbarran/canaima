@@ -14,6 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kukenan.url = "github:juanalbarran/neovim";
+    nix-claude-code = {
+      url = "github:ryoppippi/nix-claude-code";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sarisarinama = {
       url = "github:juanalbarran/sarisarinama";
       inputs = {
