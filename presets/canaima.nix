@@ -4,28 +4,29 @@
   home = config.flake.modules.homeManager;
 in {
   flake.modules.nixos.canaima = {
-    imports = [
-      nixos.core
-      nixos.juan
-      nixos.hostspec
-      nixos.sway
-      nixos.ui
-      nixos.login
+    imports = with nixos; [
+      core
+      juan
+      hostspec
+      sway
+      ui
+      login
     ];
     home-manager.users.juan.imports = [home.canaima];
   };
   flake.modules.homeManager.canaima = {
-    imports = [
-      home.core
-      home.juan
-      home.hostspec
-      home.sway
-      home.ui
-      home.editor
-      home.multiplexer
-      home.git
-      home.shell
-      home.ai
+    imports = with home; [
+      core
+      juan
+      hostspec
+      sway
+      ui
+      editor
+      multiplexer
+      git
+      shell
+      ai
+      terminal
     ];
   };
 }

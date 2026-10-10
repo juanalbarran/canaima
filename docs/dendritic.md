@@ -76,10 +76,24 @@ All the AI apps, one directory per app under `modules/ai/`, merged into the `ai`
 
 #### Workspace
 
-All the modules for work: editor, multiplexer
+All the modules for work: editor, multiplexer, terminal
 
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.
 - `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `sarisarinama`.
+- `terminal`: foot, the main terminal (`ui.apps.terminal`), with JetBrainsMono Nerd Font 12 and 10k lines of scrollback. Colors are foot's defaults until sarisarinama themes it. Imported by `canaima` and `mucuchies`.
+  | Action | Keybind |
+  | ------------------------------- | ---------------------------- |
+  | fullscreen | `ctrl` + `return` |
+  | newline in TUIs (sent as CSI-u) | `shift` + `return` |
+  | new terminal in the same dir | `ctrl` + `shift` + `n` |
+  | copy / paste | `ctrl` + `shift` + `c` / `v` |
+  | open a URL (jump labels) | `ctrl` + `shift` + `o` |
+  | copy a URL | `ctrl` + `shift` + `y` |
+  | copy a git hash | `ctrl` + `shift` + `g` |
+  | font size up / down / reset | `ctrl` + `=` / `-` / `0` |
+
+An unfocused foot window turns urgent on the bell.
+
 - `multiplexer`: tmux, needed by the sarisarinama project menu. Imported by `canaima`.
 
   | Action                           | Keybind                        |

@@ -7,14 +7,15 @@
   home = config.flake.modules.homeManager;
 in {
   flake.modules.homeManager.mucuchies = {
-    imports = [
-      home.core
-      home.juan-albarran
-      home.hostspec
-      home.sway
-      home.ui
-      home.git
-      home.ai
+    imports = with home; [
+      core
+      juan-albarran
+      hostspec
+      sway
+      ui
+      git
+      ai
+      terminal
     ];
   };
   flake.homeConfigurations.mucuchies = inputs.home-manager.lib.homeManagerConfiguration {
