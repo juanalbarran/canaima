@@ -100,12 +100,12 @@ One file per feature under `modules/media/`, merged into the `media` module. Imp
 
 #### Workspace
 
-All the modules for work: editor, multiplexer, terminal
+All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, multiplexer.
 
-- `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.
-- `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `mucuchies`.
-- `gh`: GitHub CLI as `juanalbarran`, with no `gh auth login`. `config.yml` comes from Home Manager (`git_protocol: ssh`); `hosts.yml` is a sops template holding `access_tokens/github_token`, so every `gh` on `PATH` (including the one Claude Code brings) uses it. `gh auth switch`/`login` are refused, since the account is config. Imported by `canaima` only; `mucuchies` keeps its own manual login.
-- `terminal`: foot, the main terminal (`ui.apps.terminal`), with JetBrainsMono Nerd Font 12 and 10k lines of scrollback. Colors are foot's defaults until sarisarinama themes it. Imported by `canaima` and `mucuchies`.
+- `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`.
+- `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`).
+- `gh`: GitHub CLI as `juanalbarran`, with no `gh auth login`. `config.yml` comes from Home Manager (`git_protocol: ssh`); `hosts.yml` is a sops template holding `access_tokens/github_token`, so every `gh` on `PATH` (including the one Claude Code brings) uses it. `gh auth switch`/`login` are refused, since the account is config. Only when the host sets `hostspec.githubUser`: `asus` sets `juanalbarran`; `mucuchies` leaves it unset and keeps its own manual login.
+- `terminal`: foot, the main terminal (`ui.apps.terminal`), with JetBrainsMono Nerd Font 12 and 10k lines of scrollback. Colors are foot's defaults until sarisarinama themes it.
 
   | Action                          | Keybind                      |
   | ------------------------------- | ---------------------------- |
@@ -130,3 +130,5 @@ All the modules for work: editor, multiplexer, terminal
   | move window to the next slot     | `ctrl` + `alt` + `shift` + `]` |
   | kill pane / session (confirms)   | `ctrl` + `b` then `x` / `X`    |
   | copy mode: select / copy         | `v` / `y`                      |
+
+  Each window keybind is bound under every name a terminal may send for it (`M-{`, `M-S-{`, `M-S-[`), with extended keys enabled for foot and ghostty.
