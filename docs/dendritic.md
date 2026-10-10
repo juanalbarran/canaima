@@ -10,8 +10,10 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 │   └── dendritic.md
 ├── modules/                features — the bulk of the config
 │   ├── ai/
+│   ├── browsers/
 │   ├── core/
 │   ├── ui/
+│   ├── media/
 │   ├── meta/
 │   └── workspace/
 ├── presets/                named bundles of features
@@ -74,26 +76,48 @@ All the AI apps, one directory per app under `modules/ai/`, merged into the `ai`
 | -------- | -------------------------------------- | ---------------------------------------- |
 | `/issue` | `modules/ai/claude/_commands/issue.md` | Show a GitHub issue and start solving it |
 
+#### Browsers
+
+One file per browser under `modules/browsers/`, merged into the `browsers` module. Imported by `canaima` and `mucuchies`. Themes come from sarisarinama (not yet).
+
+- `qutebrowser`: the main browser (`ui.apps.browser`). Tabs on top, shown only with more than one. Adblock on, no autoplay. Quickmarks (`b` / `B` + name) and search engines (`o` + keyword): `nix`, `nixo` (NixOS options), `hm`, `g`; anything else goes to DuckDuckGo.
+
+  | Action                | Keybind                              |
+  | --------------------- | ------------------------------------ |
+  | previous / next tab   | `alt` + `shift` + `[` / `]`          |
+  | move tab left / right | `ctrl` + `alt` + `shift` + `[` / `]` |
+  | open video in mpv     | `m` (hint) / `ctrl` + `m` (this tab) |
+  | watch live stream     | `,t` (hint) / `,T` (this tab)        |
+  | toggle page dark mode | `,d`                                 |
+
+#### Media
+
+One file per feature under `modules/media/`, merged into the `media` module. Imported by `canaima` and `mucuchies`; `browsers` uses it for its mpv and streamlink binds.
+
+- `mpv`: mpv with uosc (controls), thumbfast (seek previews) and mpris (media keys), yt-dlp as its backend, 1080p max, resumes where you stopped. CPU output (`vo=wlshm`) on non-NixOS.
+- `twitch`: streamlink plays live streams in that mpv, low latency, ads skipped; chatterino2 for the chat.
+
 #### Workspace
 
 All the modules for work: editor, multiplexer, terminal
 
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.
-- `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `sarisarinama`.
+- `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `mucuchies`.
 - `gh`: GitHub CLI as `juanalbarran`, with no `gh auth login`. `config.yml` comes from Home Manager (`git_protocol: ssh`); `hosts.yml` is a sops template holding `access_tokens/github_token`, so every `gh` on `PATH` (including the one Claude Code brings) uses it. `gh auth switch`/`login` are refused, since the account is config. Imported by `canaima` only; `mucuchies` keeps its own manual login.
 - `terminal`: foot, the main terminal (`ui.apps.terminal`), with JetBrainsMono Nerd Font 12 and 10k lines of scrollback. Colors are foot's defaults until sarisarinama themes it. Imported by `canaima` and `mucuchies`.
-  | Action | Keybind |
-  | ------------------------------- | ---------------------------- |
-  | fullscreen | `ctrl` + `return` |
-  | newline in TUIs (sent as CSI-u) | `shift` + `return` |
-  | new terminal in the same dir | `ctrl` + `shift` + `n` |
-  | copy / paste | `ctrl` + `shift` + `c` / `v` |
-  | open a URL (jump labels) | `ctrl` + `shift` + `o` |
-  | copy a URL | `ctrl` + `shift` + `y` |
-  | copy a git hash | `ctrl` + `shift` + `g` |
-  | font size up / down / reset | `ctrl` + `=` / `-` / `0` |
 
-An unfocused foot window turns urgent on the bell.
+  | Action                          | Keybind                      |
+  | ------------------------------- | ---------------------------- |
+  | fullscreen                      | `ctrl` + `return`            |
+  | newline in TUIs (sent as CSI-u) | `shift` + `return`           |
+  | new terminal in the same dir    | `ctrl` + `shift` + `n`       |
+  | copy / paste                    | `ctrl` + `shift` + `c` / `v` |
+  | open a URL (jump labels)        | `ctrl` + `shift` + `o`       |
+  | copy a URL                      | `ctrl` + `shift` + `y`       |
+  | copy a git hash                 | `ctrl` + `shift` + `g`       |
+  | font size up / down / reset     | `ctrl` + `=` / `-` / `0`     |
+
+  An unfocused foot window turns urgent on the bell.
 
 - `multiplexer`: tmux, needed by the sarisarinama project menu. Imported by `canaima`.
 

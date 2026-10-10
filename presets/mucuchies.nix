@@ -16,6 +16,8 @@ in {
       git
       ai
       terminal
+      browsers
+      media
     ];
   };
   flake.homeConfigurations.mucuchies = inputs.home-manager.lib.homeManagerConfiguration {

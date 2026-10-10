@@ -28,6 +28,8 @@ in {
       ai
       terminal
       gh
+      browsers
+      media
     ];
   };
 }
