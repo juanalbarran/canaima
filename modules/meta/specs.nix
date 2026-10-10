@@ -26,6 +26,14 @@
         default = null;
         description = "User logged in automatically once at boot; null disables it";
       };
+      sshKeyName = lib.mkOption {
+        type = lib.types.str;
+        description = "Name of the SSH key in sops (private_keys/<name>), deployed to ~/.ssh/<name>";
+      };
+      emailSecret = lib.mkOption {
+        type = lib.types.str;
+        description = "Sops secret holding the git email, e.g. personal/email";
+      };
     };
   };
 in {

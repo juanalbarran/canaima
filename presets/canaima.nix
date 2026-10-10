@@ -23,6 +23,7 @@ in {
       home.ui
       home.editor
       home.multiplexer
+      home.git
       home.shell
     ];
   };

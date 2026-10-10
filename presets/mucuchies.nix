@@ -1,4 +1,4 @@
-# ./presets/sarisarinama.nix
+# ./presets/mucuchies.nix
 {
   config,
   inputs,
@@ -6,24 +6,27 @@
 }: let
   home = config.flake.modules.homeManager;
 in {
-  flake.modules.homeManager.sarisarinama = {
+  flake.modules.homeManager.mucuchies = {
     imports = [
       home.core
       home.juan-albarran
       home.hostspec
       home.sway
       home.ui
+      home.git
     ];
   };
-  flake.homeConfigurations.sarisarinama = inputs.home-manager.lib.homeManagerConfiguration {
+  flake.homeConfigurations.mucuchies = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
     extraSpecialArgs = {inherit inputs;};
     modules = [
-      config.flake.modules.homeManager.sarisarinama
+      config.flake.modules.homeManager.mucuchies
       {
         hostspec = {
-          hostname = "sarisarinama";
+          hostname = "mucuchies";
           isNixOS = false;
+          sshKeyName = "playa-el-yaque";
+          emailSecret = "work/email";
         };
       }
     ];

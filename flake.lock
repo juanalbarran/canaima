@@ -182,7 +182,9 @@
         "import-tree": "import-tree",
         "kukenan": "kukenan",
         "nixpkgs": "nixpkgs_2",
-        "sarisarinama": "sarisarinama"
+        "sarisarinama": "sarisarinama",
+        "secrets": "secrets",
+        "sops-nix": "sops-nix"
       }
     },
     "sarisarinama": {
@@ -208,6 +210,42 @@
       "original": {
         "owner": "juanalbarran",
         "repo": "sarisarinama",
+        "type": "github"
+      }
+    },
+    "secrets": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1784648611,
+        "narHash": "sha256-YEFPuZYI+vAMWZ8IylIuLx80fw22q09H1HyUtmaIy6o=",
+        "ref": "refs/heads/main",
+        "rev": "8c9a358bec00da432616372a619f527d9d63d648",
+        "revCount": 23,
+        "type": "git",
+        "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@github.com/juanalbarran/fortin-de-la-galera.git"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791103873,
+        "narHash": "sha256-nFxM+pKoZ8LJAEnUXARyCaOAloWgaW9kZQOSjWzKcTE=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "dcd241ba97088c22569d1573286e1b9daad340c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     },

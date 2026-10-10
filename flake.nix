@@ -22,6 +22,14 @@
         import-tree.follows = "import-tree";
       };
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    secrets = {
+      url = "git+ssh://git@github.com/juanalbarran/fortin-de-la-galera.git";
+      flake = false;
+    };
   };
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} (

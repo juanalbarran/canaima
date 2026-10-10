@@ -15,7 +15,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 │   └── workspace/
 ├── presets/                named bundles of features
 │   ├── canaima.nix
-│   └── sarisarinama.nix
+│   └── mucuchies.nix
 ├── hosts/                  machines, and only what is true of one machine
 │   └── asus/
 ├── users/                  users, the main one, my personal, and those related with work
@@ -38,7 +38,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 Canaima will contain the configuration for my personal laptop.
 The more important thing about this is that my personal laptop will run `NixOS`
 
-#### Sarirsarinama
+#### Mucuchies
 
 This preset will be used for all the laptops that i'll use that uses linux and dont use the `NixOS` distribution.
 It contains it's own [document](./sarisarinama.md)
@@ -51,6 +51,14 @@ Here are the most important modules and a brief explanation
 
 This is the `core` module, contains the modules that are core in nixos and nix configuration
 
+- `sops`: [sops-nix](https://github.com/Mic92/sops-nix) decrypts secrets from the private `fortin-de-la-galera` repo (input `secrets`) at activation, using the age key at `~/.config/sops/age/keys.txt`. Deploys the SSH key `private_keys/<hostspec.sshKeyName>` to `~/.ssh/`, the GitHub token for nix (`access-tokens`) and the git email (`hostspec.emailSecret`).
+- `ssh`: openssh + agent (NixOS), and `~/.ssh/config` with `github.com` using `~/.ssh/<hostspec.sshKeyName>`.
+
+  | Preset       | `sshKeyName`     | `emailSecret`    |
+  | ------------ | ---------------- | ---------------- |
+  | canaima      | `playa-el-agua`  | `personal/email` |
+  | sarisarinama | `playa-el-yaque` | `work/email`     |
+
 #### UI
 
 Contains all the modules for `ui`. More info here [UI](./ui.md)
@@ -60,6 +68,7 @@ Contains all the modules for `ui`. More info here [UI](./ui.md)
 All the modules for work: editor, multiplexer
 
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`. Imported by `canaima`.
+- `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`). Imported by `canaima` and `sarisarinama`.
 - `multiplexer`: tmux, needed by the sarisarinama project menu. Imported by `canaima`.
 
   | Action                           | Keybind                        |

@@ -14,6 +14,8 @@
           hostname = "canaima";
           isDocked = true;
           autologin = "juan";
+          sshKeyName = "playa-el-agua";
+          emailSecret = "personal/email";
         };
       }
     ];
