@@ -100,8 +100,11 @@ One file per feature under `modules/media/`, merged into the `media` module. Imp
 
 #### Workspace
 
-All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, multiplexer.
+All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, multiplexer, fish, fastfetch, cli tools.
 
+- `fish`: the interactive shell: foot and every tmux pane start fish. bash stays the login shell (greetd, TTY, SSH) and keeps `~/.profile`, so POSIX login scripts work; on `mucuchies` it is also the login shell at `~/.nix-profile/bin/bash`. Home Manager's session variables (`EDITOR`, …) reach fish too.
+- `fastfetch`: same as main (small logo, boxed list in `fastfetch/_modules.nix`), shown as fish's greeting in every new shell.
+- `cli-tools`: `bat`, `lazygit` (`lg` changes to the repo you leave in) and `yazi` (shows hidden files; `y` changes to the directory you quit in).
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`.
 - `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`).
 - `gh`: GitHub CLI as `juanalbarran`, with no `gh auth login`. `config.yml` comes from Home Manager (`git_protocol: ssh`); `hosts.yml` is a sops template holding `access_tokens/github_token`, so every `gh` on `PATH` (including the one Claude Code brings) uses it. `gh auth switch`/`login` are refused, since the account is config. Only when the host sets `hostspec.githubUser`: `asus` sets `juanalbarran`; `mucuchies` leaves it unset and keeps its own manual login.
