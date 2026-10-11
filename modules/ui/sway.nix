@@ -33,6 +33,11 @@
     toSway = bind:
       lib.concatStringsSep "+"
       (map (m: swayMods.${m}) bind.mods ++ [bind.key]);
+    swaymsg = lib.getExe' pkgs.sway "swaymsg";
+    runOrRaise = app: "exec ${swaymsg} '[app_id=\"^${app.appId}$\"] focus' || ${app.command}";
+    appBinds =
+      lib.mapAttrs' (_: a: lib.nameValuePair (toSway a.bind) (runOrRaise a))
+      config.ui.apps;
     execBinds =
       lib.mapAttrs' (_: b: lib.nameValuePair (toSway b.bind) "exec ${b.command}")
       (config.ui.apps // config.ui.binds);
@@ -58,7 +63,7 @@
           border = 0;
           titlebar = false;
         };
-        keybindings = lib.mkOptionDefault (execBinds // actionBinds);
+        keybindings = lib.mkOptionDefault (execBinds // execBinds // actionBinds);
         startup = map (command: {inherit command;}) config.ui.startup;
       };
     };
