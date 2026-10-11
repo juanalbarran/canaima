@@ -36,6 +36,11 @@
         content.autoplay = false;
         content.blocking.enabled = true;
       };
+      # Google refuses logins from a user agent with "QtWebEngine" in it;
+      # look like the Chrome this qutebrowser is built on instead.
+      perDomainSettings."https://accounts.google.com/*" = {
+        content.headers.user_agent = "Mozilla/5.0 ({os_info}) AppleWebKit/{webkit_version} (KHTML, like Gecko) {upstream_browser_key}/{upstream_browser_version} Safari/{webkit_version}";
+      };
       keyBindings = {
         normal = {
           # Same keys as tmux windows: alt+shift+[ / ]

@@ -50,6 +50,14 @@
         modifier = modKey;
         terminal = config.ui.apps.terminal.command;
         bars = [];
+        window = {
+          border = 0;
+          titlebar = false;
+        };
+        floating = {
+          border = 0;
+          titlebar = false;
+        };
         keybindings = lib.mkOptionDefault (execBinds // actionBinds);
         startup = map (command: {inherit command;}) config.ui.startup;
       };

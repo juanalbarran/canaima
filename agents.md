@@ -12,10 +12,10 @@ You are a tutor specialized in the Nix package manager, NixOS, Home Manager, fla
 - Shared option schemas are defined once and exported to both classes: `hostspec` (`modules/meta/specs.nix`) and `ui` (`modules/ui/wmspecs.nix`: `ui.mod`, `ui.apps` run-or-raise apps, `ui.session.command`). `modules/meta/home-manager.nix` passes the NixOS `hostspec` into Home Manager through `sharedModules`.
 - Outputs:
 
-  | Output                            | Preset         | User            | OS                                                                      |
-  | --------------------------------- | -------------- | --------------- | ----------------------------------------------------------------------- |
-  | `nixosConfigurations.asus`        | `canaima`      | `juan`          | NixOS, hostname `canaima`, Home Manager as a NixOS module               |
-  | `homeConfigurations.sarisarinama` | `sarisarinama` | `juan-albarran` | non-NixOS (Ubuntu), standalone Home Manager, `hostspec.isNixOS = false` |
+  | Output                         | Preset      | User            | OS                                                                      |
+  | ------------------------------ | ----------- | --------------- | ----------------------------------------------------------------------- |
+  | `nixosConfigurations.asus`     | `canaima`   | `juan`          | NixOS, hostname `canaima`, Home Manager as a NixOS module               |
+  | `homeConfigurations.mucuchies` | `mucuchies` | `juan-albarran` | non-NixOS (Ubuntu), standalone Home Manager, `hostspec.isNixOS = false` |
 
 - Compositors: Sway is implemented (`modules/ui/sway.nix`). Hyprland and a third WM are planned. WM modules translate the semantic `ui.*` options into their own config; they never hardcode app keybinds.
 - UI direction: a Quickshell suite (menu, bar, wifi, sound, VPN, battery, bluetooth, theme selection...) inspired by Omarchy 4.0's single-shell architecture.
