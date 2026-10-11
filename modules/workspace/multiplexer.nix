@@ -1,12 +1,18 @@
 # ./modules/workspace/multiplexer.nix
 {
-  flake.modules.homeManager.workspace = {lib, ...}: let
+  flake.modules.homeManager.workspace = {
+    lib,
+    pkgs,
+    ...
+  }: let
     # One combo reaches tmux under different names depending on how the
     # terminal encodes it, so every action is bound to all of them.
     bindAll = action: keys: map (key: "bind -n ${key} ${action}") keys;
   in {
     programs.tmux = {
       enable = true;
+      # ctrl+h/j/k/l moves between panes, or inside nvim when the pane runs it
+      plugins = [pkgs.tmuxPlugins.vim-tmux-navigator];
       terminal = "tmux-256color";
       baseIndex = 1;
       mouse = true;
@@ -42,6 +48,12 @@
           "bind X confirm-before -p 'kill session #S? (y/n)' kill-session"
           "bind -T copy-mode-vi v send -X begin-selection"
           "bind -T copy-mode-vi y send -X copy-selection-and-cancel"
+
+          # Resize the tmux pane, also from nvim (plain alt+h/j/k/l is Sway's)
+          "bind -n C-M-h resize-pane -L 3"
+          "bind -n C-M-j resize-pane -D 3"
+          "bind -n C-M-k resize-pane -U 3"
+          "bind -n C-M-l resize-pane -R 3"
         ]
         ++ bindAll "previous-window" ["M-\\{" "M-S-\\{" "M-S-["]
         ++ bindAll "next-window" ["M-\\}" "M-S-\\}" "M-S-]"]

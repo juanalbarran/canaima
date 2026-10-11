@@ -127,13 +127,18 @@ All the modules for work, merged into the `workspace` module and imported by `ca
 
 - `multiplexer`: tmux, needed by the sarisarinama project menu. Status bar on top: `[session]` on the left, the window list centred (current bold, others dim), and a blank line under it as a gap. No colours: the theme will come from sarisarinama. Windows and panes start at 1, mouse on, vi copy mode, `y` copies to the system clipboard.
 
-  | Action                           | Keybind                        |
-  | -------------------------------- | ------------------------------ |
-  | previous window                  | `alt` + `shift` + `[`          |
-  | next window                      | `alt` + `shift` + `]`          |
-  | move window to the previous slot | `ctrl` + `alt` + `shift` + `[` |
-  | move window to the next slot     | `ctrl` + `alt` + `shift` + `]` |
-  | kill pane / session (confirms)   | `ctrl` + `b` then `x` / `X`    |
-  | copy mode: select / copy         | `v` / `y`                      |
+  | Action                           | Keybind                                |
+  | -------------------------------- | -------------------------------------- |
+  | previous window                  | `alt` + `shift` + `[`                  |
+  | next window                      | `alt` + `shift` + `]`                  |
+  | move window to the previous slot | `ctrl` + `alt` + `shift` + `[`         |
+  | move window to the next slot     | `ctrl` + `alt` + `shift` + `]`         |
+  | move to pane / nvim split        | `ctrl` + `h` / `j` / `k` / `l`         |
+  | back to the previous pane        | `ctrl` + `\`                           |
+  | resize pane                      | `ctrl` + `alt` + `h` / `j` / `k` / `l` |
+  | clear the shell (`ctrl` + `l`)   | `ctrl` + `b` then `ctrl` + `l`         |
+  | kill pane / session (confirms)   | `ctrl` + `b` then `x` / `X`            |
+  | copy mode: select / copy         | `v` / `y`                              |
 
   Each window keybind is bound under every name a terminal may send for it (`M-{`, `M-S-{`, `M-S-[`), with extended keys enabled for foot and ghostty.
+  Pane moves are shared with Neovim through [vim-tmux-navigator](https://github.com/christoomey/vim-tmux-navigator) (tmux plugin here, nvim plugin in kukenan): in an nvim pane they move between its splits first and cross into tmux at the edge. In other panes (Claude Code, fish) tmux takes `ctrl` + `h/j/k/l`.
