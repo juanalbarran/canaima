@@ -40,7 +40,7 @@
       config.ui.apps;
     execBinds =
       lib.mapAttrs' (_: b: lib.nameValuePair (toSway b.bind) "exec ${b.command}")
-      (config.ui.apps // config.ui.binds);
+      config.ui.binds;
     actionBinds = {
       ${toSway config.ui.actions.close} = "kill";
     };
@@ -63,7 +63,15 @@
           border = 0;
           titlebar = false;
         };
-        keybindings = lib.mkOptionDefault (execBinds // execBinds // actionBinds);
+        keybindings = lib.mkOptionDefault (appBinds
+          // execBinds
+          // actionBinds
+          // {
+            # Home Manager sorts bindings by name, so Mod+0 came first and
+            # Sway named a new screen's first workspace 10. Without it, 1.
+            "${modKey}+0" = null;
+            "${modKey}+Shift+0" = null;
+          });
         startup = map (command: {inherit command;}) config.ui.startup;
       };
     };
