@@ -4,7 +4,14 @@
   pkgs-unstable,
   config,
   ...
-}: {
+}: let
+  # yt-dlp reads qutebrowser's (chromium) cookies to pass youtube's bot check
+  mpvCmd =
+    "${pkgs.mpv}/bin/mpv"
+    + " --script-opts=ytdl_hook-ytdl_path=${pkgs-unstable.yt-dlp}/bin/yt-dlp"
+    + " --ytdl-raw-options=cookies-from-browser=chromium:${config.xdg.dataHome}/qutebrowser/webengine"
+    + " --force-window --vo=wlshm";
+in {
   programs.qutebrowser = {
     enable = true;
     package = pkgs.qutebrowser.overrideAttrs (old: {
@@ -58,8 +65,8 @@
     keyBindings = {
       normal = {
         # power user feature: open video links in mpv (requires mpv installed)
-        "m" = "hint links spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs-unstable.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {hint-url}";
-        "<ctrl-m>" = "spawn --detach ${pkgs.mpv}/bin/mpv --script-opts=ytdl_hook-ytdl_path=${pkgs-unstable.yt-dlp}/bin/yt-dlp --force-window --vo=wlshm {url};; tab-close";
+        "m" = "hint links spawn --detach ${mpvCmd} {hint-url}";
+        "<ctrl-m>" = "spawn --detach ${mpvCmd} {url};; tab-close";
 
         # vim-style tab navigation (standard j/k)
         "<Meta-Shift-{>" = "tab-prev";
