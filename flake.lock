@@ -70,11 +70,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1790996401,
-        "narHash": "sha256-f+kOxEmOUnQazVAmGg0i8hzwgd1kX/geY+k/Dpheye8=",
+        "lastModified": 1791938526,
+        "narHash": "sha256-yNYK2pdk3bCtJrpblrNYA6hZKdybWUeyTtx74+OEJFo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "db7d5e2332710f5abb088f6b5de927d7f9511b35",
+        "rev": "32904dfe1cf86039f3c8c9f41f94e1cfd76dbb34",
         "type": "github"
       },
       "original": {
@@ -107,11 +107,11 @@
         "utils": "utils_2"
       },
       "locked": {
-        "lastModified": 1791388493,
-        "narHash": "sha256-lWpYsJUfFwf7qhkdyRZqDsaqT22QjeFsRLgx+Uf1nnA=",
+        "lastModified": 1792010687,
+        "narHash": "sha256-Wwjoffm1D/bebgKrF9djpyu7NEjDSgyct2qVpLLvUIg=",
         "owner": "juanalbarran",
         "repo": "neovim",
-        "rev": "2ffe41ea41eb3db683e2c67c1c8d14417d0db0da",
+        "rev": "6236e20abe2df4545ed9524677c02b8a99c17009",
         "type": "github"
       },
       "original": {
@@ -150,11 +150,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791576129,
-        "narHash": "sha256-/h/GeWMLZ/6I+bN+110/LmtMDm+v6fheMJOPnuCTREg=",
+        "lastModified": 1792004520,
+        "narHash": "sha256-Swnl+ge4IexcU74x5ADPsa5mlv1/M48YFfaymGEgzW0=",
         "owner": "ryoppippi",
         "repo": "nix-claude-code",
-        "rev": "81be531ae2e78817d59152162d45140409076fe5",
+        "rev": "3e243205603e15331245678a80d80fa94fc0498c",
         "type": "github"
       },
       "original": {
@@ -181,11 +181,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1791662279,
-        "narHash": "sha256-xI8L+UwJLIg75yVJwLPsY+AUEP1teCT3FyuvodyJu2Y=",
+        "lastModified": 1791883866,
+        "narHash": "sha256-yvkDdToRZ4IgPc9tSBzzCYJvTLf8n5eE3rgUkpCuD5A=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "6fcc160353f63555b560f25588925133c8f61f2a",
+        "rev": "a033e66ab94a6bedf2c3d58d93a36319d3cbbbaf",
         "type": "github"
       },
       "original": {
@@ -221,11 +221,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1791832477,
-        "narHash": "sha256-rUKCCYakkr820MBfqiY68DWMCPA2pIkj3yCfkBojoM8=",
+        "lastModified": 1792009540,
+        "narHash": "sha256-lsXWHBA3MIBcbyQmd1TgmI9Hp1kut5XQH/OYVDqfaqQ=",
         "owner": "juanalbarran",
         "repo": "sarisarinama",
-        "rev": "6963e373fd9e934b76c3ba131dee6412fe8a878e",
+        "rev": "d34aa69365d20906ac4150fde78ae23771706d6a",
         "type": "github"
       },
       "original": {
