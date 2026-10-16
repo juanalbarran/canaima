@@ -1,5 +1,9 @@
 # ./modules/ui/shell.nix
-{inputs, ...}: {
+{
+  inputs,
+  lib,
+  ...
+}: {
   flake.modules.homeManager.shell = {config, ...}: let
     cfg = config.programs.sarisarinama;
     path = "${cfg.package}/share/sarisarinama";
@@ -8,6 +12,9 @@
     programs.sarisarinama = {
       enable = true;
       projects.root = "~/dev";
+      style = lib.genAttrs ["menu" "network" "monitor" "vpn"] (_: {
+        font.size = config.hostspec.panelFontSize;
+      });
     };
     ui.startup = ["env SARISARINAMA_PATH=${path} quickshell -p ${path}"];
     ui.binds = {

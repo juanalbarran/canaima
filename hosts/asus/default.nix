@@ -18,6 +18,7 @@
           emailSecret = "personal/email";
           githubUser = "juanalbarran";
           defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
+          panelFontSize = 16;
         };
       }
     ];

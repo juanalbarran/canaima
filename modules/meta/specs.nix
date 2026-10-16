@@ -45,6 +45,12 @@
         default = null;
         description = "GitHub account gh logs in as, with the sops token; null leaves gh unmanaged";
       };
+      panelFontSize = lib.mkOption {
+        type = lib.types.nullOr lib.types.ints.positive;
+        default = null;
+        example = 16;
+        description = "Font size in px for the shell menu and panes; null keeps the shell's own size";
+      };
     };
   };
 in {
