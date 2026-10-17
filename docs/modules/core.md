@@ -9,3 +9,4 @@ This is the `core` module, contains the modules that are core in nixos and nix c
   | ------------ | ---------------- | ---------------- |
   | canaima      | `playa-el-agua`  | `personal/email` |
   | sarisarinama | `playa-el-yaque` | `work/email`     |
+  - `printing` (NixOS only): CUPS with Canon's `cnijfilter2` driver (for the TS200), `ipp-usb` for driverless USB printers, avahi (mDNS) and `system-config-printer` (Print Settings), as in omarchy. `cups-browsed` is off. `modules/core/printers.nix` also adds the Printers row to the shell menu.
