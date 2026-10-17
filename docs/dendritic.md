@@ -12,6 +12,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 │   ├── ai/
 │   ├── browsers/
 │   ├── core/
+│   ├── gaming/
 │   ├── ui/
 │   ├── media/
 │   ├── meta/
@@ -54,5 +55,6 @@ Here are the most important modules and a brief explanation
 - UI: [UI](./modules/ui.md)
 - AI: [ai](./modules/ai.md)
 - Browsers: [browsers](./modules/browsers.md)
+- Gaming: [gaming](./modules/gaming.md)
 - Media: [media](./modules/media.md)
 - Workspace: [workspace](./modules/workspace.md)
