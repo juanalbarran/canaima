@@ -23,6 +23,9 @@
         fi
         # umu-run uses the GE-Proton Steam already has instead of downloading it from GitHub
         export PROTONPATH="''${PROTONPATH:-${pkgs.proton-ge-bin.steamcompattool}}"
+        # Steam's mirrors disagree on the latest runtime, so umu-run redownloaded ~200 MB
+        # on every launch and the client hung on "Initializing environment"
+        export UMU_RUNTIME_UPDATE="''${UMU_RUNTIME_UPDATE:-0}"
         exec appimage-run "$appimage" "$@"
       '';
     };
