@@ -5,6 +5,9 @@
     lib,
     ...
   }: {
+    services.upower.enable = true;
+    services.power-profiles-daemon.enable = true;
+
     services.logind.settings.Login = lib.mkIf config.hostspec.isDocked {
       HandleLidSwitch = "ignore";
       HandleLidSwitchDocked = "ignore";

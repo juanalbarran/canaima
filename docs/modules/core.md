@@ -9,4 +9,5 @@ This is the `core` module, contains the modules that are core in nixos and nix c
   | ------------ | ---------------- | ---------------- |
   | canaima      | `playa-el-agua`  | `personal/email` |
   | sarisarinama | `playa-el-yaque` | `work/email`     |
+- `laptop` (NixOS only): UPower (battery state) and power-profiles-daemon (power profiles) for the shell's battery widget and panel; with `hostspec.isDocked`, logind ignores the lid switch. Don't enable TLP or auto-cpufreq alongside power-profiles-daemon, they conflict. On Ubuntu (sarisarinama) both daemons ship with the distro.
   - `printing` (NixOS only): CUPS with Canon's `cnijfilter2` driver (for the TS200), `ipp-usb` for driverless USB printers, avahi (mDNS) and `system-config-printer` (Print Settings), as in omarchy. `cups-browsed` is off. `modules/core/printers.nix` also adds the Printers row to the shell menu.
