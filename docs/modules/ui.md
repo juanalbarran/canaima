@@ -24,7 +24,10 @@ The window manager for the applications will follow the `run or raise` philosoph
 | menu | `mod` + `d` |
 | projects | `mod` + `p` |
 | close window | `mod` + `c` |
-Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`). Each WM translates them.
+| reload WM and shell | `ctrl` + `shift` + `c` |
+Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close` and `reload`). Each WM translates them.
+
+`ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`). `ctrl` + `shift` + `c` is taken by the WM, so terminals no longer receive it as copy.
 
 ## Login
 
@@ -32,7 +35,7 @@ Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-
 
 ## Shell
 
-The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` only for now). The WM starts it through `ui.startup`, and `mod` + `d` toggles its menu over IPC.
+The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` only for now). The WM starts it through `ui.reload` with a script that kills the running instance first, so the reload keybind restarts the shell. `mod` + `d` toggles its menu over IPC.
 
 `hostspec.panelFontSize` sets the font size in px of the menu and the network, monitor and VPN panes (`style.<pane>.font.size`). `null` keeps the shell's own size. The bar always uses the shared `style.font.size` (12). `asus` sets 16 to match foot's `size=12`: foot uses points, the shell uses px, and 12 pt × 96/72 = 16 px.
 

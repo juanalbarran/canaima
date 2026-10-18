@@ -43,6 +43,7 @@
       config.ui.binds;
     actionBinds = {
       ${toSway config.ui.actions.close} = "kill";
+      ${toSway config.ui.actions.reload} = "reload";
     };
   in {
     wayland.windowManager.sway = {
@@ -72,7 +73,13 @@
             "${modKey}+0" = null;
             "${modKey}+Shift+0" = null;
           });
-        startup = map (command: {inherit command;}) config.ui.startup;
+        startup =
+          map (command: {inherit command;}) config.ui.startup
+          ++ map (command: {
+            inherit command;
+            always = true;
+          })
+          config.ui.reload;
       };
     };
   };

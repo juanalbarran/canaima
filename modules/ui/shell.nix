@@ -4,9 +4,18 @@
   lib,
   ...
 }: {
-  flake.modules.homeManager.shell = {config, ...}: let
+  flake.modules.homeManager.shell = {
+    config,
+    pkgs,
+    ...
+  }: let
     cfg = config.programs.sarisarinama;
     path = "${cfg.package}/share/sarisarinama";
+    # Kills the running shell first, so a WM reload restarts it
+    start = pkgs.writeShellScript "sarisarinama-start" ''
+      ${lib.getExe' pkgs.procps "pkill"} -x quickshell
+      SARISARINAMA_PATH=${path} exec quickshell -p ${path}
+    '';
   in {
     imports = [inputs.sarisarinama.modules.homeManager.sarisarinama];
     programs.sarisarinama = {
@@ -16,7 +25,7 @@
         font.size = config.hostspec.panelFontSize;
       });
     };
-    ui.startup = ["env SARISARINAMA_PATH=${path} quickshell -p ${path}"];
+    ui.reload = ["${start}"];
     ui.binds = {
       menu = {
         command = "quickshell -p ${path} ipc call shell toggle menu '{}'";

@@ -72,10 +72,23 @@
         default.key = "c";
         description = "Keybind that closes the focused window";
       };
+      actions.reload = lib.mkOption {
+        type = lib.types.submodule {options = bind;};
+        default = {
+          mods = ["ctrl" "shift"];
+          key = "c";
+        };
+        description = "Keybind that reloads the WM config, which reruns ui.reload";
+      };
       startup = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
         description = "Commands the WM runs once when the session starts";
+      };
+      reload = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [];
+        description = "Commands the WM runs when the session starts and again on every config reload";
       };
       session.command = lib.mkOption {
         type = lib.types.str;
