@@ -11,10 +11,13 @@
     # The umu-run the launcher finds in its FHS environment. The launcher sets PROTONPATH=GE-Proton,
     # which makes umu-run download the latest GE-Proton from GitHub, so it is pointed at the
     # GE-Proton Steam already has. Steam's mirrors disagree on the latest runtime, so without
-    # UMU_RUNTIME_UPDATE=0 it redownloaded ~200 MB on every launch
+    # UMU_RUNTIME_UPDATE=0 it redownloaded ~200 MB on every launch. Haswell only has Mesa's
+    # incomplete hasvk Vulkan, which DXVK rejects, and the client's native D3D9 fallback is
+    # Proton's d3d9.dll, also DXVK, so it exited with code 3; WineD3D renders over OpenGL instead
     umu-run = pkgs.writeShellScriptBin "umu-run" ''
       export PROTONPATH=${pkgs.proton-ge-bin.steamcompattool}
       export UMU_RUNTIME_UPDATE="''${UMU_RUNTIME_UPDATE:-0}"
+      export PROTON_USE_WINED3D="''${PROTON_USE_WINED3D:-1}"
       exec ${lib.getExe' pkgs.umu-launcher "umu-run"} "$@"
     '';
     # Whitemane's official launcher is an unversioned AppImage that patches the client itself,
