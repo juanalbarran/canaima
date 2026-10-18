@@ -75,7 +75,7 @@
       actions.reload = lib.mkOption {
         type = lib.types.submodule {options = bind;};
         default = {
-          mods = ["ctrl" "shift"];
+          mods = ["mod" "shift"];
           key = "c";
         };
         description = "Keybind that reloads the WM config, which reruns ui.reload";

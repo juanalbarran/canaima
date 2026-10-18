@@ -24,10 +24,10 @@ The window manager for the applications will follow the `run or raise` philosoph
 | menu | `mod` + `d` |
 | projects | `mod` + `p` |
 | close window | `mod` + `c` |
-| reload WM and shell | `ctrl` + `shift` + `c` |
+| reload WM and shell | `shift` + `mod` + `c` |
 Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close` and `reload`). Each WM translates them.
 
-`ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`). `ctrl` + `shift` + `c` is taken by the WM, so terminals no longer receive it as copy.
+`ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`).
 
 ## Login
 
