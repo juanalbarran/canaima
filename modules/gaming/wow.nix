@@ -2,11 +2,21 @@
 {
   flake.modules.nixos.gaming = {
     config,
+    lib,
     pkgs,
     ...
   }: let
     # 32 and 64-bit Wine, staging patches help older DirectX games
     wine = pkgs.wineWow64Packages.stagingFull;
+    # The umu-run the launcher finds in its FHS environment. The launcher sets PROTONPATH=GE-Proton,
+    # which makes umu-run download the latest GE-Proton from GitHub, so it is pointed at the
+    # GE-Proton Steam already has. Steam's mirrors disagree on the latest runtime, so without
+    # UMU_RUNTIME_UPDATE=0 it redownloaded ~200 MB on every launch
+    umu-run = pkgs.writeShellScriptBin "umu-run" ''
+      export PROTONPATH=${pkgs.proton-ge-bin.steamcompattool}
+      export UMU_RUNTIME_UPDATE="''${UMU_RUNTIME_UPDATE:-0}"
+      exec ${lib.getExe' pkgs.umu-launcher "umu-run"} "$@"
+    '';
     # Whitemane's official launcher is an unversioned AppImage that patches the client itself,
     # so it is fetched on first run instead of pinned with a hash that breaks on every release
     whitemane = pkgs.writeShellApplication {
@@ -21,11 +31,6 @@
             https://launcher.gamefreedom.org/artifacts/whitemane/Whitemane.AppImage
           chmod +x "$appimage"
         fi
-        # umu-run uses the GE-Proton Steam already has instead of downloading it from GitHub
-        export PROTONPATH="''${PROTONPATH:-${pkgs.proton-ge-bin.steamcompattool}}"
-        # Steam's mirrors disagree on the latest runtime, so umu-run redownloaded ~200 MB
-        # on every launch and the client hung on "Initializing environment"
-        export UMU_RUNTIME_UPDATE="''${UMU_RUNTIME_UPDATE:-0}"
         exec appimage-run "$appimage" "$@"
       '';
     };
@@ -35,7 +40,7 @@
       enable = true;
       binfmt = true;
       # The launcher is a Tauri app, these are the libraries its binary links (readelf -d),
-      # glib-networking for HTTPS, Wine for the launcher-game.exe it bundles, and umu-launcher,
+      # glib-networking for HTTPS, Wine for the launcher-game.exe it bundles, and umu-run,
       # which the launcher uses to run the client with Proton
       package = pkgs.appimage-run.override {
         extraPkgs = p: [
@@ -49,7 +54,7 @@
           p.dbus
           p.libayatana-appindicator
           wine
-          p.umu-launcher
+          umu-run
         ];
       };
     };
