@@ -25,7 +25,10 @@ The window manager for the applications will follow the `run or raise` philosoph
 | projects | `mod` + `p` |
 | close window | `mod` + `c` |
 | reload WM and shell | `shift` + `mod` + `c` |
-Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close` and `reload`). Each WM translates them.
+| toggle passthrough | `shift` + `mod` + `p` |
+Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`, `reload` and `passthrough`). Each WM translates them.
+
+Passthrough is a WM mode whose only keybind is its own toggle, so every other key reaches the focused window. Games use it to bind `mod` combos, e.g. `alt` + `e` in WoW, which Sway's default keybinds would otherwise take.
 
 `ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`).
 

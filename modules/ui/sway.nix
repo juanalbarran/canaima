@@ -44,6 +44,7 @@
     actionBinds = {
       ${toSway config.ui.actions.close} = "kill";
       ${toSway config.ui.actions.reload} = "reload";
+      ${toSway config.ui.actions.passthrough} = "mode passthrough";
     };
   in {
     wayland.windowManager.sway = {
@@ -73,6 +74,11 @@
             "${modKey}+0" = null;
             "${modKey}+Shift+0" = null;
           });
+        # Passthrough has no keybinds but its own exit, so every other key reaches the
+        # focused window, mkOptionDefault keeps Sway's default resize mode
+        modes = lib.mkOptionDefault {
+          passthrough.${toSway config.ui.actions.passthrough} = "mode default";
+        };
         startup =
           map (command: {inherit command;}) config.ui.startup
           ++ map (command: {

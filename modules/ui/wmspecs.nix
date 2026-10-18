@@ -80,6 +80,14 @@
         };
         description = "Keybind that reloads the WM config, which reruns ui.reload";
       };
+      actions.passthrough = lib.mkOption {
+        type = lib.types.submodule {options = bind;};
+        default = {
+          mods = ["mod" "shift"];
+          key = "p";
+        };
+        description = "Keybind that toggles passthrough, which sends every other key to the focused window so games can bind mod combos";
+      };
       startup = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
