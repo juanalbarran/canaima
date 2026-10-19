@@ -1,6 +1,10 @@
 # ./modules/workspace/fastfetch/fastfetch.nix
 {
   flake.modules.homeManager.workspace = {
+    config,
+    lib,
+    ...
+  }: {
     imports = [./_modules.nix];
     programs.fastfetch = {
       enable = true;
@@ -15,7 +19,8 @@
         display.separator = " ";
       };
     };
-    # Every new fish shows it, as bash did on main
+    # Every new interactive shell shows it, as bash did on main
     programs.fish.functions.fish_greeting = "fastfetch";
+    programs.bash.initExtra = lib.mkIf (config.hostspec.shell == "bash") "fastfetch";
   };
 }

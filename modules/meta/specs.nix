@@ -40,6 +40,11 @@
         example = "org.qutebrowser.qutebrowser.desktop";
         description = "Desktop file xdg-open uses for links and HTML; null leaves mimeapps.list alone";
       };
+      shell = lib.mkOption {
+        type = lib.types.enum ["fish" "bash"];
+        default = "fish";
+        description = "Interactive shell that foot and tmux start; bash stays the login shell either way";
+      };
       githubUser = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
         default = null;

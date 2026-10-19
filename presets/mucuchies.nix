@@ -37,6 +37,7 @@ in {
           emailSecret = "work/email";
           defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
           panelFontSize = 16;
+          shell = "bash";
         };
       }
     ];
