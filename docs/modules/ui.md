@@ -32,6 +32,13 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 
 `ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`).
 
+## Sway on another distro
+
+`modules/ui/sway-generic-linux.nix` adds to the `sway` module when `hostspec.isNixOS` is false (`mucuchies`):
+
+- Session: GDM lists only `/usr/share/wayland-sessions`, not `~/.local/share`, so Home Manager can't install it. The activation compares that file with the one it builds (`Exec=~/.nix-profile/bin/sway`) and, if it's missing or different, prints the `sudo install` command that copies it.
+- Portals: Ubuntu's `xdg-desktop-portal` doesn't find Nix's backends, so the distro's are used (apt `xdg-desktop-portal-wlr`, `xdg-desktop-portal-gtk`). `~/.config/xdg-desktop-portal/sway-portals.conf` sends screen sharing and screenshots to `wlr` and the rest (file picker…) to `gtk`.
+
 ## Login
 
 `modules/ui/login.nix` (NixOS only) runs greetd. If `hostspec.autologin` is set, the host boots straight into `ui.session.command` as that user, once. After logout, tuigreet asks for a password. `asus` sets `autologin = "juan"`.
