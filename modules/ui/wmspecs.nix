@@ -32,27 +32,8 @@
             inherit bind;
           };
         });
-        default = {
-          terminal = {
-            command = "foot";
-            appId = "foot";
-            bind.key = "q";
-          };
-          auxTerminal = {
-            command = "ghostty";
-            appId = "com.mitchellh.ghostty";
-            bind = {
-              mods = ["mod" "shift"];
-              key = "q";
-            };
-          };
-          browser = {
-            command = "qutebrowser";
-            appId = "org.qutebrowser.qutebrowser";
-            bind.key = "b";
-          };
-        };
-        description = "Applications that can be opened by the WM in a run-or-raise action";
+        default = {};
+        description = "Applications that can be opened by the WM in a run-or-raise action; feature modules add their own";
       };
       binds = lib.mkOption {
         type = lib.types.attrsOf (lib.types.submodule {
@@ -101,6 +82,29 @@
       session.command = lib.mkOption {
         type = lib.types.str;
         default = "sway";
+      };
+    };
+    # The apps every preset has, set as config rather than as the option's
+    # default: a default is dropped as soon as any module adds an app (chrome,
+    # slack…). mkDefault on each field still lets a host change one of them
+    config.ui.apps = {
+      terminal = {
+        command = lib.mkDefault "foot";
+        appId = lib.mkDefault "foot";
+        bind.key = lib.mkDefault "q";
+      };
+      auxTerminal = {
+        command = lib.mkDefault "ghostty";
+        appId = lib.mkDefault "com.mitchellh.ghostty";
+        bind = {
+          mods = lib.mkDefault ["mod" "shift"];
+          key = lib.mkDefault "q";
+        };
+      };
+      browser = {
+        command = lib.mkDefault "qutebrowser";
+        appId = lib.mkDefault "org.qutebrowser.qutebrowser";
+        bind.key = lib.mkDefault "b";
       };
     };
   };

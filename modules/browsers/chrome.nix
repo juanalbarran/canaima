@@ -15,5 +15,10 @@
         "--use-gl=egl"
       ];
     };
+    ui.apps.chrome = {
+      command = "google-chrome-stable";
+      appId = "google-chrome";
+      bind.key = "g";
+    };
   };
 }
