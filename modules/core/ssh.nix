@@ -14,6 +14,19 @@
           User = "git";
           IdentityFile = "~/.ssh/${config.hostspec.sshKeyName}";
         };
+        # Aliases for remotes that need a specific account, e.g. git@github-ctwo:org/repo
+        "github-nix" = {
+          HostName = "github.com";
+          User = "git";
+          IdentityFile = "~/.ssh/nix";
+          IdentitiesOnly = "yes";
+        };
+        "github-ctwo" = {
+          HostName = "github.com";
+          User = "git";
+          IdentityFile = "~/.ssh/ctwo";
+          IdentitiesOnly = "yes";
+        };
         "*".AddKeysToAgent = "yes";
       };
     };
