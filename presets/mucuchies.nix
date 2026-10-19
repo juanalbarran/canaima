@@ -35,7 +35,7 @@ in {
           isNixOS = false;
           sshKeyName = "playa-el-yaque";
           emailSecret = "work/email";
-          defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
+          defaultBrowser = "google-chrome.desktop";
           panelFontSize = 16;
           shell = "bash";
         };
