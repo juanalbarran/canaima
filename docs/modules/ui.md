@@ -43,6 +43,17 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 
 `ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`).
 
+## Media keys
+
+`modules/ui/media-keys.nix` adds `ui.binds` with no modifier for the laptop keys, on `canaima` and `mucuchies`. Volume with `wpctl` (PipeWire; the distro's on Ubuntu), stops at 100%; brightness with `brightnessctl`, which goes through logind, so no root or udev rule.
+
+| Key | Action |
+| --- | --- |
+| volume up / down | ±5% |
+| mute | toggle the speakers |
+| mic mute | toggle the microphone |
+| brightness up / down | ±10% |
+
 ## Sway on another distro
 
 `modules/ui/sway-generic-linux.nix` adds to the `sway` module when `hostspec.isNixOS` is false (`mucuchies`):

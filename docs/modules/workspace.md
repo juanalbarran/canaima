@@ -1,8 +1,8 @@
 # Workspace
 
-All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, multiplexer, interactive shell, prompt, fastfetch, cli tools, dev tools.
+All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, aux terminal, multiplexer, interactive shell, prompt, fastfetch, cli tools, dev tools.
 
-- `interactive-shell`: what foot and every tmux pane start, picked by `hostspec.shell`: `fish` (default, `canaima`) or `bash` (`mucuchies`). bash is always enabled and stays the login shell (greetd, TTY, SSH, GDM) and keeps `~/.profile`, so POSIX login scripts work; on `mucuchies` that login shell is `~/.nix-profile/bin/bash`. Home Manager's session variables (`EDITOR`, …) reach both shells.
+- `interactive-shell`: what foot, ghostty and every tmux pane start, picked by `hostspec.shell`: `fish` (default, `canaima`) or `bash` (`mucuchies`). bash is always enabled and stays the login shell (greetd, TTY, SSH, GDM) and keeps `~/.profile`, so POSIX login scripts work; on `mucuchies` that login shell is `~/.nix-profile/bin/bash`. Home Manager's session variables (`EDITOR`, …) reach both shells.
 - `prompt`: [starship](https://starship.rs)'s default prompt in fish and bash, on `canaima` and `mucuchies`, the same look as main. `command_timeout` is 2000ms so git status in big repos isn't cut off.
 - `fastfetch`: same as main (small logo, boxed list in `fastfetch/_modules.nix`), shown in every new interactive shell (fish's greeting, or bash's `.bashrc`).
 - `cli-tools`: `bat` (and `cat` aliased to it in bash and fish; piped, it prints plain like cat), `ripgrep`, `tree`, `lazygit` (`lg` changes to the repo you leave in) and `yazi` (shows hidden files; `y` changes to the directory you quit in).
@@ -24,6 +24,13 @@ All the modules for work, merged into the `workspace` module and imported by `ca
   | font size up / down / reset     | `ctrl` + `=` / `-` / `0`     |
 
   An unfocused foot window turns urgent on the bell.
+
+- `aux-terminal`: Ghostty, the second terminal (`ui.apps.auxTerminal`, `mod` + `shift` + `q`), set up like foot (JetBrainsMono Nerd Font 12, block cursor, no decorations), copy on select, starts `hostspec.shell`. Main's other keybinds were Ghostty's defaults and aren't repeated. Colors are Ghostty's defaults until sarisarinama themes it.
+
+  | Action              | Keybind                                                                  |
+  | ------------------- | ------------------------------------------------------------------------ |
+  | fullscreen          | `ctrl` + `return`                                                        |
+  | previous / next tab | `alt` + `shift` + `[` / `]` (only with another tab, else tmux gets them) |
 
 - `multiplexer`: tmux, needed by the sarisarinama project menu. Status bar on top: `[session]` on the left, the window list centred by name only, without numbers (current bold, others dim), and a blank line under it as a gap. No colours: the theme will come from sarisarinama. Windows and panes start at 1, mouse on, vi copy mode, `y` copies to the system clipboard.
 
