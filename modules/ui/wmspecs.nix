@@ -68,8 +68,9 @@
       };
       actions.passthrough = lib.mkOption {
         type = lib.types.submodule {options = bind;};
+        # ctrl too, so mod+shift+p stays free for the CTWO projects menu
         default = {
-          mods = ["mod" "shift"];
+          mods = ["mod" "shift" "ctrl"];
           key = "p";
         };
         description = "Keybind that toggles passthrough, which sends every other key to the focused window so games can bind mod combos";
