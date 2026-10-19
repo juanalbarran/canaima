@@ -16,6 +16,9 @@
   }: {
     nix = {
       package = lib.mkDefault pkgs.nix;
+      # Identical files in the store become hard links to one copy. The daemon
+      # takes it from ~/.config/nix/nix.conf because the user is trusted
+      settings.auto-optimise-store = true;
       gc = {
         automatic = true;
         dates = "weekly";
