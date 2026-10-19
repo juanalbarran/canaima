@@ -3,9 +3,9 @@
 All the modules for work, merged into the `workspace` module and imported by `canaima` and `mucuchies`: editor, git, gh, terminal, multiplexer, interactive shell, prompt, fastfetch, cli tools, dev tools.
 
 - `interactive-shell`: what foot and every tmux pane start, picked by `hostspec.shell`: `fish` (default, `canaima`) or `bash` (`mucuchies`). bash is always enabled and stays the login shell (greetd, TTY, SSH, GDM) and keeps `~/.profile`, so POSIX login scripts work; on `mucuchies` that login shell is `~/.nix-profile/bin/bash`. Home Manager's session variables (`EDITOR`, …) reach both shells.
-- `prompt`: [starship](https://starship.rs)'s default prompt in fish and bash, the same look as main. `command_timeout` is 2000ms so git status in big repos isn't cut off.
+- `prompt`: [starship](https://starship.rs)'s default prompt in fish and bash, on `canaima` and `mucuchies`, the same look as main. `command_timeout` is 2000ms so git status in big repos isn't cut off.
 - `fastfetch`: same as main (small logo, boxed list in `fastfetch/_modules.nix`), shown in every new interactive shell (fish's greeting, or bash's `.bashrc`).
-- `cli-tools`: `bat`, `ripgrep`, `tree`, `lazygit` (`lg` changes to the repo you leave in) and `yazi` (shows hidden files; `y` changes to the directory you quit in).
+- `cli-tools`: `bat` (and `cat` aliased to it in bash and fish; piped, it prints plain like cat), `ripgrep`, `tree`, `lazygit` (`lg` changes to the repo you leave in) and `yazi` (shows hidden files; `y` changes to the directory you quit in).
 - `dev-tools`: `devenv` (per-project dev environments) and `gcc` (nvim-treesitter compiles its parsers with it).
 - `editor`: [kukenan](https://github.com/juanalbarran/kukenan) variants `base`, `web`, `rust`, `java`. `EDITOR`/`VISUAL` are `nvim-base`.
 - `git`: git with the user name; the email comes from sops (`~/.config/git/sops-data.conf`).
