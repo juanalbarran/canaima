@@ -4,6 +4,11 @@
   lib,
   ...
 }: {
+  # The lock's PAM service, which only NixOS can write to /etc/pam.d
+  flake.modules.nixos.shell = {
+    imports = [inputs.sarisarinama.modules.nixos.sarisarinama];
+  };
+
   flake.modules.homeManager.shell = {
     config,
     pkgs,
@@ -36,6 +41,13 @@
       projects = {
         command = "env SARISARINAMA_PATH=${path} sarisarinama-projects-menu ${cfg.projects.root}";
         bind.key = "p";
+      };
+      lock = {
+        command = "quickshell -p ${path} ipc call lock lock";
+        bind = {
+          mods = ["mod" "ctrl"];
+          key = "q";
+        };
       };
     };
   };

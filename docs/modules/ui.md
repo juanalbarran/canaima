@@ -29,6 +29,7 @@ The window manager for the applications will follow the `run or raise` philosoph
 | reload WM and shell | `shift` + `mod` + `c` |
 | projects at `~/nix/ctwo/ctwo-product` (mucuchies) | `shift` + `mod` + `p` |
 | toggle passthrough | `ctrl` + `shift` + `mod` + `p` |
+| lock screen | `ctrl` + `mod` + `q` |
 Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`, `reload` and `passthrough`). Each WM translates them. Run-or-raise: the bind focuses the window with that `appId` if there is one, and otherwise launches `command`. terminal, auxTerminal and browser are set in `wmspecs.nix` as config with `mkDefault` on each field, not as the option's default, which would be dropped as soon as a feature module adds its own app (`browsers` adds chrome, `work` adds slack). An app bind replaces Sway's default on the same key: `mod` + `s` (stacking layout) is Slack's.
 
 An app's `workspace` makes its windows always open there (Sway `assign`), wherever you launch them from; `null` (the default) opens them where you are. Focus doesn't follow a window assigned elsewhere, but run-or-raise brings you to it on the next press.
@@ -79,6 +80,8 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 ## Shell
 
 The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` and `mucuchies`). The WM starts it through `ui.reload` with a script that kills the running instance first, so the reload keybind restarts the shell. `mod` + `d` toggles its menu over IPC.
+
+The shell is also the lock screen: `ctrl` + `mod` + `q` locks over IPC (`ipc call lock lock`), and the shell itself locks on `loginctl lock-session`, after `programs.sarisarinama.lock.idle` seconds idle (default 300) and before suspend, so there is no swayidle. The password is checked against the PAM service `sarisarinama-lock`: on `asus` the `nixos` half of `shell` imports `modules.nixos.sarisarinama`, which declares it; on `mucuchies` Home Manager activation writes `/etc/pam.d/sarisarinama-lock` with sudo. Without the service the shell refuses to lock.
 
 `hostspec.panelFontSize` sets the font size in px of the menu and the network, monitor and VPN panes (`style.<pane>.font.size`). `null` keeps the shell's own size. The bar always uses the shared `style.font.size` (12). `asus` sets 16 to match foot's `size=12`: foot uses points, the shell uses px, and 12 pt × 96/72 = 16 px.
 

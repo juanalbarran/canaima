@@ -11,6 +11,7 @@ in {
       sway
       ui
       login
+      shell
       gaming
     ];
     home-manager.users.juan.imports = [home.canaima];
