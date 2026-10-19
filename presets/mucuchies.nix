@@ -17,6 +17,7 @@ in {
       workspace
       browsers
       media
+      work
     ];
   };
   flake.homeConfigurations.mucuchies = inputs.home-manager.lib.homeManagerConfiguration {

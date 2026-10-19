@@ -16,6 +16,7 @@ The idea of this `dendritic` branch is to migrate slowly this config to the dend
 │   ├── ui/
 │   ├── media/
 │   ├── meta/
+│   ├── work/
 │   └── workspace/
 ├── presets/                named bundles of features
 │   ├── canaima.nix
@@ -58,3 +59,4 @@ Here are the most important modules and a brief explanation
 - Gaming: [gaming](./modules/gaming.md)
 - Media: [media](./modules/media.md)
 - Workspace: [workspace](./modules/workspace.md)
+- Work: [work](./modules/work.md)
