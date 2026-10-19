@@ -13,6 +13,7 @@ in {
       hostspec
       sway
       ui
+      shell
       ai
       workspace
       browsers
@@ -35,6 +36,7 @@ in {
           sshKeyName = "playa-el-yaque";
           emailSecret = "work/email";
           defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
+          panelFontSize = 16;
         };
       }
     ];

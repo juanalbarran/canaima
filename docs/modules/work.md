@@ -6,4 +6,5 @@ One file per app under `modules/work/`, merged into the `work` module. Imported 
 - `1password`: the 1Password app and its CLI (`op`).
 - `wireguard`: `wireguard-tools`, and `~/.config/wireguard/wg0.conf` as a sops template: the private and preshared keys come from `access_tokens/wireguard/*`. Bring it up by hand with `sudo wg-quick up ~/.config/wireguard/wg0.conf`.
 - `drata`: Drata's compliance agent, wrapped from its AppImage (`_drata-agent.nix`, skipped by `import-tree`). It downloads the `latest` release, so when Drata publishes a new one the hash breaks and has to be updated.
-- `path`: `~/.ctwo/bin` (CTWO's CLI tools) and `~/.local/bin` on `PATH`, for bash and fish.
+- `openvpn`: the `openvpn` CLI and the `vpn/nix` secret at `~/.config/openvpn/nix.conf`. Ubuntu's NetworkManager uses its own OpenVPN plugin (apt), and the shell's VPN pane turns connections on and off through `nmcli`, so there's no Nix plugin or nm-applet.
+- `path`: `~/.local/bin` and `~/.ctwo/bin` on `PATH`, for bash and fish. `~/.ctwo/bin` goes first, after genericLinux's `nix.sh` (which puts `~/.nix-profile/bin` in front), because CTWO's `claude` shim there has to shadow the real `claude`: it prints the CTWO banner and then runs it.
