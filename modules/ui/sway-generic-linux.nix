@@ -12,13 +12,22 @@
       [Desktop Entry]
       Name=Sway
       Comment=An i3-compatible Wayland compositor
-      Exec=${config.home.profileDirectory}/bin/sway
+      Exec=${config.home.profileDirectory}/bin/sway-session
       Type=Application
       DesktopNames=sway
     '';
     target = "/usr/share/wayland-sessions/sway.desktop";
+    # GDM runs Exec without a login shell, so sway got the distro PATH and
+    # nothing from ~/.nix-profile (quickshell, swaymsg, Nix's foot). Sourcing
+    # the session vars brings in nix.sh too. In the profile, not the store,
+    # so the installed session file stays valid across generations
+    sway-session = pkgs.writeShellScriptBin "sway-session" ''
+      . "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+      exec "${config.home.profileDirectory}/bin/sway" "$@"
+    '';
   in
     lib.mkIf (!config.hostspec.isNixOS) {
+      home.packages = [sway-session];
       home.activation.checkSwaySession = lib.hm.dag.entryAnywhere ''
         if ! cmp -s ${session} ${target}; then
           warnEcho "GDM's Sway session is missing or outdated, run"
