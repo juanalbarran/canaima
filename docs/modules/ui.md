@@ -55,6 +55,16 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 | mic mute | toggle the microphone |
 | brightness up / down | ±10% |
 
+## Screenshots
+
+`modules/ui/screenshots.nix`, on `canaima` and `mucuchies`: a `screenshot` script (grim, slurp, wl-clipboard) and three `ui.binds`. Files go to `~/Pictures/screenshots/screenshot-<date>-<time>.png` (`SCREENSHOTS_DIR` overrides it). `Esc` while selecting an area cancels.
+
+| Key | Action |
+| --- | --- |
+| `print` | whole screen → file |
+| `shift` + `print` | selected area → file |
+| `ctrl` + `print` | selected area → clipboard |
+
 ## Sway on another distro
 
 `modules/ui/sway-generic-linux.nix` adds to the `sway` module when `hostspec.isNixOS` is false (`mucuchies`):
