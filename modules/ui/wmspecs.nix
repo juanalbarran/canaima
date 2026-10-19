@@ -29,6 +29,11 @@
               type = lib.types.str;
               description = "Wayland app_id, used to match windows for run-or-raise";
             };
+            workspace = lib.mkOption {
+              type = lib.types.nullOr lib.types.ints.positive;
+              default = null;
+              description = "Workspace the app's windows always open on; null opens them where you are";
+            };
             inherit bind;
           };
         });
@@ -91,6 +96,7 @@
       terminal = {
         command = lib.mkDefault "foot";
         appId = lib.mkDefault "foot";
+        workspace = lib.mkDefault 1;
         bind.key = lib.mkDefault "q";
       };
       auxTerminal = {
@@ -104,6 +110,7 @@
       browser = {
         command = lib.mkDefault "qutebrowser";
         appId = lib.mkDefault "org.qutebrowser.qutebrowser";
+        workspace = lib.mkDefault 2;
         bind.key = lib.mkDefault "b";
       };
     };

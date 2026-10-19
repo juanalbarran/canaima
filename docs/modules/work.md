@@ -2,7 +2,7 @@
 
 One file per app under `modules/work/`, merged into the `work` module. Imported by `mucuchies` only, it's what the work laptop needs on top of `workspace`.
 
-- `slack`: Slack, run-or-raise on `mod` + `s` (`ui.apps.slack`, app_id `Slack`). It replaces Sway's default `mod` + `s` (stacking layout).
+- `slack`: Slack, run-or-raise on `mod` + `s` (`ui.apps.slack`, app_id `Slack`), always on workspace 5. It replaces Sway's default `mod` + `s` (stacking layout).
 - `1password`: the 1Password app and its CLI (`op`).
 - `wireguard`: `wireguard-tools`, and `~/.config/wireguard/wg0.conf` as a sops template: the private and preshared keys come from `access_tokens/wireguard/*`. Bring it up by hand with `sudo wg-quick up ~/.config/wireguard/wg0.conf`.
 - `drata`: Drata's compliance agent, wrapped from its AppImage (`_drata-agent.nix`, skipped by `import-tree`). It downloads the `latest` release, so when Drata publishes a new one the hash breaks and has to be updated.

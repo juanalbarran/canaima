@@ -18,6 +18,7 @@
     ui.apps.chrome = {
       command = "google-chrome-stable";
       appId = "google-chrome";
+      workspace = 4;
       bind.key = "g";
     };
   };

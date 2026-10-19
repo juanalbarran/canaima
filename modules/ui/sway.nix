@@ -41,6 +41,11 @@
     execBinds =
       lib.mapAttrs' (_: b: lib.nameValuePair (toSway b.bind) "exec ${b.command}")
       config.ui.binds;
+    # The apps with a workspace, grouped by it: {"1" = [{app_id = "^foot$";}];}
+    assigns =
+      lib.mapAttrs (_: map (a: {app_id = "^${a.appId}$";}))
+      (lib.groupBy (a: toString a.workspace)
+        (lib.filter (a: a.workspace != null) (lib.attrValues config.ui.apps)));
     actionBinds = {
       ${toSway config.ui.actions.close} = "kill";
       ${toSway config.ui.actions.reload} = "reload";
@@ -57,6 +62,7 @@
         modifier = modKey;
         terminal = config.ui.apps.terminal.command;
         bars = [];
+        inherit assigns;
         window = {
           border = 0;
           titlebar = false;

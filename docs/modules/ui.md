@@ -30,6 +30,15 @@ The window manager for the applications will follow the `run or raise` philosoph
 | toggle passthrough | `shift` + `mod` + `p` |
 Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`, `reload` and `passthrough`). Each WM translates them. Run-or-raise: the bind focuses the window with that `appId` if there is one, and otherwise launches `command`. terminal, auxTerminal and browser are set in `wmspecs.nix` as config with `mkDefault` on each field, not as the option's default, which would be dropped as soon as a feature module adds its own app (`browsers` adds chrome, `work` adds slack). An app bind replaces Sway's default on the same key: `mod` + `s` (stacking layout) is Slack's.
 
+An app's `workspace` makes its windows always open there (Sway `assign`), wherever you launch them from; `null` (the default) opens them where you are. Focus doesn't follow a window assigned elsewhere, but run-or-raise brings you to it on the next press.
+
+| App | Workspace |
+| --- | --- |
+| terminal | 1 |
+| browser (qutebrowser) | 2 |
+| chrome | 4 |
+| slack (mucuchies) | 5 |
+
 Passthrough is a WM mode whose only keybind is its own toggle, so every other key reaches the focused window. Games use it to bind `mod` combos, e.g. `alt` + `e` in WoW, which Sway's default keybinds would otherwise take.
 
 `ui.startup` commands run once when the session starts. `ui.reload` commands run then and again on every WM reload (Sway's `exec_always`).

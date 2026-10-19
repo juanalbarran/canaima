@@ -13,7 +13,7 @@ One file per browser under `modules/browsers/`, merged into the `browsers` modul
   | toggle page dark mode | `,d`                                 |
 
 - `default-browser`: if the host sets `hostspec.defaultBrowser` (a desktop file name), `xdg-open` uses it for links and HTML files (`~/.config/mimeapps.list`). `asus` sets qutebrowser; `mucuchies` leaves it unset, so its own `mimeapps.list` stays.
-- `chrome`: Google Chrome (unfree), for sites that need it. Run-or-raise on `mod` + `g` (`ui.apps.chrome`, app_id `google-chrome`); qutebrowser stays `ui.apps.browser`. Flags for native Wayland and the GPU (rasterization, zero-copy, VA-API video, `--use-gl=egl` for Intel's EGL error).
+- `chrome`: Google Chrome (unfree), for sites that need it. Run-or-raise on `mod` + `g` (`ui.apps.chrome`, app_id `google-chrome`), always on workspace 4; qutebrowser stays `ui.apps.browser`. Flags for native Wayland and the GPU (rasterization, zero-copy, VA-API video, `--use-gl=egl` for Intel's EGL error).
 - `brave`: Brave with Chrome's flags, the `Default` profile and one extension from the Chrome Web Store.
 - `xremap`: Chrome can't rebind its tab keys, so [xremap](https://github.com/xremap/xremap) turns `alt` + `shift` + `[` / `]` into `ctrl` + (`shift` +) `tab` in Chrome only, the same keys as tmux, qutebrowser and Tridactyl. A user service that starts with the graphical session. Non-NixOS only: it needs to read `/dev/input` and write `/dev/uinput`, which on Ubuntu is the `input` and `uinput` groups and a udev rule (`KERNEL=="uinput", GROUP="uinput", MODE="0660"`); on NixOS that would need a NixOS-side half (`hardware.uinput`, groups), not written yet.
 - `firefox/`: Firefox, one file per part.

@@ -6,6 +6,7 @@
     ui.apps.slack = {
       command = "slack";
       appId = "Slack";
+      workspace = 5;
       bind.key = "s";
     };
   };
