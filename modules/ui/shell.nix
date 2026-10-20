@@ -28,10 +28,9 @@
     programs.sarisarinama = {
       enable = true;
       projects.root = "~/dev";
-      style =
-        lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
-          font.size = config.hostspec.panelFontSize;
-        })
+      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
+        font.size = config.hostspec.panelFontSize;
+      });
     };
     ui.reload = ["${start}"];
     ui.binds = {
