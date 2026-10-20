@@ -32,7 +32,7 @@ The window manager for the applications will follow the `run or raise` philosoph
 | lock screen | `ctrl` + `mod` + `q` |
 Keybinds come from semantic options in `modules/ui/wmspecs.nix`: `ui.apps` (run-or-raise apps, which have an `appId`), `ui.binds` (commands, e.g. the menu and the project menu at `~/dev`) and `ui.actions` (WM actions, e.g. `close`, `reload` and `passthrough`). Each WM translates them. Run-or-raise: the bind focuses the window with that `appId` if there is one, and otherwise launches `command`. terminal, auxTerminal and browser are set in `wmspecs.nix` as config with `mkDefault` on each field, not as the option's default, which would be dropped as soon as a feature module adds its own app (`browsers` adds chrome, `work` adds slack). An app bind replaces Sway's default on the same key: `mod` + `s` (stacking layout) is Slack's.
 
-An app's `workspace` makes its windows always open there (Sway `assign`), wherever you launch them from; `null` (the default) opens them where you are. Focus doesn't follow a window assigned elsewhere, but run-or-raise brings you to it on the next press.
+An app's `workspace` makes its windows always open there (Sway `assign`), wherever you launch them from; `null` (the default) opens them where you are. Run-or-raise takes you to the app's workspace: launching switches there first, and raising focuses the window, wherever it is. An `appId` must match the window's Wayland `app_id` exactly (case too, Slack's is `slack`), check it with `swaymsg -t get_tree`; with no match the bind only relaunches the app.
 
 | App | Workspace |
 | --- | --- |

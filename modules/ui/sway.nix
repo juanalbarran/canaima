@@ -34,7 +34,13 @@
       lib.concatStringsSep "+"
       (map (m: swayMods.${m}) bind.mods ++ [bind.key]);
     swaymsg = lib.getExe' pkgs.sway "swaymsg";
-    runOrRaise = app: "exec ${swaymsg} '[app_id=\"^${app.appId}$\"] focus' || ${app.command}";
+    # Focusing a window on another workspace switches to it. Launching an app
+    # with a workspace switches there first, since its assign only moves the window.
+    # No ; or {}, which Sway would read as its own syntax
+    goTo = app:
+      lib.optionalString (app.workspace != null)
+      "${swaymsg} workspace number ${toString app.workspace} && ";
+    runOrRaise = app: "exec ${swaymsg} '[app_id=\"^${app.appId}$\"] focus' || (${goTo app}${app.command})";
     appBinds =
       lib.mapAttrs' (_: a: lib.nameValuePair (toSway a.bind) (runOrRaise a))
       config.ui.apps;
