@@ -28,7 +28,7 @@
     programs.sarisarinama = {
       enable = true;
       projects.root = "~/dev";
-      style = lib.genAttrs ["menu" "network" "monitor" "vpn"] (_: {
+      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
     };
