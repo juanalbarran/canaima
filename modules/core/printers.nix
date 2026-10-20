@@ -9,8 +9,8 @@
       # omarchy keeps cups-browsed (auto-created network queues) off
       browsed.enable = false;
     };
-    # Driverless printing for USB printers that speak IPP-over-USB
-    services.ipp-usb.enable = true;
+    # Off, the TS200 has no IPP-over-USB and ipp-usb kept reclaiming its USB interface every few seconds which stalled CUPS' usb backend mid-job
+    services.ipp-usb.enable = false;
     # mDNS, which ipp-usb uses to announce the printer to CUPS
     services.avahi = {
       enable = true;
