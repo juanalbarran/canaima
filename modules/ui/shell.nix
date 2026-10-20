@@ -29,11 +29,9 @@
       enable = true;
       projects.root = "~/dev";
       style =
-        lib.genAttrs ["menu" "network" "monitor" "vpn"] (_: {
+        lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
           font.size = config.hostspec.panelFontSize;
         })
-        # The keybinds pane is dense small print, so it gets a size of its own
-        // {keybinds.font.size = 18;};
     };
     ui.reload = ["${start}"];
     ui.binds = {
