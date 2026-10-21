@@ -25,6 +25,7 @@ The window manager for the applications will follow the `run or raise` philosoph
 | ai | `mod` + `a` |
 | menu | `mod` + `d` |
 | projects | `mod` + `p` |
+| next wallpaper | `shift` + `mod` + `w` |
 | close window | `mod` + `c` |
 | reload WM and shell | `shift` + `mod` + `c` |
 | projects at `~/nix/ctwo/ctwo-product` (mucuchies) | `shift` + `mod` + `p` |

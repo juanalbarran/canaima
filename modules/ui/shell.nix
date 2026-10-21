@@ -44,6 +44,13 @@
         command = "env SARISARINAMA_PATH=${path} sarisarinama-projects-menu ${cfg.projects.root}";
         bind.key = "p";
       };
+      nextWallpaper = {
+        command = "quickshell -p ${path} ipc call wallpaper next";
+        bind = {
+          mods = ["mod" "shift"];
+          key = "w";
+        };
+      };
       lock = {
         command = "quickshell -p ${path} ipc call lock lock";
         bind = {
