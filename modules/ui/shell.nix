@@ -28,7 +28,7 @@
     programs.sarisarinama = {
       enable = true;
       projects.root = "~/dev";
-      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
+      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery" "notifications"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
       theme.rotateWallpapers = 4; # minutes

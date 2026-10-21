@@ -89,7 +89,7 @@ The shell is also the notification daemon (`programs.sarisarinama.notifications.
 
 `mod` + `?` (`shift` + `mod` + `/`) opens the shell's keybinds menu: Neovim, Tmux and Sway, each opening a pane with that app's keybinds. The issue asked for `mod` + `k`, but that is Sway's focus up, so it stays. `modules/ui/keybinds.nix` fills the Sway section from `ui.apps`, `ui.binds` and Sway's final keybinding table (its defaults included, `mod` + `1`…`9` folded into one row), so it cannot disagree with what is bound. It also adds a `Canaima` group to the shell's tmux preset with what `modules/workspace/multiplexer.nix` binds; that one is written by hand, so a change there needs one here too.
 
-`hostspec.panelFontSize` sets the font size in px of the menu and the network, monitor and VPN panes (`style.<pane>.font.size`). The keybinds pane has its own size, 18 on every host, set in `modules/ui/shell.nix`. `null` keeps the shell's own size. The bar always uses the shared `style.font.size` (12). `asus` sets 16 to match foot's `size=12`: foot uses points, the shell uses px, and 12 pt × 96/72 = 16 px.
+`hostspec.panelFontSize` sets the font size in px of the menu, the network, monitor, VPN, battery and keybinds panes, and the notifications: their toasts and their panel (`style.<pane>.font.size`, listed in `modules/ui/shell.nix`). `null` keeps the shell's own size. The bar always uses the shared `style.font.size` (12). `asus` sets 16 to match foot's `size=12`: foot uses points, the shell uses px, and 12 pt × 96/72 = 16 px.
 
 ## UI Suite
 
