@@ -28,6 +28,7 @@ in {
       workspace
       browsers
       media
+      gaming
     ];
   };
 }

@@ -74,8 +74,6 @@
         icon = "wine";
         categories = ["Game"];
       })
-      # Installs Battle.net for retail World of Warcraft (WoW forever) from Lutris' own install script
-      pkgs.lutris
     ];
   };
 }
