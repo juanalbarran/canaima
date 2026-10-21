@@ -2,7 +2,7 @@
 
 One file per browser under `modules/browsers/`, merged into the `browsers` module. Imported by `canaima` and `mucuchies`. Themes come from sarisarinama (not yet).
 
-- `qutebrowser`: the main browser (`ui.apps.browser`). Tabs on top, shown only with more than one. Adblock on, no autoplay. On `accounts.google.com` it sends a Chrome user agent, since Google refuses QtWebEngine logins. Quickmarks (`b` / `B` + name) and search engines (`o` + keyword): `nix`, `nixo` (NixOS options), `hm`, `g`; anything else goes to DuckDuckGo.
+- `qutebrowser`: the main browser (`ui.apps.browser`). Tabs on top, shown only with more than one. Adblock on, no autoplay. On `accounts.google.com` it sends a Chrome user agent, since Google refuses QtWebEngine logins. Quickmarks (`b` / `B` + name) and search engines (`o` + keyword): `nix`, `nixo` (NixOS options), `hm`, `g`; anything else goes to DuckDuckGo. The mpv binds pass qutebrowser's cookies to yt-dlp (`--cookies-from-browser`), since YouTube otherwise blocks it as a bot.
 
   | Action                | Keybind                              |
   | --------------------- | ------------------------------------ |

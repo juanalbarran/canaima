@@ -5,7 +5,10 @@
     lib,
     ...
   }: let
-    mpv = "spawn --detach ${lib.getExe config.programs.mpv.finalPackage} --force-window";
+    # YouTube makes yt-dlp prove it isn't a bot; qutebrowser's own cookies
+    # (Chromium's format) get it through
+    cookies = "cookies-from-browser=chromium:${config.xdg.dataHome}/qutebrowser/webengine";
+    mpv = "spawn --detach ${lib.getExe config.programs.mpv.finalPackage} --force-window --ytdl-raw-options=${cookies}";
     streamlink = "spawn --detach ${lib.getExe config.programs.streamlink.package}";
   in {
     programs.qutebrowser = {
