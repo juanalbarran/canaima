@@ -34,6 +34,8 @@
       theme.rotateWallpapers = 4; # minutes
       # Only the keybind locks, never idle (#72)
       lock.idle = 0;
+      # The shell is the notification daemon; dunst must not hold the bus name
+      notifications.enable = true;
     };
     ui.reload = ["${start}"];
     ui.binds = {
