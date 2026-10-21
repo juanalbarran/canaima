@@ -81,7 +81,7 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 
 ## Shell
 
-The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` and `mucuchies`). The WM starts it through `ui.reload` with a script that kills the running instance first, so the reload keybind restarts the shell. `mod` + `d` toggles its menu over IPC.
+The ui shell is [sarisarinama](https://github.com/juanalbarran/sarisarinama), a flake input imported by `modules/ui/shell.nix` (`canaima` and `mucuchies`). The WM starts it through `ui.reload` with a script that kills the running instance first, so the reload keybind restarts the shell. `mod` + `d` toggles its menu over IPC. Three of its menus have a key of their own, opening the menu straight on its file (sarisarinama#36): `mod` + `shift` + `s` the Services menu (Network, Bluetooth, VPN, Monitors, Sound), `mod` + `shift` + `t` Themes, `mod` + `shift` + `e` System. That last one takes Sway's default exit prompt, which is left with no key: leave Sway from the System menu's power entries or with `swaymsg exit`.
 
 The shell is also the lock screen: `ctrl` + `mod` + `q` locks over IPC (`ipc call lock lock`), and the shell itself locks on `loginctl lock-session` and before suspend. It never locks on idle: `programs.sarisarinama.lock.idle` is `0`, so there is no swayidle either. The password is checked against the PAM service `sarisarinama-lock`: on `asus` the `nixos` half of `shell` imports `modules.nixos.sarisarinama`, which declares it; on `mucuchies` Home Manager activation writes `/etc/pam.d/sarisarinama-lock` with sudo. Without the service the shell refuses to lock.
 

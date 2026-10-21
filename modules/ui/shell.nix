@@ -23,12 +23,18 @@
       ${lib.getExe' pkgs.procps "pkill"} -f '^quickshell -p .*/share/sarisarinama$'
       SARISARINAMA_PATH=${path} exec quickshell -p ${path}
     '';
+    # A menu of the shell's own, opened straight on its file
+    openMenu = name: "quickshell -p ${path} ipc call shell toggle menu ${lib.escapeShellArg (builtins.toJSON {file = "${config.xdg.configHome}/sarisarinama/${name}.json";})}";
+    shiftBind = key: {
+      mods = ["mod" "shift"];
+      inherit key;
+    };
   in {
     imports = [inputs.sarisarinama.modules.homeManager.sarisarinama];
     programs.sarisarinama = {
       enable = true;
       projects.root = "~/dev";
-      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery" "notifications"] (_: {
+      style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery" "notifications" "bluetooth"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
       theme.rotateWallpapers = 4; # minutes
@@ -46,6 +52,19 @@
       projects = {
         command = "env SARISARINAMA_PATH=${path} sarisarinama-projects-menu ${cfg.projects.root}";
         bind.key = "p";
+      };
+      # sarisarinama#36. mod+shift+e replaces Sway's default exit prompt
+      servicesMenu = {
+        command = openMenu "services";
+        bind = shiftBind "s";
+      };
+      themesMenu = {
+        command = openMenu "themes";
+        bind = shiftBind "t";
+      };
+      systemMenu = {
+        command = openMenu "system";
+        bind = shiftBind "e";
       };
       nextWallpaper = {
         command = "quickshell -p ${path} ipc call wallpaper next";
