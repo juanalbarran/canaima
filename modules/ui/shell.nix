@@ -31,6 +31,7 @@
       style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
+      theme.rotateWallpapers = 4; # minutes
       # Only the keybind locks, never idle (#72)
       lock.idle = 0;
     };
