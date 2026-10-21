@@ -31,6 +31,8 @@
       style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
+      # Only the keybind locks, never idle (#72)
+      lock.idle = 0;
     };
     ui.reload = ["${start}"];
     ui.binds = {
