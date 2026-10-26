@@ -26,7 +26,7 @@
     lib,
     ...
   }: {
-    programs.sarisarinama.menus.root = lib.mkIf config.hostspec.isNixOS [
+    programs.sarisarinama.menus.services = lib.mkIf config.hostspec.isNixOS [
       {
         icon = "󰐪 ";
         label = "Printers";
