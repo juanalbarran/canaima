@@ -66,6 +66,11 @@
         command = openMenu "system";
         bind = shiftBind "e";
       };
+      # sarisarinama#18; the links are modules/ui/bookmarks.nix
+      bookmarksMenu = {
+        command = openMenu "bookmarks";
+        bind.key = "m";
+      };
       nextWallpaper = {
         command = "quickshell -p ${path} ipc call wallpaper next";
         bind = {
