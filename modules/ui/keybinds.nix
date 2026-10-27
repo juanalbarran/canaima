@@ -257,6 +257,54 @@
           ];
         }
       ];
+
+      # What terminal.nix binds beyond foot's defaults
+      foot.groups = lib.mkAfter [
+        {
+          title = "Canaima";
+          binds = [
+            {
+              keys = "Ctrl+Enter";
+              description = "Fullscreen";
+            }
+            {
+              keys = "Ctrl+Shift+y";
+              description = "Copy a URL";
+            }
+            {
+              keys = "Ctrl+Shift+g";
+              description = "Copy a commit hash";
+            }
+            {
+              keys = "Shift+Enter";
+              description = "Told apart from Enter (Claude Code)";
+            }
+          ];
+        }
+      ];
+
+      # What aux-terminal.nix binds beyond ghostty's defaults. With mod =
+      # alt, its Alt+1…9 tabs never arrive: Sway takes them for workspaces
+      ghostty.groups = lib.mkAfter [
+        {
+          title = "Canaima";
+          binds =
+            [
+              {
+                keys = "Alt+{";
+                description = "Previous tab, or tmux's window";
+              }
+              {
+                keys = "Alt+}";
+                description = "Next tab, or tmux's window";
+              }
+            ]
+            ++ lib.optional (config.ui.mod == "alt") {
+              keys = "Alt+1…9";
+              description = "Sway's workspaces, not tabs";
+            };
+        }
+      ];
     };
   };
 }
