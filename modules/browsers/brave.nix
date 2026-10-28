@@ -4,7 +4,11 @@
     programs.brave = {
       enable = true;
       commandLineArgs = config.programs.google-chrome.commandLineArgs ++ ["--profile-directory=Default"];
-      extensions = [{id = "hfjbmagddngcpeloejdejnfgbamkjaeg";}];
+      extensions = [
+        {id = "hfjbmagddngcpeloejdejnfgbamkjaeg";}
+        # re-start: start page and new tab
+        {id = "fdodcmjeojbmcgmhcgcelffcekhicnop";}
+      ];
     };
   };
 }

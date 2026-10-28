@@ -28,6 +28,8 @@
           (extension "tree-style-tab" "treestyletab@piro.sakura.ne.jp")
           (extension "darkreader" "addon@darkreader.org")
           (extension "domain-in-title" "{966515fa-4c81-4afe-9879-9bbaf8576390}")
+          # Start page and new tab; Tridactyl can't run on its page
+          (extension "d004c62a8aed4f3b8ddd" "re-start@refact0r.dev")
           # Misc
           (extension "s3download-statusbar" "{6913849f-c79f-4f3e-83e4-890d91ad6154}")
           (extension "auto-tab-discard" "{c2c003ee-bd69-42a2-b0e9-6f34222cb046}")

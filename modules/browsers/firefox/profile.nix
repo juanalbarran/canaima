@@ -5,8 +5,6 @@
       id = 0;
       isDefault = true;
       settings = {
-        # Tridactyl works best on a blank new page
-        "browser.startup.homepage" = "about:blank";
         "browser.urlbar.update2.engineAliasRefresh" = true;
         "browser.toolbars.bookmarks.visibility" = "always";
       };

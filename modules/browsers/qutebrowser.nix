@@ -3,8 +3,12 @@
   flake.modules.homeManager.browsers = {
     config,
     lib,
+    pkgs,
     ...
   }: let
+    # No extensions in qutebrowser, so re-start is built and opened as a file;
+    # every file:// page shares one localStorage, so its settings survive updates
+    startPage = "file://${pkgs.callPackage ./_re-start.nix {}}/index.html";
     # YouTube makes yt-dlp prove it isn't a bot; qutebrowser's own cookies
     # (Chromium's format) get it through
     cookies = "cookies-from-browser=chromium:${config.xdg.dataHome}/qutebrowser/webengine";
@@ -31,6 +35,8 @@
         g = "https://www.google.com/search?hl=en&q={}";
       };
       settings = {
+        url.start_pages = [startPage];
+        url.default_page = startPage;
         tabs.position = "top";
         tabs.show = "multiple";
         scrolling.smooth = true;
