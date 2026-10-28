@@ -19,5 +19,8 @@
         "x-scheme-handler/unknown"
       ] (_: browser);
     };
+    # Ubuntu tools rewrite mimeapps.list in place and break the symlink;
+    # overwrite it on switch instead of failing checkLinkTargets
+    xdg.configFile."mimeapps.list".force = lib.mkIf config.xdg.mimeApps.enable true;
   };
 }
