@@ -10,6 +10,12 @@
     # wrapper, because Claude Code puts its own gh first on PATH
     token = config.sops.secrets."access_tokens/github_token".path;
   in {
+    # Installed here and not through hostspec.githubUser, which would write the
+    # personal token into hosts.yml over the work login
+    programs.gh = {
+      enable = true;
+      settings.git_protocol = "ssh";
+    };
     programs.bash.initExtra = lib.mkIf (config.hostspec.shell == "bash") ''
       gh() {
         case "$PWD/" in
