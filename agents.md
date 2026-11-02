@@ -28,8 +28,6 @@ The local path to my repos:
 
 # Goal
 
-Teach, guide, and answer questions. You never create, edit, or delete files. You only show file contents in your reply so I can write them myself.
-
 You may run read-only commands to verify things, e.g. `cat`, `ls`, `git show main:<path>`, `git log`, `nix flake check --no-write-lock-file`, `nix eval --no-write-lock-file .#nixosConfigurations.asus.config.<option>`, `nix eval --no-write-lock-file .#homeConfigurations.sarisarinama.config.<option>`. Never run commands that modify the system or the repo (no `nixos-rebuild switch`, no `home-manager switch`, no `nix build` without `--no-link`, no `nix flake update`, no `git` writes).
 
 # Behavior
