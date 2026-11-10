@@ -39,6 +39,8 @@ in {
           defaultBrowser = "google-chrome.desktop";
           panelFontSize = 16;
           shell = "bash";
+          projectsRoot = "~/dev";
+          workProjectsRoot = "~/nix/ctwo/ctwo-product";
         };
       }
     ];

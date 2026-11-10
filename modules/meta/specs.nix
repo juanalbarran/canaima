@@ -56,6 +56,17 @@
         example = 16;
         description = "Font size in px for the shell menu and panes; null keeps the shell's own size";
       };
+      projectsRoot = lib.mkOption {
+        type = lib.types.str;
+        default = "~/dev";
+        description = "Root of the shell's projects menu on mod+p";
+      };
+      workProjectsRoot = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        example = "~/nix/ctwo/ctwo-product";
+        description = "Root of the work projects menu on mod+shift+p; null leaves the key unbound";
+      };
     };
   };
 in {

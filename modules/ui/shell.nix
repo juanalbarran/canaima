@@ -33,7 +33,7 @@
     imports = [inputs.sarisarinama.modules.homeManager.sarisarinama];
     programs.sarisarinama = {
       enable = true;
-      projects.root = "~/dev";
+      projects.root = config.hostspec.projectsRoot;
       style = lib.genAttrs ["menu" "network" "monitor" "vpn" "keybinds" "battery" "notifications" "bluetooth"] (_: {
         font.size = config.hostspec.panelFontSize;
       });
