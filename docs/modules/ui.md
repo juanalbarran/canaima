@@ -28,7 +28,7 @@ The window manager for the applications will follow the `run or raise` philosoph
 | next wallpaper | `shift` + `mod` + `w` |
 | close window | `mod` + `c` |
 | reload WM and shell | `shift` + `mod` + `c` |
-| projects at `~/nix/ctwo/ctwo-product` (mucuchies) | `shift` + `mod` + `p` |
+| work projects at `hostspec.workProjectsRoot` (mucuchies: `~/nix/nix`) | `shift` + `mod` + `p` |
 | toggle passthrough | `ctrl` + `shift` + `mod` + `p` |
 | lock screen | `ctrl` + `mod` + `q` |
 | keybinds | `shift` + `mod` + `/` (`mod` + `?`) |

@@ -40,7 +40,7 @@ in {
           panelFontSize = 16;
           shell = "bash";
           projectsRoot = "~/dev";
-          workProjectsRoot = "~/nix/ctwo/ctwo-product";
+          workProjectsRoot = "~/nix/nix";
         };
       }
     ];
