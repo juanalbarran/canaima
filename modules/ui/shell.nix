@@ -71,6 +71,11 @@
         command = openMenu "bookmarks";
         bind.key = "m";
       };
+      # The running tmux sessions (sarisarinama's sessions menu)
+      sessionsMenu = {
+        command = openMenu "sessions";
+        bind.key = "t";
+      };
       nextWallpaper = {
         command = "quickshell -p ${path} ipc call wallpaper next";
         bind = {
