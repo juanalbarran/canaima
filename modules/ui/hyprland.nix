@@ -115,14 +115,42 @@
         "exec-once" = config.ui.startup;
         # exec reruns on every reload, Sway's exec_always
         exec = config.ui.reload;
-        # Sway's look: no borders, gaps, rounding or animations
+        # Hyprland's own look, from its example config: gaps, rounded
+        # corners, blur, shadows and animations. Sway keeps the flat one
         general = {
-          border_size = 0;
-          gaps_in = 0;
-          gaps_out = 0;
+          border_size = 2;
+          gaps_in = 5;
+          gaps_out = 20;
+          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+          "col.inactive_border" = "rgba(595959aa)";
         };
-        decoration.rounding = 0;
-        animations.enabled = false;
+        decoration = {
+          rounding = 10;
+          shadow = {
+            enabled = true;
+            range = 4;
+            render_power = 3;
+          };
+          blur = {
+            enabled = true;
+            size = 3;
+            passes = 1;
+          };
+        };
+        animations = {
+          enabled = true;
+          bezier = [
+            "easeOutQuint, 0.23, 1, 0.32, 1"
+            "linear, 0, 0, 1, 1"
+          ];
+          animation = [
+            "global, 1, 10, default"
+            "windows, 1, 4.8, easeOutQuint, popin 87%"
+            "fade, 1, 3, easeOutQuint"
+            "workspaces, 1, 2, easeOutQuint, slide"
+            "border, 1, 5.4, easeOutQuint"
+          ];
+        };
         # sarisarinama draws the wallpaper
         misc = {
           disable_hyprland_logo = true;
