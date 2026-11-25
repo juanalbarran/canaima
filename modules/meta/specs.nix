@@ -56,6 +56,12 @@
         example = 16;
         description = "Font size in px for the shell menu and panes; null keeps the shell's own size";
       };
+      opacity = lib.mkOption {
+        type = lib.types.numbers.between 0.0 1.0;
+        default = 1.0;
+        example = 0.8;
+        description = "Background opacity under Hyprland of the terminals and of the shell's bar, menus, panes and notifications, which Hyprland blurs; Sway keeps all of them opaque";
+      };
       projectsRoot = lib.mkOption {
         type = lib.types.str;
         default = "~/dev";

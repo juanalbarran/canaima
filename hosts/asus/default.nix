@@ -18,6 +18,7 @@
           githubUser = "juanalbarran";
           defaultBrowser = "org.qutebrowser.qutebrowser.desktop";
           panelFontSize = 16;
+          opacity = 0.8;
           projectsRoot = "~/dev";
         };
       }

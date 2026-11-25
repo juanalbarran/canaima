@@ -89,11 +89,6 @@
         type = lib.types.str;
         default = "sway";
       };
-      hyprland.alpha = lib.mkOption {
-        type = lib.types.numbers.between 0.0 1.0;
-        default = 1.0;
-        description = "Background alpha of the terminal and the bar under Hyprland, which blurs what shows through; Sway keeps both opaque";
-      };
     };
     # The apps every preset has, set as config rather than as the option's
     # default: a default is dropped as soon as any module adds an app (chrome,

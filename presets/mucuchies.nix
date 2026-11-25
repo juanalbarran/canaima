@@ -41,6 +41,7 @@ in {
           emailSecret = "work/email";
           defaultBrowser = "google-chrome.desktop";
           panelFontSize = 16;
+          opacity = 0.8;
           shell = "bash";
           projectsRoot = "~/dev";
           workProjectsRoot = "~/nix/nix";

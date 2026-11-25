@@ -38,9 +38,9 @@
         font.size = config.hostspec.panelFontSize;
       });
       theme.rotateWallpapers = 4; # minutes
-      # Only under Hyprland; Sway's bar and menus stay opaque
-      theme.surfaces.bar.hyprlandBackgroundAlpha = config.ui.hyprland.alpha;
-      theme.surfaces.menu.hyprlandBackgroundAlpha = config.ui.hyprland.alpha;
+      # Every surface's background, only under Hyprland; Sway's stay opaque.
+      # The terminals take the same value in translucency.nix
+      theme.surfaces.hyprlandOpacity = config.hostspec.opacity;
       # Only the keybind locks, never idle (#72)
       lock.idle = 0;
       # The shell is the notification daemon; dunst must not hold the bus name
