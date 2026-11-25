@@ -6,7 +6,12 @@
     pkgs,
     ...
   }: {
-    programs.yt-dlp.enable = true;
+    programs.yt-dlp = {
+      enable = true;
+      # YouTube's JS challenge changes faster than nixpkgs' yt-dlp; take the
+      # newest solver script from yt-dlp's GitHub instead of the bundled one
+      settings.remote-components = "ejs:github";
+    };
     programs.mpv = {
       enable = true;
       scripts = with pkgs.mpvScripts; [mpris uosc thumbfast];
