@@ -38,12 +38,16 @@
         font.size = config.hostspec.panelFontSize;
       });
       theme.rotateWallpapers = 4; # minutes
-      # Only Hyprland's floating bar; Sway's flush one stays opaque
+      # Only under Hyprland; Sway's bar and menus stay opaque
       theme.surfaces.bar.hyprlandBackgroundAlpha = config.ui.hyprland.alpha;
+      theme.surfaces.menu.hyprlandBackgroundAlpha = config.ui.hyprland.alpha;
       # Only the keybind locks, never idle (#72)
       lock.idle = 0;
       # The shell is the notification daemon; dunst must not hold the bus name
       notifications.enable = true;
+      # Hyprland draws no window borders (hyprland.nix), so there is nothing
+      # for the theme to paint there
+      integrations.hyprland.enable = false;
     };
     ui.reload = ["${start}"];
     ui.binds = {

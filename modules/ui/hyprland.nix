@@ -116,13 +116,12 @@
         # exec reruns on every reload, Sway's exec_always
         exec = config.ui.reload;
         # Hyprland's own look, from its example config: gaps, rounded
-        # corners, blur, shadows and animations. Sway keeps the flat one
+        # corners, blur, shadows and animations, but no borders. Sway keeps
+        # the flat one
         general = {
-          border_size = 2;
+          border_size = 0;
           gaps_in = 5;
           gaps_out = 20;
-          "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
         };
         decoration = {
           rounding = 10;

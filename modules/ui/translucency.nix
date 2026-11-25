@@ -1,8 +1,8 @@
 # ./modules/ui/translucency.nix
-# Only when Hyprland is the WM: the terminals' background and the bar are
-# see-through, by ui.hyprland.alpha, and Hyprland blurs what shows through
-# them. Under Sway all three stay opaque. The bar's half is in shell.nix,
-# which owns the shell's config
+# Only when Hyprland is the WM: the terminals' background, the bar and the
+# menus are see-through, by ui.hyprland.alpha, and Hyprland blurs what shows
+# through them. Under Sway all of them stay opaque. The shell's half, the
+# bar's and the menus' alpha, is in shell.nix, which owns its config
 {
   flake.modules.homeManager.hyprland = {
     config,
@@ -42,11 +42,11 @@
     # tmux and Neovim show through too
     programs.ghostty.package = onHyprland pkgs.ghostty "--background-opacity=${alpha} --background-opacity-cells=true";
     # Windows are blurred by decoration.blur already; a layer only by a
-    # rule. ignore_alpha skips the bar's clear corners, which would
-    # otherwise blur as a square
+    # rule. ignore_alpha skips the clear corners round the bar and the menu
+    # card, which would otherwise blur as a square
     wayland.windowManager.hyprland.settings.layerrule = [
-      "blur on, match:namespace ^(sarisarinama-bar)$"
-      "ignore_alpha 0.5, match:namespace ^(sarisarinama-bar)$"
+      "blur on, match:namespace ^(sarisarinama-(bar|menu))$"
+      "ignore_alpha 0.5, match:namespace ^(sarisarinama-(bar|menu))$"
     ];
   };
 }

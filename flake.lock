@@ -270,11 +270,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795608412,
-        "narHash": "sha256-jgTTjFrVPdkEIEjzJTMaaY7iQ7CrpgbkOl/ztwOYHTc=",
+        "lastModified": 1795608660,
+        "narHash": "sha256-Bf8pM/uB4muEQRVJ9lqemcw5PA3Tc1ZuKf3gbwYPp/c=",
         "owner": "juanalbarran",
         "repo": "sarisarinama",
-        "rev": "af6bee59a95d5af2b581aaf9c13add0399e03bd8",
+        "rev": "d22cc6c4291de0daa1153ac175b19610075e0f80",
         "type": "github"
       },
       "original": {
