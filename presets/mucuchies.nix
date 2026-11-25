@@ -27,6 +27,8 @@ in {
     pkgs = import inputs.nixpkgs {
       system = "x86_64-linux";
       config.allowUnfree = true;
+      # qutebrowser 3.7.0 still accepts eMudhra TLS certs; nixpkgs has no newer release yet
+      config.permittedInsecurePackages = ["qutebrowser-3.7.0"];
     };
     extraSpecialArgs = {inherit inputs;};
     modules = [
