@@ -1,6 +1,6 @@
 # ./modules/ui/keybinds.nix
-# The sarisarinama keybinds pane: mod+? opens its menu, a row per app. The
-# WM section, Sway or Hyprland, whichever is enabled, is built from ui.apps,
+# The sarisarinama keybinds pane: mod+? opens its menu, a row per app. Each
+# enabled WM, Sway and/or Hyprland, gets a section built from ui.apps,
 # ui.binds and that WM's final keybinding table, so it shows what is really
 # bound, defaults included. tmux gets the binds multiplexer.nix adds on top
 # of the defaults sarisarinama ships.
@@ -27,12 +27,10 @@
       (lib.trim "${lib.elemAt f 2} ${lib.concatStringsSep ", " (lib.drop 3 f)}"))
     (hyprland.settings.bind or []));
 
-    # The running WM: its names for the modifiers, to find the ui.* binds
-    # in its table, the table itself, and what its commands mean
-    wm =
-      if hyprland.enable
-      then {
-        name = "hyprland";
+    # Each WM: its names for the modifiers, to find the ui.* binds in its
+    # table, the table itself, and what its commands mean
+    wms = {
+      hyprland = {
         label = "Hyprland";
         icon = " "; # nf-linux-hyprland
         mods = {
@@ -58,9 +56,8 @@
           "exec hyprctl reload" = ["Session" "Reload Hyprland"];
           "submap passthrough" = ["Session" "Passthrough: every key to the window"];
         };
-      }
-      else {
-        name = "sway";
+      };
+      sway = {
         label = "Sway";
         icon = " ";
         mods = {
@@ -98,8 +95,10 @@
           "mode passthrough" = ["Session" "Passthrough: every key to the window"];
         };
       };
-    # A ui.* bind the way the WM's table writes it: "Mod1+Shift+q", "ALT+SHIFT+q"
-    toCombo = bind: lib.concatStringsSep "+" (map (m: wm.mods.${m}) bind.mods ++ [bind.key]);
+    };
+    # The WMs this config sets up. Both on mucuchies, where GDM picks one
+    # per login, so the pane shows a section for each
+    enabled = lib.filterAttrs (name: _: config.wayland.windowManager.${name}.enable) wms;
 
     # How a key is printed on a keycap; a letter is printed upper case. No
     # spaces or +: in the pane's notation a space separates keys pressed in
@@ -152,88 +151,114 @@
     in
       lib.toUpper (lib.substring 0 1 spaced) + lib.substring 1 (-1) spaced;
 
-    appRow = name: app: {
-      keys = keysOf (toCombo app.bind);
-      description =
-        humanize name
-        + lib.optionalString (app.workspace != null) " · workspace ${toString app.workspace}";
-    };
-    bindRow = name: b: {
-      keys = keysOf (toCombo b.bind);
-      description = humanize name;
-    };
     # Binds without the mod key are the keyboard's own: media, Print
     hasMod = b: lib.elem "mod" b.bind.mods;
 
-    # The rest of the WM's table: its defaults and ui.actions. Each command
-    # is reduced to a template, a number becoming N and a direction DIR,
-    # so mod+1…9 or mod+h/j/k/l make one row each
-    taken = map (x: toCombo x.bind) (lib.attrValues config.ui.apps ++ lib.attrValues config.ui.binds);
-    table =
-      lib.filterAttrs (combo: command: command != null && !(lib.elem combo taken))
-      wm.table;
-    templateOf = command: let
-      words = lib.splitString " " command;
-      last = lib.last words;
-      swap = w:
-        if lib.elem w wm.directions
-        then "DIR"
-        else if builtins.match "[0-9]+" w != null
-        then "N"
-        else w;
-    in
-      if lib.hasPrefix "exec " command
-      then command
-      else lib.concatStringsSep " " (lib.init words ++ [(swap last)]);
+    # One WM's section: the ui.* binds as that WM writes them, then the
+    # rest of its table
+    sectionOf = wm: let
+      # A ui.* bind the way the WM's table writes it: "Mod1+Shift+q", "ALT+SHIFT+q"
+      toCombo = bind: lib.concatStringsSep "+" (map (m: wm.mods.${m}) bind.mods ++ [bind.key]);
 
-    # template -> [group, description]; anything else lands in Other
-    describe = command: let
-      t = templateOf command;
-    in
-      wm.known.${
-        t
-      } or (
-        if lib.hasPrefix "exec swaynag" command
-        then ["Session" "Exit Sway"]
-        else if lib.hasPrefix "exec " command
-        then ["Session" "Run ${baseNameOf (lib.head (lib.splitString " " (lib.removePrefix "exec " command)))}"]
-        else ["Other" command]
-      );
-
-    # The combos of one template, as one row. The last key varies: 1…9 for
-    # numbers, H/J/K/L for directions, with the arrows left out as the
-    # same thing twice
-    rowOf = combos: let
-      lasts = map (c: lib.last (lib.splitString "+" c)) combos;
-      prefix = lib.init (lib.splitString "+" (lib.head combos));
-      letters = lib.filter (k: builtins.stringLength k == 1) lasts;
-      nums = lib.sort lib.lessThan (map lib.toInt (lib.filter (k: builtins.match "[0-9]+" k != null) lasts));
-      varying =
-        if lib.length combos == 1
-        then keyName (lib.head lasts)
-        else if nums != []
-        then "${toString (lib.head nums)}…${toString (lib.last nums)}"
-        else if letters != []
-        then lib.concatMapStringsSep "/" keyName letters
-        else lib.concatMapStrings keyName lasts;
-      d = describe table.${lib.head combos};
-    in {
-      group = lib.head d;
-      bind = {
-        keys = lib.concatStringsSep "+" (map keyName prefix ++ [varying]);
-        description = lib.last d;
+      appRow = name: app: {
+        keys = keysOf (toCombo app.bind);
+        description =
+          humanize name
+          + lib.optionalString (app.workspace != null) " · workspace ${toString app.workspace}";
       };
-    };
-    # Grouped by template and by the modifiers held, so mod+1 and
-    # mod+shift+1 stay apart
-    rows = map rowOf (lib.attrValues (lib.groupBy (combo:
-      templateOf table.${combo}
-      + "|"
-      + lib.concatStringsSep "+" (lib.init (lib.splitString "+" combo)))
-    (lib.attrNames table)));
-    wmGroup = title: {
-      inherit title;
-      binds = lib.sort (a: b: a.description < b.description) (map (r: r.bind) (lib.filter (r: r.group == title) rows));
+      bindRow = name: b: {
+        keys = keysOf (toCombo b.bind);
+        description = humanize name;
+      };
+      # The rest of the WM's table: its defaults and ui.actions. Each command
+      # is reduced to a template, a number becoming N and a direction DIR,
+      # so mod+1…9 or mod+h/j/k/l make one row each
+      taken = map (x: toCombo x.bind) (lib.attrValues config.ui.apps ++ lib.attrValues config.ui.binds);
+      table =
+        lib.filterAttrs (combo: command: command != null && !(lib.elem combo taken))
+        wm.table;
+      templateOf = command: let
+        words = lib.splitString " " command;
+        last = lib.last words;
+        swap = w:
+          if lib.elem w wm.directions
+          then "DIR"
+          else if builtins.match "[0-9]+" w != null
+          then "N"
+          else w;
+      in
+        if lib.hasPrefix "exec " command
+        then command
+        else lib.concatStringsSep " " (lib.init words ++ [(swap last)]);
+
+      # template -> [group, description]; anything else lands in Other
+      describe = command: let
+        t = templateOf command;
+      in
+        wm.known.${
+          t
+        } or (
+          if lib.hasPrefix "exec swaynag" command
+          then ["Session" "Exit Sway"]
+          else if lib.hasPrefix "exec " command
+          then ["Session" "Run ${baseNameOf (lib.head (lib.splitString " " (lib.removePrefix "exec " command)))}"]
+          else ["Other" command]
+        );
+
+      # The combos of one template, as one row. The last key varies: 1…9 for
+      # numbers, H/J/K/L for directions, with the arrows left out as the
+      # same thing twice
+      rowOf = combos: let
+        lasts = map (c: lib.last (lib.splitString "+" c)) combos;
+        prefix = lib.init (lib.splitString "+" (lib.head combos));
+        letters = lib.filter (k: builtins.stringLength k == 1) lasts;
+        nums = lib.sort lib.lessThan (map lib.toInt (lib.filter (k: builtins.match "[0-9]+" k != null) lasts));
+        varying =
+          if lib.length combos == 1
+          then keyName (lib.head lasts)
+          else if nums != []
+          then "${toString (lib.head nums)}…${toString (lib.last nums)}"
+          else if letters != []
+          then lib.concatMapStringsSep "/" keyName letters
+          else lib.concatMapStrings keyName lasts;
+        d = describe table.${lib.head combos};
+      in {
+        group = lib.head d;
+        bind = {
+          keys = lib.concatStringsSep "+" (map keyName prefix ++ [varying]);
+          description = lib.last d;
+        };
+      };
+      # Grouped by template and by the modifiers held, so mod+1 and
+      # mod+shift+1 stay apart
+      rows = map rowOf (lib.attrValues (lib.groupBy (combo:
+        templateOf table.${combo}
+        + "|"
+        + lib.concatStringsSep "+" (lib.init (lib.splitString "+" combo)))
+      (lib.attrNames table)));
+      wmGroup = title: {
+        inherit title;
+        binds = lib.sort (a: b: a.description < b.description) (map (r: r.bind) (lib.filter (r: r.group == title) rows));
+      };
+    in {
+      inherit (wm) label icon;
+      order = 30;
+      groups =
+        [
+          {
+            title = "Applications";
+            binds = lib.mapAttrsToList appRow config.ui.apps;
+          }
+          {
+            title = "Shell";
+            binds = lib.mapAttrsToList bindRow (lib.filterAttrs (_: hasMod) config.ui.binds);
+          }
+          {
+            title = "Keyboard keys";
+            binds = lib.mapAttrsToList bindRow (lib.filterAttrs (_: b: !hasMod b) config.ui.binds);
+          }
+        ]
+        ++ map wmGroup ["Windows" "Layout" "Workspaces" "Session" "Other"];
     };
   in {
     ui.binds.keybinds = {
@@ -245,121 +270,101 @@
       };
     };
 
-    programs.sarisarinama.keybinds = {
-      # Only the running WM's section: the other one binds nothing
-      ${wm.name} = {
-        inherit (wm) label icon;
-        order = 30;
-        groups =
-          [
-            {
-              title = "Applications";
-              binds = lib.mapAttrsToList appRow config.ui.apps;
-            }
-            {
-              title = "Shell";
-              binds = lib.mapAttrsToList bindRow (lib.filterAttrs (_: hasMod) config.ui.binds);
-            }
-            {
-              title = "Keyboard keys";
-              binds = lib.mapAttrsToList bindRow (lib.filterAttrs (_: b: !hasMod b) config.ui.binds);
-            }
-          ]
-          ++ map wmGroup ["Windows" "Layout" "Workspaces" "Session" "Other"];
-      };
-
-      # What multiplexer.nix binds beyond tmux's defaults
-      tmux.groups = lib.mkAfter [
-        {
-          title = "Canaima";
-          binds = [
-            {
-              keys = "Ctrl+h/j/k/l";
-              description = "Pane, or nvim split, that way";
-            }
-            {
-              keys = "Ctrl+Alt+h/j/k/l";
-              description = "Resize the pane";
-            }
-            {
-              keys = "Alt+{";
-              description = "Previous window";
-            }
-            {
-              keys = "Alt+}";
-              description = "Next window";
-            }
-            {
-              keys = "Ctrl+Alt+{";
-              description = "Move the window left";
-            }
-            {
-              keys = "Ctrl+Alt+}";
-              description = "Move the window right";
-            }
-            {
-              keys = "Ctrl+b X";
-              description = "Kill the session";
-            }
-            {
-              keys = "v";
-              description = "Start a selection (copy mode)";
-            }
-            {
-              keys = "y";
-              description = "Copy and leave (copy mode)";
-            }
-          ];
-        }
-      ];
-
-      # What terminal.nix binds beyond foot's defaults
-      foot.groups = lib.mkAfter [
-        {
-          title = "Canaima";
-          binds = [
-            {
-              keys = "Ctrl+Enter";
-              description = "Fullscreen";
-            }
-            {
-              keys = "Ctrl+Shift+y";
-              description = "Copy a URL";
-            }
-            {
-              keys = "Ctrl+Shift+g";
-              description = "Copy a commit hash";
-            }
-            {
-              keys = "Shift+Enter";
-              description = "Told apart from Enter (Claude Code)";
-            }
-          ];
-        }
-      ];
-
-      # What aux-terminal.nix binds beyond ghostty's defaults. With mod =
-      # alt, its Alt+1…9 tabs never arrive: the WM takes them for workspaces
-      ghostty.groups = lib.mkAfter [
-        {
-          title = "Canaima";
-          binds =
-            [
+    programs.sarisarinama.keybinds =
+      lib.mapAttrs (_: sectionOf) enabled
+      // {
+        # What multiplexer.nix binds beyond tmux's defaults
+        tmux.groups = lib.mkAfter [
+          {
+            title = "Canaima";
+            binds = [
+              {
+                keys = "Ctrl+h/j/k/l";
+                description = "Pane, or nvim split, that way";
+              }
+              {
+                keys = "Ctrl+Alt+h/j/k/l";
+                description = "Resize the pane";
+              }
               {
                 keys = "Alt+{";
-                description = "Previous tab, or tmux's window";
+                description = "Previous window";
               }
               {
                 keys = "Alt+}";
-                description = "Next tab, or tmux's window";
+                description = "Next window";
               }
-            ]
-            ++ lib.optional (config.ui.mod == "alt") {
-              keys = "Alt+1…9";
-              description = "${wm.label}'s workspaces, not tabs";
-            };
-        }
-      ];
-    };
+              {
+                keys = "Ctrl+Alt+{";
+                description = "Move the window left";
+              }
+              {
+                keys = "Ctrl+Alt+}";
+                description = "Move the window right";
+              }
+              {
+                keys = "Ctrl+b X";
+                description = "Kill the session";
+              }
+              {
+                keys = "v";
+                description = "Start a selection (copy mode)";
+              }
+              {
+                keys = "y";
+                description = "Copy and leave (copy mode)";
+              }
+            ];
+          }
+        ];
+
+        # What terminal.nix binds beyond foot's defaults
+        foot.groups = lib.mkAfter [
+          {
+            title = "Canaima";
+            binds = [
+              {
+                keys = "Ctrl+Enter";
+                description = "Fullscreen";
+              }
+              {
+                keys = "Ctrl+Shift+y";
+                description = "Copy a URL";
+              }
+              {
+                keys = "Ctrl+Shift+g";
+                description = "Copy a commit hash";
+              }
+              {
+                keys = "Shift+Enter";
+                description = "Told apart from Enter (Claude Code)";
+              }
+            ];
+          }
+        ];
+
+        # What aux-terminal.nix binds beyond ghostty's defaults. With mod =
+        # alt, its Alt+1…9 tabs never arrive: the WM takes them for workspaces
+        ghostty.groups = lib.mkAfter [
+          {
+            title = "Canaima";
+            binds =
+              [
+                {
+                  keys = "Alt+{";
+                  description = "Previous tab, or tmux's window";
+                }
+                {
+                  keys = "Alt+}";
+                  description = "Next tab, or tmux's window";
+                }
+              ]
+              ++ lib.optional (config.ui.mod == "alt") {
+                keys = "Alt+1…9";
+                description = "${lib.concatMapStringsSep "/" (w: w.label) (lib.attrValues enabled)} workspaces, not tabs";
+              };
+          }
+        ];
+      };
   };
 }

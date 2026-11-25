@@ -12,6 +12,7 @@ in {
       juan-albarran
       hostspec
       sway
+      hyprland
       ui
       shell
       ai

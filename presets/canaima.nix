@@ -8,12 +8,16 @@ in {
       core
       juan
       hostspec
+      sway
       hyprland
       ui
       login
       shell
       gaming
     ];
+    # Both WMs are listed in tuigreet (F3); this one is picked until it
+    # remembers another
+    ui.session.command = "sway";
     home-manager.users.juan.imports = [home.canaima];
   };
   flake.modules.homeManager.canaima = {
@@ -21,6 +25,7 @@ in {
       core
       juan
       hostspec
+      sway
       hyprland
       ui
       shell

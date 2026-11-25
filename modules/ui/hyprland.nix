@@ -3,11 +3,12 @@
 # Run-or-raise apps, ui.binds, ui.actions, workspaces and startup come from
 # ui.*; the window binds mirror Sway's defaults, so both WMs feel the same
 {
-  flake.modules.nixos.hyprland = {
+  flake.modules.nixos.hyprland = {lib, ...}: {
     programs.hyprland.enable = true;
     hardware.graphics.enable = true;
-    # Hyprland's own launcher, the one its session file runs
-    ui.session.command = "start-hyprland";
+    # Hyprland's own launcher, the one its session file runs. mkDefault, so
+    # a preset with both WMs picks which one tuigreet starts on
+    ui.session.command = lib.mkDefault "start-hyprland";
   };
   flake.modules.homeManager.hyprland = {
     config,
@@ -91,9 +92,11 @@
   in {
     wayland.windowManager.hyprland = {
       enable = true;
-      # On NixOS, programs.hyprland already installs both
+      # On NixOS, programs.hyprland already installs it
       package = lib.mkIf config.hostspec.isNixOS null;
-      portalPackage = lib.mkIf config.hostspec.isNixOS null;
+      # NixOS's programs.hyprland brings the portal; elsewhere the distro's
+      # are used (hyprland-generic-linux.nix), which can't see Nix's
+      portalPackage = null;
       # Home Manager 26.05 defaults to Lua. hyprlang keeps `hyprctl keyword`
       # and `hyprctl dispatch <name>` working, which sarisarinama uses
       configType = "hyprlang";
