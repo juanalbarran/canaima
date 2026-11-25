@@ -8,7 +8,7 @@ in {
       core
       juan
       hostspec
-      sway
+      hyprland
       ui
       login
       shell
@@ -21,7 +21,7 @@ in {
       core
       juan
       hostspec
-      sway
+      hyprland
       ui
       shell
       ai

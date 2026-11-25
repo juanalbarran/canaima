@@ -75,6 +75,10 @@ Passthrough is a WM mode whose only keybind is its own toggle, so every other ke
 - Session: GDM lists only `/usr/share/wayland-sessions`, not `~/.local/share`, so Home Manager can't install it. The activation compares that file with the one it builds (`Exec=~/.nix-profile/bin/sway`) and, if it's missing or different, prints the `sudo install` command that copies it.
 - Portals: Ubuntu's `xdg-desktop-portal` doesn't find Nix's backends, so the distro's are used (apt `xdg-desktop-portal-wlr`, `xdg-desktop-portal-gtk`). `~/.config/xdg-desktop-portal/sway-portals.conf` sends screen sharing and screenshots to `wlr` and the rest (file picker…) to `gtk`.
 
+## Hyprland
+
+`modules/ui/hyprland.nix` translates the same `ui.*` options as `sway.nix`, with Sway's default keys mapped to Hyprland dispatchers, so a preset switches WM by importing `hyprland` instead of `sway` (`canaima` does). Its config is hyprlang, not Home Manager 26.05's Lua default, because sarisarinama uses `hyprctl keyword`. Run-or-raise checks `hyprctl clients -j` for the app's class (its Wayland `app_id`). Workspaces use `windowrule … workspace N silent`; passthrough and resize are submaps. The keybinds pane shows a Hyprland section instead of Sway's when it is enabled. Not ported: Sway's `mod+v`/`mod+s` splits and stacking, `mod+space` focus floating/tiled, `mod+a` focus parent; Hyprland's dwindle layout has no direct equivalent. Only on NixOS so far: `mucuchies` would also need a GDM session file and portals, like `sway-generic-linux.nix`.
+
 ## Login
 
 `modules/ui/login.nix` (NixOS only) runs greetd. If `hostspec.autologin` is set, the host boots straight into `ui.session.command` as that user, once. After logout, tuigreet asks for a password. `asus` sets `autologin = "juan"`.
